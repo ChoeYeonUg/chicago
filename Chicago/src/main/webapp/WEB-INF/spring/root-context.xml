@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
@@ -15,4 +20,31 @@
 			<value>UTF-8</value>
 		</property>
 	</bean>
+	
+		
+	<util:properties id="db" location="classpath:db.properties" />
+	
+	 <bean id="ds" class="org.apache.commons.dbcp.BasicDataSource"
+	 p:driverClassName="#{db['driver']}"
+	 p:url="#{db['url']}"
+	 p:username="#{db['username']}"
+	 p:password="#{db['password']}" />
+	
+	<bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean"
+	p:dataSource-ref="ds"
+	p:configLocation="classpath:Config.xml"
+	p:typeAliasesPackage="com.sist.dao"
+	p:mapperLocations="classpath:mapper/*mapper.xml">
+	</bean>
+	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="ssf"/>
+	</bean> 
+	
+	<!-- <bean id="dao" class="com.sist.dao.MemberDAO" p:sqlSessionTemplate-ref="sqlSessionTemplate">
+	</bean> -->
+	<bean class= "org.mybatis.spring.mapper.MapperScannerConfigurer">
+  		<property name="basePackage" value="com.sist.dao.mapper" />
+  		<property name="sqlSessionFactoryBeanName" value="ssf"></property>
+  	</bean>
 </beans>
