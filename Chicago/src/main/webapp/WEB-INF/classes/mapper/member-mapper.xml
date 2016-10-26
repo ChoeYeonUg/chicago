@@ -16,8 +16,8 @@
   		SELECT count(*) FROM member1 <include refid="where-id"/>
   	</select>
   	
-  	<select id="pwdCheck" resultType="int" parameterType="String">
-  		SELECT count(*) FROM member1 <include refid="where-pwd"/>
+  	<select id="pwdCheck" resultType="String" parameterType="String">
+  		SELECT pwd FROM member1 <include refid="where-id"></include>
   	</select>
   	
   	<select id="selectMember" resultType="memberVO" parameterType="String">

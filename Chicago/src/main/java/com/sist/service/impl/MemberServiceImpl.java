@@ -27,14 +27,14 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public boolean memberPwd(String pwd) throws Exception {
+	public boolean memberPwd(String id,String pwd) throws Exception {
 		// TODO Auto-generated method stub
 		
 		boolean check = false;
 		
-		int pwdCheck = mapper.pwdCheck(pwd);
+		String dbPwd = mapper.pwdCheck(id);
 		
-		if(pwdCheck == 1){
+		if(pwd.equals(pwd)){
 			check = true;
 		}
 		

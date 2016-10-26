@@ -29,13 +29,15 @@
 	 p:url="#{db['url']}"
 	 p:username="#{db['username']}"
 	 p:password="#{db['password']}" />
+	 
+	 
 	
 	<bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean"
 	p:dataSource-ref="ds"
 	p:configLocation="classpath:Config.xml"
 	p:typeAliasesPackage="com.sist.dao"
 	p:mapperLocations="classpath:mapper/*mapper.xml">
-	</bean>
+	</bean>	
 	
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="ssf"/>

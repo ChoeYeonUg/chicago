@@ -44,7 +44,7 @@ public class LoginController {
 				model.addAttribute("jsp", "main");
 				model.addAttribute("jsp", "../login/login.jsp");
 				logger.info(this.toString() + "ID 틀림");
-			}else if(!ms.memberPwd(vo.getPwd())){
+			}else if(!ms.memberPwd(vo.getId(),vo.getPwd())){
 				model.addAttribute("jsp", "main");
 				model.addAttribute("jsp", "../login/login.jsp");
 				logger.info(this.toString() + "PWD 틀림");
@@ -59,8 +59,7 @@ public class LoginController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}		
 		
 		return "main/main";
 	}

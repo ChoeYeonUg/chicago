@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-f
+	<div class="outline">
+		<div class="div_menu">
+			<h2>Category</h2>
+			<ul class="nav_bar">
+				<c:forEach items="${storeList }" var="name">
+					<li><a href="storeInfo.do?store_name=${name }">${name }</a></li>
+				</c:forEach>
+			</ul>
+		</div>
+		<div class="col-md-9">
+		
+		</div>
+	</div>
 </body>
 </html>

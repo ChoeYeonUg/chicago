@@ -38,11 +38,10 @@
 			</tr>
 			<tr>
 				<td>성별</td>
-				<td><form:radiobuttons items="${gender }"  path="gender"/></td>
-			</tr>
-			<tr>
-				<td>성별</td>
-				<td><form:radiobuttons items="${gender }"  path="gender"/></td>
+				<td><%-- <form:radiobuttons items="${gender }"  path="gender"/> --%>
+					<input type="radio" name="gender" value="1" checked="checked">남
+					<input type="radio" name="gender" value="2">여
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="가입하기"></td>
