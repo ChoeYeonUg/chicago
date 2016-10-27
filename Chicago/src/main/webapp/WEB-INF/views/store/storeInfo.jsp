@@ -6,20 +6,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="css/store.css" rel="stylesheet" />
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=AJLoOIbdkptv3uVxSBZ7"></script>
 
 </head>
 <body>
-	<div class="outline">
-		<div class="div_menu">
-			<h2>Category</h2>
-			<ul class="nav_bar">
-				<c:forEach items="${storeList }" var="name">
-					<li><a href="storeInfo.do?store_name=${name }">${name }</a></li>
-				</c:forEach>
-			</ul>
-		</div>
-		<div class="col-md-9">
+	<div id="content">
+		<div class="container background-white">
+			<div class="row margin-vert-40">
+				<div class="col-md-3">
+					<ul class="nav_bar">
+						<c:forEach items="${storeList }" var="name">
+							<li class="list-group-item"><a href="storeInfo.do?store_name=${name }">${name }</a></li>
+						</c:forEach>
+					</ul>
+				</div>
+			<div class="col-md-9">
 			<div id="map" style="width:600px;height:400px;"></div>
 				<script>
 				var store = new naver.maps.LatLng(${vo.lat}, ${vo.lng}),
@@ -70,6 +72,8 @@
   				</div>
 			</div>
 		</div>
+	</div>
+	</div>
 	</div>
 
 </body>
