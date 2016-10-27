@@ -9,7 +9,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<center>
+	<div id="content">
+            <div class="container background-white">
+                <div class="row margin-vert-30">
+                    <!-- Register Box -->
+                    <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
+                     <h2 class="margin-bottom-20">회원가입</h2>
 		<form:form action="join_ok.do" commandName="memberVO">
 		<table>
 			<tr>
@@ -49,7 +54,9 @@
 		
 		</table>
 		</form:form>
-	</center>
+	</div>
+	</div>
+	</div>
 
 </body>
 </html>
