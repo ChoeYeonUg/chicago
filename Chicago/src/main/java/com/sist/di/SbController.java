@@ -9,7 +9,7 @@ public class SbController {
 	@RequestMapping("sb")
 	public String sb_page(Model model){
 		
-		model.addAttribute("jsp", "sb");
+		model.addAttribute("jsp", "sb.jsp");
 		model.addAttribute("jsp", "../sb/sb.jsp");
 		return "main/main";
 	}

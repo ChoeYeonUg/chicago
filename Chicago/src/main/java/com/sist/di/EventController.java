@@ -8,8 +8,8 @@ public class EventController {
 	@RequestMapping("event")
 	public String login_page(Model model){
 		
-		model.addAttribute("jsp", "event");
-		model.addAttribute("jsp", "../event/event.jsp");
+		model.addAttribute("jsp", "event.jsp");
+		model.addAttribute("event_jsp", "../event/event.jsp");
 		return "main/main";
 	}
 }

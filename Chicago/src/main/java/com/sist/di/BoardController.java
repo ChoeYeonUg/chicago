@@ -9,8 +9,8 @@ public class BoardController {
 	@RequestMapping("board")
 	public String login_page(Model model){
 		
-		model.addAttribute("jsp", "board");
-		model.addAttribute("jsp", "../board/list.jsp");
+		model.addAttribute("jsp", "board.jsp");
+		model.addAttribute("board_jsp", "../board/list.jsp");
 		return "main/main";
 	}
 }

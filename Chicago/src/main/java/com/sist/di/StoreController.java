@@ -26,7 +26,7 @@ public class StoreController {
 		
 		model.addAttribute("storeCount", storeCount);
 		model.addAttribute("storeList", storeList);
-		model.addAttribute("jsp", "store");
+		model.addAttribute("jsp", "store.jsp");
 		model.addAttribute("jsp", "../store/store.jsp");
 		return "main/main";
 	}
@@ -42,7 +42,7 @@ public class StoreController {
 		model.addAttribute("storeList", storeList);		
 		model.addAttribute("vo", vo);
 		
-		model.addAttribute("jsp", "store");
+		model.addAttribute("jsp", "store.jsp");
 		model.addAttribute("jsp", "../store/storeInfo.jsp");		
 		return "main/main";
 	}

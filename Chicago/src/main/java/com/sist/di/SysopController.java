@@ -10,7 +10,7 @@ public class SysopController {
 	@RequestMapping("sysop")
 	public String sysop_page(Model model){
 		
-		model.addAttribute("jsp", "sysop");
+		model.addAttribute("jsp", "sysop.jsp");
 		model.addAttribute("jsp", "../sysop/sysop.jsp");
 		return "main/main";
 	}

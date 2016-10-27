@@ -49,4 +49,6 @@
   		<property name="basePackage" value="com.sist.dao.mapper" />
   		<property name="sqlSessionFactoryBeanName" value="ssf"></property>
   	</bean>
+  	
+  	<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
 </beans>

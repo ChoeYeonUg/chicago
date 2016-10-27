@@ -10,8 +10,8 @@ public class BookController {
 	@RequestMapping("book")
 	public String login_page(Model model){
 		
-		model.addAttribute("jsp", "book");
-		model.addAttribute("jsp", "../book/list.jsp");
+		model.addAttribute("jsp", "book.jsp");
+		model.addAttribute("book_jsp", "../book/list.jsp");
 		return "main/main";
 	}
 }
