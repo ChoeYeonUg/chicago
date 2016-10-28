@@ -96,7 +96,7 @@ public class LoginController {
 		return "main/main";
 	}
 	
-	@RequestMapping(value="id_check", method = RequestMethod.POST)
+	@RequestMapping(value="id_check", method = RequestMethod.POST, produces="text/html;charset=UTF-8")
 	public void id_check(@ModelAttribute("MemberVO") MemberVO memberVO, HttpServletResponse resp){
 		String data = "";
 		try {
@@ -108,6 +108,7 @@ public class LoginController {
 				data = "사용할 수 없습니다.";
 			}
 			System.out.println(data);
+			resp.setCharacterEncoding("UTF-8");
 			resp.getWriter().print(data);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -119,8 +120,9 @@ public class LoginController {
 	}
 	
 	@RequestMapping("join_ok")
-	public String join_ok(Model model,MemberVO vo){
-		
+	public String join_ok(Model model,MemberVO vo, String addr){
+		logger.info(addr);
+		logger.info(vo.getAddr());
 		model.addAttribute("jsp", "login.jsp");
 		model.addAttribute("login_jsp", "../login/join.jsp");
 		return "main/main";
