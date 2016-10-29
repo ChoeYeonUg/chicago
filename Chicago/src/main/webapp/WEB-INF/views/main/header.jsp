@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="css/bootstrap.min.css" rel="stylesheet" />
-<link href="css/header.css" rel="stylesheet" />
+<link href="css/header1.css" rel="stylesheet" />
 
 <!-- Theme skin -->
 <link href="skins/default.css" rel="stylesheet" />
@@ -25,8 +25,9 @@
 <script src="js/custom.js"></script>
 </head>
 <body>
-	<header>
-        <div class="navbar navbar-default navbar-static-top">
+	<!-- <div class="wrapper row1"> -->
+	<header id="header" class="hoc clear">
+<!--         <div class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -36,7 +37,66 @@
                     </button>
                     <a class="navbar-brand" href="index.html"><span>C</span>hicago</a>
                 </div>
-                <div class="navbar-collapse collapse ">
+                 -->
+                 
+		<div id="logo" class="fl_left">
+			<h1><a class="navbar-hou" href="index.html"><span class="main-hou">C</span>hicago</a></h1>
+		</div>
+                 
+                <nav id="mainav" class="fl_right">
+       				 <ul class="clear">
+          				<li><a href="store.do"><spring:message code="header.menu"/></a></li>
+          				<li><a class="drop" href="book.do"><spring:message code="header.book"/></a>
+            				<ul>
+              					<li><a href="#"><spring:message code="header.major"/></a></li>
+                                <li><a href="#"><spring:message code="header.novel"/></a></li>
+								<li><a href="#"><spring:message code="header.poem"/></a></li>
+								<li><a href="#"><spring:message code="header.essay"/></a></li>
+								<li><a href="#"><spring:message code="header.fairytale"/></a></li>
+            				</ul>
+          				</li>
+          				<li><a class="drop" href="event.do"><spring:message code="header.event"/></a>
+            				<ul>
+              					<li><a href="event.do"><spring:message code="header.eventView"/></a></li>
+                                <li><a href="#"><spring:message code="header.month"/></a></li>
+								<li><a href="#"><spring:message code="header.week"/></a></li>
+								<li><a href="#"><spring:message code="header.day"/></a></li>
+            				</ul>
+          				</li>
+          				<li><a class="drop" href="board.do"><spring:message code="header.board"/></a>
+            				<ul>
+              					<li><a href="board.do"><spring:message code="header.board"/></a></li>
+                                <li><a href="#"><spring:message code="header.board"/></a></li>
+								<li><a href="#"><spring:message code="header.board"/></a></li>
+            				</ul>
+          				</li>
+          				<li><a class="drop" href="member.do"><spring:message code="header.mypage"/></a>
+            				<ul>
+              					<li><a href="member.do"><spring:message code="header.modifi"/></a></li>
+                                <li><a href="#"><spring:message code="header.ppl"/></a></li>
+								<li><a href="#"><spring:message code="header.egd"/></a></li>
+								<li><a href="#"><spring:message code="header.qu"/></a></li>
+            				</ul>
+          				</li>
+          				<li><a href="sb.do"><spring:message code="header.sb"/></a></li>
+          				<li><a class="drop" href="sysop.do"><spring:message code="header.saMenu"/></a>
+            				<ul>
+                                <li><a href="sysop.do"><spring:message code="header.saMember"/></a></li>
+                                <li><a href="#"><spring:message code="header.saBook"/></a></li>
+								<li><a href="#"><spring:message code="header.saBoard"/></a></li>
+								<li><a href="#"><spring:message code="header.saList"/></a></li>
+            				</ul>
+          				</li>
+          				<li><a class="drop" href="login.do"><spring:message code="header.login"/></a>
+            				<ul>
+                                <li><a href="login.do"><spring:message code="header.login"/></a></li>
+                                <li><a href="#"><spring:message code="header.nm"/></a></li>
+            				</ul>
+          				</li>
+        			</ul>
+      			</nav>
+                
+<%--                 <div class="navbar-collapse collapse ">
                     <ul class="nav navbar-nav">
                         <li><a href="store.do"><spring:message code="header.menu"/></a></li>
                         <li class="dropdown">
@@ -95,9 +155,12 @@
                             </ul>
                         </li>
                     </ul>
-                </div>
+                </div> 
             </div>
         </div>
+        --%>
 	</header>
+	
+
 </body>
 </html>

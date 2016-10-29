@@ -14,3 +14,7 @@
   div {
     display: block;
 }
+
+.panel-default{
+	max-width: 600px;	
+}

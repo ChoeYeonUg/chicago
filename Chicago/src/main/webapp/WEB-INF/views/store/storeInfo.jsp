@@ -22,7 +22,7 @@
 					</ul>
 				</div>
 			<div class="col-md-9">
-			<div id="map" style="width:600px;height:400px;"></div>
+			<div id="map" style="width:600px;height:400px;"></div><br/><br/>
 				<script>
 				var store = new naver.maps.LatLng(${vo.lat}, ${vo.lng}),
 				    map = new naver.maps.Map('map', {

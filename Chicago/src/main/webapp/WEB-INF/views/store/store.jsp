@@ -10,19 +10,20 @@
 </head>
 <body>
 	<div id="content">
-	<div class="outline">
-		<div class="div_menu">
-			<h2>Category</h2>
-			<ul class="nav_bar">
-				<c:forEach items="${storeList }" var="name">
-					<li><a href="storeInfo.do?store_name=${name }">${name }</a></li>
-				</c:forEach>
-			</ul>
-		</div>
-		<div class="col-md-9">
+		<div class="container background-white">
+			<div class="row margin-vert-40">
+				<div class="col-md-3">
+					<ul class="nav_bar">
+						<c:forEach items="${storeList }" var="name">
+							<li class="list-group-item"><a href="storeInfo.do?store_name=${name }">${name }</a></li>
+						</c:forEach>
+					</ul>
+				</div>
+				<div class="col-md-9">
 		
+				</div>
+			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>

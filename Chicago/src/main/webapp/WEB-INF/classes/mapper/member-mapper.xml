@@ -20,6 +20,10 @@
   		SELECT pwd FROM member1 <include refid="where-id"></include>
   	</select>
   	
+  	<select id="getGrade" resultType="int" parameterType="String">
+  		SELECT grade FROM member1 <include refid="where-id"></include>
+  	</select>
+  	
   	<select id="selectMember" resultType="memberVO" parameterType="String">
   		SELECT id, pwd, addr,zipcode,phone,gender,email,point,grade FROM member1 <include refid="where-id"/>
   	</select>

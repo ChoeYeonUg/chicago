@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,14 +48,14 @@ public class LoginController {
 				model.addAttribute("login_jsp", "../login/login.jsp");
 				logger.info(this.toString() + "ID 틀림");
 			}else if(!ms.memberPwd(vo.getId(),vo.getPwd())){
-				model.addAttribute("jsp", "login.jsp");
+				model.addAttribute("	jsp", "login.jsp");
 				model.addAttribute("login_jsp", "../login/login.jsp");
 				logger.info(this.toString() + "PWD 틀림");
 			}else{
 				HttpSession hs = req.getSession();
-				
+				int grade = ms.memberGrade(vo.getId());
 				hs.setAttribute("id", vo.getId());
-				
+				hs.setAttribute("grade", grade);
 				model.addAttribute("jsp", "default.jsp");
 				logger.info(this.toString() + "로그인 완료");
 			}
@@ -64,6 +65,20 @@ public class LoginController {
 		}		
 		
 		return "main/main";
+	}
+	
+	@RequestMapping(name="logout")
+	public String logout(HttpServletRequest req){
+		HttpSession session = req.getSession();
+		
+		String id = (String) session.getAttribute("id");
+		if(id != null){
+			session.removeAttribute("id");
+			session.removeAttribute("grade");
+		}
+		
+		
+		return "redirect:login.do";
 	}
 
 	@RequestMapping(value = "join", method = RequestMethod.GET)
@@ -97,17 +112,19 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="id_check", method = RequestMethod.POST, produces="text/html;charset=UTF-8")
-	public void id_check(@ModelAttribute("MemberVO") MemberVO memberVO, HttpServletResponse resp){
-		String data = "";
+	public void id_check(String id, HttpServletResponse resp){
+		//String data = "";
+		boolean data = false;
 		try {
-			logger.info(memberVO.getId()+" 호출됩니다.");
-			boolean idCheck = ms.memberId(memberVO.getId());
-			if(!idCheck && memberVO.getId().length()>4){
-				data = "사용 가능한 아이디 입니다.";
+			logger.info(id+" 호출됩니다.");
+			boolean idCheck = ms.memberId(id);
+			if(!idCheck && id.length()>4){
+				//data = "사용 가능한 아이디 입니다.";
+				data = true;
 			}else{
-				data = "사용할 수 없습니다.";
+				//data = "사용할 수 없습니다.";
+				data = false;
 			}
-			System.out.println(data);
 			resp.setCharacterEncoding("UTF-8");
 			resp.getWriter().print(data);
 		} catch (Exception e) {
@@ -120,11 +137,23 @@ public class LoginController {
 	}
 	
 	@RequestMapping("join_ok")
-	public String join_ok(Model model,MemberVO vo, String addr){
-		logger.info(addr);
-		logger.info(vo.getAddr());
+	public String join_ok(Model model,MemberVO vo, Errors errors){
+		logger.info("호출");
 		model.addAttribute("jsp", "login.jsp");
-		model.addAttribute("login_jsp", "../login/join.jsp");
+		try {
+			boolean idCheck = ms.memberId(vo.getId());
+			new MemberVOValidator().validate(vo, errors);
+			if(errors.hasErrors() || !idCheck) {
+				model.addAttribute("login_jsp", "../login/join.jsp");
+				return "main/main";
+			}else{
+				ms.MemberJoin(vo);
+			}
+			model.addAttribute("jsp", "login.jsp");
+			model.addAttribute("login_jsp", "../login/joinComplete.jsp");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return "main/main";
 	}
 	

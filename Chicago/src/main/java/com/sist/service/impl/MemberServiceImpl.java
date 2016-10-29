@@ -3,6 +3,7 @@ package com.sist.service.impl;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import com.sist.dao.MemberVO;
 import com.sist.dao.mapper.MemberMapper;
 import com.sist.service.MemberService;
 
@@ -39,6 +40,19 @@ public class MemberServiceImpl implements MemberService{
 		}
 		
 		return check;
+	}
+
+	@Override
+	public int memberGrade(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.getGrade(id);
+	}
+
+	@Override
+	public void MemberJoin(MemberVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		mapper.joinMember(vo);
+		
 	}
 	
 

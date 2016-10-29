@@ -9,6 +9,8 @@
 <link rel="stylesheet" type="text/css" href="css/nivoslider.css">
 </head>
 <body>
+	<div id="content">
+	<div class="container background-white">
 	<div class="list_container">
 		<div class="div_lmenu">
 			<ul class="category">
@@ -246,6 +248,8 @@
 			</div>
 	<!-- 베스트샐러 끝 -->
 		</div>
+	</div>
+	</div>
 	</div>
 </body>
 </html>
