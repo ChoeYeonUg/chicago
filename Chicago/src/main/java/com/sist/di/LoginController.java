@@ -21,7 +21,7 @@ import com.sist.service.MemberService;
 public class LoginController {
 	/* private */
 	
-	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@Resource(name="memberService")
 	private MemberService ms;
 
