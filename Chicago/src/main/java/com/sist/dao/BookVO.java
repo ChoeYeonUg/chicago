@@ -2,7 +2,7 @@ package com.sist.dao;
 
 import java.util.Date;
 
-public class GoodsVO {
+public class BookVO {
 	private String book_code;
 	private String book_name;
 	private int book_category;
