@@ -63,11 +63,12 @@
 								<li><a href="#"><spring:message code="header.day"/></a></li>
             				</ul>
           				</li>
-          				<li><a class="drop" href="board.do"><spring:message code="header.board"/></a>
+          				<li><a class="drop" href="noticeboard.do"><spring:message code="header.board"/></a>
             				<ul>
-              					<li><a href="board.do"><spring:message code="header.board"/></a></li>
-                                <li><a href="#"><spring:message code="header.board"/></a></li>
-								<li><a href="#"><spring:message code="header.board"/></a></li>
+              					<li><a href="noticeboard.do"><spring:message code="header.noticBoard"/></a></li>
+                                <li><a href="faqboard.do?faq_category=0"><spring:message code="header.faqBoard"/></a></li>
+								<li><a href="secretboard.do"><spring:message code="header.secretBoard"/></a></li>
+								<li><a href="reviewboard.do">리뷰보드</a></li>
             				</ul>
           				</li>
           				<li><a class="drop" href="member.do"><spring:message code="header.mypage"/></a>
@@ -81,7 +82,7 @@
           				<li><a href="sb.do"><spring:message code="header.sb"/></a></li>
           				<li><a class="drop" href="sysop.do"><spring:message code="header.saMenu"/></a>
             				<ul>
-                                <li><a href="sysop.do"><spring:message code="header.saMember"/></a></li>
+                                <li><a href="member_management.do"><spring:message code="header.saMember"/></a></li>
                                 <li><a href="#"><spring:message code="header.saBook"/></a></li>
 								<li><a href="#"><spring:message code="header.saBoard"/></a></li>
 								<li><a href="#"><spring:message code="header.saList"/></a></li>
@@ -121,9 +122,10 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false"><spring:message code="header.board"/> <b class=" icon-angle-down"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="board.do"><spring:message code="header.board"/></a></li>
-                                <li><a href="#"><spring:message code="header.board"/></a></li>
-								<li><a href="#"><spring:message code="header.board"/></a></li>
+                                 <li><a href="noticeboard.do"><spring:message code="header.noticBoard"/></a></li>
+                                <li><a href="faqboard.do?faq_category=0"><spring:message code="header.faqBoard"/></a></li>
+								<li><a href="secretboard.do"><spring:message code="header.secretBoard"/></a></li>
+								<li><a href="reviewboard.do">리뷰보드</a></li>
                             </ul>
                         </li>
                         

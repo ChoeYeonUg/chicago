@@ -12,8 +12,14 @@
  	
  	<typeAliases>
  		<typeAlias type="com.sist.dao.MemberVO" alias="member"/>
+ 		<typeAlias type="com.sist.dao.BoardVO" alias="board"/>
+ 		
  	</typeAliases>
  	<!-- <mappers>
  		<mapper resource="/mapper/member-mapper.xml"/>
+ 	</mappers> -->
+ 	
+ <!-- 	<mappers>
+ 		<mapper resource="/maper/board-mapper.xml"/>
  	</mappers> -->
  </configuration>

@@ -1,5 +1,8 @@
 package com.sist.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,4 +13,7 @@ public interface MemberService {
 	public boolean memberId(String id) throws Exception;
 	public int memberGrade(String id) throws Exception;
 	public boolean memberPwd(String id,String pwd) throws Exception;
+	public void memberDelete(String id) throws Exception;
+	public void updateGrade(Map map) throws Exception;
+	public List<MemberVO> memberList(Map map) throws Exception;
 }

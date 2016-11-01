@@ -58,8 +58,6 @@
     	<appender-ref ref="console" />
 	</logger>
     
-    
-    
     <logger name="jdbc.sqltiming">
         <level value="debug" />
     </logger>
