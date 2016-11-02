@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ import com.sist.dao.loginVO;
 import com.sist.service.MemberService;
 
 @Controller
+@EnableAspectJAutoProxy
 public class LoginController {
 	/* private */
 	
