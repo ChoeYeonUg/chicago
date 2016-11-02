@@ -1,6 +1,7 @@
 package com.sist.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -21,19 +22,22 @@ public class BookServiceImpl implements BookService{
 	}
 	
 	@Override
-	public List<BookVO> newBookCate1() {
-		return bm.newBookCate1();
+	public List<BookVO> newBookCate(int category) {
+		return bm.newBookCate(category);
 	}
+
 	@Override
-	public List<BookVO> newBookCate2() {
-		return bm.newBookCate2();
+	public List<BookVO> bookListCateFirst(Map map) {
+		return bm.bookListCateFirst(map);
 	}
+	
 	@Override
-	public List<BookVO> newBookCate3() {
-		return bm.newBookCate3();
+	public int cateFirCount() {
+		return bm.cateFirCount();
 	}
+	
 	@Override
-	public List<BookVO> newBookCate4() {
-		return bm.newBookCate4();
+	public int cateFirTotalPage() {
+		return bm.cateFirTotalPage();
 	}
 }

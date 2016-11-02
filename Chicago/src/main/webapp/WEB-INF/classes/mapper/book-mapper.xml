@@ -9,28 +9,27 @@
 	</select>
 
 	<!-- book 메인화면 : 카테고리 별 신간 5권씩 출력 -->
-	<select id="newBookCate1" resultType="bookVO">
+	<select id="newBookCate" resultType="bookVO" parameterType="int">
 		SELECT book_name, publisher, book_content, price, publication, img, writer, num FROM
 		(SELECT book_name, publisher, book_content, price, publication, img, writer, rownum as num FROM
-    	(SELECT book_name, publisher, book_content, price, publication, img, writer FROM GOODS1 where book_category='1' ORDER BY publication DESC)) 
+    	(SELECT book_name, publisher, book_content, price, publication, img, writer FROM GOODS1 where book_category=#{category} ORDER BY publication DESC)) 
     	WHERE num BETWEEN 1 AND 5
 	</select>
-		<select id="newBookCate2" resultType="bookVO">
-		SELECT book_name, publisher, book_content, price, publication, img, writer, num FROM
-		(SELECT book_name, publisher, book_content, price, publication, img, writer, rownum as num FROM
-    	(SELECT book_name, publisher, book_content, price, publication, img, writer FROM GOODS1 where book_category='2' ORDER BY publication DESC)) 
-    	WHERE num BETWEEN 1 AND 5
+
+	
+	<!-- 카테고리별 전체 리스트 (최신순으로 정렬) -->
+	<select id="bookListCateFirst" resultType="bookVO" parameterType="hashmap">
+		SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img, num FROM 
+		(SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img, rownum as num FROM 
+		(SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img FROM GOODS1 WHERE book_category=#{category} ORDER BY publication DESC))
+		WHERE num BETWEEN #{start} AND #{end}
 	</select>
-		<select id="newBookCate3" resultType="bookVO">
-		SELECT book_name, publisher, book_content, price, publication, img, writer, num FROM
-		(SELECT book_name, publisher, book_content, price, publication, img, writer, rownum as num FROM
-    	(SELECT book_name, publisher, book_content, price, publication, img, writer FROM GOODS1 where book_category='3' ORDER BY publication DESC)) 
-    	WHERE num BETWEEN 1 AND 5
+	<!-- 카테고리별 총 권수 -->
+	<select id="cateFirCount" resultType="int">
+		SELECT COUNT(*) FROM GOODS1 WHERE book_category='1'
 	</select>
-		<select id="newBookCate4" resultType="bookVO">
-		SELECT book_name, publisher, book_content, price, publication, img, writer, num FROM
-		(SELECT book_name, publisher, book_content, price, publication, img, writer, rownum as num FROM
-    	(SELECT book_name, publisher, book_content, price, publication, img, writer FROM GOODS1 where book_category='4' ORDER BY publication DESC)) 
-    	WHERE num BETWEEN 1 AND 5
+	<!-- 카테고리별 총 페이지 수 (1페이지에 10권 목록 보이기) -->
+	<select id="cateFirTotalPage" resultType="int">
+		SELECT CEIL(COUNT(*)/10) FROM goods1 WHERE book_category='1'
 	</select>
 </mapper>

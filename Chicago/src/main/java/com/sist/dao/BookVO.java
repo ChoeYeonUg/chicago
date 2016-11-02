@@ -16,7 +16,7 @@ public class BookVO {
 	private Date publication;
 	private int writer_no;
 	private String img;
-	
+
 	public String getBook_code() {
 		return book_code;
 	}
