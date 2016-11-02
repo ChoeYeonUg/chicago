@@ -1,0 +1,87 @@
+package com.sist.aop;
+
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+@Aspect
+public class LoginAspect {
+	private static final Logger logger = LoggerFactory.getLogger(LoginAspect.class);
+	static String name = "";
+	static String type = "";
+	
+		
+	@Pointcut("execution(* com.sist.di.*Controller.*(..)) || execution(* com.sist.service.impl.*Impl.*(..)) || execution(* com.sist.dao.mapper.*Mapper.*(..))")
+	private void test(){}
+	
+	
+	@Pointcut("execution(* com.sist.di.SysopController.*(..))")
+	private void admin(){}
+	
+	@Around(value="test()")
+	public Object logPrint(ProceedingJoinPoint joinPoint) throws Throwable{
+		type = joinPoint.getSignature().getDeclaringTypeName();
+		if (type.indexOf("Controller") > -1) {
+			name = "Controller  \t:  ";
+		}
+		else if (type.indexOf("Service") > -1) {
+			name = "ServiceImpl  \t:  ";
+		}
+		else if (type.indexOf("Mapper") > -1) {
+			name = "Mapper  \t:  ";
+		}
+		
+		if(logger.isDebugEnabled())
+			logger.debug(name + type + "." + joinPoint.getSignature().getName() + "()");
+		return joinPoint.proceed();		
+	}
+	
+	@Around(value="admin()")
+	public Object adminCheck(ProceedingJoinPoint joinPoint) throws Throwable{
+		type = joinPoint.getSignature().getDeclaringTypeName();
+		
+		 HttpServletRequest request = null;
+	        HttpServletResponse response = null;
+	        for ( Object o : joinPoint.getArgs() ){ 
+	            if ( o instanceof HttpServletRequest ) {
+	                request = (HttpServletRequest)o;
+	            } 
+	        }
+	        try{
+	            HttpSession session = request.getSession();
+	 
+	                String loginId = (String) session.getAttribute("id");
+	 
+	                System.out.println("### Margo ==> loginId : " + loginId);
+	                if (loginId == null || "".equals(loginId)) {
+	                    System.out.println("### Margo ==> in if loginId : "
+	                            + loginId);
+	                    throw new RuntimeException("앙대요.");
+	                }else{
+	                	int grade = (Integer) session.getAttribute("grade");
+	                	System.out.println(grade);
+	                	if(grade != 0) throw new RuntimeException("님따위론 안됩니다.");
+	                }
+	        }catch(Exception e){
+	             
+	            throw new RuntimeException("앙대요");
+	 
+	        }
+
+
+		
+		return joinPoint.proceed();
+	}
+
+}

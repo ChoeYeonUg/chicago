@@ -78,6 +78,11 @@ $(function(){
 		if(addr2.trim()!="" && addr.trim()!=""){
 			document.getElementById("addr").value = addr+' '+addr2;
 		}
+		
+		if(addr == null || addr.trim() == ""){
+			$('#zipcode').val(0);
+		}
+		
 		f.submit();
 	});
 	
