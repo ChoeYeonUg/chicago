@@ -82,7 +82,7 @@
           				<li><a href="sb.do"><spring:message code="header.sb"/></a></li>
           				<li><a class="drop" href="sysop.do"><spring:message code="header.saMenu"/></a>
             				<ul>
-                                <li><a href="sysop.do"><spring:message code="header.saMember"/></a></li>
+                                <li><a href="member_management.do"><spring:message code="header.saMember"/></a></li>
                                 <li><a href="#"><spring:message code="header.saBook"/></a></li>
 								<li><a href="#"><spring:message code="header.saBoard"/></a></li>
 								<li><a href="#"><spring:message code="header.saList"/></a></li>

@@ -1,5 +1,8 @@
 package com.sist.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +22,6 @@ public class MemberServiceImpl implements MemberService{
 		boolean check = false;
 		
 		int idCheck = mapper.idCheck(id);
-		
 		if(idCheck == 1){
 			check = true;
 		}
@@ -54,6 +56,26 @@ public class MemberServiceImpl implements MemberService{
 		mapper.joinMember(vo);
 		
 	}
-	
+
+	@Override
+	public void memberDelete(String id) throws Exception {
+		// TODO Auto-generated method stub
+		mapper.memberDelete(id);
+		
+	}
+
+	@Override
+	public void updateGrade(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		mapper.updateGrade(map);
+	}
+
+	@Override
+	public List<MemberVO> memberList(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.memberlist(map);
+	}
+
+
 
 }

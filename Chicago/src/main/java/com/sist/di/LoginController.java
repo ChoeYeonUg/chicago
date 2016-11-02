@@ -140,18 +140,23 @@ public class LoginController {
 	
 	@RequestMapping("join_ok")
 	public String join_ok(Model model,MemberVO vo, Errors errors){
-		logger.info("호출");
 		model.addAttribute("jsp", "login.jsp");
 		try {
 			boolean idCheck = ms.memberId(vo.getId());
+			
+			if(vo.getAddr() == null || vo.getAddr().equals("")){
+				vo.setZipcode(new Integer(0));
+			}
+			
 			new MemberVOValidator().validate(vo, errors);
-			if(errors.hasErrors() || !idCheck) {
+			if(errors.hasErrors() || idCheck) {
+				System.out.println(errors.hasErrors() + " 아이디 체크 결과" + idCheck);
 				model.addAttribute("login_jsp", "../login/join.jsp");
 				return "main/main";
 			}else{
 				ms.MemberJoin(vo);
 			}
-			model.addAttribute("jsp", "login.jsp");
+			logger.info("회원가입해라");
 			model.addAttribute("login_jsp", "../login/joinComplete.jsp");
 		} catch (Exception e) {
 			// TODO: handle exception
