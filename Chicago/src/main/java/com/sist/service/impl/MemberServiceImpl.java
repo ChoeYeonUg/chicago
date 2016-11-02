@@ -76,6 +76,12 @@ public class MemberServiceImpl implements MemberService{
 		return mapper.memberlist(map);
 	}
 
+	@Override
+	public int memberTotalPage(int rowSize) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.memberTotalPage(rowSize);
+	}
+
 
 
 }

@@ -35,6 +35,10 @@
 
   	</select>
   	
+  	<select id="memberTotalPage" resultType="int" parameterType="int">
+  		SELECT CEIL(COUNT(*)/#{rowSize}) FROM member1
+  	</select>
+  	
   	
   	
   	<insert id="joinMember" parameterType="member">

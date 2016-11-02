@@ -41,15 +41,32 @@ public class SysopController {
 			
 			int curpage = Integer.parseInt(page);
 			
-			int rowSize = 20;
+			int rowSize = 1;
 			int start = (curpage * rowSize) - (rowSize - 1);
-			int end = curpage * rowSize;
+			int end = curpage * rowSize;			
+
+			int totalpage = ms.memberTotalPage(rowSize);
+			
+			int block=10;
+			int formPage = ((curpage-1)/block*block)+1;
+			int toPage = ((curpage-1)/block*block)+block;
+			
+			if(toPage> totalpage) toPage = totalpage;
 			
 			Map map = new HashMap();
 			
 			map.put("start", start);
 			map.put("end", end);
-		
+			
+			
+			model.addAttribute("formpage", formPage);
+			model.addAttribute("topage", toPage);
+			model.addAttribute("block", block);
+			model.addAttribute("curpage", curpage);
+			model.addAttribute("totalpage", totalpage);
+			model.addAttribute("start", start);
+			model.addAttribute("end", end);
+			System.out.println(totalpage);
 			List<MemberVO> list = ms.memberList(map);
 			model.addAttribute("list", list);
 		} catch (Exception e) {
@@ -91,5 +108,30 @@ public class SysopController {
 		}		
 		
 		return "redirect:member_management.do";
+	}
+	
+	//책관리
+	@RequestMapping("board_management")
+	public String boardManagement(Model model){
+		
+		model.addAttribute("jsp", "sysop.jsp");
+		model.addAttribute("jsp", "../sysop/board_management.jsp");		
+		return "main/main";
+	}
+	
+	@RequestMapping("book_management")
+	public String bookManagement(Model model){
+		
+		model.addAttribute("jsp", "sysop.jsp");
+		model.addAttribute("jsp", "../sysop/book_management.jsp");		
+		return "main/main";
+	}
+	
+	@RequestMapping("sales_management")
+	public String salesManagement(Model model){
+		
+		model.addAttribute("jsp", "sysop.jsp");
+		model.addAttribute("jsp", "../sysop/sales_management.jsp");		
+		return "main/main";
 	}
 }
