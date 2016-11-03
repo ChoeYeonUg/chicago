@@ -29,6 +29,9 @@ public class LoginAspect {
 	@Pointcut("execution(* com.sist.di.SysopController.*(..))")
 	private void admin(){}
 	
+	@Pointcut("execution(* com.sist.di.MemberController.*(..))")
+	private void mypage(){}
+	
 	@Around(value="test()")
 	public Object logPrint(ProceedingJoinPoint joinPoint) throws Throwable{
 		type = joinPoint.getSignature().getDeclaringTypeName();
@@ -72,6 +75,39 @@ public class LoginAspect {
 	                	int grade = (Integer) session.getAttribute("grade");
 	                	System.out.println(grade);
 	                	if(grade != 0) throw new RuntimeException("님따위론 안됩니다.");
+	                }
+	        }catch(Exception e){
+	             
+	            throw new RuntimeException("앙대요");
+	 
+	        }
+
+
+		
+		return joinPoint.proceed();
+	}
+	
+	@Around(value="mypage()")
+	public Object loginCheck(ProceedingJoinPoint joinPoint) throws Throwable{
+		type = joinPoint.getSignature().getDeclaringTypeName();
+		
+		 HttpServletRequest request = null;
+	        HttpServletResponse response = null;
+	        for ( Object o : joinPoint.getArgs() ){ 
+	            if ( o instanceof HttpServletRequest ) {
+	                request = (HttpServletRequest)o;
+	            } 
+	        }
+	        try{
+	            HttpSession session = request.getSession();
+	 
+	                String loginId = (String) session.getAttribute("id");
+	 
+	                System.out.println("### Margo ==> loginId : " + loginId);
+	                if (loginId == null || "".equals(loginId)) {
+	                    System.out.println("### Margo ==> in if loginId : "
+	                            + loginId);
+	                    throw new RuntimeException("앙대요.");
 	                }
 	        }catch(Exception e){
 	             

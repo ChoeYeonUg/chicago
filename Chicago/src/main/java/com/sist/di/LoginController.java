@@ -47,7 +47,7 @@ public class LoginController {
 				model.addAttribute("login_jsp", "../login/login.jsp");
 				logger.info(this.toString() + "ID 틀림");
 			}else if(!ms.memberPwd(vo.getId(),vo.getPwd())){
-				model.addAttribute("	jsp", "login.jsp");
+				model.addAttribute("jsp", "login.jsp");
 				model.addAttribute("login_jsp", "../login/login.jsp");
 				logger.info(this.toString() + "PWD 틀림");
 			}else{
@@ -66,7 +66,7 @@ public class LoginController {
 		return "main/main";
 	}
 	
-	@RequestMapping(name="logout")
+	@RequestMapping("logout")
 	public String logout(HttpServletRequest req){
 		HttpSession session = req.getSession();
 		
