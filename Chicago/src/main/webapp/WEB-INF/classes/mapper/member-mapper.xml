@@ -32,13 +32,21 @@
 	  SELECT id,name,phone,grade,num
 			FROM (SELECT id,name,phone,grade,ROWNUM as num
 			FROM (SELECT id,name,phone,grade FROM member1 WHERE  <![CDATA[ id <> 'admin' ]]>)) WHERE num BETWEEN #{start} AND #{end}
-
   	</select>
   	
   	<select id="memberTotalPage" resultType="int" parameterType="int">
-  		SELECT CEIL(COUNT(*)/#{rowSize}) FROM member1
+  		SELECT CEIL(COUNT(*)/#{rowSize}) FROM member1 WHERE  <![CDATA[ id <> 'admin' ]]>
   	</select>
   	
+  	<select id="memberSearch" resultType="member" parameterType="hashmap">
+	  SELECT id,name,phone,grade,num
+			FROM (SELECT id,name,phone,grade,ROWNUM as num
+			FROM (SELECT id,name,phone,grade FROM member1 WHERE  <![CDATA[ id <> 'admin' ]]> AND ${fs} LIKE '%${ss}%')) WHERE num BETWEEN #{start} AND #{end}
+  	</select>
+  	
+  	<select id="memberSearchPage" resultType="int" parameterType="hashmap">
+  		SELECT CEIL(COUNT(*)/#{rowSize}) FROM member1 WHERE  <![CDATA[ id <> 'admin' ]]> AND ${fs} LIKE '%${ss}%'
+  	</select>
   	
   	
   	<insert id="joinMember" parameterType="member">

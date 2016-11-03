@@ -89,7 +89,6 @@
   	<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
   	
   		<aop:aspectj-autoproxy/>
-		 <bean id="loginAspect" class="com.sist.aop.LoginAspect"></bean> 
-	
+		 <bean id="loginAspect" class="com.sist.aop.LoginAspect"></bean>
 
 </beans>

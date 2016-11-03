@@ -66,13 +66,24 @@ function openPop(data){
 <table>
 	<tr>
 		<td>
-			<a href="member_management.do?page=${(formpage - block) >= 1 ? formpage-block : curpage }">이전</a>&nbsp;
-			
+			<a href="member_management.do?fs=${fs }&ss=${ss }&page=${(formpage - block) >= 1 ? formpage-block : curpage }">이전</a>&nbsp;
 			<c:forEach begin="${formpage }" end="${topage }" step="1" var="i">
-				<a href="member_management.do?page=${i }">[${i }]</a>
+				<a href="member_management.do?fs=${fs }&ss=${ss }&page=${i }">[${i }]</a>
 			</c:forEach>
-			&nbsp;<a href="member_management.do?page=${(formpage + block)<=totalpage ? formpage+block : curpage }">다음</a>
-						
+			&nbsp;<a href="member_management.do?fs=${fs }&ss=${ss }&page=${(formpage + block)<=totalpage ? formpage+block : curpage }">다음</a>		
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<form action="member_management.do" method="post">
+				<select name="fs">
+					<option value="id">id</option>
+					<option value="name">name</option>
+				</select>
+				<input type="search" id="ss" name="ss">
+				<input type="submit" value="검색">
+			</form>
 		</td>
 	</tr>
 </table>

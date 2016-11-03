@@ -17,4 +17,7 @@ public interface MemberService {
 	public void updateGrade(Map map) throws Exception;
 	public List<MemberVO> memberList(Map map) throws Exception;
 	public int memberTotalPage(int rowSize) throws Exception;
+	public List<MemberVO> memberSearch(Map map) throws Exception;
+	public int memberSearchPage(Map map) throws Exception;
+	
 }

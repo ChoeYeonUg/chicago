@@ -14,4 +14,7 @@ public interface MemberMapper {
 	public void updateGrade(Map map);
 	public List<MemberVO> memberlist(Map map);
 	public int memberTotalPage(int rowSize);
+	public List<MemberVO> memberSearch(Map map);
+	public int memberSearchPage(Map map);
+	
 }
