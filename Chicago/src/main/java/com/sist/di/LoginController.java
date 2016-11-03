@@ -9,16 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sist.dao.MemberVO;
-import com.sist.dao.loginVO;
 import com.sist.service.MemberService;
 
 @Controller
@@ -50,7 +47,7 @@ public class LoginController {
 				model.addAttribute("login_jsp", "../login/login.jsp");
 				logger.info(this.toString() + "ID 틀림");
 			}else if(!ms.memberPwd(vo.getId(),vo.getPwd())){
-				model.addAttribute("	jsp", "login.jsp");
+				model.addAttribute("jsp", "login.jsp");
 				model.addAttribute("login_jsp", "../login/login.jsp");
 				logger.info(this.toString() + "PWD 틀림");
 			}else{
@@ -69,7 +66,7 @@ public class LoginController {
 		return "main/main";
 	}
 	
-	@RequestMapping(name="logout")
+	@RequestMapping("logout")
 	public String logout(HttpServletRequest req){
 		HttpSession session = req.getSession();
 		

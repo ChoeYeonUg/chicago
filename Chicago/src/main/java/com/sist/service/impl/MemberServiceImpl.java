@@ -37,7 +37,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		String dbPwd = mapper.pwdCheck(id);
 		
-		if(pwd.equals(pwd)){
+		if(pwd.equals(dbPwd)){
 			check = true;
 		}
 		
@@ -74,6 +74,24 @@ public class MemberServiceImpl implements MemberService{
 	public List<MemberVO> memberList(Map map) throws Exception {
 		// TODO Auto-generated method stub
 		return mapper.memberlist(map);
+	}
+
+	@Override
+	public int memberTotalPage(int rowSize) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.memberTotalPage(rowSize);
+	}
+
+	@Override
+	public List<MemberVO> memberSearch(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.memberSearch(map);
+	}
+
+	@Override
+	public int memberSearchPage(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.memberSearchPage(map);
 	}
 
 
