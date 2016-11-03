@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+	pageEncoding="EUC-KR"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,16 +25,16 @@
 	type="text/css" rel="stylesheet">
 </head>
 <body>
-<div id="content">
+	<div id="content">
 		<div class="container background-white">
 			<div class="row margin-vert-40">
 
-<table width="700">
+				<table width="700">
 					<tr>
-						<td width="70%"><h2 align="left">
-								1:1게시판
-							</h2></td>
-						<td width="30%" align="right"><a href="noticeboard.do" style="color: #b3b3b3">공지사항</a> l<a href="faqboard.do" style="color: #b3b3b3"> Faq</a> l 1:1게시판</td>
+						<td width="70%"><h2 align="left">1:1게시판</h2></td>
+						<td width="30%" align="right"><a href="noticeboard.do"
+							style="color: #b3b3b3">공지사항</a> l<a href="faqboard.do"
+							style="color: #b3b3b3"> Faq</a> l 1:1게시판</td>
 					</tr>
 				</table>
 
@@ -39,62 +42,159 @@
 					<h5>1:1게시판 입니다.</h5>
 				</div>
 
-<center>
-	<table width="600">
-			<tr id="title">
-				<th width="10%">번호</th>
-				<th width="50%" align="center">제목</th>
-				<th width="15%">글쓴이</th>
-				<th width="15%">날짜</th>
-				<th width="10%">조회수</th>
-			</tr>
-	</table>
-		<!-- 관리자만보이게 설정 -->
-	<table width="700">
-					<tr>
-					
-						<td align="right"><a href="#">글쓰기 &nbsp;&nbsp;<a href="#">삭제</a></td>
-					</tr>
-				</table>
-				
-				<table>
-			<tr>
-				<td>
-					<form method="post" action="find.do" id="ff">
-						Search:
-						<select name="fs">
-							<option value="name">이름</option>
-							<c:if test="${fs eq 'subject' }">
-								<option value="subject" selected="selected">제목</option>
-							</c:if>
-							<c:if test="${fs ne 'subject' }">
-								<option value="subject">제목</option>
-							</c:if>
-							<c:if test="${fs eq 'content' }">			
-							<option value="content" selected="selected">내용</option></c:if>
-							<c:if test="${fs ne 'content' }">
-							<option value="content" >내용</option>
-							</c:if>
-						</select>
-						<c:if test="${ss eq null }">
-						<input type="text" size="10" name="ss" id="ss">
-						</c:if>
-						<c:if test="${ss ne null }">
-						<input type="text" size="10" name="ss" id="ss" value="${ss }"> 
-						</c:if>
-						<input type="button" value="찾기" id="findBtn1">
-						<input type="hidden" name="page" value="${curpage }">
-							<!-- <span id="print"></span> -->
-					</form>
-				</td>
-			
-			</tr>
-			
-		</table>
-		
-</center>
+				<center>
+					<table width="900">
+						<tr id="title">
+							<th width="10%">번호</th>
+							<th width="50%" align="center">제목</th>
+							<th width="15%">ID</th>
+							<th width="15%">날짜</th>
+							<th width="10%">hit</th>
+						</tr>
+						<c:forEach var="vo" items="${list }">
+							<tr>
+								<td width="10%">${vo.board_no}</td>
+								<td width="45%">
+										<c:if test="${vo.group_tab>0 }">
+											<c:forEach var="i" begin="1" end="${vo.group_tab}">&nbsp;&nbsp;	</c:forEach>
+											<!-- 리플라이이미지 -->
+											<img src="./board_img/reply.png" style="width: 10px; height:auto;" >
+										</c:if> 
+										<!-- 삭제된 글이 아니면 정상작동--> 
+										<c:if test="${msg!=vo.subject}">
+											<c:if test="${vo.secret==1}">
+												<a href="secret_content.do?board_no=${vo.board_no }&page=${curpage}">${vo.subject }</a>
+											</c:if>
+											<c:if test="${vo.secret==2 }">
+												<a href="secretboard_pwd_check.do?board_no=${vo.board_no }&page=${curpage}">${vo.subject }</a>
+											</c:if>
+										<%-- 	<!-- new 이미지 표시 -->
+											<c:if test="${today eq dbday}">
+											<sup><img src="./board_img/new.png" style="width: 10px; height:auto;" ></sup>
+											</c:if> --%>
+										</c:if> 
+										<!-- 삭제된 글이면 읽을 수 없게 막음 --> 
+										<c:if test="${msg==vo.subject}">
+											<font color="blue">${vo.sebject }</font>
+										</c:if> 
+										<!-- 새글표시 --> 
+										<%-- <c:if test="${today eq vo.regdate}">
+								<img src="./board_img/new.png" style="width: 10px; height:auto;" >	</c:if> --%>
+								</td>
+								<td width="15%" class="tdcenter">${vo.id }</td>
+								<td width="20%" class="tdcenter"><%-- <fmt:formatDate
+										value="${vo.regdate }" var="regdate" pattern="yyyy-MM-dd" />--%>
+									${dbday } </td>
+								<td width="10%" class="tdcenter">${vo.hit }</td>
+							</tr>
+						</c:forEach>
 
-	<div class="clearfix margin-bottom-10"></div>
+
+					</table>
+					<!-- 페이지표시 -->
+	<table border="0" width="600">
+		<tr>
+		<td align="right"> 
+		
+		
+		<!-- [1][2][3][4][5] -->
+		<!-- fp           tp -->
+								
+		<%-- <c:if test="${curpage>block}">
+			<a href="noticeboard.do?page=1">
+				비긴</a> &nbsp;
+				<a href="noticeboard.do?page=${fromPage-1}">
+				프리브</a> &nbsp;
+		</c:if>    --%>
+		
+		<%-- <c:if test="${curpage<=block}"> --%>
+			<a href="secretboard.do?page=1">비긴</a>
+				<a href="secretboard.do?page=${curpage>1?curpage-1:curpage}">
+				프리브</a> &nbsp;
+		<%-- </c:if>    --%>
+		
+		<c:forEach var="i" begin="${fromPage }" end="${toPage }">
+		[<c:if test="${ curpage ==i}">
+		
+		<span style="color:red">${i }</span>
+		
+		</c:if>		
+		<c:if test="${ curpage !=i}">
+		<a href="secretboard.do?page=${i }">${i }</a>
+					
+		</c:if>		
+		]
+		</c:forEach>
+		
+		<c:if test="${toPage<totalpage }">
+			<a href="secretboard.do?page=${toPage+1 }">넥스트</a>
+			<a href="secretboard.do?page=${totalpage }">끝</a>
+		</c:if>
+		
+		<c:if test="${toPage>=totalpage }">
+			<a href="secretboard.do?page=${curpage<totalpage?curpage+1:curpage }">넥스트</a>&nbsp;
+			<a href="secretboard.do?page=${totalpage }">끝</a>
+		</c:if>
+		&nbsp;&nbsp;
+		${curpage } page / ${totalpage  } pages
+		
+		</td>
+		
+		</tr>
+		</table>
+		<!-- 페이지표시 끝 -->
+					<!-- 글쓰기 -->
+					<table width="700">
+						<tr>
+							<!-- 관리자만보이게 설정 -->
+							<c:if test="${id!=null }">
+							<td align="right"><a href="secretboard_insert.do">글쓰기</a></td>
+							</c:if>
+						</tr>
+					</table>
+					<!-- 글쓰기 끝 -->
+
+					<table>
+						<tr>
+							<td>
+								<form method="post" action="find.do" id="ff">
+									Search: <select name="fs">
+										<option value="name">이름</option>
+										<c:if test="${fs eq 'subject' }">
+											<option value="subject" selected="selected">제목</option>
+										</c:if>
+										<c:if test="${fs ne 'subject' }">
+											<option value="subject">제목</option>
+										</c:if>
+										<c:if test="${fs eq 'content' }">
+											<option value="content" selected="selected">내용</option>
+										</c:if>
+										<c:if test="${fs ne 'content' }">
+											<option value="content">내용</option>
+										</c:if>
+									</select>
+									<c:if test="${ss eq null }">
+										<input type="text" size="10" name="ss" id="ss">
+									</c:if>
+									<c:if test="${ss ne null }">
+										<input type="text" size="10" name="ss" id="ss" value="${ss }">
+									</c:if>
+									<input type="button" value="찾기" id="findBtn1"> <input
+										type="hidden" name="page" value="${curpage }">
+									<!-- <span id="print"></span> -->
+
+
+
+								</form>
+							</td>
+
+						</tr>
+
+					</table>
+
+				</center>
+
+				<div class="clearfix margin-bottom-10"></div>
 			</div>
 		</div>
 	</div>

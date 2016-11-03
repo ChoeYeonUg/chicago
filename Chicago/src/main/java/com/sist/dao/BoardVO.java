@@ -18,9 +18,14 @@ public class BoardVO {
 	private int root;
 	private int depth;
 	private int faq_category;
-	
-	
-	
+	private int num;
+
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public int getBoard_no() {
 		return board_no;
 	}

@@ -35,7 +35,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		String dbPwd = mapper.pwdCheck(id);
 		
-		if(pwd.equals(pwd)){
+		if(dbPwd.equals(pwd)){
 			check = true;
 		}
 		

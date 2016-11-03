@@ -63,7 +63,7 @@
 										<a data-toggle="collapse" data-parent="#accordion"
 											href="#faq-sub-${vo.board_no}">
 											<h4 class="panel-title">
-												${vo.subject}  <span class="pull-right">
+												${vo.subject} <span class="pull-right">
 													<i class="glyphicon glyphicon-plus"></i>
 											</span>
 										</h4>
@@ -83,15 +83,70 @@
 						</div>
 					</div>
 				</div>
-
+				
+	
+	<!-- 페이지표시 -->
+	<table border="0" width="600">
+		<tr>
+		<td align="right"> 
+		
+		
+		<!-- [1][2][3][4][5] -->
+		<!-- fp           tp -->
+								
+		<%-- <c:if test="${curpage>block}">
+			<a href="noticeboard.do?page=1">
+				비긴</a> &nbsp;
+				<a href="noticeboard.do?page=${fromPage-1}">
+				프리브</a> &nbsp;
+		</c:if>    --%>
+		
+		<%-- <c:if test="${curpage<=block}"> --%>
+			<a href="noticeboard.do?page=1">비긴</a>
+				<a href="noticeboard.do?page=${curpage>1?curpage-1:curpage}">
+				프리브</a> &nbsp;
+		<%-- </c:if>    --%>
+		
+		<c:forEach var="i" begin="${fromPage }" end="${toPage }">
+		[<c:if test="${ curpage ==i}">
+		
+		<span style="color:red">${i }</span>
+		
+		</c:if>		
+		<c:if test="${ curpage !=i}">
+		<a href="noticeboard.do?page=${i }">${i }</a>
+					
+		</c:if>		
+		]
+		</c:forEach>
+		
+		<c:if test="${toPage<totalpage }">
+			<a href="noticeboard.do?page=${toPage+1 }">넥스트</a>
+			<a href="noticeboard.do?page=${totalpage }">끝</a>
+		</c:if>
+		
+		<c:if test="${toPage>=totalpage }">
+			<a href="noticeboard.do?page=${curpage<totalpage?curpage+1:curpage }">넥스트</a>&nbsp;
+			<a href="noticeboard.do?page=${totalpage }">끝</a>
+		</c:if>
+		&nbsp;&nbsp;
+		${curpage } page / ${totalpage  } pages
+		
+		</td>
+		
+		</tr>
+		</table>
+		<!-- 페이지표시 끝 -->
+		<!-- 글쓰기 -->
 				<table width="700">
 					<tr>
 						<!-- 관리자만보이게 설정 -->
+						<c:if test="${grade<=1 }">
 						<td align="right"><a href="noticeboard_insert.do">글쓰기</a></td>
-
+						</c:if>
 					</tr>
 				</table>
-
+		<!-- 글쓰기 끝 -->
 				<!-- End FAQ Item -->
 
 				<div class="clearfix margin-bottom-10"></div>
