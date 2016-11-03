@@ -1,9 +1,11 @@
 package com.sist.di;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
@@ -51,6 +53,7 @@ public class MemberVOValidator implements Validator{
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "id", "error");
 			
 		}else{
+			System.out.println(2);
 			errors.rejectValue("id","short");
 		}
 
@@ -59,6 +62,8 @@ public class MemberVOValidator implements Validator{
 		}else{
 			errors.rejectValue("pwd","short");
 		}
+		
+		
 		if(vo.getName().length() >= 2){
 			Matcher nameMat = ptnName.matcher(vo.getName());
 			if(!nameMat.matches()){
@@ -79,7 +84,11 @@ public class MemberVOValidator implements Validator{
 		}else{
 			errors.rejectValue("phone","phonemiss");
 		}
+		List<ObjectError> list = errors.getAllErrors();
 		
+		for(ObjectError oe : list){
+			System.out.println(oe.getDefaultMessage());
+		}
 
 	}
 
