@@ -1,5 +1,7 @@
 	package com.sist.di;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +11,7 @@ public class MemberController {
 
 	
 	@RequestMapping("member")
-	public String member_page(Model model){
+	public String member_page(Model model, HttpServletRequest req){
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("jsp", "../member/member.jsp");
