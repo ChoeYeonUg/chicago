@@ -24,15 +24,42 @@
   		SELECT grade FROM member1 <include refid="where-id"></include>
   	</select>
   	
-  	<select id="selectMember" resultType="memberVO" parameterType="String">
+  	<select id="selectMember" resultType="member" parameterType="String">
   		SELECT id, pwd, addr,zipcode,phone,gender,email,point,grade FROM member1 <include refid="where-id"/>
   	</select>
   	
+  	<select id="memberlist" resultType="member" parameterType="hashmap">
+	  SELECT id,name,phone,grade,num
+			FROM (SELECT id,name,phone,grade,ROWNUM as num
+			FROM (SELECT id,name,phone,grade FROM member1 WHERE  <![CDATA[ id <> 'admin' ]]>)) WHERE num BETWEEN #{start} AND #{end}
+  	</select>
+  	
+  	<select id="memberTotalPage" resultType="int" parameterType="int">
+  		SELECT CEIL(COUNT(*)/#{rowSize}) FROM member1 WHERE  <![CDATA[ id <> 'admin' ]]>
+  	</select>
+  	
+  	<select id="memberSearch" resultType="member" parameterType="hashmap">
+	  SELECT id,name,phone,grade,num
+			FROM (SELECT id,name,phone,grade,ROWNUM as num
+			FROM (SELECT id,name,phone,grade FROM member1 WHERE  <![CDATA[ id <> 'admin' ]]> AND ${fs} LIKE '%${ss}%')) WHERE num BETWEEN #{start} AND #{end}
+  	</select>
+  	
+  	<select id="memberSearchPage" resultType="int" parameterType="hashmap">
+  		SELECT CEIL(COUNT(*)/#{rowSize}) FROM member1 WHERE  <![CDATA[ id <> 'admin' ]]> AND ${fs} LIKE '%${ss}%'
+  	</select>
   	
   	
-  	<insert id="joinMember" parameterType="com.sist.dao.MemberVO">
+  	<insert id="joinMember" parameterType="member">
   		INSERT INTO member1(id,pwd,name,addr,zipcode,phone,gender,email)
   			VALUES(#{id},#{pwd},#{name},#{addr}, #{zipcode}, #{phone}, #{gender}, #{email})
   	</insert>
+  	
+  	<delete id="memberDelete" parameterType="String">
+  		DELETE FROM member1 <include refid="where-id"/>
+  	</delete>
+  	
+  	<update id="updateGrade" parameterType="hashmap">
+  		UPDATE member1 SET grade=#{grade} <include refid="where-id"/>
+  	</update>
   	
   </mapper>
