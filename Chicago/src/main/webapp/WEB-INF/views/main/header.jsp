@@ -46,14 +46,14 @@
                 <nav id="mainav" class="fl_right">
        				 <ul class="clear">
           				<li><a href="store.do"><spring:message code="header.menu"/></a></li>
-          				<li><a class="drop" href="book.do"><spring:message code="header.book"/></a>
-            				<ul>
+          				<li><a href="book.do"><spring:message code="header.book"/></a>
+            				<!-- <ul>class="drop" 
               					<li><a href="#"><spring:message code="header.major"/></a></li>
                                 <li><a href="#"><spring:message code="header.novel"/></a></li>
 								<li><a href="#"><spring:message code="header.poem"/></a></li>
 								<li><a href="#"><spring:message code="header.essay"/></a></li>
 								<li><a href="#"><spring:message code="header.fairytale"/></a></li>
-            				</ul>
+            				</ul> -->
           				</li>
           				<li><a class="drop" href="event.do"><spring:message code="header.event"/></a>
             				<ul>
