@@ -84,8 +84,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void secret_insert(Map map) throws Exception {
-		mapper.secret_insert(map);
+	public void secret_insert(BoardVO vo) throws Exception {
+		mapper.secret_insert(vo);
 		
 	}
 
@@ -105,8 +105,9 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void secret_update(Map map) throws Exception {		
-		mapper.secret_update(map);	
+	public void secret_update(BoardVO vo) throws Exception {		
+		mapper.secret_update(vo);	
+		
 		
 	}
 
@@ -132,6 +133,29 @@ public class BoardServiceImpl implements BoardService{
 		}else{
 			mapper.secret_admin_delete(board_no);
 		}
+		
+	}
+
+	@Override
+	public BoardVO secret_parentData(int board_no) throws Exception {
+		
+		return mapper.secret_parentData(board_no);
+	}
+
+	@Override
+	public void secret_stepIncrement(BoardVO vo) throws Exception {
+		mapper.secret_stepIncrement(vo);
+		
+	}
+
+	@Override
+	public void secret_replyInsert(BoardVO vo) throws Exception {
+		mapper.secret_replyInsert(vo);
+	}
+
+	@Override
+	public void secret_depthIncrement(int board_no) throws Exception {
+		mapper.secret_depthIncrement(board_no);
 		
 	}
 

@@ -56,7 +56,7 @@
   	INSERT INTO BOARD1 (board_no,id,category,faq_category,subject,content,secret) VALUES (board_seq.nextval,'admin',2,#{faq_category},#{subject},#{content},1)
   	</insert>
   	
-  	<insert id="secret_insert" parameterType="hashmap">
+  	<insert id="secret_insert" parameterType="board">
   	INSERT INTO BOARD1 (board_no,id,subject,category,pwd,content,secret,group_id) 
   	VALUES (board_seq.nextval,#{id},#{subject},3,#{pwd},#{content},#{secret},groupid_seq.nextval)
   	</insert>
@@ -85,7 +85,7 @@
   	
   	<!-- 1:1게시판수정 -->
   	
-  	<update id="secret_update" parameterType="hashmap">
+  	<update id="secret_update" parameterType="board">
   		UPDATE board1 SET subject=#{subject},content=#{content},
   		secret=#{secret},pwd=#{pwd},hit=#{hit} WHERE board_no=#{board_no}
   	</update>
@@ -112,4 +112,22 @@
   	<update id="secret_admin_delete" parameterType="int">
   		UPDATE board1 SET subject='관리자가 삭제한 게시물입니다.', content='관리자가 삭제한 게시물입니다.'WHERE board_no=#{board_no}
  	</update>
+ 	
+ 	<select id="secret_parentData" resultType="board" parameterType="int">
+ 		SELECT group_id, group_step, group_tab FROM Board1 WHERE board_no=#{board_no}
+ 	</select>
+ 	
+ 	<update id="secret_stepIncrement" parameterType="board">
+ 		UPDATE Board1 SET group_step=group_step+1 WHERE group_id=#{group_id} AND group_step>#{group_step}
+ 	</update>
+ 	
+ 	<insert id="secret_replyInsert" parameterType="board">
+ 		INSERT INTO board1 (board_no, id, subject, content, pwd,category,secret, group_id, group_step, group_tab, root) 
+ 		VALUES(board_seq.nextval,#{id},#{subject},#{content},#{pwd},3,#{secret},#{group_id},#{group_step},#{group_tab},#{root}) 		
+ 	</insert>
+ 	
+ 	<update id="secret_depthIncrement" parameterType="int">
+ 		UPDATE Board1 SET depth=depth+1 WHERE board_no=#{board_no}
+ 	</update>
+ 	
   </mapper>
