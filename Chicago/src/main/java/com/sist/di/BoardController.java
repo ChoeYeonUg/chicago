@@ -175,10 +175,10 @@ public class BoardController {
 	
 	
 	@RequestMapping("secretboard")
-	public String secretboard(Model model,String page){
+	public String secretboard(Model model,String page,String fs,String ss){
 		try {	
 			
-
+			
 			if(page==null)
 				page="1";
 			
@@ -199,35 +199,47 @@ public class BoardController {
 			map.put("end", end);
 			map.put("rowSize", rowSize);
 			map.put("category", 3);
+			map.put("fs", fs);
+			map.put("ss", ss);
 			//토탈페이지 (카테고리3세팅)			
-			int totalpage = bs.boardTotalPage(map);
+			int totalpage ;
 
 			
+		
 			
-			//블록세팅
-			int block=5;
-			int fromPage = ((curpage-1)/block*block)+1;
-			int toPage = ((curpage-1)/block*block)+block;
-			
-			if(toPage> totalpage) toPage = totalpage;
 					
-			//화면에 뿌려줄 리스트를 list라는 이름으로 가져옴 
-			List<BoardVO> list=bs.secretboard_ListData(map);
+			List<BoardVO> list;
+			if(ss==null || ss==""){
+				list=bs.secretboard_ListData(map);
+				totalpage = bs.boardTotalPage(map);
+			}else{
+				list=bs.secret_find(map);
+				totalpage= bs.secret_find_total(map);
+			}
 			
 			 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 			 String today=sdf.format(new Date());
 		
-			
-			
+				
+				//블록세팅
+				int block=5;
+				int fromPage = ((curpage-1)/block*block)+1;
+				int toPage = ((curpage-1)/block*block)+block;
+				if(toPage> totalpage) toPage = totalpage;
+				String msg="관리자가 삭제한 게시물입니다.";
+		
+				
 			model.addAttribute("jsp", "board.jsp");
 			model.addAttribute("board_jsp", "../board/list.jsp");
 			model.addAttribute("boardjsp","../board/secretboard.jsp" );
-			
+			model.addAttribute("fs", fs);
+			model.addAttribute("ss", ss);
 			model.addAttribute("block",block);
 			model.addAttribute("fromPage", fromPage);
 			model.addAttribute("toPage", toPage);
 			model.addAttribute("totalpage", totalpage);
 			model.addAttribute("today",today);
+			model.addAttribute("msg",msg);
 			
 			//list담아주기			
 			model.addAttribute("list", list);
@@ -414,7 +426,7 @@ public class BoardController {
 		String db_pwd=bs.getPwd(board_no);
 		
 		model.addAttribute("db_pwd",db_pwd);
-		model.addAttribute("page",page);
+		
 		model.addAttribute("board_no",board_no);
 		model.addAttribute("page",curpage);
 		model.addAttribute("jsp", "board.jsp");
@@ -511,5 +523,32 @@ public class BoardController {
 		
 		return "redirect:secret_content.do?board_no="+board_no;
 	}
+	@RequestMapping("secret_reply")
+	public String secret_reply(Model model){
+
+		model.addAttribute("jsp", "board.jsp");
+		model.addAttribute("board_jsp", "../board/list.jsp");
+		model.addAttribute("boardjsp","../board/secret_reply.jsp" );
+		
+		return "main/main";
+	}
 	
+	@RequestMapping("board_delete")
+	public String secret_delete(Model model,int board_no, String page){
+		if(page==null)
+			page="1";
+		//페이지 받아오기
+		int curpage = Integer.parseInt(page);
+		try{
+			bs.board_delete(board_no);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			e.getStackTrace();
+		}
+		
+		model.addAttribute("page",curpage);
+		
+		return "redirect:secretboard.do";
+	}
+
 }

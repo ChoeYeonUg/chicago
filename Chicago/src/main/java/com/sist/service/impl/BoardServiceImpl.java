@@ -110,6 +110,32 @@ public class BoardServiceImpl implements BoardService{
 		
 	}
 
+	@Override
+	public List<BoardVO> secret_find(Map map) throws Exception {
+		List<BoardVO> list=mapper.secret_find(map);
+		
+		return list;
+	}
+
+	@Override
+	public int secret_find_total(Map map) throws Exception {
+		
+		return mapper.secret_find_total(map);
+	}
+
+	@Override
+	public void board_delete(int board_no) throws Exception {
+		
+		BoardVO vo=mapper.board_deleteData(board_no);
+		if(vo.getDepth()==0){
+			mapper.board_delete(board_no);
+		}else{
+			mapper.secret_admin_delete(board_no);
+		}
+		
+	}
+
+	
 	
 
 }

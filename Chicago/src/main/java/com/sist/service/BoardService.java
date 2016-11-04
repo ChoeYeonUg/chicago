@@ -24,5 +24,10 @@ public interface BoardService {
 	public BoardVO secretboard_Content(int board_no) throws Exception; 
 	public String getPwd(int board_no) throws Exception;
 	public void secret_update(Map map) throws Exception;
+	public List<BoardVO> secret_find(Map map) throws Exception;
+	public int secret_find_total(Map map) throws Exception;
+	public void board_delete(int board_no) throws Exception;
+	
+	
 }
 	

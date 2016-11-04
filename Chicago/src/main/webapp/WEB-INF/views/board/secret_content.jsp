@@ -79,11 +79,11 @@
 			<table>
 			<tr>
 				<td align="right">
-					<a href="#">답글</a>&nbsp;
+					<a href="secret_reply.do">답글</a>&nbsp;
 					
-				<c:if test="${id==vo.id }">
+				<c:if test="${id==vo.id || grade<=1 }">
 					<a href="secret_update.do?page=${page }&board_no=${board_no }">수정</a>&nbsp;
-					<a href="#">삭제</a>&nbsp;
+					<a href="board_delete.do?page=${page }&board_no=${board_no }">삭제</a>&nbsp;
 				</c:if>
 					<a href="secretboard.do?page=${page}">목록</a>&nbsp;
 				</td>

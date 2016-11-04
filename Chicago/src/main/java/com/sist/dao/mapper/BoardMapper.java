@@ -27,4 +27,9 @@ public interface BoardMapper {
 	public BoardVO secret_content(int board_no);
 	public String getPwd(int board_no);
 	public void secret_update(Map map);
+	public List<BoardVO> secret_find(Map map);
+	public int secret_find_total(Map map);
+	public BoardVO board_deleteData(int board_no);
+	public void board_delete(int board_no);
+	public void secret_admin_delete(int board_no);
 }	
