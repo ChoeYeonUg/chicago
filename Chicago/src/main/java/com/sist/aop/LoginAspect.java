@@ -1,6 +1,10 @@
 package com.sist.aop;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -18,54 +22,102 @@ public class LoginAspect {
 	static String type = "";
 	
 		
-	@Pointcut("execution(* com.sist.di.*Controller.*(..))")
+	@Pointcut("execution(* com.sist.di.*Controller.*(..)) || execution(* com.sist.service.impl.*Impl.*(..)) || execution(* com.sist.dao.mapper.*Mapper.*(..))")
 	private void test(){}
 	
-	/*@Around(value="test()")
-	public Object trace(ProceddingJoinPoint joinPoint) throws Throwable{
-		HttpServletRequest request= null;
-
-		for(Object o:joinPoint.getArgs()){
-			if(o instanceof HttpServletRequest){
-				request = (HttpServletRequest) o;
-			}
-		}
-	}*/
 	
-	/*@Around("execution(* com.sist.di.*Controller.*(..)) || execution(* com.sist.service.impl.*Impl.*(..)) || execution(* com.sist.dao.mapper.*Mapper.*(..))")
-	public Object logPrint(ProceedingJoinPoint joinPoint) throws Throwable {
-		type = joinPoint.getSignature().getDeclaringTypeName();
-		
-		if (type.indexOf("Controller") > -1) {
-			name = "Controller  \t:  ";
-		}
-		else if (type.indexOf("Service") > -1) {
-			name = "ServiceImpl  \t:  ";
-		}
-		else if (type.indexOf("DAO") > -1) {
-			name = "DAO  \t\t:  ";
-		}
-		logger.debug(name + type + "." + joinPoint.getSignature().getName() + "()");
-		return joinPoint.proceed();
-	}
-*/
+	@Pointcut("execution(* com.sist.di.SysopController.*(..))")
+	private void admin(){}
+	
+	@Pointcut("execution(* com.sist.di.MemberController.*(..))")
+	private void mypage(){}
 	
 	@Around(value="test()")
 	public Object logPrint(ProceedingJoinPoint joinPoint) throws Throwable{
 		type = joinPoint.getSignature().getDeclaringTypeName();
-		
 		if (type.indexOf("Controller") > -1) {
 			name = "Controller  \t:  ";
 		}
 		else if (type.indexOf("Service") > -1) {
 			name = "ServiceImpl  \t:  ";
 		}
-		else if (type.indexOf("DAO") > -1) {
-			name = "DAO  \t\t:  ";
+		else if (type.indexOf("Mapper") > -1) {
+			name = "Mapper  \t:  ";
 		}
-		System.out.println(name + type + "." + joinPoint.getSignature().getName() + "()");
-		logger.debug(name + type + "." + joinPoint.getSignature().getName() + "()");
+		
+		if(logger.isDebugEnabled())
+			logger.debug(name + type + "." + joinPoint.getSignature().getName() + "()");
 		return joinPoint.proceed();		
+	}
+	
+	@Around(value="admin()")
+	public Object adminCheck(ProceedingJoinPoint joinPoint) throws Throwable{
+		type = joinPoint.getSignature().getDeclaringTypeName();
+		
+		 HttpServletRequest request = null;
+	        HttpServletResponse response = null;
+	        for ( Object o : joinPoint.getArgs() ){ 
+	            if ( o instanceof HttpServletRequest ) {
+	                request = (HttpServletRequest)o;
+	            } 
+	        }
+	        try{
+	            HttpSession session = request.getSession();
+	 
+	                String loginId = (String) session.getAttribute("id");
+	 
+	                System.out.println("### Margo ==> loginId : " + loginId);
+	                if (loginId == null || "".equals(loginId)) {
+	                    System.out.println("### Margo ==> in if loginId : "
+	                            + loginId);
+	                    throw new RuntimeException("앙대요.");
+	                }else{
+	                	int grade = (Integer) session.getAttribute("grade");
+	                	System.out.println(grade);
+	                	if(grade != 0) throw new RuntimeException("님따위론 안됩니다.");
+	                }
+	        }catch(Exception e){
+	             
+	            throw new RuntimeException("앙대요");
+	 
+	        }
+
+
+		
+		return joinPoint.proceed();
+	}
+	
+	@Around(value="mypage()")
+	public Object loginCheck(ProceedingJoinPoint joinPoint) throws Throwable{
+		type = joinPoint.getSignature().getDeclaringTypeName();
+		
+		 HttpServletRequest request = null;
+	        HttpServletResponse response = null;
+	        for ( Object o : joinPoint.getArgs() ){ 
+	            if ( o instanceof HttpServletRequest ) {
+	                request = (HttpServletRequest)o;
+	            } 
+	        }
+	        try{
+	            HttpSession session = request.getSession();
+	 
+	                String loginId = (String) session.getAttribute("id");
+	 
+	                System.out.println("### Margo ==> loginId : " + loginId);
+	                if (loginId == null || "".equals(loginId)) {
+	                    System.out.println("### Margo ==> in if loginId : "
+	                            + loginId);
+	                    throw new RuntimeException("앙대요.");
+	                }
+	        }catch(Exception e){
+	             
+	            throw new RuntimeException("앙대요");
+	 
+	        }
+
+
+		
+		return joinPoint.proceed();
 	}
 
 }

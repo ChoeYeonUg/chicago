@@ -3,14 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-  <mapper namespace="com.sist.dao.mapper.MemberMapper">
-   <!-- 구문을 찾기위해 사용 될 수 있는 명명공간 내 유일한 구분자 -->
+<mapper namespace="com.sist.dao.mapper.MemberMapper">
+    <!-- 구문을 찾기위해 사용 될 수 있는 명명공간 내 유일한 구분자 -->
   	<sql id="where-id">
-          WHERE id=#{id}          
-      </sql>
-      <sql id="where-pwd">
-          WHERE pwd=#{pwd}          
-      </sql>
+        WHERE id=#{id}          
+    </sql>
+    
+    <sql id="where-pwd">
+        WHERE pwd=#{pwd}          
+    </sql>
+    
+    <sql id="where-id,pwd">
+        WHERE id=#{id} AND pwd=#{pwd}          
+    </sql>
       
   	<select id="idCheck" resultType="int" parameterType="String">
   		SELECT count(*) FROM member1 <include refid="where-id"/>
@@ -25,17 +30,28 @@
   	</select>
   	
   	<select id="selectMember" resultType="member" parameterType="String">
-  		SELECT id, pwd, addr,zipcode,phone,gender,email,point,grade FROM member1 <include refid="where-id"/>
+  		SELECT name,id,pwd,addr,zipcode,phone,gender,email,point,grade FROM member1 <include refid="where-id"/>
   	</select>
   	
   	<select id="memberlist" resultType="member" parameterType="hashmap">
 	  SELECT id,name,phone,grade,num
 			FROM (SELECT id,name,phone,grade,ROWNUM as num
 			FROM (SELECT id,name,phone,grade FROM member1 WHERE  <![CDATA[ id <> 'admin' ]]>)) WHERE num BETWEEN #{start} AND #{end}
-
   	</select>
   	
+  	<select id="memberTotalPage" resultType="int" parameterType="int">
+  		SELECT CEIL(COUNT(*)/#{rowSize}) FROM member1 WHERE  <![CDATA[ id <> 'admin' ]]>
+  	</select>
   	
+  	<select id="memberSearch" resultType="member" parameterType="hashmap">
+	  SELECT id,name,phone,grade,num
+			FROM (SELECT id,name,phone,grade,ROWNUM as num
+			FROM (SELECT id,name,phone,grade FROM member1 WHERE  <![CDATA[ id <> 'admin' ]]> AND ${fs} LIKE '%${ss}%')) WHERE num BETWEEN #{start} AND #{end}
+  	</select>
+  	
+  	<select id="memberSearchPage" resultType="int" parameterType="hashmap">
+  		SELECT CEIL(COUNT(*)/#{rowSize}) FROM member1 WHERE  <![CDATA[ id <> 'admin' ]]> AND ${fs} LIKE '%${ss}%'
+  	</select>
   	
   	<insert id="joinMember" parameterType="member">
   		INSERT INTO member1(id,pwd,name,addr,zipcode,phone,gender,email)
@@ -50,4 +66,28 @@
   		UPDATE member1 SET grade=#{grade} <include refid="where-id"/>
   	</update>
   	
-  </mapper>
+  	<!-- Made By Choding -->
+  	<!-- memberInfo Database Query -->
+  	
+  	<!-- Modify MemberInfo -->
+  	<update id="modyfyMemberInfo" parameterType="com.sist.dao.MemberVO">
+		UPDATE member1 SET addr=${addr},zipcode=${zipcode},email=#{email},phone=#{phone} <include refid="where-id"/>
+  	</update>
+	
+  	<!-- Check id, pwd for Modify Password -->
+	<select id="selectMemberPwd" resultType="member" parameterType="String">
+  		SELECT id,pwd FROM member1 <include refid="where-id"/>
+  	</select>
+  	
+  	<!-- Modify Member Password -->
+  	<update id="modyfyMemberPwd" parameterType="hashmap">
+		UPDATE member1 SET pwd=#{pwd} <include refid="where-id"/>
+	</update>
+	
+	<!-- Withdraw Member -->
+	<delete id="withdrawMember" parameterType="hashmap">
+		DELETE FROM member1 <include refid="where-id,pwd"/>
+  	</delete>
+  	
+</mapper>
+  

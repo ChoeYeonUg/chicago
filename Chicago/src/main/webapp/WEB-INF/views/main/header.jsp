@@ -71,14 +71,15 @@
 								<li><a href="reviewboard.do">리뷰보드</a></li>
             				</ul>
           				</li>
-          				<li><a class="drop" href="member.do"><spring:message code="header.mypage"/></a>
+          				<!-- Modified By Choding -->
+          		   		<li><a class="drop" href="mypage.do"><spring:message code="header.mypage"/></a>
             				<ul>
-              					<li><a href="member.do"><spring:message code="header.modifi"/></a></li>
-                                <li><a href="#"><spring:message code="header.ppl"/></a></li>
-								<li><a href="#"><spring:message code="header.egd"/></a></li>
-								<li><a href="#"><spring:message code="header.qu"/></a></li>
+              					<li><a href="memberinfo.do"><spring:message code="header.modifi"/></a></li>
+                                <li><a href="order.do"><spring:message code="header.ppl"/></a></li>
+								<li><a href="wish.do"><spring:message code="header.egd"/></a></li>
+								<li><a href="memberquestion.do"><spring:message code="header.qu"/></a></li>
             				</ul>
-          				</li>
+            			</li>
           				<li><a href="sb.do"><spring:message code="header.sb"/></a></li>
           				<li><a class="drop" href="sysop.do"><spring:message code="header.saMenu"/></a>
             				<ul>

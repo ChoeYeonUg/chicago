@@ -16,4 +16,12 @@ public interface MemberService {
 	public void memberDelete(String id) throws Exception;
 	public void updateGrade(Map map) throws Exception;
 	public List<MemberVO> memberList(Map map) throws Exception;
+	public int memberTotalPage(int rowSize) throws Exception;
+	public List<MemberVO> memberSearch(Map map) throws Exception;
+	public int memberSearchPage(Map map) throws Exception;
+	public MemberVO selectMember(String id) throws Exception;
+	public void modyfyMemberInfo(MemberVO vo) throws Exception;
+	public void modyfyMemberPwd(Map map) throws Exception;
+	public void withdrawMember(Map map) throws Exception;
+	
 }
