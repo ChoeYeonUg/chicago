@@ -9,6 +9,6 @@ public interface BookMapper {
 	public List<BookVO> bookAllList();
 	public List<BookVO> newBookCate(int category);
 	public List<BookVO> bookListCateFirst(Map map);
-	public int cateFirCount();
-	public int cateFirTotalPage();
+	public int cateFirCount(int book_category);
+	public int cateFirTotalPage(int book_category);
 }

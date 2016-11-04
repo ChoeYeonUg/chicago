@@ -60,13 +60,15 @@ public class BookController {
 		int start = (curPage * rowSize) - (rowSize-1); // 시작글
 		int end = curPage * rowSize; // 마지막글
 		
+		int bcate = Integer.parseInt(book_category);
+		
 		Map map = new HashMap(); // 해쉬맵 생성
 		map.put("start", start); // 맵에 시작글 넣어주기
 		map.put("end", end); // 맵에 마지막글 넣어주기
-		map.put("category", Integer.parseInt(book_category)); // 맵에 총 권수 넣어주기
+		map.put("category", bcate); // 맵에 총 권수 넣어주기
 
-		int totalPage = bs.cateFirTotalPage();
-		int count = bs.cateFirCount();
+		int totalPage = bs.cateFirTotalPage(bcate);
+		int count = bs.cateFirCount(bcate);
 		count = count - ((curPage*5)-5);
 		
 		// 블록 나누기

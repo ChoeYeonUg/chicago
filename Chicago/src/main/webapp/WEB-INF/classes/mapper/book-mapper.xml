@@ -24,12 +24,19 @@
 		(SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img FROM GOODS1 WHERE book_category=#{category} ORDER BY publication DESC))
 		WHERE num BETWEEN #{start} AND #{end}
 	</select>
+	
 	<!-- 카테고리별 총 권수 -->
-	<select id="cateFirCount" resultType="int">
-		SELECT COUNT(*) FROM GOODS1 WHERE book_category='1'
+	<select id="cateFirCount" resultType="int" parameterType="int">
+		SELECT COUNT(*) FROM GOODS1 WHERE book_category=#{book_category}
 	</select>
+	
 	<!-- 카테고리별 총 페이지 수 (1페이지에 10권 목록 보이기) -->
-	<select id="cateFirTotalPage" resultType="int">
-		SELECT CEIL(COUNT(*)/10) FROM goods1 WHERE book_category='1'
+	<select id="cateFirTotalPage" resultType="int" parameterType="int">
+		SELECT CEIL(COUNT(*)/10) FROM goods1 WHERE book_category=#{book_category}
+	</select>
+	
+	<!-- 상세 페이지 정보 -->
+	<select id="detailBook" resultType="bookVO" parameterType="int">
+		SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img FROM goods1 WHERE book_code = #{book_code}
 	</select>
 </mapper>

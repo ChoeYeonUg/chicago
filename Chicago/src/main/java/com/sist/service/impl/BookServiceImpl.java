@@ -32,12 +32,12 @@ public class BookServiceImpl implements BookService{
 	}
 	
 	@Override
-	public int cateFirCount() {
-		return bm.cateFirCount();
+	public int cateFirCount(int book_category) {
+		return bm.cateFirCount(book_category);
 	}
 	
 	@Override
-	public int cateFirTotalPage() {
-		return bm.cateFirTotalPage();
+	public int cateFirTotalPage(int book_category) {
+		return bm.cateFirTotalPage(book_category);
 	}
 }

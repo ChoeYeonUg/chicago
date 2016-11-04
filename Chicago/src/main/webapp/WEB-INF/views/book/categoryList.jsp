@@ -12,11 +12,10 @@
 <link rel="stylesheet" type="text/css" href="book_css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="book_css/header1.css" />
 <script type="text/javascript">
-	function likePopup() {
-		var popUrl = "src\main\webapp\WEB-INF\views\book\likePop.do"; // 팝업창에 출력될 page
-		var popOption = "width=370, height=360, resizeable=no, scrollbars=no, status=no;";
-		windown.open(popUrl,like,popOption);
-	};
+	function likepop() {
+		var popOption = "width=300, hegiht=300, top=500, left=500";
+		window.open('book/likePop.do',"",popOption);
+	}
 </script>
 </head>
 <body>
@@ -62,13 +61,13 @@
 							<table>
 								<!-- 책 이미지 -->
 								<tr>
-									<td align="center"> <img alt="image" src="${list.img }"></td>
+									<td align="center"><a href="bookDetail.do"><img alt="image" src="${list.img }"></a></td>
 								</tr>
 								<!-- 주문관련 아이콘 -->
 								<tr>
 									<td align="center" class="icontd">
 										<a href="javascript:likePopup();">
-											<img src="book_img\like.png" alt="like.png" title="찜하기" class="icon" name="like">&nbsp;
+											<img src="book_img\like.png" alt="like.png" title="찜하기" class="icon" onclick="likepop()">&nbsp;
 										</a> 
 										<img src="book_img\shopping.png" alt="shopping.png" title="장바구니" class="icon">&nbsp; 
 										<img src="book_img\purchase.png" alt="purchase.png" title="바로구매" class="icon">
