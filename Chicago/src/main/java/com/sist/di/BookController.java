@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sist.dao.BookVO;
@@ -91,8 +94,66 @@ public class BookController {
 		model.addAttribute("cateList", cateList);
 		model.addAttribute("page", page);
 		model.addAttribute("jsp", "book.jsp");
-		model.addAttribute("jsp", "../book/categoryList.jsp");
+		model.addAttribute("book_jsp", "../book/categoryList.jsp");
 		return "main/main";
 	}
+	
+	// 디테일 페이지 
+	@RequestMapping("bookDetail")
+	public String detailBookList(Model model, String book_code) {
+		
+		BookVO detailBook = bs.detailBook(book_code);
+		
+		model.addAttribute("detailBook", detailBook);
+		model.addAttribute("book_code", book_code);
+		model.addAttribute("jsp","book.jsp");
+		model.addAttribute("book_jsp", "../book/bookDetail.jsp");
+		
+		return "main/main";
+	}
+	
+/*	@RequestMapping("wishPop")
+	public String wishPopPage(String book_code, HttpServletRequest req, Model model) {
+		HttpSession hs = req.getSession();
+		logger.info(book_code);
+		String id = (String) hs.getAttribute("id");
+		if (id != null && !id.equals("")) {
+			logger.info("hh");
+			Map map = new HashMap();
+			map.put("id", id);
+			map.put("book_code", book_code);
+
+			bs.wishpop(map);
+		} else {
+			return "javascript:histroy.back()";
+		}
+		
+		model.addAttribute("jsp","book.jsp");
+		model.addAttribute("book_jsp","../member/wishlist.jsp");
+		
+		return "main/main";
+	}*/
+
+	@RequestMapping("purchase")
+	public String purchsePage(Model model) {
+		
+		model.addAttribute("jsp","book.jsp");
+		model.addAttribute("book_jsp","../book/purchase.jsp");
+	
+		return "main/main";
+	}
+
+	@RequestMapping("sbPage")
+	public String sbPage(Model model) {
+		
+		return "book/sbPage";
+	}
+	
+/*	@RequestMapping("wishlist")
+	public String wishlistPage(Model model) {
+		
+		return "member/wishlist";
+	}
+*/
 
 }

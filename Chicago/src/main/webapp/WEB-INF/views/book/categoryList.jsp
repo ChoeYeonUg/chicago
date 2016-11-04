@@ -11,12 +11,7 @@
 <link rel="stylesheet" type="text/css" href="book_css/bookMain.css" />
 <link rel="stylesheet" type="text/css" href="book_css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="book_css/header1.css" />
-<script type="text/javascript">
-	function likepop() {
-		var popOption = "width=300, hegiht=300, top=500, left=500";
-		window.open('book/likePop.do',"",popOption);
-	}
-</script>
+
 </head>
 <body>
 	<div id="content">
@@ -61,16 +56,20 @@
 							<table>
 								<!-- 책 이미지 -->
 								<tr>
-									<td align="center"><a href="bookDetail.do"><img alt="image" src="${list.img }"></a></td>
+									<td align="center"><a href="bookDetail.do?book_code=${list.book_code }"><img alt="image" src="${list.img }"></a></td>
 								</tr>
 								<!-- 주문관련 아이콘 -->
 								<tr>
 									<td align="center" class="icontd">
-										<a href="javascript:likePopup();">
-											<img src="book_img\like.png" alt="like.png" title="찜하기" class="icon" onclick="likepop()">&nbsp;
+										<a href="wishlist.do">
+											<img src="book_img\like.png" alt="like.png" title="찜하기" class="icon">&nbsp;
 										</a> 
-										<img src="book_img\shopping.png" alt="shopping.png" title="장바구니" class="icon">&nbsp; 
-										<img src="book_img\purchase.png" alt="purchase.png" title="바로구매" class="icon">
+										<a>
+											<img src="book_img\shopping.png" alt="shopping.png" title="장바구니" class="icon" onclick="sb()">&nbsp;
+										</a> 
+										<a href="purchase.do">
+											<img src="book_img\purchase.png" alt="purchase.png" title="바로구매" class="icon">
+										</a>
 									</td>
 								</tr>
 							</table>
@@ -82,7 +81,7 @@
 									<td height="5" align="left" colspan="3">ISBN : ${list.book_code }</td>
 								</tr>
 								<tr>
-									<td height="20" colspan="3"><h4><b>${list.book_name }</b></h4></td>
+									<td height="20" colspan="3"><h4><b><a href="bookDetail.do?book_code=${list.book_code }">${list.book_name }</a></b></h4></td>
 								</tr>
 								<tr>
 									<td height="20" width="60%" colspan="2">[저자]&nbsp;${list.writer }</td>

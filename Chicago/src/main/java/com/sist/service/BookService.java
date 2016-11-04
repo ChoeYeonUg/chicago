@@ -11,4 +11,6 @@ public interface BookService {
 	public List<BookVO> bookListCateFirst(Map map);
 	public int cateFirCount(int book_category);
 	public int cateFirTotalPage(int book_category);
+	public BookVO detailBook (String book_code);
+	public void wishpop(Map map);
 }

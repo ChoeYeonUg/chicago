@@ -40,4 +40,13 @@ public class BookServiceImpl implements BookService{
 	public int cateFirTotalPage(int book_category) {
 		return bm.cateFirTotalPage(book_category);
 	}
+	
+	@Override
+	public BookVO detailBook(String book_code) {
+		return bm.detailBook(book_code);
+	}
+	
+	public void wishpop(Map map) {
+		bm.wishpop(map);
+	}
 }
