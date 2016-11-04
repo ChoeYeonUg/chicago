@@ -28,11 +28,18 @@ public class BoardServiceImpl implements BoardService{
 		return list;
 	}
 
-	/*@Override
-	public int notice_boardTotalPage() throws Exception {
+	@Override
+	public int boardTotalPage(Map map) throws Exception {
 
-		return mapper.noticeTotalPage();
-	}*/
+		return mapper.totalPage(map);
+	}
+	
+
+	@Override
+	public int faqtotalListPage(int faq_category) throws Exception {		
+		return mapper.faqtotalListPage(faq_category);
+	}
+
 	
 	@Override
 	public int faq_boardTotalPage() throws Exception {
@@ -40,6 +47,13 @@ public class BoardServiceImpl implements BoardService{
 		return mapper.faqTotalPage();
 	}
 
+	@Override
+	public int faq_CatboardTotalPage(int faq_category) throws Exception {
+		
+		return  mapper.faqCatTotalPage(faq_category);
+	}
+
+	
 	@Override
 	public List<BoardVO> faqboard_AllListData(Map map) throws Exception {
 		List<BoardVO> list=mapper.faqlist(map);
@@ -62,8 +76,66 @@ public class BoardServiceImpl implements BoardService{
 		mapper.faq_insert(map);		
 	}
 
+	@Override
+	public List<BoardVO> secretboard_ListData(Map map) throws Exception {
+		List<BoardVO> list=mapper.secretlist(map);
+		
+		return list;
+	}
 
+	@Override
+	public void secret_insert(Map map) throws Exception {
+		mapper.secret_insert(map);
+		
+	}
 
+	@Override
+	public BoardVO secretboard_Content(int board_no) throws Exception {
+		
+		mapper.hitIncrement(board_no);		
+		
+		return mapper.secret_content(board_no); 
+	}
 
+	@Override
+	public String getPwd(int board_no) throws Exception {
+		
+		return mapper.getPwd(board_no);
+		 				
+	}
+
+	@Override
+	public void secret_update(Map map) throws Exception {		
+		mapper.secret_update(map);	
+		
+	}
+
+	@Override
+	public List<BoardVO> secret_find(Map map) throws Exception {
+		List<BoardVO> list=mapper.secret_find(map);
+		
+		return list;
+	}
+
+	@Override
+	public int secret_find_total(Map map) throws Exception {
+		
+		return mapper.secret_find_total(map);
+	}
+
+	@Override
+	public void board_delete(int board_no) throws Exception {
+		
+		BoardVO vo=mapper.board_deleteData(board_no);
+		if(vo.getDepth()==0){
+			mapper.board_delete(board_no);
+		}else{
+			mapper.secret_admin_delete(board_no);
+		}
+		
+	}
+
+	
+	
 
 }
