@@ -383,8 +383,9 @@ public class BoardController {
 		int board_no=vo.getBoard_no();
 	
 		try {
+			vo.setHit(vo.getHit()-2);
 			bs.secret_update(vo);
-			vo.setHit(vo.getHit()-2);			
+						
 			model.addAttribute("board_no",board_no);
 		} catch (Exception e) {
 			e.getStackTrace();
