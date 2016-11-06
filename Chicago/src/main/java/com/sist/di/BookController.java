@@ -32,13 +32,13 @@ public class BookController {
 	public String login_page(Model model) {
 
 		// 내용추가 (16.10.31)
-		List<BookVO> bookList = bs.bookAllList();
+		//List<BookVO> bookList = bs.bookAllList();
 		List<BookVO> newBookList1 = bs.newBookCate(1);
 		List<BookVO> newBookList2 = bs.newBookCate(2);
 		List<BookVO> newBookList3 = bs.newBookCate(3);
 		List<BookVO> newBookList4 = bs.newBookCate(4);
 
-		model.addAttribute("bookList", bookList);
+		//model.addAttribute("bookList", bookList);
 		model.addAttribute("newBookCate1", newBookList1);
 		model.addAttribute("newBookCate2", newBookList2);
 		model.addAttribute("newBookCate3", newBookList3);
@@ -134,14 +134,7 @@ public class BookController {
 		return "main/main";
 	}*/
 
-	@RequestMapping("purchase")
-	public String purchsePage(Model model) {
-		
-		model.addAttribute("jsp","book.jsp");
-		model.addAttribute("book_jsp","../book/purchase.jsp");
-	
-		return "main/main";
-	}
+
 
 	@RequestMapping("sbPage")
 	public String sbPage(Model model) {

@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>½ÃÄ«°íºÏ½º|ÀÚ°İÁõ¡¤¼öÇè¼­</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ì‹œì¹´ê³ ë¶ìŠ¤|ìê²©ì¦Â·ìˆ˜í—˜ì„œ</title>
 <link rel="stylesheet" type="text/css" href="book_css/bookMain.css" />
 <link rel="stylesheet" type="text/css" href="book_css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="book_css/header1.css" />
@@ -17,28 +17,28 @@
 	<div id="content">
 		<div class="container background-white">
 			<div class="row margin-vert-40">
-				<!-- ÁÂÃø Ä«Å×°í¸® ½ÃÀÛ -->
+				<!-- ì¢Œì¸¡ ì¹´í…Œê³ ë¦¬ ì‹œì‘ -->
 				<div class="col-md-3">
 					<ul class="list-group sidebar-nav" id="sidebar-nav">
-						<!-- Ä«Å×°í¸®1 -->
+						<!-- ì¹´í…Œê³ ë¦¬1 -->
 						<li class="list-group-item list-toggle">
 							<a href="categoryList.do?book_category=1">
 								<spring:message code="book.cate1" />
 							</a>
 						</li>
-						<!-- Ä«Å×°í¸®2 -->
+						<!-- ì¹´í…Œê³ ë¦¬2 -->
 						<li class="list-group-item list-toggle">
 							<a href="categoryList.do?book_category=2">
 								<spring:message	code="book.cate2" />
 							</a>
 						</li>
-						<!-- Ä«Å×°í¸®3 -->
+						<!-- ì¹´í…Œê³ ë¦¬3 -->
 						<li class="list-group-item list-toggle">
 							<a href="categoryList.do?book_category=3">
 								<spring:message code="book.cate3" />
 							</a>
 						</li>
-						<!-- Ä«Å×°í¸®4 -->
+						<!-- ì¹´í…Œê³ ë¦¬4 -->
 						<li class="list-group-item list-toggle">
 							<a href="categoryList.do?book_category=4">
 								<spring:message code="book.cate4" />
@@ -46,35 +46,35 @@
 						</li>	
 					</ul>
 				</div>
-				<!-- ÁÂÃø Ä«Å×°í¸® ³¡ -->
-				<!-- ³»¿ë½ÃÀÛ -->
+				<!-- ì¢Œì¸¡ ì¹´í…Œê³ ë¦¬ ë -->
+				<!-- ë‚´ìš©ì‹œì‘ -->
 				<div class="col-md-9">
 				<table width="100%" class="table_content" border="0">
 					<c:forEach items="${cateList }" var="list">
 					<tr>
 						<td width="15%" height="200">
 							<table>
-								<!-- Ã¥ ÀÌ¹ÌÁö -->
+								<!-- ì±… ì´ë¯¸ì§€ -->
 								<tr>
 									<td align="center"><a href="bookDetail.do?book_code=${list.book_code }"><img alt="image" src="${list.img }"></a></td>
 								</tr>
-								<!-- ÁÖ¹®°ü·Ã ¾ÆÀÌÄÜ -->
+								<!-- ì£¼ë¬¸ê´€ë ¨ ì•„ì´ì½˜ -->
 								<tr>
 									<td align="center" class="icontd">
 										<a href="wishlist.do">
-											<img src="book_img\like.png" alt="like.png" title="ÂòÇÏ±â" class="icon">&nbsp;
+											<img src="book_img\like.png" alt="like.png" title="ì°œí•˜ê¸°" class="icon">&nbsp;
 										</a> 
 										<a>
-											<img src="book_img\shopping.png" alt="shopping.png" title="Àå¹Ù±¸´Ï" class="icon" onclick="sb()">&nbsp;
+											<img src="book_img\shopping.png" alt="shopping.png" title="ì¥ë°”êµ¬ë‹ˆ" class="icon" onclick="sb()">&nbsp;
 										</a> 
-										<a href="purchase.do">
-											<img src="book_img\purchase.png" alt="purchase.png" title="¹Ù·Î±¸¸Å" class="icon">
+										<a href="purchase.do?book_code=${list.book_code }">
+											<img src="book_img\purchase.png" alt="purchase.png" title="ë°”ë¡œêµ¬ë§¤" class="icon">
 										</a>
 									</td>
 								</tr>
 							</table>
 						</td>
-						<!-- Ã¥ °£·« ¼Ò°³³»¿ë -->
+						<!-- ì±… ê°„ëµ ì†Œê°œë‚´ìš© -->
 						<td width="85%" height="200">
 							<table border="0">
 								<tr>
@@ -84,13 +84,13 @@
 									<td height="20" colspan="3"><h4><b><a href="bookDetail.do?book_code=${list.book_code }">${list.book_name }</a></b></h4></td>
 								</tr>
 								<tr>
-									<td height="20" width="60%" colspan="2">[ÀúÀÚ]&nbsp;${list.writer }</td>
-									<td height="20"  width="40%">[ÃâÆÇ»ç]&nbsp;${list.publisher }</td>
+									<td height="20" width="60%" colspan="2">[ì €ì]&nbsp;${list.writer }</td>
+									<td height="20"  width="40%">[ì¶œíŒì‚¬]&nbsp;${list.publisher }</td>
 								</tr>
 								<tr>
-									<td height="20"  width="30%">[ÃâÆÇÀÏ]&nbsp; <fmt:formatDate value="${list.publication }" pattern="yyyy³â M¿ù dÀÏ"/></td>
-									<td height="20"  width="30%">[±İ¾×]&nbsp; <fmt:formatNumber value="${list.price }" type="number"/>¿ø</td>
-									<td height="20"  width="40%">[ÂÊ¼ö]&nbsp;${list.pages }ÂÊ</td>
+									<td height="20"  width="30%">[ì¶œíŒì¼]&nbsp; <fmt:formatDate value="${list.publication }" pattern="yyyyë…„ Mì›” dì¼"/></td>
+									<td height="20"  width="30%">[ê¸ˆì•¡]&nbsp; <fmt:formatNumber value="${list.price }" type="number"/>ì›</td>
+									<td height="20"  width="40%">[ìª½ìˆ˜]&nbsp;${list.pages }ìª½</td>
 								</tr>
 								<tr>
 									<td height="50"  colspan="3"><br/>&nbsp;${list.book_content }</td>
@@ -128,7 +128,7 @@
 						</td>
 					</tr>
 				</table>
-				<!-- ³»¿ë ³¡ -->
+				<!-- ë‚´ìš© ë -->
 				</div>
 			</div>
 		</div>

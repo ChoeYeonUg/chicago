@@ -53,6 +53,18 @@
 	
 	</select>
 	
-	<!-- 바로구매 페이지로 넘어갈 때 -->
-	<select id="purchasepop" resultType="String" parameterType="String"></select>
+	<!-- 바로구매 페이지로 넘어갈 때 책정보 -->
+	<select id="purchase" resultType="bookVO" parameterType="String">
+		SELECT book_name, img, price,amount FROM goods1 WHERE book_code = #{book_code}
+	</select>
+	<!-- 책의 재고량을 감소시킴 -->
+	<update id="bookCount" parameterType="hashmap">
+		UPDATE goods1 SET amount = amount - #{amount} WHERE book_code = #{book_code}
+	</update>
+	
+	<!-- 책의 절판여부를 변경함 -->
+	<update id="bookOutOfPrint" parameterType="hashmap">
+		UPDATE goods1 SET out_of_print = #{outOfPrint} WHERE book_code = #{book_code}
+	</update>
+	
 </mapper>

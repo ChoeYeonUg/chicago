@@ -13,4 +13,5 @@ public interface BookService {
 	public int cateFirTotalPage(int book_category);
 	public BookVO detailBook (String book_code);
 	public void wishpop(Map map);
+	public BookVO purchase(String book_code);
 }

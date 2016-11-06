@@ -49,4 +49,10 @@ public class BookServiceImpl implements BookService{
 	public void wishpop(Map map) {
 		bm.wishpop(map);
 	}
+
+	@Override
+	public BookVO purchase(String book_code) {
+		// TODO Auto-generated method stub
+		return bm.purchase(book_code);
+	}
 }

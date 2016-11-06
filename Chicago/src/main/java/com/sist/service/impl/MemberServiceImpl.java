@@ -88,13 +88,39 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return mapper.memberSearch(map);
 	}
-
+	
 	@Override
 	public int memberSearchPage(Map map) throws Exception {
 		// TODO Auto-generated method stub
 		return mapper.memberSearchPage(map);
 	}
 
+	/* Choding Part */
+	@Override
+	public MemberVO selectMember(String id) throws Exception {
+		return mapper.selectMember(id);
+	}
+	
+	@Override
+	public void modyfyMemberInfo(MemberVO vo) throws Exception {
+		mapper.modyfyMemberInfo(vo);
+	}
+	
+	@Override
+	public void modyfyMemberPwd(Map map) throws Exception {
+		mapper.modyfyMemberPwd(map);
+	}
+	
+	@Override
+	public void withdrawMember(Map map) throws Exception {
+		mapper.withdrawMember(map);
+	}
 
+	@Override
+	public MemberVO orderData(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.orderData(id);
+	}
+	
 
 }
