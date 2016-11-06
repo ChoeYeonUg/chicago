@@ -1,0 +1,592 @@
+@CHARSET "UTF-8";
+
+/* Made By Choding */
+
+/* ==== Google font ==== */
+@import url('http://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Open+Sans:300,400,600,700');
+
+/* === prettify === */
+@import url('../js/google-code-prettify/prettify.css');
+
+/* === fontawesome === */
+@import url('font-awesome.css');
+
+/* === custom icon === */
+@import url('custom-fonts.css');
+
+/* ==== overwrite bootstrap standard ==== */
+@import url('overwrite.css');
+@import url('animate.css');
+
+
+
+/* <My Page Main Form Set > */
+/* MyPageMainOutlineForm */
+#MyPageMainOutlineForm {
+	background-color: #ffffff;
+	width: 100%;
+	height: 100%;
+	border-radius: 0px;
+	padding: auto;
+	margin: auto;
+	position: relative;
+}
+
+/* MyPageMainMiddlelineForm */
+#MyPageMainMiddlelineForm {
+	background-color: #ffffff;
+	box-sizing: border-box;
+	width: 95%;
+	height: 100%;
+	border-radius: 0px;
+	padding: auto;
+	margin: auto;
+	position: relative;
+}
+
+/* MyPageHeadlineForm */
+#MyPageHeadlineForm {
+	background-color: #ffffff;
+	box-sizing: inherit;
+	width: 90%;
+	height: 10%;
+	border-radius: 0px;
+	padding: -10 -10 -10 -10px;
+	margin: auto;
+	position: relative;
+}
+
+/* MyPageHeadline */
+#MyPageHeadline {
+	color: #222;
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 1.5em;
+	letter-spacing: -1px;
+    margin-top: 20px;
+    padding: 0 0 0 50px;
+}
+
+/* MyPageContent */
+#MyPageContent {
+	background-color: #666666;
+	width: 90%;
+	height: 100%;
+	border-radius: 0px;
+	padding: auto;
+	margin: auto;
+	position: relative;
+}
+
+/* LeftContent */
+#LeftContent {
+	background-color: #333333;
+	width: 20%;
+	height: 90%;
+	border-radius: 0px;
+	float: left;
+	position: relative;
+	padding: auto;
+	margin: auto;
+}
+
+/* MainContent */
+#MainContent {
+	background-color: #222222;
+	width: 80%;
+	height: 90%;
+	border-radius: 0px;
+	float: right;
+	position: relative;
+	padding: auto;
+	margin: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* OutlineForm - MyPage All Set */
+.OutlineForm {
+	background-color: #ffffff;
+	width: 100%;
+	height: 100%;
+	border-radius: 0px;
+	padding: auto;
+	margin: auto;
+	position: relative;
+}
+
+/* MiddlelineSettingForm - MyPage All Set */
+.MiddlelineSettingForm {
+	background-color: #ffffff;
+	box-sizing: border-box;
+	width: 90%;
+	height: 100%;
+	border-radius: 0px;
+	padding: -20% 0% 0% -20%;
+	margin: auto;
+	position: relative;
+}
+
+/* HeadlineSettingForm - MyPage All Set */
+.HeadlineSettingForm {
+	background-color: #ffffff;
+	box-sizing: content-box;
+	width: 75%;
+	height: 30%;
+	border-radius: 0px;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+	border-bottom-color: #80ffff;
+	padding: -1% 10% 0% 5%;
+	margin: auto;
+	position: relative;
+	
+}
+
+/* Notification - MyPage All Set */
+.Notification {
+	background-color: #cccccc;
+	box-sizing: content-box;
+	width: 100%;
+	height: 100%;
+	border-radius: 0px;
+	padding: -5, 10, -5, 0%;
+	margin: auto;
+	position: relative;
+	
+}
+
+/* notice - MyPage All Set */
+.notcont {
+	color: #777;
+    font-size: 10px;
+    line-height: 1.5em;
+	letter-spacing: -1px;
+    margin-top: 3px;
+    padding: 0 0 0 0px;
+}
+
+
+
+/* MemberInfoSettingForm */
+.MemberInfoSettingForm {
+	background-color: #cccccc;
+	box-sizing: content-box;
+	float: none;
+	width: 75%;
+	height: 30%;
+	border-radius: 0px;
+	padding: -1% 10% 0% 5%;
+	margin: auto;
+	position: relative;
+	size: auto;
+	
+}
+
+
+
+
+/* head */
+.Headline {
+	color: #222;
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 1.5em;
+	letter-spacing: -1px;
+    margin-top: 20px;
+    padding: 0 0 0 30px;
+}
+
+
+/* Inner Head */
+.loginHead {
+	color: #555;
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 1.3em;
+	letter-spacing: -1px;
+    margin-top: 30px;
+    padding: 0 0 0 15px;
+}
+
+
+/* total window size */
+.Member {
+	background-color: #ffffff;
+	width: 650px;
+	height: 500px;
+}
+
+/* total window size */
+#OutBox {
+	background-color: #ffffff;
+	width: 600px;
+	height: 500px;
+	border-radius: 0px;
+	padding-top: -10px;
+	padding-bottom: -10px;
+	padding-left: -10px;
+	padding-right: -10px;
+	margin-top: 7%;
+	margin-bottom: 7%;
+	margin-left: 30%;
+	margin-right: 30%;
+	position: relative;
+}
+
+#Box {
+	background-color: #dddddd;
+	box-sizing: border-box;
+	width: 90%;
+	height: 55%;
+    border-top-style: solid;
+	border-top-width: 1.5px;
+	border-top-color: #80ffff;
+	border-radius: 7px 7px 7px 7px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-left: 35px;
+	padding-right: 35px;
+	margin-top: 0%;
+	margin-bottom: 5%;
+	margin-left: 5%;
+	margin-right: 5%;
+	position: relative;
+}
+
+.cq {
+	box-sizing: border-box;
+	clear: none;
+	color: #fff;
+	display: block;
+	line-height: 20.8px;
+	list-style-image: none;
+	list-style-position: outside;
+	list-style-type: none;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+	width: 300px;
+	
+	
+}
+
+body {
+	font-family:'Open Sans', Arial, sans-serif;
+	font-size:14px;
+	font-weight:300;
+	line-height:1.5em;
+	color:#656565;
+}
+
+
+/*
+a:active {
+	outline:0;
+}
+
+.clear {
+	clear:both;
+}
+
+h1,h2, h3, h4, h5, h6 {
+	font-family:'Open Sans', Arial, sans-serif;
+	font-weight:700;
+	line-height:1.1em;
+	color:#333;
+	margin-bottom: 20px;
+}	
+
+
+===================================
+1. General
+====================================
+
+
+a:active {
+	outline:0;
+}
+
+.clear {
+	clear:both;
+}
+
+h1,h2, h3, h4, h5, h6 {
+	font-family:'Open Sans', Arial, sans-serif;
+	font-weight:700;
+	line-height:1.1em;
+	color:#333;
+	margin-bottom: 20px;
+}
+
+
+
+===================================
+3. Responsive media
+====================================
+iframe {
+	border:none;
+}
+
+img.img-polaroid {
+	margin:0 0 20px 0;
+}
+.img-box {
+	max-width:100%;
+}
+
+
+
+.container {
+	padding:0 20px 0 20px;
+	position:relative;
+}
+
+
+header .navbar {
+    margin-bottom: 0;
+}
+
+.navbar-default {
+    border: none;
+}
+
+.navbar-brand {
+    color: #222;
+	text-transform: uppercase;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1em;
+	letter-spacing: -1px;
+    margin-top: 30px;
+    padding: 0 0 0 15px;
+}
+
+
+header .navbar-collapse  ul.navbar-nav {
+    float: right;
+    margin-right: 0;
+}
+
+header .navbar-default{
+    background-color: #fff;
+}
+
+header .nav li a:hover,
+header .nav li a:focus,
+header .nav li.active a,
+header .nav li.active a:hover,
+header .nav li a.dropdown-toggle:hover,
+header .nav li a.dropdown-toggle:focus,
+header .nav li.active ul.dropdown-menu li a:hover,
+header .nav li.active ul.dropdown-menu li.active a{
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+
+header .navbar-default .navbar-nav > .open > a,
+header .navbar-default .navbar-nav > .open > a:hover,
+header .navbar-default .navbar-nav > .open > a:focus {
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+
+header .navbar {
+    min-height: 100px;
+}
+
+header .navbar-nav > li  {
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+header  .navbar-nav > li > a {
+    padding-bottom: 6px;
+    padding-top: 5px;
+    margin-left: 2px;
+    line-height: 30px;
+	font-weight: 700;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+
+.dropdown-menu li a:hover {
+    color: #fff !important;
+}
+
+header .nav .caret {
+    border-bottom-color: #f5f5f5;
+    border-top-color: #f5f5f5;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  background-color: #fff;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  background-color:  #fff;
+}	
+	
+
+.dropdown-menu  {
+    box-shadow: none;
+    border-radius: 0;
+	border: none;
+}
+
+.dropdown-menu li:last-child  {
+	padding-bottom: 0 !important;
+	margin-bottom: 0;
+}
+
+header .nav li .dropdown-menu  {
+   padding: 0;
+}
+
+header .nav li .dropdown-menu li a {
+   line-height: 28px;
+   padding: 3px 12px;
+}
+
+--- menu ---
+
+header .navigation {
+	float:right;
+}
+
+header ul.nav li {
+	border:none;
+	margin:0;
+}
+
+header ul.nav li a {	
+	font-size:12px;
+	border:none;
+	font-weight:700;
+	text-transform:uppercase;
+}
+
+header ul.nav li ul li a {	
+	font-size:12px;
+	border:none;
+	font-weight:300;
+	text-transform:uppercase;
+}
+
+
+.navbar .nav > li > a {
+  color: #111;
+  text-shadow: none;
+}
+
+.navbar .nav a:hover {
+	background:none;
+}
+
+.navbar .nav > .active > a,.navbar .nav > .active > a:hover {
+	background:none;
+	font-weight:700;
+}
+
+.navbar .nav > .active > a:active,.navbar .nav > .active > a:focus {
+	background:none;
+	outline:0;
+	font-weight:700;
+}
+
+.navbar .nav li .dropdown-menu {
+	z-index:2000;
+}
+
+header ul.nav li ul {
+	margin-top:1px;
+}
+header ul.nav li ul li ul {
+	margin:1px 0 0 1px;
+}
+.dropdown-menu .dropdown i {
+	position:absolute;
+	right:0;
+	margin-top:3px;
+	padding-left:20px;
+}
+
+.navbar .nav > li > .dropdown-menu:before {
+  display: inline-block;
+  border-right: none;
+  border-bottom: none;
+  border-left: none;
+  border-bottom-color: none;
+  content:none;
+}
+
+
+
+ul.nav li.dropdown a {
+	z-index:1000;
+	display:block;
+}
+
+ select.selectmenu {
+	display:none;
+}
+
+===================================
+5. Section: Featured
+====================================
+
+#featured{
+	width: 100%;
+	background:#fcfcfc;
+	position:relative;
+	margin:0;
+	padding:0; */

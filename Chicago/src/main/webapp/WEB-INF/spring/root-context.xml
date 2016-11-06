@@ -6,10 +6,12 @@
 	xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
@@ -41,19 +43,22 @@
 		
 	<util:properties id="db" location="classpath:db.properties" />
 	
-	<!--  <bean id="ds" class="org.apache.commons.dbcp.BasicDataSource"
+	<!--  <bean id="ds" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" 
 	 p:driverClassName="#{db['driver']}"
 	 p:url="#{db['url']}"
 	 p:username="#{db['username']}"
-	 p:password="#{db['password']}" />
+	 p:password="#{db['password']}"
+	 <property name="defaultAutoCommit" value="false" />
+	  />
 	  -->
 	 
-	 
-	 <bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	 <!-- <bean id="dataSourceSpied" class="org.springframework.jdbc.datasource.DriverManagerDataSource" > -->
+	 <bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" >
         <property name="driverClassName" value="#{db['driver']}"/>
         <property name="url" value="#{db['url']}"/>
         <property name="username" value="#{db['username']}"/>
         <property name="password" value="#{db['password']}"/>
+ 
     </bean>
      
     <bean id="ds" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
@@ -76,8 +81,16 @@
 	</bean>	
 	
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg ref="ssf"/>
+		<constructor-arg index="0" ref="ssf"/>
 	</bean> 
+	
+	<!-- 트랜잭션 설정 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="ds"></property>
+	</bean>
+	
+	<tx:annotation-driven/>
+		
 	
 	<!-- <bean id="dao" class="com.sist.dao.MemberDAO" p:sqlSessionTemplate-ref="sqlSessionTemplate">
 	</bean> -->
@@ -90,5 +103,4 @@
   	
   		<aop:aspectj-autoproxy/>
 		 <bean id="loginAspect" class="com.sist.aop.LoginAspect"></bean>
-
 </beans>
