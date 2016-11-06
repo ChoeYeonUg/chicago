@@ -12,4 +12,5 @@ public interface OrdersMapper {
 	public List<OrdersVO> printOrder(Map map);
 	public int orderSearchTotalPage(Map map);
 	public List<OrdersVO> printSearchOrder(Map map);
+	public void deliveryChange(Map map);
 }

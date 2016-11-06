@@ -34,7 +34,17 @@ function openPop(data){
 			<td>${vo.total_price }</td>
 			<td>${vo.payment }</td>
 			<td>${vo.order_date }</td>
-			<td><a href="#" onclick="return openPop('${vo.id}');">${vo.delivery }</a></td>
+			<td>
+				<c:choose>
+					<c:when test="${vo.delivery==1 }">
+						<a href="delivery_change.do?order_id=${vo.order_id }">물품준비중</a>
+					</c:when>
+					<c:when test="${vo.delivery == 2 }">
+						배송중
+					</c:when>
+					<c:otherwise>배송완료</c:otherwise>
+				</c:choose>
+			</td>
 		</tr>
 	</c:forEach>	
 </table>

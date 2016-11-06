@@ -83,4 +83,15 @@ public class SysopOrderController {
 		model.addAttribute("jsp", "../sysop/sales_statement.jsp");		
 		return "main/main";
 	}
+	
+	@RequestMapping("delivery_change")
+	public String changeDeliveryState(HttpServletRequest req, Model model,String order_id){
+		Map map = new HashMap();
+		map.put("order_id", order_id);
+		map.put("delivery", 2);
+		
+		os.deliveryChange(map);		
+
+		return "redirect:"+req.getHeader("referer");
+	}
 }
