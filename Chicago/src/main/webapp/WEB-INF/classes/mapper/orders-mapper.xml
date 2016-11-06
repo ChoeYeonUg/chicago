@@ -37,5 +37,10 @@
  	<select id="orderSearchTotalPage" resultType="int" parameterType="hashmap">
   		SELECT CEIL(COUNT(*)/#{rowSize}) FROM orders1 WHERE ${fs} LIKE '%${ss}%'
   	</select>
+  	
+  	<!-- 배송상태 변경 -->
+  	<update id="deliveryChange" parameterType="hashmap">
+  		UPDATE orders1 SET delivery =#{delivery} WHERE order_id=#{order_id}
+  	</update>
  	
 </mapper>

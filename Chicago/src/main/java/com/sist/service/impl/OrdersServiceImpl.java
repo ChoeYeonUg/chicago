@@ -84,4 +84,11 @@ public class OrdersServiceImpl implements OrdersService{
 		return om.printSearchOrder(map);
 	}
 
+
+	@Override
+	public void deliveryChange(Map map) {
+		// TODO Auto-generated method stub
+		om.deliveryChange(map);		
+	}
+
 }
