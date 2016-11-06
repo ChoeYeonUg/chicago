@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -19,16 +19,26 @@ function send(){
 	alert($('#id').val());
 	elem.submit();
 };
+
+function openPop(data){
+	
+	alert(data);
+	
+	if(confirm("삭제하시겠습니까?")){ 
+		location.href = "deleteMember.do?id="+data;
+	} 
+	return false;
+};
 </script>
 </head>
 <body>
 <table>
 	<tr>
-		<th>id</th>
-		<th>이름</th>
-		<th>휴대폰</th>
-		<th>등급</th>
-		<th>비고</th>
+		<th width="">id</th>
+		<th width="100">이름</th>
+		<th width="200">휴대폰</th>
+		<th width="50">등급</th>
+		<th width="60">비고</th>
 	</tr>
 	<c:forEach items="${list }" var="vo">
 		<tr>
@@ -40,7 +50,7 @@ function send(){
 					<input type="hidden" name="id" value="${vo.id }" id="id">
 					<input type="hidden" name="vograde" value="${vo.grade }" disabled="disabled" id="vograde">
 					<select name="grade" id="grade">
-					<c:forEach begin="1" end="5" step="1" var="i">
+					<c:forEach begin="2" end="5" step="1" var="i">
 						<c:if test="${vo.grade == i }"><option value="${i }" selected="selected">${i }</option></c:if>
 						<c:if test="${vo.grade != i }"><option value="${i }">${i }</option></c:if>
 					</c:forEach>
@@ -49,9 +59,33 @@ function send(){
 					<input type="submit" value="변경">
 				</form>
 			</td>
-			<td><a href="#">회원삭제</a></td>
+			<td><a href="#" onclick="return openPop('${vo.id}');">회원삭제</a></td>
 		</tr>
-	</c:forEach>
+	</c:forEach>	
+</table>
+<table>
+	<tr>
+		<td>
+			<a href="member_management.do?fs=${fs }&ss=${ss }&page=${(formpage - block) >= 1 ? formpage-block : curpage }">이전</a>&nbsp;
+			<c:forEach begin="${formpage }" end="${topage }" step="1" var="i">
+				<a href="member_management.do?fs=${fs }&ss=${ss }&page=${i }">[${i }]</a>
+			</c:forEach>
+			&nbsp;<a href="member_management.do?fs=${fs }&ss=${ss }&page=${(formpage + block)<=totalpage ? formpage+block : curpage }">다음</a>		
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<form action="member_management.do" method="post">
+				<select name="fs">
+					<option value="id">id</option>
+					<option value="name">name</option>
+				</select>
+				<input type="search" id="ss" name="ss">
+				<input type="submit" value="검색">
+			</form>
+		</td>
+	</tr>
 </table>
 </body>
 </html>

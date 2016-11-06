@@ -7,20 +7,19 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sist.dao.MemberVO;
-import com.sist.dao.loginVO;
 import com.sist.service.MemberService;
 
 @Controller
+@EnableAspectJAutoProxy
 public class LoginController {
 	/* private */
 	
@@ -48,7 +47,7 @@ public class LoginController {
 				model.addAttribute("login_jsp", "../login/login.jsp");
 				logger.info(this.toString() + "ID 틀림");
 			}else if(!ms.memberPwd(vo.getId(),vo.getPwd())){
-				model.addAttribute("	jsp", "login.jsp");
+				model.addAttribute("jsp", "login.jsp");
 				model.addAttribute("login_jsp", "../login/login.jsp");
 				logger.info(this.toString() + "PWD 틀림");
 			}else{
@@ -67,7 +66,7 @@ public class LoginController {
 		return "main/main";
 	}
 	
-	@RequestMapping(name="logout")
+	@RequestMapping("logout")
 	public String logout(HttpServletRequest req){
 		HttpSession session = req.getSession();
 		
@@ -138,18 +137,23 @@ public class LoginController {
 	
 	@RequestMapping("join_ok")
 	public String join_ok(Model model,MemberVO vo, Errors errors){
-		logger.info("호출");
 		model.addAttribute("jsp", "login.jsp");
 		try {
 			boolean idCheck = ms.memberId(vo.getId());
+			
+			if(vo.getAddr() == null || vo.getAddr().equals("")){
+				vo.setZipcode(new Integer(0));
+			}
+			
 			new MemberVOValidator().validate(vo, errors);
-			if(errors.hasErrors() || !idCheck) {
+			if(errors.hasErrors() || idCheck) {
+				System.out.println(errors.hasErrors() + " 아이디 체크 결과" + idCheck);
 				model.addAttribute("login_jsp", "../login/join.jsp");
 				return "main/main";
 			}else{
 				ms.MemberJoin(vo);
 			}
-			model.addAttribute("jsp", "login.jsp");
+			logger.info("회원가입해라");
 			model.addAttribute("login_jsp", "../login/joinComplete.jsp");
 		} catch (Exception e) {
 			// TODO: handle exception
