@@ -6,15 +6,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="css/join/clause.css" rel="stylesheet" />
 </head>
 <body>
-		<h2>약관</h2>
-		<p><spring:message code="clause.content" /></p>
-		<form action="join.do" method="post">
-			<label>
-				<input type="checkbox" name="agree" value="true">약관 동의
-			</label>
-			<input type="submit" value="다음"/>
-		</form>
+	<form action="join.do" method="post">
+		<div class="contents" align="center">
+			<div class="userAgreement">
+				<h2><spring:message code="join.clause" /></h2>
+				
+				<div class="uaCnts">
+					<p class="ua">
+						<input type="checkbox" name="agree" value="true">
+						<label><spring:message code="join.clause" /></label>
+					</p>
+					<spring:message code="clause.content" />
+				</div>
+				
+				<div class="bt">
+					<input type="submit" value='<spring:message code="join.next"/>'/>
+					<input type="button" value='<spring:message code="memberSecurePassword.btCancel"/>' onclick="javascript:history.back()"/>
+				</div>
+				
+			</div>
+		</div>
+	</form>
 </body>
 </html>
