@@ -174,7 +174,7 @@ function sample6_execDaumPostcode() {
 										</dt>
 										<dd>
 											<%-- <form:input name="USER_ID" id="USER_ID" class="" path="id" maxlength="16" value="${id}" readonly="readonly"/> --%>
-											<input type="text" name="name" id="id" class="" maxlength="16" value="${vo.id}" readonly="readonly">
+											<input type="text" name="id" id="id" class="" maxlength="16" value="${vo.id}" readonly="readonly">
 										</dd>
 										
 										<!-- Modify PASSWORD -->

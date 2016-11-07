@@ -30,7 +30,12 @@ public class MemberController {
 	
 	/* HeadMenu */
 	@RequestMapping("mypage")
-	public String member_page(Model model, HttpServletRequest request) {
+	public String member_page(Model model, HttpServletRequest request) throws Exception {
+		HttpSession hs = request.getSession();
+		String sessionid = (String) hs.getAttribute("id");
+		
+		MemberVO vo = ms.selectMember(sessionid);
+		model.addAttribute("vo", vo);
 		
 		model.addAttribute("jsp", "member");
 		model.addAttribute("jsp", "../member/memberinfomodify/MemberMain.jsp");
@@ -111,7 +116,7 @@ public class MemberController {
 			
 		}
 		
-		return "main/main";
+		return "redirect:modyfyMemberInfo.do";
 		
 	}
 	

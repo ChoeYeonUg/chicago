@@ -71,7 +71,7 @@
   	
   	<!-- Modify MemberInfo -->
   	<update id="modyfyMemberInfo" parameterType="com.sist.dao.MemberVO">
-		UPDATE member1 SET addr=${addr},zipcode=${zipcode},email=#{email},phone=#{phone} <include refid="where-id"/>
+		UPDATE member1 SET addr=#{addr},zipcode=#{zipcode},email=#{email},phone=#{phone} <include refid="where-id"/>
   	</update>
 	
   	<!-- Check id, pwd for Modify Password -->
