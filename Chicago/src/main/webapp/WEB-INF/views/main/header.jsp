@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,14 +47,14 @@
                 <nav id="mainav" class="fl_right">
        				 <ul class="clear">
           				<li><a href="store.do"><spring:message code="header.menu"/></a></li>
-          				<li><a class="drop" href="book.do"><spring:message code="header.book"/></a>
-            				<ul>
+          				<li><a href="book.do"><spring:message code="header.book"/></a>
+            				<!-- <ul>class="drop" 
               					<li><a href="#"><spring:message code="header.major"/></a></li>
                                 <li><a href="#"><spring:message code="header.novel"/></a></li>
 								<li><a href="#"><spring:message code="header.poem"/></a></li>
 								<li><a href="#"><spring:message code="header.essay"/></a></li>
 								<li><a href="#"><spring:message code="header.fairytale"/></a></li>
-            				</ul>
+            				</ul> -->
           				</li>
           				<li><a class="drop" href="event.do"><spring:message code="header.event"/></a>
             				<ul>
@@ -81,14 +82,17 @@
             				</ul>
             			</li>
           				<li><a href="sb.do"><spring:message code="header.sb"/></a></li>
-          				<li><a class="drop" href="sysop.do"><spring:message code="header.saMenu"/></a>
-            				<ul>
-                                <li><a href="member_management.do"><spring:message code="header.saMember"/></a></li>
-                                <li><a href="#"><spring:message code="header.saBook"/></a></li>
-								<li><a href="#"><spring:message code="header.saBoard"/></a></li>
-								<li><a href="#"><spring:message code="header.saList"/></a></li>
-            				</ul>
-          				</li>
+          				
+          				<c:if test="${garde ne 'null' && grade eq 0 }">
+	          				<li><a class="drop" href="sysop.do"><spring:message code="header.saMenu"/></a>
+	            				<ul>
+	                                <li><a href="member_management.do"><spring:message code="header.saMember"/></a></li>
+	                                <li><a href="book_management.do"><spring:message code="header.saBook"/></a></li>
+									<li><a href="board_management.do"><spring:message code="header.saBoard"/></a></li>
+									<li><a href="sales_management.do"><spring:message code="header.saList"/></a></li>
+	            				</ul>
+	          				</li>
+          				</c:if>
           				<li><a class="drop" href="login.do"><spring:message code="header.login"/></a>
             				<ul>
                                 <li><a href="login.do"><spring:message code="header.login"/></a></li>

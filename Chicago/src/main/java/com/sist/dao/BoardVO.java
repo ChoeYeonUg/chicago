@@ -18,9 +18,22 @@ public class BoardVO {
 	private int root;
 	private int depth;
 	private int faq_category;
+	private int num;
+	private String dbday;
 	
 	
-	
+	public String getDbday() {
+		return dbday;
+	}
+	public void setDbday(String dbday) {
+		this.dbday = dbday;
+	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public int getBoard_no() {
 		return board_no;
 	}

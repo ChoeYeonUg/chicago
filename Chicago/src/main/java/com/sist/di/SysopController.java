@@ -36,25 +36,20 @@ public class SysopController {
 	@RequestMapping("member_management")
 	public String memberManagement(String page, Model model, String ss, String fs,HttpServletRequest req){
 		
-		
 		try {
 			if (page == null)
 				page = "1"; // list.jsp
-			
 			
 			int curpage = Integer.parseInt(page);
 			
 			int rowSize = 1;
 			int start = (curpage * rowSize) - (rowSize - 1);
 			int end = curpage * rowSize;			
-
-			
-			
+		
 			Map map = new HashMap();
 			
 			map.put("start", start);
 			map.put("end", end);
-			System.out.println(ss);
 			List<MemberVO> list = null;
 			int totalpage=1;
 			if(ss == null || ss.equals("")){			
@@ -88,7 +83,7 @@ public class SysopController {
 			model.addAttribute("totalpage", totalpage);
 			model.addAttribute("start", start);
 			model.addAttribute("end", end);
-			System.out.println(totalpage);
+
 			model.addAttribute("list", list);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -104,7 +99,6 @@ public class SysopController {
 	public String changeGrade(String id, int grade, Model model,HttpServletRequest req){
 		
 		Map map = new HashMap();
-		logger.info("asdfasdfji");
 		map.put("id", id);
 		map.put("grade", grade);
 		
@@ -131,28 +125,4 @@ public class SysopController {
 		return "redirect:member_management.do";
 	}
 	
-	//책관리
-	@RequestMapping("board_management")
-	public String boardManagement(Model model,HttpServletRequest req){
-		
-		model.addAttribute("jsp", "sysop.jsp");
-		model.addAttribute("jsp", "../sysop/board_management.jsp");		
-		return "main/main";
-	}
-	
-	@RequestMapping("book_management")
-	public String bookManagement(Model model,HttpServletRequest req){
-		
-		model.addAttribute("jsp", "sysop.jsp");
-		model.addAttribute("jsp", "../sysop/book_management.jsp");		
-		return "main/main";
-	}
-	
-	@RequestMapping("sales_management")
-	public String salesManagement(Model model,HttpServletRequest req){
-		
-		model.addAttribute("jsp", "sysop.jsp");
-		model.addAttribute("jsp", "../sysop/sales_management.jsp");		
-		return "main/main";
-	}
 }

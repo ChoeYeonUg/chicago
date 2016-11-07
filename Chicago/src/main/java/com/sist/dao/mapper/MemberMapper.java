@@ -23,5 +23,8 @@ public interface MemberMapper {
 	public void modyfyMemberPwd(Map map);
 	//public void modyfyMemberAddrs(AddressVO vo);
 	public void withdrawMember(Map map);
+	
+	//order
+	public MemberVO orderData(String id);
 		
 }

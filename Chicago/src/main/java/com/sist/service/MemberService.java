@@ -24,4 +24,7 @@ public interface MemberService {
 	public void modyfyMemberPwd(Map map) throws Exception;
 	public void withdrawMember(Map map) throws Exception;
 	
+	//order
+	public MemberVO orderData(String id) throws Exception;
+	
 }

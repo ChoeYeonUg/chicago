@@ -37,6 +37,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		String dbPwd = mapper.pwdCheck(id);
 		
+
 		if(pwd.equals(dbPwd)){
 			check = true;
 		}
@@ -113,6 +114,12 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void withdrawMember(Map map) throws Exception {
 		mapper.withdrawMember(map);
+	}
+
+	@Override
+	public MemberVO orderData(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.orderData(id);
 	}
 	
 
