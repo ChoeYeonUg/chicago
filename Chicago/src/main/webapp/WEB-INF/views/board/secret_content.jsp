@@ -7,6 +7,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+function openPop(page,board_no){
+
+	/* 	alert(page);
+	alert(board_no); */
+	
+	if(confirm("삭제하시겠습니까?")){ 
+		location.href ="board_delete.do?page="+page+"&board_no="+board_no;
+		/* location.href = "deleteMember.do?id="+data; */
+	} 
+	return false;
+};
+</script>
 <!-- Meta -->
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="description" content="">
@@ -78,12 +93,11 @@
 			</table>
 			<table>
 			<tr>
-				<td align="right">
-					<a href="secret_reply.do">답글</a>&nbsp;
-					
+				<td align="right">					
 				<c:if test="${id==vo.id || grade<=1 }">
+					<a href="secret_reply.do?board_no=${board_no}">답글</a>&nbsp;
 					<a href="secret_update.do?page=${page }&board_no=${board_no }">수정</a>&nbsp;
-					<a href="board_delete.do?page=${page }&board_no=${board_no }">삭제</a>&nbsp;
+					<a href="#" onclick="return openPop('${page}','${board_no}');">삭제</a>&nbsp;
 				</c:if>
 					<a href="secretboard.do?page=${page}">목록</a>&nbsp;
 				</td>

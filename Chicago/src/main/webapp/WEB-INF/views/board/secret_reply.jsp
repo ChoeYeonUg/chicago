@@ -58,7 +58,7 @@ $(function () {
 <body>
 	<h3>1:1 게시판 댓글달기</h3>
 
-	<form action="secretboard_reply.do" method="post" id="frm">
+	<form action="secret_reply_ok.do" method="post" id="frm">
 		
 		<table border="0" bordercolor="black" width="500" >
 	
@@ -67,6 +67,7 @@ $(function () {
 				<th width="20%">ID</th>
 				<td width="30%" align="left">${id }
 				<input type="hidden" name="id" id="id" value="${id }"/>
+				<input type="hidden" name="board_no" id="board_no" value="${board_no}"/>
 				</td>
 				
 			</tr>

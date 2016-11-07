@@ -84,8 +84,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void secret_insert(Map map) throws Exception {
-		mapper.secret_insert(map);
+	public void secret_insert(BoardVO vo) throws Exception {
+		mapper.secret_insert(vo);
 		
 	}
 
@@ -105,8 +105,9 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void secret_update(Map map) throws Exception {		
-		mapper.secret_update(map);	
+	public void secret_update(BoardVO vo) throws Exception {		
+		mapper.secret_update(vo);	
+		
 		
 	}
 
@@ -133,6 +134,56 @@ public class BoardServiceImpl implements BoardService{
 			mapper.secret_admin_delete(board_no);
 		}
 		
+	}
+
+	@Override
+	public BoardVO secret_parentData(int board_no) throws Exception {
+		
+		return mapper.secret_parentData(board_no);
+	}
+
+	@Override
+	public void secret_stepIncrement(BoardVO vo) throws Exception {
+		mapper.secret_stepIncrement(vo);
+		
+	}
+
+	@Override
+	public void secret_replyInsert(BoardVO vo) throws Exception {
+		mapper.secret_replyInsert(vo);
+	}
+
+	@Override
+	public void secret_depthIncrement(int board_no) throws Exception {
+		mapper.secret_depthIncrement(board_no);
+		
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////관리자
+
+	@Override
+	public List<BoardVO> printSysopBoard(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.printSysopBoard(map);
+	}
+
+	@Override
+	public int printboardTotalPage(int rowSize) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.printboardTotalPage(rowSize);
+	}
+
+	@Override
+	public List<BoardVO> printSearchSysopBoard(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.printSearchSysopBoard(map);
+	}
+
+	@Override
+	public int printSearchBoardTotalPage(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.printSearchBoardTotalPage(map);
 	}
 
 	

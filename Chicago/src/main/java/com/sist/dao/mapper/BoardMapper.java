@@ -20,16 +20,26 @@ public interface BoardMapper {
 	public List<BoardVO> catfaqlist(Map map);	
 	public void notice_insert(Map map);
 	public void faq_insert(Map map);
-	public void secret_insert(Map map);
+	public void secret_insert(BoardVO vo);
 	/*1:1게시판 리스트*/
 	public List<BoardVO> secretlist(Map map);	
 	public void hitIncrement(int board_no);
 	public BoardVO secret_content(int board_no);
 	public String getPwd(int board_no);
-	public void secret_update(Map map);
+	public void secret_update(BoardVO vo);
 	public List<BoardVO> secret_find(Map map);
 	public int secret_find_total(Map map);
 	public BoardVO board_deleteData(int board_no);
 	public void board_delete(int board_no);
 	public void secret_admin_delete(int board_no);
+	public BoardVO secret_parentData(int board_no);
+	public void secret_stepIncrement(BoardVO vo);
+	public void secret_replyInsert(BoardVO vo);
+	public void secret_depthIncrement(int board_no);
+	
+	//관리자 전용 메뉴
+	public List<BoardVO> printSysopBoard(Map map);
+	public int printboardTotalPage(int rowSize);
+	public List<BoardVO> printSearchSysopBoard(Map map);
+	public int printSearchBoardTotalPage(Map map);
 }	

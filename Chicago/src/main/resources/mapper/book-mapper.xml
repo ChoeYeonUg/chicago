@@ -24,12 +24,47 @@
 		(SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img FROM GOODS1 WHERE book_category=#{category} ORDER BY publication DESC))
 		WHERE num BETWEEN #{start} AND #{end}
 	</select>
+	
 	<!-- 카테고리별 총 권수 -->
-	<select id="cateFirCount" resultType="int">
-		SELECT COUNT(*) FROM GOODS1 WHERE book_category='1'
+	<select id="cateFirCount" resultType="int" parameterType="int">
+		SELECT COUNT(*) FROM GOODS1 WHERE book_category=#{book_category}
 	</select>
+	
 	<!-- 카테고리별 총 페이지 수 (1페이지에 10권 목록 보이기) -->
-	<select id="cateFirTotalPage" resultType="int">
-		SELECT CEIL(COUNT(*)/10) FROM goods1 WHERE book_category='1'
+	<select id="cateFirTotalPage" resultType="int" parameterType="int">
+		SELECT CEIL(COUNT(*)/10) FROM goods1 WHERE book_category=#{book_category}
 	</select>
+	
+	<!-- 상세 페이지 정보 -->
+	<select id="detailBook" resultType="bookVO" parameterType="String">
+		SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img 
+		FROM goods1 
+		WHERE book_code = #{book_code}
+	</select>
+	
+	<!-- 아래 페이지로 넘겨줄 때는 Book_code 가 같은 값들을 넘겨주면 됨 -->
+	<!-- 찜목록 페이지로 넘겨줄 때 사용하는 SQL -->
+	<insert id="wishpop" parameterType="hashmap">
+		INSERT INTO WISHLIST1 VALUES(#{id}, #{book_code})
+	</insert>
+	
+	<!-- 장바구니 페이지로 넘겨줄 때 사용하는 SQL -->
+	<select id="orderpop" resultType="String" parameterType="String">
+	
+	</select>
+	
+	<!-- 바로구매 페이지로 넘어갈 때 책정보 -->
+	<select id="purchase" resultType="bookVO" parameterType="String">
+		SELECT book_name, img, price,amount FROM goods1 WHERE book_code = #{book_code}
+	</select>
+	<!-- 책의 재고량을 감소시킴 -->
+	<update id="bookCount" parameterType="hashmap">
+		UPDATE goods1 SET amount = amount - #{amount} WHERE book_code = #{book_code}
+	</update>
+	
+	<!-- 책의 절판여부를 변경함 -->
+	<update id="bookOutOfPrint" parameterType="hashmap">
+		UPDATE goods1 SET out_of_print = #{outOfPrint} WHERE book_code = #{book_code}
+	</update>
+	
 </mapper>

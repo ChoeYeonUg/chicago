@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sist.dao.mapper.OrdersMapper">
+ 	
+ 	<!-- 새로 만들 order의 id -->
+ 	<select id="newOrderId" resultType="int">
+ 		SELECT NVL(max(order_id+1), 1) FROM orders1
+ 	</select>
+ 	
+ 	<!-- order 생성 -->
+ 	<insert id="newOrder" parameterType="orders">
+ 		INSERT INTO orders1(order_id, id, name, delivery,zipcode,addr,payment,total_price,account_info,memo) 
+ 		VALUES(#{order_id},#{id},#{name},#{delivery},#{zipcode},#{addr},#{payment},#{total_price},#{account_info},#{memo})
+ 	</insert>
+ 	
+ 	<!-- order 불러옴 -->
+ 	<select id="printOrder" parameterType="hashmap" resultType="orders">
+ 		SELECT order_id,id,delivery,addr,payment,order_date,total_price,account_info,refund_state,memo,zipcode,name,num
+			FROM (SELECT order_id,id,delivery,addr,payment,order_date,total_price,account_info,refund_state,memo,zipcode,name,ROWNUM as num
+			FROM (SELECT order_id,id,delivery,addr,payment,order_date,total_price,account_info,refund_state,memo,zipcode,name FROM orders1 ORDER BY order_date DESC)) WHERE num BETWEEN #{start} AND #{end}
+ 	</select>
+ 	
+ 	<select id="orderTotalPage" resultType="int" parameterType="int">
+  		SELECT CEIL(COUNT(*)/#{rowSize}) FROM orders1
+  	</select>
+  	
+  	<!-- order 서치 -->
+ 	<select id="printSearchOrder" parameterType="hashmap" resultType="orders">
+ 		SELECT order_id,id,delivery,addr,payment,order_date,total_price,account_info,refund_state,memo,zipcode,name,num
+			FROM (SELECT order_id,id,delivery,addr,payment,order_date,total_price,account_info,refund_state,memo,zipcode,name,ROWNUM as num
+			FROM (SELECT order_id,id,delivery,addr,payment,order_date,total_price,account_info,refund_state,memo,zipcode,name FROM orders1 WHERE ${fs} LIKE '%${ss}%' ORDER BY order_date DESC)) WHERE num BETWEEN #{start} AND #{end}
+ 	</select>
+ 	
+ 	<select id="orderSearchTotalPage" resultType="int" parameterType="hashmap">
+  		SELECT CEIL(COUNT(*)/#{rowSize}) FROM orders1 WHERE ${fs} LIKE '%${ss}%'
+  	</select>
+  	
+  	<!-- 배송상태 변경 -->
+  	<update id="deliveryChange" parameterType="hashmap">
+  		UPDATE orders1 SET delivery =#{delivery} WHERE order_id=#{order_id}
+  	</update>
+ 	
+</mapper>

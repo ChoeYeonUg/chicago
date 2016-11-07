@@ -26,10 +26,10 @@ public class LoginAspect {
 	private void test(){}
 	
 	
-	@Pointcut("execution(* com.sist.di.SysopController.*(..))")
+	@Pointcut("execution(* com.sist.di.Sysop*Controller.*(..))")
 	private void admin(){}
 	
-	@Pointcut("execution(* com.sist.di.MemberController.*(..))")
+	@Pointcut("execution(* com.sist.di.MemberController.*(..)) || execution(* com.sist.di.PurchaseController.*(..))")
 	private void mypage(){}
 	
 	@Around(value="test()")
@@ -65,15 +65,10 @@ public class LoginAspect {
 	            HttpSession session = request.getSession();
 	 
 	                String loginId = (String) session.getAttribute("id");
-	 
-	                System.out.println("### Margo ==> loginId : " + loginId);
 	                if (loginId == null || "".equals(loginId)) {
-	                    System.out.println("### Margo ==> in if loginId : "
-	                            + loginId);
 	                    throw new RuntimeException("앙대요.");
 	                }else{
 	                	int grade = (Integer) session.getAttribute("grade");
-	                	System.out.println(grade);
 	                	if(grade != 0) throw new RuntimeException("님따위론 안됩니다.");
 	                }
 	        }catch(Exception e){
@@ -102,11 +97,7 @@ public class LoginAspect {
 	            HttpSession session = request.getSession();
 	 
 	                String loginId = (String) session.getAttribute("id");
-	 
-	                System.out.println("### Margo ==> loginId : " + loginId);
 	                if (loginId == null || "".equals(loginId)) {
-	                    System.out.println("### Margo ==> in if loginId : "
-	                            + loginId);
 	                    throw new RuntimeException("앙대요.");
 	                }
 	        }catch(Exception e){

@@ -32,12 +32,27 @@ public class BookServiceImpl implements BookService{
 	}
 	
 	@Override
-	public int cateFirCount() {
-		return bm.cateFirCount();
+	public int cateFirCount(int book_category) {
+		return bm.cateFirCount(book_category);
 	}
 	
 	@Override
-	public int cateFirTotalPage() {
-		return bm.cateFirTotalPage();
+	public int cateFirTotalPage(int book_category) {
+		return bm.cateFirTotalPage(book_category);
+	}
+	
+	@Override
+	public BookVO detailBook(String book_code) {
+		return bm.detailBook(book_code);
+	}
+	
+	public void wishpop(Map map) {
+		bm.wishpop(map);
+	}
+
+	@Override
+	public BookVO purchase(String book_code) {
+		// TODO Auto-generated method stub
+		return bm.purchase(book_code);
 	}
 }

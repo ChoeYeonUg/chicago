@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sist.dao.BookVO;
@@ -29,13 +32,13 @@ public class BookController {
 	public String login_page(Model model) {
 
 		// 내용추가 (16.10.31)
-		List<BookVO> bookList = bs.bookAllList();
+		//List<BookVO> bookList = bs.bookAllList();
 		List<BookVO> newBookList1 = bs.newBookCate(1);
 		List<BookVO> newBookList2 = bs.newBookCate(2);
 		List<BookVO> newBookList3 = bs.newBookCate(3);
 		List<BookVO> newBookList4 = bs.newBookCate(4);
 
-		model.addAttribute("bookList", bookList);
+		//model.addAttribute("bookList", bookList);
 		model.addAttribute("newBookCate1", newBookList1);
 		model.addAttribute("newBookCate2", newBookList2);
 		model.addAttribute("newBookCate3", newBookList3);
@@ -60,13 +63,15 @@ public class BookController {
 		int start = (curPage * rowSize) - (rowSize-1); // 시작글
 		int end = curPage * rowSize; // 마지막글
 		
+		int bcate = Integer.parseInt(book_category);
+		
 		Map map = new HashMap(); // 해쉬맵 생성
 		map.put("start", start); // 맵에 시작글 넣어주기
 		map.put("end", end); // 맵에 마지막글 넣어주기
-		map.put("category", Integer.parseInt(book_category)); // 맵에 총 권수 넣어주기
+		map.put("category", bcate); // 맵에 총 권수 넣어주기
 
-		int totalPage = bs.cateFirTotalPage();
-		int count = bs.cateFirCount();
+		int totalPage = bs.cateFirTotalPage(bcate);
+		int count = bs.cateFirCount(bcate);
 		count = count - ((curPage*5)-5);
 		
 		// 블록 나누기
@@ -89,8 +94,59 @@ public class BookController {
 		model.addAttribute("cateList", cateList);
 		model.addAttribute("page", page);
 		model.addAttribute("jsp", "book.jsp");
-		model.addAttribute("jsp", "../book/categoryList.jsp");
+		model.addAttribute("book_jsp", "../book/categoryList.jsp");
 		return "main/main";
 	}
+	
+	// 디테일 페이지 
+	@RequestMapping("bookDetail")
+	public String detailBookList(Model model, String book_code) {
+		
+		BookVO detailBook = bs.detailBook(book_code);
+		
+		model.addAttribute("detailBook", detailBook);
+		model.addAttribute("book_code", book_code);
+		model.addAttribute("jsp","book.jsp");
+		model.addAttribute("book_jsp", "../book/bookDetail.jsp");
+		
+		return "main/main";
+	}
+	
+/*	@RequestMapping("wishPop")
+	public String wishPopPage(String book_code, HttpServletRequest req, Model model) {
+		HttpSession hs = req.getSession();
+		logger.info(book_code);
+		String id = (String) hs.getAttribute("id");
+		if (id != null && !id.equals("")) {
+			logger.info("hh");
+			Map map = new HashMap();
+			map.put("id", id);
+			map.put("book_code", book_code);
+
+			bs.wishpop(map);
+		} else {
+			return "javascript:histroy.back()";
+		}
+		
+		model.addAttribute("jsp","book.jsp");
+		model.addAttribute("book_jsp","../member/wishlist.jsp");
+		
+		return "main/main";
+	}*/
+
+
+
+	@RequestMapping("sbPage")
+	public String sbPage(Model model) {
+		
+		return "book/sbPage";
+	}
+	
+/*	@RequestMapping("wishlist")
+	public String wishlistPage(Model model) {
+		
+		return "member/wishlist";
+	}
+*/
 
 }
