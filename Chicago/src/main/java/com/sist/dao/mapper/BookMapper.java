@@ -15,4 +15,10 @@ public interface BookMapper {
 	public void wishpop(Map map);
 	public BookVO purchase(String book_code);
 	public void bookCount(Map map);
+	
+	//관리자//////////////////////////////////////////////
+	public List<BookVO> printSysopBook(Map map);
+	public int printBookTotalPage(int rowSize);
+	public List<BookVO> printSearchSysopBook(Map map);
+	public int printSearchBookTotalPage(Map map);
 }

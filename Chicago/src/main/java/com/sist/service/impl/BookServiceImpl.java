@@ -55,4 +55,30 @@ public class BookServiceImpl implements BookService{
 		// TODO Auto-generated method stub
 		return bm.purchase(book_code);
 	}
+
+	
+	/////////////////관리자 메뉴
+	@Override
+	public List<BookVO> printSysopBook(Map map) {
+		// TODO Auto-generated method stub
+		return bm.printSysopBook(map);
+	}
+
+	@Override
+	public int printBookTotalPage(int rowSize) {
+		// TODO Auto-generated method stub
+		return bm.printBookTotalPage(rowSize);
+	}
+
+	@Override
+	public List<BookVO> printSearchSysopBook(Map map) {
+		// TODO Auto-generated method stub
+		return bm.printSearchSysopBook(map);
+	}
+
+	@Override
+	public int printSearchBookTotalPage(Map map) {
+		// TODO Auto-generated method stub
+		return bm.printSearchBookTotalPage(map);
+	}
 }

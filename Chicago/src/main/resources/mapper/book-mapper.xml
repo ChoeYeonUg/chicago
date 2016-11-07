@@ -67,4 +67,26 @@
 		UPDATE goods1 SET out_of_print = #{outOfPrint} WHERE book_code = #{book_code}
 	</update>
 	
+	<!-- 운영자 메뉴 -->
+	<select id="printSysopBook" resultType="bookVO" parameterType="hashmap">
+		SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img, num FROM 
+		(SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img, rownum as num FROM 
+		(SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img FROM GOODS1 ORDER BY publication DESC))
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<select id="printBookTotalPage" resultType="int" parameterType="int">
+		SELECT CEIL(COUNT(*)/#{rowSize}) FROM GOODS1
+	</select>
+	
+	<select id="printSearchSysopBook" resultType="bookVO" parameterType="hashmap">
+		SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img, num FROM 
+		(SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img, rownum as num FROM 
+		(SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img FROM GOODS1  WHERE ${fs} LIKE '%${ss}%' ORDER BY publication DESC))
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<select id="printSearchBookTotalPage" resultType="int" parameterType="int">
+		SELECT CEIL(COUNT(*)/#{rowSize}) FROM GOODS1 WHERE ${fs} LIKE '%${ss}%'
+	</select>
+	
+	
 </mapper>
