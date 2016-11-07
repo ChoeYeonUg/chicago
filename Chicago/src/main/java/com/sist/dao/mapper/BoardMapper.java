@@ -36,4 +36,10 @@ public interface BoardMapper {
 	public void secret_stepIncrement(BoardVO vo);
 	public void secret_replyInsert(BoardVO vo);
 	public void secret_depthIncrement(int board_no);
+	
+	//관리자 전용 메뉴
+	public List<BoardVO> printSysopBoard(Map map);
+	public int printboardTotalPage(int rowSize);
+	public List<BoardVO> printSearchSysopBoard(Map map);
+	public int printSearchBoardTotalPage(Map map);
 }	

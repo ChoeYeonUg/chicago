@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +34,7 @@ function openPop(data){
 			<td>${vo.order_id }</td>
 			<td>${vo.total_price }</td>
 			<td>${vo.payment }</td>
-			<td>${vo.order_date }</td>
+			<td><fmt:formatDate value="${vo.order_date }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			<td>
 				<c:choose>
 					<c:when test="${vo.delivery==1 }">
@@ -64,7 +65,7 @@ function openPop(data){
 			<form action="sales_management.do" method="post">
 				<select name="fs">
 					<option value="id">id</option>
-					<option value="name">name</option>
+					<option value="subject">제목</option>
 				</select>
 				<input type="search" id="ss" name="ss">
 				<input type="submit" value="검색">

@@ -31,5 +31,11 @@ public interface BoardService {
 	public void secret_stepIncrement(BoardVO vo) throws Exception;
 	public void secret_replyInsert(BoardVO vo) throws Exception;
 	public void secret_depthIncrement(int board_no) throws Exception;
+	
+	//관리자 전용 메뉴
+	public List<BoardVO> printSysopBoard(Map map) throws Exception;
+	public int printboardTotalPage(int rowSize) throws Exception;
+	public List<BoardVO> printSearchSysopBoard(Map map);
+	public int printSearchBoardTotalPage(Map map);
 }
 	
