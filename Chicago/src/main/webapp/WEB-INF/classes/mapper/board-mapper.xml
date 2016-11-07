@@ -4,7 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.sist.dao.mapper.BoardMapper">
-  	<!-- 구문을 찾기위해 사용 될 수 있는 명명공간 내 유일한 구분자 -->
    
   	<select id="noticelist" resultType="board" parameterType="hashmap">
  		SELECT board_no,subject,category,faq_category,content,num 
@@ -15,20 +14,17 @@
   	
   	<select id="totalPage" resultType="int" parameterType="hashmap">
   		SELECT CEIL(COUNT(*)/#{rowSize}) FROM board1 WHERE category=#{category}
-  	</select>
-  	
-  	<!-- faq카테고리의 페이지 이동 정하기 / 5랑 rowSize 대입하기 나중에 -->
+  	</select>  	
+
   	<select id="faqtotalListPage" resultType="int" parameterType="int">
   		SELECT CEIL(COUNT(*)/5) FROM board1 WHERE category=2 AND FAQ_CATEGORY=#{faq_category}
   	</select>
   	 	  
-  	  <!-- 카테고리별 토탈 -->
+  	<!-- 카테고리별 토탈 -->
   	<select id="faqTotalPage" resultType="int">
   		SELECT COUNT(*) FROM BOARD1 WHERE CATEGORY=2
-  	</select>
-  	
-  	<!-- faq카테고리 마다의 토탈페이지도 해야함 -->  	
-  	
+  	</select>  	
+	  	
   	<select id="faqCatTotalPage" resultType="int"  parameterType="int">
   		SELECT COUNT(*) FROM BOARD1 WHERE CATEGORY=2 AND FAQ_CATEGORY=#{faq_category}
   	</select>
@@ -44,7 +40,6 @@
 	  SELECT board_no,subject,category,faq_category,content,regdate,num
 			FROM (SELECT board_no,subject,category,faq_category,content,regdate,ROWNUM as num
 			FROM (SELECT board_no,subject,category,faq_category,content,regdate FROM board1 WHERE category=2 AND FAQ_CATEGORY=#{faq_category} ORDER BY board_no DESC)) WHERE num BETWEEN #{start} AND #{end}
-
   	</select> 
   	
   	<insert id="notice_insert" parameterType="hashmap">
@@ -83,8 +78,7 @@
   		SELECT pwd FROM BOARD1 WHERE category=3 AND board_no=#{board_no}
   	</select>
   	
-  	<!-- 1:1게시판수정 -->
-  	
+  	<!-- 1:1게시판수정 -->  	
   	<update id="secret_update" parameterType="board">
   		UPDATE board1 SET subject=#{subject},content=#{content},
   		secret=#{secret},pwd=#{pwd},hit=#{hit} WHERE board_no=#{board_no}

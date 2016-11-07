@@ -67,7 +67,27 @@ star-input>.input.focus{outline:1px dotted #ddd;}
     	<input type="radio" name="star-input" value="5" id="p5">
     	<label for="p5">5</label>
   	</span>
-  	<output for="star-input"><b>0</b>Á¡</output>						
+  	<output for="star-input"><b>0</b>Á¡</output>				
+  	
+  	
+  	
+  	<form action="review_insert_ok.do" method="post" id="frm">
+  		<table border="1" bordercolor="black">
+  			<tr>
+  				<td></td>
+  				<td></td>
+  				
+  			</tr>
+  		</table>
+  	</form>
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  			
 </span>
 <script src="board_js/jquery-1.11.3.min.js"></script>
 <script src="board_js/star.js"></script>

@@ -322,14 +322,15 @@ public class BoardController {
 		int curpage = Integer.parseInt(page);
 		
 		try{
-		String db_pwd=bs.getPwd(board_no);
-		
-		model.addAttribute("db_pwd",db_pwd);		
-		model.addAttribute("board_no",board_no);
-		model.addAttribute("page",curpage);
-		model.addAttribute("jsp", "board.jsp");
-		model.addAttribute("board_jsp", "../board/list.jsp");
-		model.addAttribute("boardjsp","../board/secretboard_pwd_check.jsp" );
+			String db_pwd=bs.getPwd(board_no);
+			
+			model.addAttribute("db_pwd",db_pwd);		
+			model.addAttribute("board_no",board_no);
+			model.addAttribute("page",curpage);
+			
+			model.addAttribute("jsp", "board.jsp");
+			model.addAttribute("board_jsp", "../board/list.jsp");
+			model.addAttribute("boardjsp","../board/secretboard_pwd_check.jsp" );
 		
 		}catch(Exception e){
 			e.getStackTrace();
@@ -350,6 +351,7 @@ public class BoardController {
 			if(db_pwd.equals(pwd)){
 				model.addAttribute("page",curpage);
 				model.addAttribute("board_no",board_no);				
+				
 				return "redirect:secret_content.do";
 			}
 		}catch(Exception e){
@@ -381,11 +383,10 @@ public class BoardController {
 	@RequestMapping("secret_update_ok")
 	public String secret_update_ok(Model model,BoardVO vo){
 		int board_no=vo.getBoard_no();
-	
+		vo.setHit(vo.getHit()-2);
 		try {
-			vo.setHit(vo.getHit()-2);
-			bs.secret_update(vo);
-						
+			
+			bs.secret_update(vo);						
 			model.addAttribute("board_no",board_no);
 		} catch (Exception e) {
 			e.getStackTrace();
@@ -396,7 +397,7 @@ public class BoardController {
 	@RequestMapping("secret_reply")
 	public String secret_reply(Model model,int board_no){		
 				
-		model.addAttribute("board_no",board_no);
+		model.addAttribute("board_no",board_no);		
 		model.addAttribute("jsp", "board.jsp");
 		model.addAttribute("board_jsp", "../board/list.jsp");
 		model.addAttribute("boardjsp","../board/secret_reply.jsp" );
@@ -406,61 +407,47 @@ public class BoardController {
 	
 	@RequestMapping("secret_reply_ok")
 	public String secret_reply_ok(Model model,String page,int board_no,BoardVO vo){
-
 		
 		if(page==null)
-			page="1";
-		//페이지 받아오기
-		int curpage = Integer.parseInt(page);
-		
-	
+			page="1";		
+		int curpage = Integer.parseInt(page);	
 		
 		try{
-			BoardVO pvo=bs.secret_parentData(board_no);
-			bs.secret_stepIncrement(pvo);
+			BoardVO pvo=bs.secret_parentData(board_no);			
 			
 			vo.setGroup_id(pvo.getGroup_id());		
 			vo.setGroup_step(pvo.getGroup_step() + 1);
 			vo.setGroup_tab(pvo.getGroup_tab() + 1);
-			vo.setRoot(board_no);
-			
-			System.out.println(vo.getGroup_id());
-			System.out.println(vo.getGroup_step());
-			System.out.println(vo.getGroup_tab());
+			vo.setRoot(board_no);		
 			
 			bs.secret_replyInsert(vo);
 			bs.secret_depthIncrement(board_no);
-
 			
+			model.addAttribute("page",curpage);
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 			e.getStackTrace();
-		}
-		
-		model.addAttribute("page",curpage);
-		
+		}	
 		return "redirect:secretboard.do";
 	}
 	
 	@RequestMapping("board_delete")
 	public String secret_delete(Model model,int board_no, String page){
 		if(page==null)
-			page="1";
-		//페이지 받아오기
+			page="1";		
 		int curpage = Integer.parseInt(page);
+		
 		try{
 			bs.board_delete(board_no);
+			model.addAttribute("page",curpage);
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 			e.getStackTrace();
 		}
-		
-		model.addAttribute("page",curpage);
-		
 		return "redirect:secretboard.do";
 	}
 	
-
+	///////////////*리뷰게시판*///////////////
 	@RequestMapping("reviewboard")
 	public String reviewboard(Model model){
 		
