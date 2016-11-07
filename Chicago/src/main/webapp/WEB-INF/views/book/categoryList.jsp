@@ -84,16 +84,18 @@
 									<td height="20" colspan="3"><h4><b><a href="bookDetail.do?book_code=${list.book_code }">${list.book_name }</a></b></h4></td>
 								</tr>
 								<tr>
-									<td height="20" width="60%" colspan="2">[저자]&nbsp;${list.writer }</td>
-									<td height="20"  width="40%">[출판사]&nbsp;${list.publisher }</td>
+									<td height="20" width="60%" colspan="3" style="color:#999999;">[저자]&nbsp;${list.writer }</td>
+									
 								</tr>
 								<tr>
-									<td height="20"  width="30%">[출판일]&nbsp; <fmt:formatDate value="${list.publication }" pattern="yyyy년 M월 d일"/></td>
-									<td height="20"  width="30%">[금액]&nbsp; <fmt:formatNumber value="${list.price }" type="number"/>원</td>
-									<td height="20"  width="40%">[쪽수]&nbsp;${list.pages }쪽</td>
+									<td height="20"  width="33" style="color:#999999;">[출판사]&nbsp;${list.publisher }</td>
+									<td height="20"  width="33%" style="color:#999999;">[출판일]&nbsp; <fmt:formatDate value="${list.publication }" pattern="yyyy년 M월 d일"/></td>
+									<td height="20"  width="34%" style="color:#999999;">[금액]&nbsp; <fmt:formatNumber value="${list.price }" type="number"/>원</td>
+									<%-- <td height="20"  width="40%">[쪽수]&nbsp;${list.pages }쪽</td> --%>
 								</tr>
 								<tr>
-									<td height="50"  colspan="3"><br/>&nbsp;${list.book_content }</td>
+									<td height="50"  colspan="3"><br/>&nbsp;&nbsp;&nbsp;${list.book_content }&nbsp;
+									<a href="bookDetail.do?book_code=${list.book_code }">+더보기</a></td>
 								</tr>
 							</table>
 						</td>

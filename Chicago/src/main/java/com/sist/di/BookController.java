@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sist.dao.BookVO;
 import com.sist.service.BookService;
 
@@ -52,7 +53,7 @@ public class BookController {
 	
 	// 카테고리 별 리스트 보여주는 페이지 
 	@RequestMapping("categoryList")
-	public String book_cate_page1(Model model, String book_category, String page) {
+	public String book_cate_page1(Model model, String book_category, String page, String book_code) {
 		// 페이지 구하기 
 		if(page == null) {
 			page = "1"; // 첫번째 페이지를 메인으로 보여주기 
@@ -93,6 +94,7 @@ public class BookController {
 		model.addAttribute("count", count);
 		model.addAttribute("cateList", cateList);
 		model.addAttribute("page", page);
+		model.addAttribute("book_code",book_code);
 		model.addAttribute("jsp", "book.jsp");
 		model.addAttribute("book_jsp", "../book/categoryList.jsp");
 		return "main/main";
