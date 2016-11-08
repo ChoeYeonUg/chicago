@@ -27,6 +27,31 @@
 		}
 	}
 	
+	function btdown() {
+		var amount = ${detailBook.amount};
+		var defamount = $('#defamount').val();
+		if(defamount<=1) {
+			alert('최소 주문 수량은 1권입니다.');
+			defamount = 1;
+		} else if (defamount>1 && defamount<=amount) {
+			defamount--;
+			$('#defamount').val(defamount);
+			/* alert(amount); */
+		}
+	}
+	
+	function btup() {
+		var amount = ${detailBook.amount};
+		var defamount = $('#defamount').val();
+		if(defamount<amount) {
+			defamount++;
+			$('#defamount').val(defamount);
+			/* alert(amount); */s
+		} else {
+			alert('주문 가능한 수량을 초과하였습니다.');
+		} 
+	}
+	
 </script>
 </head>
 <body>
@@ -107,9 +132,9 @@
 								<tr>
 									<td style="font-size:11px; color:#505050;" height="13" colspan="4"><b>[주문수량]</b>&nbsp;
 										<img src="book_img\down.png" alt="downBtn" style="width:20px;height:20px;" onclick="btdown()"/>
-										<input type="text" value="1" name="defamount" id="defamount" readonly="readonly"/>
+										<input type="text" value="${defAmount }" name="amount" id="defamount" readonly="readonly"/>
 										<input type="hidden" value="${detailBook.book_code }" name="book_code"/>
-										<input type="hidden" value="${detailBook.amount }" id="amount"/>
+										<%-- <input type="hidden" value="${detailBook.amount }" id="amount"/> --%>
 										<img src="book_img\up.png" alt="upBtn" style="width:20px;height:20px;" onclick="btup()"/>
 									</td>
 								</tr>
