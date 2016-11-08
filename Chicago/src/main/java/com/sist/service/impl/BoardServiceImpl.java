@@ -158,6 +158,33 @@ public class BoardServiceImpl implements BoardService{
 		mapper.secret_depthIncrement(board_no);
 		
 	}
+	
+	///////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////관리자
+
+	@Override
+	public List<BoardVO> printSysopBoard(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.printSysopBoard(map);
+	}
+
+	@Override
+	public int printboardTotalPage(int rowSize) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.printboardTotalPage(rowSize);
+	}
+
+	@Override
+	public List<BoardVO> printSearchSysopBoard(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.printSearchSysopBoard(map);
+	}
+
+	@Override
+	public int printSearchBoardTotalPage(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.printSearchBoardTotalPage(map);
+	}
 
 	
 	

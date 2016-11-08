@@ -94,7 +94,7 @@
   		SELECT board_no,subject,id,GROUP_ID,hit,group_tab,regdate,secret,pwd,to_char(regdate,'yyyy-MM-dd') as dbday,num 
   		FROM (SELECT board_no,subject,id,GROUP_ID,hit,group_tab,regdate,secret,pwd,ROWNUM as num 
   		FROM (SELECT board_no,subject,id,GROUP_ID,hit,group_tab,regdate,secret,pwd FROM board1 WHERE category=3 AND ${fs} LIKE '%${ss}%' ORDER BY group_id DESC, group_step ASC)) 
-  		WHERE num BETWEEN #{start} AND #{end}  	
+  		WHERE num BETWEEN #{start} AND #{end}
   	</select>
   	
   	<select id="secret_find_total" resultType="int" parameterType="hashmap">
@@ -129,5 +129,28 @@
  	<update id="secret_depthIncrement" parameterType="int">
  		UPDATE Board1 SET depth=depth+1 WHERE board_no=#{board_no}
  	</update>
+ 	
+ 	<!-- 운영자 전용 게시판 -->
+ 	<select id="printSysopBoard" resultType="board" parameterType="hashmap">
+ 		SELECT board_no,subject,id,GROUP_ID,hit,group_tab,regdate,secret,pwd,to_char(regdate,'yyyy-MM-dd') as dbday,num 
+  		FROM (SELECT board_no,subject,id,GROUP_ID,hit,group_tab,regdate,secret,pwd,ROWNUM as num 
+  		FROM (SELECT board_no,subject,id,GROUP_ID,hit,group_tab,regdate,secret,pwd FROM board1 ORDER BY group_id DESC, group_step ASC)) 
+  		WHERE num BETWEEN #{start} AND #{end}
+ 	</select>
+ 	
+ 	<select id="printboardTotalPage" resultType="int" parameterType="int">
+ 		SELECT CEIL(COUNT(*)/#{rowSize}) FROM board1
+ 	</select>
+ 	
+ 	<select id="printSearchSysopBoard" resultType="board" parameterType="hashmap">
+ 		SELECT board_no,subject,id,GROUP_ID,hit,group_tab,regdate,secret,pwd,to_char(regdate,'yyyy-MM-dd') as dbday,num 
+  		FROM (SELECT board_no,subject,id,GROUP_ID,hit,group_tab,regdate,secret,pwd,ROWNUM as num 
+  		FROM (SELECT board_no,subject,id,GROUP_ID,hit,group_tab,regdate,secret,pwd FROM board1 WHERE ${fs} LIKE '%${ss}%' ORDER BY group_id DESC, group_step ASC)) 
+  		WHERE num BETWEEN #{start} AND #{end}
+ 	</select>
+ 	
+ 	<select id="printSearchBoardTotalPage" resultType="int" parameterType="hashmap">
+ 		SELECT CEIL(COUNT(*)/#{rowSize}) FROM board1 WHERE ${fs} LIKE '%${ss}%'
+ 	</select>
  	
   </mapper>

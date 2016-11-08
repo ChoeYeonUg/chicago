@@ -105,9 +105,12 @@ public class BookController {
 	public String detailBookList(Model model, String book_code) {
 		
 		BookVO detailBook = bs.detailBook(book_code);
+		// 수량정보
+		int defAmount = 1;
 		
 		model.addAttribute("detailBook", detailBook);
 		model.addAttribute("book_code", book_code);
+		model.addAttribute("defAmount", defAmount);
 		model.addAttribute("jsp","book.jsp");
 		model.addAttribute("book_jsp", "../book/bookDetail.jsp");
 		

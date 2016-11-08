@@ -66,17 +66,17 @@
 								<div class="row">
 									<c:forEach items="${newBookCate1 }" var="vo">
 										<div class="imgdiv">
-											<a href="bookDetail.do?book_code=${book_code }"><img class="newimg" src="${vo.img }" alt="filler image"></a>
+											<a href="bookDetail.do?book_code=${vo.book_code }"><img class="newimg" src="${vo.img }" alt="filler image"></a>
 										</div>
 										<div class="desdiv">
-											<h3><a href="bookDetail.do?book_code=${book_code }">${vo.book_name }</a></h3>
+											<h3><a href="bookDetail.do?book_code=${vo.book_code }">${vo.book_name }</a></h3>
 											<%-- <p>${vo.book_content }</p> --%>
 											<h5>
 												<b>[저자]</b> ${vo.writer }&nbsp;&nbsp; <b>[출판사]</b> ${vo.publisher }&nbsp;&nbsp;<b>[출판일]</b>
 												<fmt:formatDate value="${vo.publication }" pattern="yyyy년 M월 d일" />
 												&nbsp;&nbsp;<b>[가격]</b> <fmt:formatNumber value="${vo.price }" type="number"/>원&nbsp;&nbsp;
 											</h5>
-											<p>${vo.book_content }<a href="bookDetail.do?book_code=${book_code }">&nbsp;&nbsp;▶ 더보기</a>
+											<p>${vo.book_content }<a href="bookDetail.do?book_code=${vo.book_code }">&nbsp;&nbsp;▶ 더보기</a>
 											</p>
 											<hr>
 										</div>
@@ -88,10 +88,10 @@
 								<div class="row">
 									<c:forEach items="${newBookCate2 }" var="vo">
 										<div class="imgdiv">
-											<a href="bookDetail.do?book_code=${book_code }"><img class="newimg" src="${vo.img }" alt="filler image"></a>
+											<a href="bookDetail.do?book_code=${vo.book_code }"><img class="newimg" src="${vo.img }" alt="filler image"></a>
 										</div>
 										<div class="desdiv">
-											<h3><a href="bookDetail.do?book_code=${book_code }">${vo.book_name }</a></h3>
+											<h3><a href="bookDetail.do?book_code=${vo.book_code }">${vo.book_name }</a></h3>
 											<%-- <p>${vo.book_content }</p> --%>
 											<h5>
 												<b>[저자]</b> ${vo.writer }&nbsp;&nbsp; <b>[출판사]</b>
@@ -100,7 +100,7 @@
 													pattern="yyyy년 M월 d일" />
 												&nbsp;&nbsp;<b>[가격]</b> <fmt:formatNumber value="${vo.price }" type="number"/>원&nbsp;&nbsp;
 											</h5>
-											<p>${vo.book_content }<a href="bookDetail.do?book_code=${book_code }">&nbsp;&nbsp;▶ 더보기</a>
+											<p>${vo.book_content }<a href="bookDetail.do?book_code=${vo.book_code }">&nbsp;&nbsp;▶ 더보기</a>
 											</p>
 											<hr>
 										</div>
@@ -112,10 +112,10 @@
 								<div class="row">
 									<c:forEach items="${newBookCate3 }" var="vo">
 										<div class="imgdiv">
-											<a href="bookDetail.do?book_code=${book_code }"><img class="newimg" src="${vo.img }" alt="filler image"></a>
+											<a href="bookDetail.do?book_code=${vo.book_code }"><img class="newimg" src="${vo.img }" alt="filler image"></a>
 										</div>
 										<div class="desdiv">
-											<h3><a href="bookDetail.do?book_code=${book_code }">${vo.book_name }</a></h3>
+											<h3><a href="bookDetail.do?book_code=${vo.book_code }">${vo.book_name }</a></h3>
 											<%-- <p>${vo.book_content }</p> --%>
 											<h5>
 												<b>[저자]</b> ${vo.writer }&nbsp;&nbsp; <b>[출판사]</b>
@@ -124,7 +124,7 @@
 													pattern="yyyy년 M월 d일" />
 												&nbsp;&nbsp;<b>[가격]</b> <fmt:formatNumber value="${vo.price }" type="number"/>원&nbsp;&nbsp;
 											</h5>
-											<p>${vo.book_content }<a href="bookDetail.do?book_code=${book_code }">&nbsp;&nbsp;▶ 더보기</a>
+											<p>${vo.book_content }<a href="bookDetail.do?book_code=${vo.book_code }">&nbsp;&nbsp;▶ 더보기</a>
 											</p>
 											<hr>
 										</div>
@@ -136,10 +136,10 @@
 								<div class="row">
 									<c:forEach items="${newBookCate4 }" var="vo">
 										<div class="imgdiv">
-											<a href="bookDetail.do?book_code=${book_code }"><img class="newimg" src="${vo.img }" alt="filler image"></a>
+											<a href="bookDetail.do?book_code=${vo.book_code }"><img class="newimg" src="${vo.img }" alt="filler image"></a>
 										</div>
 										<div class="desdiv">
-											<h3><a href="bookDetail.do?book_code=${book_code }">${vo.book_name }</a></h3>
+											<h3><a href="bookDetail.do?book_code=${vo.book_code }">${vo.book_name }</a></h3>
 											<%-- <p>${vo.book_content }</p> --%>
 											<h5>
 												<b>[저자]</b> ${vo.writer }&nbsp;&nbsp; <b>[출판사]</b>
@@ -148,7 +148,7 @@
 													pattern="yyyy년 M월 d일" />
 												&nbsp;&nbsp;<b>[가격]</b> <fmt:formatNumber value="${vo.price }" type="number"/>원&nbsp;&nbsp;
 											</h5>
-											<p>${vo.book_content }<a href="bookDetail.do?book_code=${book_code }">&nbsp;&nbsp;▶ 더보기</a>
+											<p>${vo.book_content }<a href="bookDetail.do?book_code=${vo.book_code }">&nbsp;&nbsp;▶ 더보기</a>
 											</p>
 										</div>
 										<br />

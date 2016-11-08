@@ -11,7 +11,23 @@
 <link rel="stylesheet" type="text/css" href="book_css/bookMain.css" />
 <link rel="stylesheet" type="text/css" href="book_css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="book_css/header1.css" />
-
+<script type="text/javascript">
+	function bcBtn() {
+		if(confirm("장바구니로 이동하시겠습니까?") == true) {
+			window.location.href="sb/sb.do?book_code=${detailBook.book_code}";
+		} else {
+			return;
+		}
+	}
+	
+	function lkBtn() {
+		if(confirm("찜목록으로 이동하시겠습니까?") == true) {
+			window.location.href="member/memberwishlist/MemberWishList.do?book_code=${datilBook.book_code}";
+		} else {
+			return;
+		}
+	}
+</script>
 </head>
 <body>
 	<div id="content">
@@ -61,12 +77,8 @@
 								<!-- 주문관련 아이콘 -->
 								<tr>
 									<td align="center" class="icontd">
-										<a href="wishlist.do">
-											<img src="book_img\like.png" alt="like.png" title="찜하기" class="icon">&nbsp;
-										</a> 
-										<a>
-											<img src="book_img\shopping.png" alt="shopping.png" title="장바구니" class="icon" onclick="sb()">&nbsp;
-										</a> 
+										<img src="book_img\like.png" alt="like.png" title="찜하기" class="icon" onclick="lkBtn()">&nbsp;
+										<img src="book_img\shopping.png" alt="shopping.png" title="장바구니" class="icon" onclick="bcBtn()">&nbsp; 
 										<a href="purchase.do?book_code=${list.book_code }">
 											<img src="book_img\purchase.png" alt="purchase.png" title="바로구매" class="icon">
 										</a>
@@ -88,7 +100,7 @@
 									
 								</tr>
 								<tr>
-									<td height="20"  width="33" style="color:#999999;">[출판사]&nbsp;${list.publisher }</td>
+									<td height="20"  width="33%" style="color:#999999;">[출판사]&nbsp;${list.publisher }</td>
 									<td height="20"  width="33%" style="color:#999999;">[출판일]&nbsp; <fmt:formatDate value="${list.publication }" pattern="yyyy년 M월 d일"/></td>
 									<td height="20"  width="34%" style="color:#999999;">[금액]&nbsp; <fmt:formatNumber value="${list.price }" type="number"/>원</td>
 									<%-- <td height="20"  width="40%">[쪽수]&nbsp;${list.pages }쪽</td> --%>
@@ -102,6 +114,7 @@
 					</tr>
 					</c:forEach>
 				</table>
+				<!-- 페이지 -->
 				<table width="100" id="table_page">
 					<tr>
 						<td align="center">
