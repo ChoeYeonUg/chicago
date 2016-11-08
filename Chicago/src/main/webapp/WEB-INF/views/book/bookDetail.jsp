@@ -27,7 +27,6 @@
 		}
 	}
 	
- 	function 
 </script>
 </head>
 <body>
@@ -108,9 +107,9 @@
 								<tr>
 									<td style="font-size:11px; color:#505050;" height="13" colspan="4"><b>[주문수량]</b>&nbsp;
 										<img src="book_img\down.png" alt="downBtn" style="width:20px;height:20px;" onclick="btdown()"/>
-										&nbsp;${defAmount }&nbsp;
+										<input type="text" value="1" name="defamount" id="defamount" readonly="readonly"/>
 										<input type="hidden" value="${detailBook.book_code }" name="book_code"/>
-										<input type="hidden" value="${defAmount }" name="amount" id="amount"/>
+										<input type="hidden" value="${detailBook.amount }" id="amount"/>
 										<img src="book_img\up.png" alt="upBtn" style="width:20px;height:20px;" onclick="btup()"/>
 									</td>
 								</tr>
@@ -129,6 +128,19 @@
 				</table>
 				</form>
 				<br/><br/>
+				<h4><b>상세소개</b></h4>
+				<hr/>
+				<table>
+					<tr>
+						<td width="100%" style="font-size:11px; color:#505050;">${detailBook.book_content }</td>
+					</tr>
+				</table>
+				<br/><br/>
+				
+				
+				<!-- 여기에 리뷰칸 넣어주세용 :) -->
+				
+				
 				<h4><b>상품정보제공고시</b></h4>
 				<hr/>
 				<table>
@@ -156,47 +168,44 @@
 				<br/><br/>
 				<h4><b>교환/환불</b></h4>
 				<hr color="#505050"/>
-				<table border="1">
+				<table>
 					<tr>
-						<th width="20%" style="font-size:11px; color:#505050;">교환/환불 방법</th>
-						<td width="80%" style="font-size:11px; color:#505050;">&nbsp;'마이페이지 > 취소/반품/교환/환불'에서 신청함, 1:1 문의 게시판 또는 고객센터 이용 가능</td>
+						<th width="15%" style="font-size:11px; color:#505050;"><spring:message code="info.title1"/></th>
+						<td width="85%" style="font-size:11px; color:#505050;"><spring:message code="info.des1"/></td>
 					</tr>
 					<tr>
-						<th width="20%" style="font-size:11px; color:#505050;">교환/환불 가능 기간</th>
-						<td width="80%" style="font-size:11px; color:#505050;">&nbsp;고객변심은 출고완료 다음날부터 14일 까지만 교환/환불이 가능함</td>
+						<th width="15%" style="font-size:11px; color:#505050;"><spring:message code="info.title2"/></th>
+						<td width="85%" style="font-size:11px; color:#505050;"><spring:message code="info.des2"/></td>
 					</tr>
 					<tr>
-						<th width="20%" style="font-size:11px; color:#505050;">교환/환불 비용</th>
-						<td width="80%" style="font-size:11px; color:#505050;">&nbsp;고객변심 또는 구매착오의 경우에만 2,500원 택배비를 고객님이 부담함</td>
+						<th width="15%" style="font-size:11px; color:#505050;"><spring:message code="info.title3"/></th>
+						<td width="85%" style="font-size:11px; color:#505050;"><spring:message code="info.des3"/></td>
 					</tr>
 					<tr>
-						<th width="20%" style="font-size:11px; color:#505050;">교환/환불 불가사유</th>
-						<td width="80%" style="font-size:11px; color:#505050;">&nbsp;반품접수 없이 반송하거나, 우편으로 보낼 경우 상품 확인이 어려워 환불이 불가할 수 있음<br/>
-						&nbsp;배송된 상품의 분실, 상품포장이 훼손된 경우, 비닐랩핑된 상품의 비닐 개봉시 교환/반품이 불가능함
+						<th width="15%" style="font-size:11px; color:#505050;"><spring:message code="info.title4"/></th>
+						<td width="85%" style="font-size:11px; color:#505050;"><spring:message code="info.des4"/>
 						</td>
 					</tr>
 					<tr>
-						<th width="20%" style="font-size:11px; color:#505050;">소비자 피해보상</th>
-						<td width="80%" style="font-size:11px; color:#505050;">&nbsp;소비자 피해보상의 분쟁처리 등에 관한 사항은 소비자 분쟁해결기준 (공정거래위원회 고시)에 따라 비해보상 받을 수 있음<br/>
-							&nbsp;교환/반품/보증조건 및 품질보증 기준은 소비자기본법에 따른 소비자 분쟁 해결 기준에 따라 피해를 보상 받을 수 있음
+						<th width="15%" style="font-size:11px; color:#505050;"><spring:message code="info.title5"/></th>
+						<td width="85%" style="font-size:11px; color:#505050;"><spring:message code="info.des5"/>
 						</td>
 					</tr>
 					<tr>
-						<th width="20%" style="font-size:11px; color:#505050;">기타</th>
-						<td width="80%" style="font-size:11px; color:#505050;">&nbsp;도매상 및 제작사 사정에 따라 품절/절판 등의 사유로 주문이 취소될 수 있음<br/>
-							&nbsp;(이 경우 CHICAGO BOOKS 에서 고객님께 별도로 연락하여 고지함)
+						<th width="15%" style="font-size:11px; color:#505050;"><spring:message code="info.title6"/></th>
+						<td width="85%" style="font-size:11px; color:#505050;"><spring:message code="info.des6"/>
 						</td>
 					</tr>
 				</table>
 				<br/><br/>
 				<h4><b>배송안내</b></h4>
 				<hr/>
-				<ul style="font-size:11px; color:#505050;">
-					<li>CHICAGO BOOKS 도서 상품은 택배로 배송되며, 출고완료 1~2일내 상품을 받아보실 수 있습니다.</li>
-					<li>출고가능 시간이 서로 다른 상품을 함께 주문할 경우 출고가능 시간이 가장 긴 상품을 기준으로 배송됩니다.</li>
-					<li>군부대, 교도소 등 특정기관은 우체국 택배만 배송가능하여, CHICAGO BOOKS 외 타업체 배송상품인 경우 발송되지 않을 수 있습니다.</li>
-					<li>배송비 : 2,500원</li>
-				</ul>
+				<table>
+					<tr><td style="font-size:11px; color:#505050;">-&nbsp;<spring:message code="del.info1"/></td></tr>
+					<tr><td style="font-size:11px; color:#505050;">-&nbsp;<spring:message code="del.info2"/></td></tr>
+					<tr><td style="font-size:11px; color:#505050;">-&nbsp;<spring:message code="del.info3"/></td></tr>
+					<tr><td style="font-size:11px; color:#505050;">-&nbsp;<spring:message code="del.info4"/></td></tr>
+				</table>
 				</div>
 				<br/><br/>
 				<!-- 내용 끝 -->
