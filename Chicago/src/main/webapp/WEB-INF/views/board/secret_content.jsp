@@ -11,7 +11,6 @@
 <script type="text/javascript">
 
 function openPop(page,board_no){
-
 	/* 	alert(page);
 	alert(board_no); */
 	

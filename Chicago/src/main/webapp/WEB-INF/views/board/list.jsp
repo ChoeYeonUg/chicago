@@ -23,7 +23,6 @@
 	type="text/css" rel="stylesheet">
 </head>
 <body>
-
 	<div id="content">
 		<div class="container background-white">
 			<div class="row margin-vert-40">

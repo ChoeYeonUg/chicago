@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sist.dao.BoardVO;
+import com.sist.dao.ReviewVO;
 
 public interface BoardMapper {
 	/*공지사항 리스트*/
@@ -36,4 +37,18 @@ public interface BoardMapper {
 	public void secret_stepIncrement(BoardVO vo);
 	public void secret_replyInsert(BoardVO vo);
 	public void secret_depthIncrement(int board_no);
+	
+	//관리자 전용 메뉴	
+	public List<BoardVO> printSysopBoard(Map map);
+	public int printboardTotalPage(int rowSize);
+	public List<BoardVO> printSearchSysopBoard(Map map);
+	public int printSearchBoardTotalPage(Map map);
+	public BoardVO boardManagementContent(int board_no);
+	
+	public List<ReviewVO> printSysopReviewBoard(Map map);
+	public int printboardReviewTotalPage(int rowSize);
+	public List<ReviewVO> printSearchReviewSysopBoard(Map map);
+	public int printSearchReviewBoardTotalPage(Map map);
+	public void board_reviewManagement_delete(int review_no);
+	public ReviewVO boardManagementReviewContent(int review_no);
 }	

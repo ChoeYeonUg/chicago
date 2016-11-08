@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.ui.Model;
 
 import com.sist.dao.BoardVO;
+import com.sist.dao.ReviewVO;
 
 import oracle.net.aso.e;
 
@@ -34,5 +35,19 @@ public interface BoardService {
 	public BoardVO secret_parentData(int board_no) throws Exception;
 	public void secret_replyInsert(BoardVO vo) throws Exception;
 	public void secret_depthIncrement(int board_no) throws Exception;
+	
+	//관리자 전용 메뉴
+	public List<BoardVO> printSysopBoard(Map map) throws Exception;
+	public int printboardTotalPage(int rowSize) throws Exception;
+	public List<BoardVO> printSearchSysopBoard(Map map);
+	public int printSearchBoardTotalPage(Map map);
+	public BoardVO boardManagementContent(int board_no) throws Exception;
+	
+	public List<ReviewVO> printSysopReviewBoard(Map map) throws Exception;
+	public int printboardReviewTotalPage(int rowSize) throws Exception;
+	public List<ReviewVO> printSearchReviewSysopBoard(Map map);
+	public int printSearchReviewBoardTotalPage(Map map);
+	public void board_reviewManagement_delete(int review_no) throws Exception;
+	public ReviewVO boardManagementReviewContent(int review_no) throws Exception;
 }
 	

@@ -32,13 +32,13 @@ function openPop(data){
 </script>
 </head>
 <body>
-<table>
+<table style="width: 600px">
 	<tr>
-		<th width="">id</th>
+		<th width="100">id</th>
 		<th width="100">이름</th>
 		<th width="200">휴대폰</th>
-		<th width="50">등급</th>
-		<th width="60">비고</th>
+		<th width="100">등급</th>
+		<th width="100">비고</th>
 	</tr>
 	<c:forEach items="${list }" var="vo">
 		<tr>

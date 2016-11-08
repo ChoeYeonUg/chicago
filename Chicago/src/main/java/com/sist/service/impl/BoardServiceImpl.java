@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.sist.dao.BoardVO;
+import com.sist.dao.ReviewVO;
 import com.sist.dao.mapper.BoardMapper;
 import com.sist.dao.mapper.MemberMapper;
 import com.sist.service.BoardService;
@@ -134,4 +135,77 @@ public class BoardServiceImpl implements BoardService{
 	public void secret_depthIncrement(int board_no) throws Exception {
 		mapper.secret_depthIncrement(board_no);
 	}
+
+	///////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////관리자
+
+	@Override
+	public List<BoardVO> printSysopBoard(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.printSysopBoard(map);
+	}
+
+	@Override
+	public int printboardTotalPage(int rowSize) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.printboardTotalPage(rowSize);
+	}
+
+	@Override
+	public List<BoardVO> printSearchSysopBoard(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.printSearchSysopBoard(map);
+	}
+
+	@Override
+	public int printSearchBoardTotalPage(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.printSearchBoardTotalPage(map);
+	}
+
+	@Override
+	public BoardVO boardManagementContent(int board_no) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.boardManagementContent(board_no);
+	}
+
+	
+	@Override
+	public List<ReviewVO> printSysopReviewBoard(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.printSysopReviewBoard(map);
+	}
+
+	@Override
+	public int printboardReviewTotalPage(int rowSize) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.printboardReviewTotalPage(rowSize);
+	}
+
+	@Override
+	public List<ReviewVO> printSearchReviewSysopBoard(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.printSearchReviewSysopBoard(map);
+	}
+
+	@Override
+	public int printSearchReviewBoardTotalPage(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.printSearchReviewBoardTotalPage(map);
+	}
+
+	@Override
+	public void board_reviewManagement_delete(int review_no) throws Exception {
+		mapper.board_reviewManagement_delete(review_no);		
+	}
+
+	@Override
+	public ReviewVO boardManagementReviewContent(int review_no) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.boardManagementReviewContent(review_no);
+	}
+
+
+	
+	
 }

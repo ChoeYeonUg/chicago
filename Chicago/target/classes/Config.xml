@@ -3,23 +3,29 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   
- <configuration>
+<configuration>
  
  	<settings>
         <setting name="logImpl" value="LOG4J" />
     </settings>
-
  	
  	<typeAliases>
  		<typeAlias type="com.sist.dao.MemberVO" alias="member"/>
+ 		<typeAlias type="com.sist.dao.AddressVO" alias="address"/>
+ 		<typeAlias type="com.sist.dao.WishlistVO" alias="wishlist"/>
+ 		<typeAlias type="com.sist.dao.OrderlistVO" alias="orderlist"/>
  		<typeAlias type="com.sist.dao.BoardVO" alias="board"/>
- 		
+ 		<typeAlias type="com.sist.dao.ReviewVO" alias="r_board"/>
+ 		<typeAlias type="com.sist.dao.OrdersVO" alias="orders"/>
+ 		<typeAlias type="com.sist.dao.OrderBookVO" alias="orderbook"/>
  	</typeAliases>
+ 	
  	<!-- <mappers>
  		<mapper resource="/mapper/member-mapper.xml"/>
  	</mappers> -->
  	
- <!-- 	<mappers>
+ 	<!-- <mappers>
  		<mapper resource="/maper/board-mapper.xml"/>
  	</mappers> -->
- </configuration>
+ 	
+</configuration>

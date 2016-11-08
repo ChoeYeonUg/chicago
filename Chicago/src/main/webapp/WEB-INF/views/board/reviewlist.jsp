@@ -74,8 +74,8 @@ star-input>.input.focus{outline:1px dotted #ddd;}
   	<form action="review_insert_ok.do" method="post" id="frm">
   		<table border="1" bordercolor="black">
   			<tr>
-  				<td></td>
-  				<td></td>
+  				<td>zz</td>
+  				<td>zz</td>
   				
   			</tr>
   		</table>
