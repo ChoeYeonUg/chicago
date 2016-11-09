@@ -61,14 +61,15 @@ public class MemberController {
 					vo = ms.selectMember(sessionid);
 					model.addAttribute("vo", vo);
 					
-					return "member/memberinfomodify/SelectMemberInfo";
+					return "redirect:SelectMemberInfo.do";
+					//return "member/memberinfomodify/SelectMemberInfo";
 					
 				} else if(typecheck.equals("ma")) {
 					
 					avo = ms.selectMemberDeliveryAddrs(sessionid);
 					model.addAttribute("vo", avo);
 					
-					return "member/memberinfomodify/MemberAddressInfo";
+					return "main/main";
 					
 				}
 			
