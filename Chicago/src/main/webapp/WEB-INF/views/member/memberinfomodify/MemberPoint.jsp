@@ -50,10 +50,8 @@
 				</div>
 				<div class="InnerBox">
 					<div id="MemberPoint-Box">
-						<form:form method="get" action="" name="frm" enctype="multipart/form-data" modelAttribute="uploadForm">
-						<input type="hidden" name="" value=""/>
-						<input type="hidden" name="" value=""/>
-						<input type="hidden" name="" value=""/>
+							<form:form commandName="com.sist.dao.MemberVO">
+							<input type="hidden" value="<%=request.getAttribute("id") %>">
 							<fieldset>
 								<div class="PointInfo">
 									
@@ -63,7 +61,7 @@
 											<label for="USER_GRADE"><spring:message code="MemberPoint.myGrade"/></label>
 										</dt>
 										<dd>
-											<h3></h3>
+											<h3>${vo.grade}</h3>
 										</dd>
 										
 										<!-- View POINT -->
@@ -71,7 +69,7 @@
 											<label for="USER_POINT"><spring:message code="MemberPoint.myPoint"/></label>
 										</dt>
 										<dd>
-											<h3><spring:message code="MemberPoint.myPointj"/></h3>
+											<h3>${vo.point}<spring:message code="MemberPoint.myPointj"/></h3>
 										</dd>
 									</dl>
 								</div>

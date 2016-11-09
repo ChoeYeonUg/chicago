@@ -21,7 +21,9 @@ public interface MemberMapper {
 	public MemberVO selectMember(String id);
 	public void modyfyMemberInfo(MemberVO vo);
 	public void modyfyMemberPwd(Map map);
-	//public void modyfyMemberAddrs(AddressVO vo);
+	public AddressVO selectMemberDeliveryAddrs(String id);
+	public void insertMemberDeliveryAddrs(AddressVO avo);
+	public void modyfyMemberDeliveryAddrs(AddressVO avo);
 	public void withdrawMember(Map map);
 	
 	//order

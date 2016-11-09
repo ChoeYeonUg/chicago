@@ -50,19 +50,19 @@
 								<a data-toggle="" data-parent="" href="modyfyMemberInfo.do"><spring:message code="memberInfoModifyMain.memberinfohead"/></a>
 								<ul id="" class="">
 									<li class="">
-										<a href="modyfyMemberInfo.do"><spring:message code="memberInfoModifyMain.btMemberInfoModify"/></a>
+										<a href="selectMemberInfo.do"><spring:message code="memberInfoModifyMain.btMemberInfoModify"/></a>
 									</li>
 									<li class="">
 										<a href="modyfyMemberPwd.do"><spring:message code="memberInfoModifyMain.btMemberPasswordModify"/></a>
 									</li>
 									<li class="">
-										<a href="modifyMemberAddrs.do"><spring:message code="memberInfoModifyMain.btMemberAddressModify"/></a>
+										<a href="memberAddrsInfo.do"><spring:message code="memberInfoModifyMain.btMemberAddressModify"/></a>
 									</li>
 									<li class="">
 										<a href="memberPoint.do"><spring:message code="memberInfoModifyMain.btMemberPoint"/></a>
 									</li>
 									<li class="">
-										<a href="WithdrawMember.do"><spring:message code="memberInfoModifyMain.btWithdrawMember"/></a>
+										<a href="withdrawMember.do"><spring:message code="memberInfoModifyMain.btWithdrawMember"/></a>
 									</li>
 								</ul>
 							</li>

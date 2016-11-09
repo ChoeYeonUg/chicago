@@ -11,7 +11,7 @@
 <meta >
 <title>Made By ChoDing!!</title>
 <link href="css/bootstrap.min.css" rel="stylesheet" />
-<link href="css/mypagecss/memberinfo.css" rel="stylesheet" />
+<link href="css/mypage_css/memberinfo.css" rel="stylesheet" />
 
 <!-- Theme skin -->
 <link href="skins/default.css" rel="stylesheet" />
@@ -27,67 +27,72 @@
 <script src="js/validate.js"></script>
 <script src="js/google-code-prettify/prettify.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-<script type="text/javascript">
-function send(){
-	var f=document.frm;
-		
-	if(f.USER_Check_NewPWD.value=="" && f.USER_Check_NewPWD.value!="${pwd}"){
-		alert("올바른 비밀번호가 아닙니다!");
-		f.USER_PWD.focus();
-		return;
-	}
-	
-	if(f.USER_Check_NewPWD.value=="${pwd}"){
-		alert("본인인증이 완료되었습니다.감사합니다!");
-		return;
-	}
-	
-	f.submit();
-	
-}
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js"></script>
 
 </head>
 <body>
-	<!-- Member Secure PASSWORD -->
+	<!-- Member Info Modify -->
 	<div class="OutlineForm">
 		<div class="MiddlelineSettingForm">
 			<div class="HeadlineSettingForm">
 				<div class="Headline">
-					<spring:message code="memberSecurePassword.header"/>
+					어드레스
 				</div>
 				<div class="Notification">
 					<ul class="notcont">
-						<li><spring:message code="memberSecurePassword.notFy1"/></li>
-						<li><spring:message code="memberSecurePassword.notFy2"/></li>
+						<li></li>
+						<li></li>
+						<li></li>
 					</ul>
 				</div>
 			</div>
-			<div class="MemberSettingForm">
+			<div class="MemberInfoSettingForm">
+				<div class="MemberInfoHeadlineForm">
+					<label class="MemberInfoHeadline"></label>
+				</div>
 				<div class="InnerBox">
-					<div id="MemberSecurePassword-Box">
-						<form:form method="post" action="membersecurepwd_ok.do" commandName="memberVO">
-						<input type="hidden" value="<%=request.getAttribute("id") %>">
-						<input type="hidden"  name="typecheck" value="${typecheck}">
+					<div id="MemberInfo-Box">
+							<form:form commandName="com.sist.dao.AddressVO">
+							<input type="hidden" value="<%=request.getAttribute("id") %>">
+							<input type="hidden"  name="typecheck" value="${typecheck}">
 							<fieldset>
-								<div class="MemberSecurePwd">
-									<dl class="msp">
-										<!-- Input Confirm PASSWORD -->
+								<div class="InfoModify">
+									<dl class="mim">
 										<dt>
-											<label for="USER_PWD"><spring:message code="memberSecurePassword.Password"/></label>
+											<label for="ADDRESS_1">주소1</label>
 										</dt>
 										<dd>
-											<input type="password" name="USER_Check_NewPWD" id="USER_Check_NewPWD" class="" maxlength="16">
+											${vo.zipcode1}
+											&nbsp;
+											${vo.addr1}
+										</dd>
+										<dt>
+											<label for="ADDRESS_2">주소2</label>
+										</dt>
+										<dd>
+											${vo.zipcode2}
+											&nbsp;
+											${vo.addr2}
+										</dd>
+										<dt>
+											<label for="ADDRESS_3">주소3</label>
+										</dt>
+										<dd>
+											${vo.zipcode3}
+											&nbsp;
+											${vo.addr3}
 										</dd>
 									</dl>
 								</div>
 								
 								<!-- OK, Cancel Button -->
 								<div>
-									<input type="button" value="확인" onclick="send()">
-									<%-- <form:button name="" id="" class="" onclick="send()"><spring:message code="memberSecurePassword.btOk"/></form:button>
-									<form:button name="" id="" class="" onclick="javascript:history.back()"><spring:message code="memberSecurePassword.btCancel"/></form:button> --%>
+									<a href="insertMemberAddrs.do">입력하기</a>
+									<a href="modifyMemberAddrs.do">수정하기</a>
+									<a href="main.do">메인으로 가기</a>
+									<%-- <input type="button" value="<spring:message code="memberInfoModify.btOk"/>" onclick="send()">
+									<form:button name="" id="" class="" onclick="javascript:history.back()"><spring:message code="memberInfoModify.btCancel"/></form:button> --%>
 								</div>
 								
 							</fieldset>

@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import com.sist.dao.AddressVO;
 import com.sist.dao.MemberVO;
 import com.sist.dao.mapper.MemberMapper;
 import com.sist.service.MemberService;
@@ -96,6 +97,11 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	/* Choding Part */
+	@Override 
+	public String pwdCheck(String id) throws Exception {
+		return mapper.pwdCheck(id);
+	}
+	
 	@Override
 	public MemberVO selectMember(String id) throws Exception {
 		return mapper.selectMember(id);
@@ -109,6 +115,21 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void modyfyMemberPwd(Map map) throws Exception {
 		mapper.modyfyMemberPwd(map);
+	}
+	
+	@Override
+	public AddressVO selectMemberDeliveryAddrs(String id) throws Exception {
+		return mapper.selectMemberDeliveryAddrs(id);
+	}
+	
+	@Override
+	public void insertMemberDeliveryAddrs(AddressVO avo) throws Exception {
+		mapper.insertMemberDeliveryAddrs(avo);
+	}
+	
+	@Override
+	public void modyfyMemberDeliveryAddrs(AddressVO avo) throws Exception {
+		mapper.modyfyMemberDeliveryAddrs(avo);
 	}
 	
 	@Override

@@ -13,9 +13,15 @@
         WHERE pwd=#{pwd}          
     </sql>
     
-    <sql id="where-id,pwd">
-        WHERE id=#{id} AND pwd=#{pwd}          
-    </sql>
+    <!-- Check id, pwd for  Withdraw Member -->
+	<sql id="where-id,pwd">
+		WHERE member.id=#{id},addr.id=#{id} AND member.pwd=#{pwd}          
+	</sql>
+	
+	<!-- Check address1, member TABLE id for Select, Modify Address -->
+	<sql id="where-addrid">
+		WHERE id = (SELECT id FROM member WHERE id=#{id})
+	</sql>
       
   	<select id="idCheck" resultType="int" parameterType="String">
   		SELECT count(*) FROM member <include refid="where-id"/>
@@ -70,22 +76,38 @@
   		UPDATE member SET grade=#{grade} <include refid="where-id"/>
   	</update>
   	
-  	<!-- Made By Choding -->
-  	<!-- memberInfo Database Query -->
-  	
-  	<!-- Modify MemberInfo -->
-  	<update id="modyfyMemberInfo" parameterType="com.sist.dao.MemberVO">
-		UPDATE member SET addr=${addr},zipcode=${zipcode},email=#{email},phone=#{phone} <include refid="where-id"/>
-  	</update>
+	<!-- Made By Choding -->
+	<!-- memberInfo Database Query -->
 	
-  	<!-- Check id, pwd for Modify Password -->
+	<!-- Modify Member Info -->
+	<update id="modyfyMemberInfo" parameterType="com.sist.dao.MemberVO">
+		UPDATE member SET addr=#{addr},zipcode=#{zipcode},email=#{email},phone=#{phone} <include refid="where-id"/>
+	</update>
+	
+	<!-- Check id, pwd for Modify Password -->
 	<select id="selectMemberPwd" resultType="member" parameterType="String">
   		SELECT id,pwd FROM member <include refid="where-id"/>
-  	</select>
-  	
-  	<!-- Modify Member Password -->
-  	<update id="modyfyMemberPwd" parameterType="hashmap">
+	</select>
+  
+	<!-- Modify Member Password -->
+	<update id="modyfyMemberPwd" parameterType="hashmap">
 		UPDATE member SET pwd=#{pwd} <include refid="where-id"/>
+	</update>
+	
+	<!-- Check id for Confirm Member Delivery Address -->
+	<select id="selectMemberDeliveryAddrs" resultType="address" parameterType="String">
+		SELECT addr1,zipcode1,addr2,zipcode2,addr3,zipcode3 FROM addrs <include refid="where-addrid"/>
+ 	</select>
+ 	
+ 	<!-- Insert Address -->
+ 	<insert id="insertMemberDeliveryAddrs" parameterType="address">
+		INSERT INTO addrs(addr1,zipcode1,addr2,zipcode2,addr3,zipcode3)
+		VALUES(#{addr1},#{zipcode1},#{addr2},#{zipcode2},#{addr3},#{zipcode3}) <include refid="where-id"/>
+	</insert>
+	
+	<!-- Modify Member Address -->
+	<update id="modyfyMemberDeliveryAddrs" parameterType="hashmap">
+		UPDATE addrs SET addr1=#{addr1},zipcode1=#{zipcode1},addr2=#{addr2},zipcode2=#{zipcode2},addr3=#{addr3},zipcode3=#{zipcode3} <include refid="where-id"/>
 	</update>
 	
 	<!-- Withdraw Member -->
@@ -94,4 +116,3 @@
   	</delete>
   	
 </mapper>
-  

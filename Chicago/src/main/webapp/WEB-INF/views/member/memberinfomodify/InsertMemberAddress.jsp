@@ -232,7 +232,7 @@ function sample6_execDaumPostcode3() {
 				</div>
 				<div class="InnerBox">
 					<div id="ModifyMemberAddress-Box">
-						<form:form method="post" name="frm" id="frm" action="modyfyMemberAddrs_ok.do" commandName="com.sist.dao.AddressVO">
+						<form:form method="post" name="frm" id="frm" action="insertMemberDeliveryAddrs_ok.do" commandName="com.sist.dao.AddressVO">
 						<input type="hidden" value="<%=request.getAttribute("id") %>">
 						<fieldset>
 								<div class="ModifyMemberAddress">
@@ -279,7 +279,7 @@ function sample6_execDaumPostcode3() {
 								
 								<!-- OK, Cancel Button -->
 								<div>
-									<input type="button" value="변경하기" onclick="send()">
+									<input type="button" value="입력하기" onclick="send()">
 									<%-- <form:button name="" id="" class="" onclick="javascript:history.back()"><spring:message code="memberInfoModify.btCancel"/></form:button> --%>
 								</div>
 								
