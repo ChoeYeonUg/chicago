@@ -127,7 +127,7 @@
  	
  	<!-- 운영자 전용 게시판 --> 	
  	
- 	<!-- 일반게시판 -->
+ 	<!-- 관리자 일반게시판 -->
  	<select id="printSysopBoard" resultType="board" parameterType="hashmap">
  		SELECT board_no,subject,id,GROUP_ID,hit,group_tab,regdate,secret,pwd,to_char(regdate,'yyyy-MM-dd') as dbday,num 
   		FROM (SELECT board_no,subject,id,GROUP_ID,hit,group_tab,regdate,secret,pwd,ROWNUM as num 
@@ -154,8 +154,8 @@
  		SELECT board_no,subject,id,category,content,regdate,hit,secret,pwd
 	  	FROM board1 WHERE board_no=#{board_no}
  	</select>
- 	
- 	<!-- 리뷰게시판 -->
+ 	<!-- 관리자 일반게시판 끝-->
+ 	<!-- 관리자 리뷰게시판 -->
  	<select id="printSysopReviewBoard" resultType="r_board" parameterType="hashmap">
  		SELECT review_no,subject,id,score,regdate,to_char(regdate,'yyyy-MM-dd') as dbday,num
   		FROM (SELECT review_no,subject,id,score,regdate,ROWNUM as num
@@ -187,5 +187,6 @@
 	  	FROM REVIEW1 WHERE REVIEW_NO=#{review_no} 
  	</select>
  	
+ 	<!-- 관리자 리뷰게시판 끝 -->
  	
   </mapper>

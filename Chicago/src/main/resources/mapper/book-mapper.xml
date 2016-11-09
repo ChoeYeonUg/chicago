@@ -3,16 +3,15 @@
 
 <mapper namespace="com.sist.dao.mapper.BookMapper">
 	<select id="bookAllList" resultType="bookVO">
-		SELECT book_code, book_name,
-		book_category, writer, publisher, book_content, price, publication, img
+		SELECT book_code, book_name, book_category, writer, publisher, book_content, price, publication, img
 		FROM goods1
 	</select>
 
 	<!-- book 메인화면 : 카테고리 별 신간 5권씩 출력 -->
 	<select id="newBookCate" resultType="bookVO" parameterType="int">
-		SELECT book_name, publisher, book_content, price, publication, img, writer, num FROM
-		(SELECT book_name, publisher, book_content, price, publication, img, writer, rownum as num FROM
-    	(SELECT book_name, publisher, book_content, price, publication, img, writer FROM GOODS1 where book_category=#{category} ORDER BY publication DESC)) 
+		SELECT book_code, book_name, publisher, book_content, price, publication, img, writer, num FROM
+		(SELECT book_code, book_name, publisher, book_content, price, publication, img, writer, rownum as num FROM
+    	(SELECT book_code, book_name, publisher, book_content, price, publication, img, writer FROM GOODS1 where book_category=#{category} ORDER BY publication DESC)) 
     	WHERE num BETWEEN 1 AND 5
 	</select>
 
@@ -66,5 +65,11 @@
 	<update id="bookOutOfPrint" parameterType="hashmap">
 		UPDATE goods1 SET out_of_print = #{outOfPrint} WHERE book_code = #{book_code}
 	</update>
+	<!-- 책 상세페이지 속 리뷰게시판 -->
+ 	<select id="bookReviewList" resultType="r_board" parameterType="String">
+ 		SELECT score,review_no,content,id,book_code,regdate,num
+			FROM (SELECT score,review_no,content,id,book_code,regdate,ROWNUM as num
+			FROM (SELECT score,review_no,content,id,book_code,regdate FROM review1 WHERE book_code=#{book_code} ORDER BY REVIEW_NO DESC )) WHERE num BETWEEN 1 AND 5
+ 	</select>
 	
 </mapper>

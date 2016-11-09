@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.sist.dao.BookVO;
+import com.sist.dao.ReviewVO;
 import com.sist.dao.mapper.BookMapper;
 import com.sist.service.BookService;
 
@@ -54,5 +55,11 @@ public class BookServiceImpl implements BookService{
 	public BookVO purchase(String book_code) {
 		// TODO Auto-generated method stub
 		return bm.purchase(book_code);
+	}
+
+	@Override
+	public ReviewVO bookReviewList(String book_code) {
+		// TODO Auto-generated method stub
+		return bm.bookReviewList(book_code);
 	}
 }

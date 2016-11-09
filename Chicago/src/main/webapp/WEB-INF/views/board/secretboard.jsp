@@ -11,19 +11,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$('#findBtn2').click(function(){
-			
-			//ss : 입력창 print ff: form태그  fs : 셀렉트옵션태그
+		$('#findBtn2').click(function(){						
 			var ss=$('#ss').val();
-			/* $('#print').html(""); */
 			
 			if(ss==""){
-				/* $('#print').html("<font color=red>검색어 입력</font>") */
+				
 				$('#ss').focus();
 				return;
 			}
-			$('#ff').submit();
-			
+			$('#ff').submit();			
 		});
 	});
 </script>
@@ -40,13 +36,13 @@
 <link href="http://fonts.googleapis.com/css?family=Raleway:100,300,400"
 	type="text/css" rel="stylesheet">
 <link href="http://fonts.googleapis.com/css?family=Roboto:400,300"
-	type="text/css" rel="stylesheet">
-	
+	type="text/css" rel="stylesheet">	
 </head>
 <body>
 	<div id="content">
 		<div class="container background-white">
 			<div class="row margin-vert-40">
+				<!-- 각 게시판 링크 -->
 				<table width="700">
 					<tr>
 						<td width="70%"><h2 align="left">1:1게시판</h2></td>
@@ -59,7 +55,7 @@
 				<div>
 					<h5>1:1게시판 입니다.</h5>
 				</div>
-
+				<!-- 리스트 시작 -->
 				<center>
 					<table width="900">
 						<tr id="title">
@@ -107,61 +103,35 @@
 								<td width="10%" class="tdcenter">${vo.hit }</td>
 							</tr>
 						</c:forEach>
-
-
 					</table>
-					<!-- 페이지표시 -->
-	<table border="0" width="600">
-		<tr>
-		<td align="right"> 
-		
-		
-		<!-- [1][2][3][4][5] -->
-		<!-- fp           tp -->
-								
-		<%-- <c:if test="${curpage>block}">
-			<a href="noticeboard.do?page=1">
-				비긴</a> &nbsp;
-				<a href="noticeboard.do?page=${fromPage-1}">
-				프리브</a> &nbsp;
-		</c:if>    --%>
-		
-		<%-- <c:if test="${curpage<=block}"> --%>
-			<a href="secretboard.do?fs=${fs }&ss=${ss }&page=1">비긴</a>
-				<a href="secretboard.do?fs=${fs }&ss=${ss }&page=${curpage>1?curpage-1:curpage}">
-				프리브</a> &nbsp;
-		<%-- </c:if>    --%>
-		
-		<c:forEach var="i" begin="${fromPage }" end="${toPage }">
-		[<c:if test="${ curpage ==i}">
-		
-		<span style="color:red">${i }</span>
-		
-		</c:if>		
-		<c:if test="${ curpage !=i}">
-		<a href="secretboard.do?fs=${fs }&ss=${ss }&page=${i }">${i }</a>
+					<!-- 리스트 끝- ->
 					
-		</c:if>		
-		]
-		</c:forEach>
+					<!-- 페이지표시 -->
+					<table border="0" width="600">
+						<tr>
+							<td align="right"> 	
+								<a href="secretboard.do?fs=${fs }&ss=${ss }&page=1">비긴</a>
+								<a href="secretboard.do?fs=${fs }&ss=${ss }&page=${curpage>1?curpage-1:curpage}">프리브</a> &nbsp;
+			
+								<c:forEach var="i" begin="${fromPage }" end="${toPage }">
+									[<c:if test="${ curpage ==i}"><span style="color:red">${i }</span></c:if>		
+									<c:if test="${ curpage !=i}"><a href="secretboard.do?fs=${fs }&ss=${ss }&page=${i }">${i }</a></c:if>]
+								</c:forEach>
+			
+								<c:if test="${toPage<totalpage }">
+									<a href="secretboard.do?fs=${fs }&ss=${ss }&page=${toPage+1 }">넥스트</a>
+									<a href="secretboard.do?fs=${fs }&ss=${ss }&page=${totalpage }">끝</a>
+								</c:if>		
+								<c:if test="${toPage>=totalpage }">
+									<a href="secretboard.do?fs=${fs }&ss=${ss }&page=${curpage<totalpage?curpage+1:curpage }">넥스트</a>&nbsp;
+									<a href="secretboard.do?fs=${fs }&ss=${ss }&page=${totalpage }">끝</a>
+								</c:if>
+								&nbsp;&nbsp;${curpage } page / ${totalpage  } pages
+							</td>
 		
-		<c:if test="${toPage<totalpage }">
-			<a href="secretboard.do?fs=${fs }&ss=${ss }&page=${toPage+1 }">넥스트</a>
-			<a href="secretboard.do?fs=${fs }&ss=${ss }&page=${totalpage }">끝</a>
-		</c:if>
-		
-		<c:if test="${toPage>=totalpage }">
-			<a href="secretboard.do?fs=${fs }&ss=${ss }&page=${curpage<totalpage?curpage+1:curpage }">넥스트</a>&nbsp;
-			<a href="secretboard.do?fs=${fs }&ss=${ss }&page=${totalpage }">끝</a>
-		</c:if>
-		&nbsp;&nbsp;
-		${curpage } page / ${totalpage  } pages
-		
-		</td>
-		
-		</tr>
-		</table>
-		<!-- 페이지표시 끝 -->
+						</tr>
+					</table>
+					<!-- 페이지표시 끝 -->
 					<!-- 글쓰기 -->
 					<table width="700">
 						<tr>
@@ -172,7 +142,7 @@
 						</tr>
 					</table>
 					<!-- 글쓰기 끝 -->
-					<!-- 검색 -->
+					<!-- 검색 시작 -->
 					<table>
 						<tr>
 							<td>
@@ -210,13 +180,10 @@
 									<!-- 	<span id="print"></span> -->
 								</form>
 							</td>
-
 						</tr>
-
 					</table>
 					<!-- 검색 끝 -->
 				</center>
-
 				<div class="clearfix margin-bottom-10"></div>
 			</div>
 		</div>
