@@ -164,8 +164,27 @@
 				
 				
 				<!-- 여기에 리뷰칸 넣어주세용 :) -->
-				
-				
+				<h4><b>상품리뷰</b></h4>
+				<hr/>
+				<table>
+					<tr>
+						<td width="20%" style="font-size:11px; color:#505050;" align="center">별점</td>
+						<td width="40%" style="font-size:11px; color:#505050;" align="center">평가</td>
+						<td width="25%" style="font-size:11px; color:#505050;" align="center">ID</td>
+						<td width="25%" style="font-size:11px; color:#505050;" align="center">날짜</td>
+					</tr>
+					<c:forEach var="rvo" items="${list}">
+					<tr>					
+					
+						<td width="20%" style="font-size:11px; color:#505050;" align="center">${rvo.score }</td>
+						<td width="40%" style="font-size:11px; color:#505050;" align="center">${rvo.content }</td>
+						<td width="25%" style="font-size:11px; color:#505050;" align="center">${rvo.id }</td>
+						<td width="25%" style="font-size:11px; color:#505050;" align="center">
+						<fmt:formatDate value="${rvo.regdate}" pattern="yyyy년  MM월  dd일"/></td>
+					</tr> 
+					</c:forEach>
+				</table>
+				<br/><br/>
 				<h4><b>상품정보제공고시</b></h4>
 				<hr/>
 				<table>

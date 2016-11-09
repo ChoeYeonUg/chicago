@@ -20,8 +20,8 @@ public class BoardVO {
 	private int faq_category;
 	private int num;
 	private String dbday;
-	
-	
+
+
 	public String getDbday() {
 		return dbday;
 	}

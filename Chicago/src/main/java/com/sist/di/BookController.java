@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sist.dao.BookVO;
+import com.sist.dao.ReviewVO;
 import com.sist.service.BookService;
 
 @Controller
@@ -107,13 +108,21 @@ public class BookController {
 		BookVO detailBook = bs.detailBook(book_code);
 		// 수량정보
 		int defAmount = 1;
+		System.out.println("짜증ㅋㅋ큐ㅠㅠㅠ");
+		try{
+		List<ReviewVO> list=bs.bookReviewList(book_code);
 		
+		model.addAttribute("list",list);
 		model.addAttribute("detailBook", detailBook);
 		model.addAttribute("book_code", book_code);
 		model.addAttribute("defAmount", defAmount);
 		model.addAttribute("jsp","book.jsp");
 		model.addAttribute("book_jsp", "../book/bookDetail.jsp");
 		
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			e.getStackTrace();
+		}
 		return "main/main";
 	}
 	

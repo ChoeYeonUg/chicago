@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.sist.dao.mapper.BoardMapper">
+   
+  	<select id="noticelist" resultType="board" parameterType="hashmap">
+ 		SELECT board_no,subject,category,faq_category,content,num 
+ 		FROM (SELECT board_no,subject,category,faq_category,content,regdate,ROWNUM as num 
+ 		FROM (SELECT board_no,subject,category,faq_category,content,regdate FROM board1 WHERE category=1 ORDER BY BOARD_NO deSC )) 
+ 		WHERE num BETWEEN #{start} AND #{end}
+  	</select> 
+  	
+  	<select id="totalPage" resultType="int" parameterType="hashmap">
+  		SELECT CEIL(COUNT(*)/#{rowSize}) FROM board1 WHERE category=#{category}
+  	</select>  	
+
+  	<select id="faqtotalListPage" resultType="int" parameterType="int">
+  		SELECT CEIL(COUNT(*)/5) FROM board1 WHERE category=2 AND FAQ_CATEGORY=#{faq_category}
+  	</select>
+  	 	  
+  	<!-- 카테고리별 토탈 -->
+  	<select id="faqTotalPage" resultType="int">
+  		SELECT COUNT(*) FROM BOARD1 WHERE CATEGORY=2
+  	</select>  	
+	  	
+  	<select id="faqCatTotalPage" resultType="int"  parameterType="int">
+  		SELECT COUNT(*) FROM BOARD1 WHERE CATEGORY=2 AND FAQ_CATEGORY=#{faq_category}
+  	</select>
+  	
+  	<select id="faqlist" resultType="board" parameterType="hashmap">
+	  SELECT board_no,subject,category,faq_category,content,regdate,num 
+ 		FROM (SELECT board_no,subject,category,faq_category,content,regdate,ROWNUM as num 
+ 		FROM (SELECT board_no,subject,category,faq_category,content,regdate FROM board1 WHERE category=2 ORDER BY BOARD_NO DESC)) 
+ 		WHERE num BETWEEN #{start} AND #{end}
+  	</select> 
+  	
+  	<select id="catfaqlist" resultType="board" parameterType="hashmap">
+	  SELECT board_no,subject,category,faq_category,content,regdate,num
+			FROM (SELECT board_no,subject,category,faq_category,content,regdate,ROWNUM as num
+			FROM (SELECT board_no,subject,category,faq_category,content,regdate FROM board1 WHERE category=2 AND FAQ_CATEGORY=#{faq_category} ORDER BY board_no DESC)) WHERE num BETWEEN #{start} AND #{end}
+  	</select> 
+  	
+  	<insert id="notice_insert" parameterType="hashmap">
+  		INSERT INTO BOARD1 (board_no,id,category,subject,content,secret) VALUES (board_seq.nextval,'admin',1,#{subject},#{content},1)
+  	
+  	</insert>
+  	
+  	<insert id="faq_insert" parameterType="hashmap">
+  	INSERT INTO BOARD1 (board_no,id,category,faq_category,subject,content,secret) VALUES (board_seq.nextval,'admin',2,#{faq_category},#{subject},#{content},1)
+  	</insert>
+  	
+  	<insert id="secret_insert" parameterType="board">
+  	INSERT INTO BOARD1 (board_no,id,subject,category,pwd,content,secret,group_id) 
+  	VALUES (board_seq.nextval,#{id},#{subject},3,#{pwd},#{content},#{secret},groupid_seq.nextval)
+  	</insert>
+  	
+  	<!-- 1:1게시판 리스트 -->  	
+  	<select id="secretlist" resultType="board" parameterType="hashmap">
+  		SELECT board_no,subject,id,GROUP_ID,hit,group_tab,regdate,secret,pwd,to_char(regdate,'yyyy-MM-dd') as dbday,num 
+ 		FROM (SELECT board_no,id,GROUP_ID,hit,group_tab,subject,regdate,secret,pwd,ROWNUM as num
+ 		FROM (SELECT board_no,id,GROUP_ID,hit,group_tab,subject,regdate,secret,pwd FROM board1 WHERE category=3 ORDER BY group_id DESC, group_step ASC))
+ 		WHERE num BETWEEN #{start} AND #{end}
+  	</select> 
+  	
+  	<update id="hitIncrement" parameterType="int">
+  		UPDATE board1 SET hit=hit+1 WHERE CATEGORY=3 AND board_no=#{board_no}
+  	</update>
+  	
+  	<select id="secret_content" resultType="board" parameterType="int">
+  	SELECT board_no,subject,id,category,content,regdate,hit,secret,pwd  
+  	FROM board1 WHERE category=3 AND board_no=#{board_no}
+  	</select>
+  	
+  	<!-- 비밀번호 찾기 -->
+  	<select id="getPwd" resultType="String" parameterType="int">
+  		SELECT pwd FROM BOARD1 WHERE category=3 AND board_no=#{board_no}
+  	</select>
+  	
+  	<!-- 1:1게시판수정 -->  	
+  	<update id="secret_update" parameterType="board">
+  		UPDATE board1 SET subject=#{subject},content=#{content},
+  		secret=#{secret},pwd=#{pwd},hit=#{hit} WHERE board_no=#{board_no}
+  	</update>
+  	
+  	<select id="secret_find" resultType="board" parameterType="hashmap">
+  		SELECT board_no,subject,id,GROUP_ID,hit,group_tab,regdate,secret,pwd,to_char(regdate,'yyyy-MM-dd') as dbday,num 
+  		FROM (SELECT board_no,subject,id,GROUP_ID,hit,group_tab,regdate,secret,pwd,ROWNUM as num 
+  		FROM (SELECT board_no,subject,id,GROUP_ID,hit,group_tab,regdate,secret,pwd FROM board1 WHERE category=3 AND ${fs} LIKE '%${ss}%' ORDER BY group_id DESC, group_step ASC)) 
+  		WHERE num BETWEEN #{start} AND #{end}  	
+  	</select>
+  	
+  	<select id="secret_find_total" resultType="int" parameterType="hashmap">
+  		SELECT CEIL(COUNT(*)/#{rowSize}) FROM board1 WHERE category=3 AND ${fs} LIKE '%${ss}%'
+  	</select>
+  	
+  	<select id="board_deleteData" resultType="board" parameterType="int">
+  		SELECT root,depth FROM board1 WHERE board_no=#{board_no}
+  	</select>
+  	
+  	<delete id="board_delete" parameterType="int">
+  		DELETE FROM board1 WHERE board_no=#{board_no}
+  	</delete>
+  	
+  	<update id="secret_admin_delete" parameterType="int">
+  		UPDATE board1 SET subject='관리자가 삭제한 게시물입니다.', content='관리자가 삭제한 게시물입니다.'WHERE board_no=#{board_no}
+ 	</update>
+ 	
+ 	<select id="secret_parentData" resultType="board" parameterType="int">
+ 		SELECT group_id, group_step, group_tab FROM Board1 WHERE board_no=#{board_no}
+ 	</select>
+ 	
+ 	<update id="secret_stepIncrement" parameterType="board">
+ 		UPDATE Board1 SET group_step=group_step+1 WHERE group_id=#{group_id} AND group_step>#{group_step}
+ 	</update>
+ 	
+ 	<insert id="secret_replyInsert" parameterType="board">
+ 		INSERT INTO board1 (board_no, id, subject, content, pwd,category,secret, group_id, group_step, group_tab, root) 
+ 		VALUES(board_seq.nextval,#{id},#{subject},#{content},#{pwd},3,#{secret},#{group_id},#{group_step},#{group_tab},#{root}) 		
+ 	</insert>
+ 	
+ 	<update id="secret_depthIncrement" parameterType="int">
+ 		UPDATE Board1 SET depth=depth+1 WHERE board_no=#{board_no}
+ 	</update>
+ 	
+  </mapper>

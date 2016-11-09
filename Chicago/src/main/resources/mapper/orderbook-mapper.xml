@@ -5,7 +5,7 @@
   
 <mapper namespace="com.sist.dao.mapper.OrderBookMapper">
   <insert id="insertOrBk" parameterType="orderbook">
-  	INSERT INTO order_book1(order_id, book_code, amount)
+  	INSERT INTO order_book(order_id, book_code, amount)
   	VALUES(#{order_id},#{book_code},#{amount})
   </insert>
   

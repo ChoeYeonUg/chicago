@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sist.dao.BookVO;
+import com.sist.dao.ReviewVO;
 
 public interface BookService {
 	public List<BookVO> bookAllList();
@@ -15,9 +16,14 @@ public interface BookService {
 	public void wishpop(Map map);
 	public BookVO purchase(String book_code);
 	
+
 	////////////관리자
 	public List<BookVO> printSysopBook(Map map);
 	public int printBookTotalPage(int rowSize);
 	public List<BookVO> printSearchSysopBook(Map map);
 	public int printSearchBookTotalPage(Map map);
+
+	//상세페이지리뷰게시판
+	public List<ReviewVO> bookReviewList(String book_code);
+
 }
