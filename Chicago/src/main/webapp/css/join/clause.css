@@ -1,0 +1,68 @@
+@CHARSET "UTF-8";
+
+#contents h2 {
+    height: 67px;
+    padding: 43px 0 0 0;
+}
+
+.userAgreement h2 {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #cccccc;
+}
+
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, acronym, address, big, cite, code, img, ins, kbd, q, s, samp, small, strike, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+.uaCnts {
+    width: 668px;
+    padding-top: 11px;
+}
+
+.ua {
+    width: 659px;
+    height: 28px;
+/*     padding: 11px 0 0 9px; */
+    border: 1px solid #e5e5e5;
+    border-bottom: 0;
+    background-color: #f7f7f7;
+    font-weight: bold;
+    color: #000000;
+}
+
+.ua input {
+    vertical-align: middle;
+    margin-bottom: 3px;
+    display: inline-block;
+}
+
+.ua label{
+	display: inline;
+}
+
+.uaTxt {
+    width: 649px;
+    height: 130px;
+    padding: 0 0 0 19px;
+    color: #161616;
+    border: 1px solid #e5e5e5;
+    line-height: 1.5;
+}
+
+.userAgreement .bt {
+    clear: both;
+    height: 109px;
+    padding-top: 34px;
+    text-align: center;
+}
+
+.bt input{
+	display: inline;
+	
+}
