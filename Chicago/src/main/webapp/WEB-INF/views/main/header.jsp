@@ -56,6 +56,7 @@
 								<li><a href="#"><spring:message code="header.fairytale"/></a></li>
             				</ul> -->
           				</li>
+          				<li><a href="writer.do"><spring:message code="header.writer"/></a> </li>
           				<li><a class="drop" href="event.do"><spring:message code="header.event"/></a>
             				<ul>
               					<li><a href="event.do"><spring:message code="header.eventView"/></a></li>
@@ -82,7 +83,6 @@
             				</ul>
             			</li>
           				<li><a href="sb.do"><spring:message code="header.sb"/></a></li>
-          				
           				<c:if test="${garde ne 'null' && grade eq 0 }">
 	          				<li><a class="drop" href="sysop.do"><spring:message code="header.saMenu"/></a>
 	            				<ul>
