@@ -171,5 +171,16 @@ public class BookController {
 		return "member/wishlist";
 	}
 */
+	@RequestMapping("bookReviewContent")
+	public String bookReviewContent(Model model,String book_code){
+		
+		BookVO detailBook = bs.detailBook(book_code);
+		
+		model.addAttribute("detailBook", detailBook);
+		model.addAttribute("model", model);
+		model.addAttribute("book_code", book_code);
+		
+		return"book/bookReviewContent";
+	}
 
 }

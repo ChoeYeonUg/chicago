@@ -26,6 +26,13 @@
 			return;
 		}
 	}
+	
+	function popupOpen(book_code){
+		alert(book_code)
+		var popUrl="bookReviewContent.do?book_code="+book_code;
+		var popOption="width=500, height=460, resizable=no scrollbars=no status=no;";
+		window.open(popUrl,"",popOption);
+	}
 
 	
 </script>
@@ -149,8 +156,13 @@
 				
 				<!-- 여기에 리뷰칸 넣어주세용 :) -->
 				<h4><b>상품리뷰</b></h4>
-				<hr/>
 				<table>
+					<tr>
+						<td align="right" style="font-size:11px; color:#505050;"><a href="#"  >더 많은 리뷰보기</a></td>
+					</tr>
+				</table>
+				<hr/>
+				<table>					
 					<tr>
 						<td width="20%" style="font-size:11px; color:#505050;" align="center">별점</td>
 						<td width="40%" style="font-size:11px; color:#505050;" align="center">평가</td>
@@ -171,7 +183,7 @@
 					<table>
 					<br/>
 					<tr>						
-						<td align="right" colspan="4"><a href="#">리뷰쓰기</a></td>
+						<td align="right" colspan="4"><a href="#" onclick="javascript:popupOpen('${book_code}');">리뷰쓰기</a></td>
 					</tr>
 				</table>
 				<br/><br/>
