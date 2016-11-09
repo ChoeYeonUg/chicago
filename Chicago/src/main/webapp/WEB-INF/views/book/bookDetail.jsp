@@ -26,6 +26,7 @@
 			return;
 		}
 	}
+
 	
 </script>
 </head>
@@ -69,7 +70,15 @@
 				<table class="table_content" border="0">
 					<tr>
 						<!-- 책 이미지 -->
-						<td width="14%"><img alt="bookImage" src="${detailBook.img }" style="vertical-align: bottom;"></td>
+						<td width="14%">
+						<table>
+							<tr>
+								<td><img alt="bookImage" src="${detailBook.img }" style="vertical-align: bottom;"></td>
+							</tr>
+							<tr>								
+								<td align="center"  style="font-size:11px; color:#505050;">별점:${starAvg}</td>								
+							</tr>
+						</table>					
 						<!-- 책 기본정보 -->
 						<td width="86%">
 							<table>
@@ -149,15 +158,21 @@
 						<td width="25%" style="font-size:11px; color:#505050;" align="center">날짜</td>
 					</tr>
 					<c:forEach var="rvo" items="${list}">
+					<tr>
 					<tr>					
-					
 						<td width="20%" style="font-size:11px; color:#505050;" align="center">${rvo.score }</td>
 						<td width="40%" style="font-size:11px; color:#505050;" align="center">${rvo.content }</td>
 						<td width="25%" style="font-size:11px; color:#505050;" align="center">${rvo.id }</td>
 						<td width="25%" style="font-size:11px; color:#505050;" align="center">
 						<fmt:formatDate value="${rvo.regdate}" pattern="yyyy년  MM월  dd일"/></td>
-					</tr> 
-					</c:forEach>
+					</tr> 					
+					</c:forEach>					
+					</table>
+					<table>
+					<br/>
+					<tr>						
+						<td align="right" colspan="4"><a href="#">리뷰쓰기</a></td>
+					</tr>
 				</table>
 				<br/><br/>
 				<h4><b>상품정보제공고시</b></h4>
