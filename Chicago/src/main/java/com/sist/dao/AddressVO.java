@@ -4,11 +4,11 @@ package com.sist.dao;
 public class AddressVO {
 	private String id;
 	private String addr1;
-	private int zipCode1;
+	private int zipcode1;
 	private String addr2;
-	private int zipCode2;
+	private int zipcode2;
 	private String addr3;
-	private int zipCode3;
+	private int zipcode3;
 	
 	public String getId() {
 		return id;
@@ -26,12 +26,12 @@ public class AddressVO {
 		this.addr1 = addr1;
 	}
 	
-	public int getZipCode1() {
-		return zipCode1;
+	public int getZipcode1() {
+		return zipcode1;
 	}
 	
-	public void setZipCode1(int zipCode1) {
-		this.zipCode1 = zipCode1;
+	public void setZipcode1(int zipCode1) {
+		this.zipcode1 = zipCode1;
 	}
 	
 	public String getAddr2() {
@@ -42,12 +42,12 @@ public class AddressVO {
 		this.addr2 = addr2;
 	}
 	
-	public int getZipCode2() {
-		return zipCode2;
+	public int getZipcode2() {
+		return zipcode2;
 	}
 	
-	public void setZipCode2(int zipCode2) {
-		this.zipCode2 = zipCode2;
+	public void setZipcode2(int zipCode2) {
+		this.zipcode2 = zipCode2;
 	}
 	
 	public String getAddr3() {
@@ -58,12 +58,12 @@ public class AddressVO {
 		this.addr3 = addr3;
 	}
 	
-	public int getZipCode3() {
-		return zipCode3;
+	public int getZipcode3() {
+		return zipcode3;
 	}
 	
-	public void setZipCode3(int zipCode3) {
-		this.zipCode3 = zipCode3;
+	public void setZipcode3(int zipCode3) {
+		this.zipcode3 = zipCode3;
 	}
 	
 }

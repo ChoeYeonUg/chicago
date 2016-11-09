@@ -28,70 +28,47 @@
 <script src="js/google-code-prettify/prettify.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<script type="text/javascript">
-function send(){
-	var f=document.frm;
-		
-	if(f.USER_Check_NewPWD.value=="" && f.USER_Check_NewPWD.value!="${pwd}"){
-		alert("올바른 비밀번호가 아닙니다!");
-		f.USER_PWD.focus();
-		return;
-	}
-	
-	if(f.USER_Check_NewPWD.value=="${pwd}"){
-		alert("본인인증이 완료되었습니다.감사합니다!");
-		return;
-	}
-	
-	f.submit();
-	
-}
 </script>
 
 </head>
 <body>
-	<!-- Member Secure PASSWORD -->
+	<!-- Member Main Home -->
 	<div class="OutlineForm">
 		<div class="MiddlelineSettingForm">
 			<div class="HeadlineSettingForm">
 				<div class="Headline">
-					<spring:message code="memberSecurePassword.header"/>
+					메인홈이얌
 				</div>
 				<div class="Notification">
 					<ul class="notcont">
-						<li><spring:message code="memberSecurePassword.notFy1"/></li>
-						<li><spring:message code="memberSecurePassword.notFy2"/></li>
+						<li></li>
+						<li></li>
 					</ul>
 				</div>
 			</div>
 			<div class="MemberSettingForm">
 				<div class="InnerBox">
-					<div id="MemberSecurePassword-Box">
-						<form:form method="post" action="membersecurepwd_ok.do" commandName="memberVO">
-						<input type="hidden" value="<%=request.getAttribute("id") %>">
-						<input type="hidden"  name="typecheck" value="${typecheck}">
+					<div id="MemberMainHome-Box">
+						<form>
 							<fieldset>
 								<div class="MemberSecurePwd">
-									<dl class="msp">
-										<!-- Input Confirm PASSWORD -->
-										<dt>
-											<label for="USER_PWD"><spring:message code="memberSecurePassword.Password"/></label>
-										</dt>
-										<dd>
-											<input type="password" name="USER_Check_NewPWD" id="USER_Check_NewPWD" class="" maxlength="16">
-										</dd>
-									</dl>
+									<!-- Input Current PASSWORD -->
+									<ul class="notcont">
+										<li></li>
+										<li></li>
+									</ul>
 								</div>
 								
-								<!-- OK, Cancel Button -->
+								<!-- MemberJoin, GuestUser Button -->
 								<div>
-									<input type="button" value="확인" onclick="send()">
-									<%-- <form:button name="" id="" class="" onclick="send()"><spring:message code="memberSecurePassword.btOk"/></form:button>
-									<form:button name="" id="" class="" onclick="javascript:history.back()"><spring:message code="memberSecurePassword.btCancel"/></form:button> --%>
+									<a href="clause.do">회원가입하기</a>
+									<a>비회원으로 계속하기</a>
+									<!-- <input type="button" value="회원가입하기" onclick="cluse.do">
+									<input type="button" value="비회원으로 이용하기" onclick=> -->
 								</div>
 								
 							</fieldset>
-						</form:form>
+						</form>
 					</div>
 				</div>
 			</div>

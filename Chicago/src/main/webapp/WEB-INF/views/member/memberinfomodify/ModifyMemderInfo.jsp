@@ -223,7 +223,6 @@ function sample6_execDaumPostcode() {
 								<!-- OK, Cancel Button -->
 								<div>
 									<input type="button" value="<spring:message code="memberInfoModify.btOk"/>" onclick="send()">
-									<%-- <form:button name="" id="" class="" onclick="send()"><spring:message code="memberInfoModify.btOk"/></form:button> --%>
 									<%-- <form:button name="" id="" class="" onclick="javascript:history.back()"><spring:message code="memberInfoModify.btCancel"/></form:button> --%>
 								</div>
 								

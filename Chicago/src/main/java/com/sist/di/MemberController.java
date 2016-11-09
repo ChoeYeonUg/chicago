@@ -1,7 +1,9 @@
 package com.sist.di;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+
+import com.sist.dao.*;
+import com.sist.service.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -11,13 +13,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.context.request.RequestAttributes;
-
-import com.sist.dao.*;
-import com.sist.service.MemberService;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /* Made By Choding */
 @Controller
@@ -29,64 +29,103 @@ public class MemberController {
 	private MemberService ms;
 	
 	/* HeadMenu */
-	@RequestMapping("mypage")
+	@RequestMapping("mypage.do")
 	public String member_page(Model model, HttpServletRequest request) throws Exception {
-		HttpSession hs = request.getSession();
-		String sessionid = (String) hs.getAttribute("id");
 		
-		MemberVO vo = ms.selectMember(sessionid);
-		model.addAttribute("vo", vo);
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
-		model.addAttribute("jsp", "member");
-		model.addAttribute("jsp", "../member/memberinfomodify/MemberMain.jsp");
-		
-		model.addAttribute("cmi", "MemberMain");
-		model.addAttribute("cmi", "../memberinfomodify/ModifyMemderInfo.jsp");
+		model.addAttribute("MemberMain_cmi", "../MemberMain.jsp");
+		model.addAttribute("cmi", "../member/MemberMainHome.jsp");
 		
 		return "main/main";
 		
 	}
 	
-	/* Member Info HeadMenu  */
-	@RequestMapping("memberinfo")
-	public String member_info_page(Model model, HttpServletRequest request) throws Exception {
+	/* Secure Page */
+	@RequestMapping(value="membersecurepwd_ok.do", method=RequestMethod.POST)
+	public String membersecurepwd_ok(Model model,MemberVO vo, AddressVO avo, HttpServletRequest request, String USER_Check_NewPWD, String typecheck) throws Exception {
+		
 		HttpSession hs = request.getSession();
-		String sessionid = (String) hs.getAttribute("id");
+		String sessionid = (String)hs.getAttribute("id");
+		String cpwd = ms.pwdCheck(sessionid);
+
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
+	
+		model.addAttribute("MemberMain_cmi", "../MemberMain.jsp");
 		
-		MemberVO vo = ms.selectMember(sessionid);
-		model.addAttribute("vo", vo);
+			if(USER_Check_NewPWD.equals(cpwd)) {
+				if(typecheck.equals("mi")) {
+						
+					vo = ms.selectMember(sessionid);
+					model.addAttribute("vo", vo);
+					
+					return "member/memberinfomodify/SelectMemberInfo";
+					
+				} else if(typecheck.equals("ma")) {
+					
+					avo = ms.selectMemberDeliveryAddrs(sessionid);
+					model.addAttribute("vo", avo);
+					
+					return "member/memberinfomodify/MemberAddressInfo";
+					
+				}
+			
+			} 		
 		
-		model.addAttribute("jsp", "member");
-		model.addAttribute("jsp", "../member/memberinfomodify/MemberMain.jsp");
+		return "redirect:selectMemberInfo.do";
 		
-		model.addAttribute("cmi", "MemberMain");
-		model.addAttribute("cmi", "../memberinfomodify/ModifyMemderInfo.jsp");
+	}
+	
+	/* Member Info HeadMenu */
+	@RequestMapping("memberinfo.do")
+	public String member_info_page(Model model, HttpServletRequest request) throws Exception {
+		
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
+		
+		model.addAttribute("MemberMain_cmi", "../MemberMain.jsp");
+		model.addAttribute("cmi", "../member/MemberMainHome.jsp");
 		
 		return "main/main";
 		
 	}
 	
 	/* Member Info SideMenu Include */
-	@RequestMapping("modyfyMemberInfo.do")
-	public String member_side_info_page(Model model, HttpServletRequest request) throws Exception {
-		HttpSession hs = request.getSession();
-		String sessionid = (String) hs.getAttribute("id");
+	@RequestMapping("selectMemberInfo.do")
+	public String member_side_info_page(Model model, MemberVO vo, HttpServletRequest request, String typecheck) throws Exception {
 		
-		MemberVO vo = ms.selectMember(sessionid);
-		model.addAttribute("vo", vo);
+		typecheck="mi";
 		
-		model.addAttribute("jsp", "member");
-		model.addAttribute("jsp", "../member/memberinfomodify/MemberMain.jsp");
+		model.addAttribute("typecheck", typecheck);
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
-		model.addAttribute("cmi", "MemberMain");
-		model.addAttribute("cmi", "../memberinfomodify/ModifyMemderInfo.jsp");
+		
+		model.addAttribute("MemberMain_cmi", "../MemberMain.jsp");
+		model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
 		
 		return "main/main";
 		
 	}
 	
-	@RequestMapping(value="modyfyMemberInfo_ok.do", method = RequestMethod.POST)
-	public String modyfyMemberInfo_ok(Model model, MemberVO vo, HttpServletRequest request, int zipcode, String addr, String addr2, String email, String phone) throws Exception {
+	@RequestMapping("modyfyMemberInfo.do")
+	public String modifymemberinfo_page(Model model, MemberVO vo, HttpServletRequest request) throws Exception {
+		
+		
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
+		
+		model.addAttribute("MemberMain_cmi", "../MemberMain.jsp");
+		model.addAttribute("cmi", "../member/memberinfomodify/ModifyMemderInfo.jsp");
+		
+		return "main/main";
+		
+	}
+	
+	@RequestMapping(value="modyfyMemberInfo_ok.do", method=RequestMethod.POST)
+	public String modyfyMemberInfo_ok(Model model, MemberVO vo, HttpServletRequest request, int zipcode, String addr, String email, String phone) throws Exception {
 		
 		logger.info(vo.getId() + " : " + vo.getPwd());
 		
@@ -94,11 +133,9 @@ public class MemberController {
 		String sessionid = (String) hs.getAttribute("id");
 		
 		model.addAttribute("jsp", "member.jsp");
-		model.addAttribute("member_jsp", "../member/memberinfomodify/MemberMain.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
-		
-		//if(ms.memberId(sessionid) && ms.memberPwd(sessionid,vo.getPwd())) {
-		if(ms.memberId(sessionid)) {
+		if(ms.memberId(sessionid) && !sessionid.equals("admin")) {
 				
 				vo = new MemberVO();
 				vo.setZipcode(zipcode);
@@ -112,6 +149,7 @@ public class MemberController {
 				
 		} else {
 			
+			model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
 			model.addAttribute("cmi", "../memberinfomodify/ModifyMemderInfo.jsp");
 			
 		}
@@ -121,21 +159,19 @@ public class MemberController {
 	}
 	
 	@RequestMapping("modyfyMemberPwd.do")
-	public String member_side_pwd_page(Model model, HttpServletRequest request) {
+	public String member_side_pwd_page(Model model, HttpServletRequest request) throws Exception {
 		
-		model.addAttribute("jsp", "member");
-		model.addAttribute("jsp", "../member/memberinfomodify/MemberMain.jsp");
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
-		model.addAttribute("memberVO", new MemberVO());
-		model.addAttribute("cmi", "MemberMain");
-		model.addAttribute("cmi", "../memberinfomodify/ModifyMemberPassword.jsp");
+		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+		model.addAttribute("cmi", "../member/memberinfomodify/ModifyMemberPassword.jsp");
 		
 		return "main/main";
 		
 	}
 	
-	
-	@RequestMapping(value="modyfyMemberPwd_ok.do", method = RequestMethod.POST)
+	@RequestMapping(value="modyfyMemberPwd_ok.do", method=RequestMethod.POST)
 	public String modyfyMemberPwd_ok(Model model, MemberVO vo, HttpServletRequest request,String USER_NewPWD, String USER_C_NewPWD) throws Exception {
 		
 		logger.info(vo.getId() + " : " + vo.getPwd());
@@ -144,76 +180,183 @@ public class MemberController {
 		String sessionid = (String) hs.getAttribute("id");
 		
 		model.addAttribute("jsp", "member.jsp");
-		model.addAttribute("member_jsp", "../member/memberinfomodify/MemberMain.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
-		
-		if(ms.memberId(sessionid) && ms.memberPwd(sessionid,vo.getPwd())) {
+		if(ms.memberId(sessionid) && ms.memberPwd(sessionid,vo.getPwd()) && !sessionid.equals("admin")) {
 			if(USER_NewPWD.equals(USER_C_NewPWD)) {
 				
 				Map map = new HashMap();
 				map.put("pwd", USER_NewPWD);
 				map.put("id", sessionid);
 				ms.modyfyMemberPwd(map);
-				model.addAttribute("cmi", "../memberinfomodify/ModifyMemderInfo.jsp");
+				
+				model.addAttribute("jsp", "../main/main.jsp");
 				
 			} else {
 				
-				model.addAttribute("cmi", "../memberinfomodify/ModifyMemberPassword.jsp");
+				model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+				model.addAttribute("cmi", "../member/memberinfomodify/ModifyMemberPassword.jsp");
 				
 			}
 			
 		} else {
 			
-			model.addAttribute("cmi", "../memberinfomodify/ModifyMemberPassword.jsp");
+			model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+			model.addAttribute("cmi", "../member/memberinfomodify/ModifyMemberPassword.jsp");
 			
 		}
 		
-		return "main/main";
-		
-	}
-	
-	@RequestMapping("modifyMemberAddrs.do")
-	public String member_side_addrs_page(Model model, HttpServletRequest request) {
-		
-		model.addAttribute("jsp", "member");
-		model.addAttribute("jsp", "../member/memberinfomodify/MemberMain.jsp");
-			
-		model.addAttribute("cmi", "MemberMain");
-		model.addAttribute("cmi", "../memberinfomodify/ModifyMemberAddress.jsp");
-			
-		return "main/main";
+		return "redirect:modyfyMemberInfo.do";
 		
 	}
 	
 	@RequestMapping("memberPoint.do")
-	public String member_side_point_page(Model model, HttpServletRequest request) {
+	public String member_side_point_page(Model model, MemberVO vo, HttpServletRequest request) throws Exception {
 		
-		model.addAttribute("jsp", "member");
-		model.addAttribute("jsp", "../member/memberinfomodify/MemberMain.jsp");
+		HttpSession hs = request.getSession();
+		String sessionid = (String) hs.getAttribute("id");
 		
+		vo = ms.selectMember(sessionid);
+		model.addAttribute("vo", vo);
 		
-		model.addAttribute("cmi", "MemberMain");
-		model.addAttribute("cmi", "../memberinfomodify/MemberPoint.jsp");
-			
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
+		
+		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+		model.addAttribute("cmi", "../member/memberinfomodify/MemberPoint.jsp");
 		
 		return "main/main";
 		
 	}
 	
-	@RequestMapping("WithdrawMember")
+	@RequestMapping("memberAddrsInfo.do")
+	public String memberAddrsInfo_page(Model model, AddressVO avo, HttpServletRequest request, String typecheck) throws Exception {
+		
+		typecheck="ma";
+		
+		model.addAttribute("typecheck", typecheck);
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
+		
+		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+		model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
+		
+		return "main/main";
+		
+	}
+	
+	@RequestMapping("insertMemberAddrs.do")
+	public String insertMemberAddrsInfo_page(Model model, AddressVO avo, HttpServletRequest request) throws Exception {
+		
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
+		
+		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+		model.addAttribute("cmi", "../member/memberinfomodify/InsertMemberAddress.jsp");
+		return "main/main";
+		
+	}
+	
+	@RequestMapping(value="insertMemberAddrs_ok.do", method=RequestMethod.POST)
+	public String insertMemberAddrs_ok(Model model, AddressVO avo, HttpServletRequest request, int zipcode1, String addr1, int zipcode2, String addr2,int zipcode3, String addr3) throws Exception {
+		
+		logger.info(avo.getId());
+		
+		HttpSession hs = request.getSession();
+		String sessionid = (String) hs.getAttribute("id");
+		
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
+		
+		if(ms.memberId(sessionid) && !sessionid.equals("admin")) {
+			
+			avo = new AddressVO();
+			avo.setZipcode1(zipcode1);
+			avo.setAddr1(addr1);
+			avo.setZipcode2(zipcode2);
+			avo.setAddr2(addr2);
+			avo.setZipcode3(zipcode3);
+			avo.setAddr3(addr3);
+			avo.setId(sessionid);
+			ms.insertMemberDeliveryAddrs(avo);
+			
+			model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+			model.addAttribute("cmi", "../member/memberinfomodify/MemberAddressInfo.jsp");
+			
+		} else {
+			
+			model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+			model.addAttribute("cmi", "../member/MemberMainHome.jsp");
+			
+		}
+		
+		return "redirect:memberAddrsInfo.do";
+		
+	}
+	
+	@RequestMapping("modifyMemberAddrs.do")
+	public String modifyMemberAddrsInfo_page(Model model, AddressVO avo, HttpServletRequest request) throws Exception {
+		
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
+		
+		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+		model.addAttribute("cmi", "../member/memberinfomodify/ModifyMemberAddress.jsp");
+		return "main/main";
+		
+	}
+	
+	@RequestMapping(value="modyfyMemberAddrs_ok.do", method=RequestMethod.POST)
+	public String modyfyMemberAddrs_ok(Model model, AddressVO avo, HttpServletRequest request, int zipcode1, String addr1, int zipcode2, String addr2,int zipcode3, String addr3) throws Exception {
+		
+		logger.info(avo.getId());
+		
+		HttpSession hs = request.getSession();
+		String sessionid = (String) hs.getAttribute("id");
+		
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
+		
+		if(ms.memberId(sessionid) && !sessionid.equals("admin")) {
+			
+			avo = new AddressVO();
+			avo.setZipcode1(zipcode1);
+			avo.setAddr1(addr1);
+			avo.setZipcode2(zipcode2);
+			avo.setAddr2(addr2);
+			avo.setZipcode3(zipcode3);
+			avo.setAddr3(addr3);
+			avo.setId(sessionid);
+			ms.modyfyMemberDeliveryAddrs(avo);
+			
+			model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+			model.addAttribute("cmi", "../member/memberinfomodify/MemberAddressInfo.jsp");
+			
+		} else {
+			
+			model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+			model.addAttribute("cmi", "../member/MemberMainHome.jsp");
+			
+		}
+		
+		return "redirect:memberAddrsInfo.do";
+		
+	}
+	
+	@RequestMapping("withdrawMember.do")
 	public String member_side_withdraw_page(Model model, HttpServletRequest request) {
 		
-		model.addAttribute("jsp", "member");
-		model.addAttribute("jsp", "../member/memberinfomodify/MemberMain.jsp");
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
-		model.addAttribute("cmi", "MemberMain");
-		model.addAttribute("cmi", "../memberinfomodify/WithdrawMember.jsp");
-			
+		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+		model.addAttribute("cmi", "../member/memberinfomodify/WithdrawMember.jsp");
+		
 		return "main/main";
 		
 	}
 	
-	@RequestMapping(value="withdrawMember_ok.do", method = RequestMethod.POST)
+	@RequestMapping(value="withdrawMember_ok.do", method=RequestMethod.POST)
 	public String withdrawMember_ok(Model model, MemberVO vo, HttpServletRequest request,String USER_PWD, String USER_C_PWD) throws Exception {
 		
 		logger.info(vo.getId() + " : " + vo.getPwd());
@@ -222,8 +365,7 @@ public class MemberController {
 		String sessionid = (String) hs.getAttribute("id");
 		
 		model.addAttribute("jsp", "member.jsp");
-		model.addAttribute("member_jsp", "../member/memberinfomodify/MemberMain.jsp");
-		
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
 		if(ms.memberPwd(sessionid, USER_PWD) && !sessionid.equals("admin")) {
 			
@@ -231,39 +373,51 @@ public class MemberController {
 			map.put("id", sessionid);
 			map.put("pwd", USER_PWD);
 			ms.withdrawMember(map);
+			
 			hs.invalidate();
-				
+			
 		} else {
-			model.addAttribute("cmi", "../memberinfomodify/WithdrawMember.jsp");		
+			
+			model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+			model.addAttribute("cmi", "../member/memberinfomodify/WithdrawMember.jsp");
+			
 		}
 		
 		return "redirect:main.do";
 		
 	}
 	
+	
+	
+
+	
+	
+	
+	
+	
 	/* Member Orderlist HeadMenu */ 
-	@RequestMapping("order")
+	@RequestMapping("order.do")
 	public String member_order_page(Model model, HttpServletRequest request) {
 		
-		model.addAttribute("jsp", "member");
-		model.addAttribute("jsp", "../member/memberinfomodify/MemberMain.jsp");
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
-		model.addAttribute("cmi", "MemberMain");
-		model.addAttribute("cmi", "../orderlist/OrderListMain.jsp");
+		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+		model.addAttribute("cmi", "../member/orderlist/OrderListMain.jsp");
 			
 		return "main/main";
 		
 	}
 	
 	/* Member Wishlist HeadMenu */ 
-	@RequestMapping("wish")
+	@RequestMapping("wish.do")
 	public String member_wish_page(Model model, HttpServletRequest request) {
 		
-		model.addAttribute("jsp", "member");
-		model.addAttribute("jsp", "../member/memberinfomodify/MemberMain.jsp");
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
-		model.addAttribute("cmi", "MemberMain");
-		model.addAttribute("cmi", "../memberwishlist/MemberWishList.jsp");
+		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+		model.addAttribute("cmi", "../member/memberwishlist/MemberWishList.jsp");
 		
 		return "main/main";
 		
@@ -272,14 +426,14 @@ public class MemberController {
 	
 	
 	/* Member Question HeadMenu */ 
-	@RequestMapping("memberquestion")
+	@RequestMapping("memberquestion.do")
 	public String member_question_page(Model model, HttpServletRequest request) {
 		
-		model.addAttribute("jsp", "member");
-		model.addAttribute("jsp", "../member/memberinfomodify/MemberMain.jsp");
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
-		model.addAttribute("cmi", "MemberMain");
-		model.addAttribute("cmi", "../memberquestion/MemberQuestionMain.jsp");
+		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+		model.addAttribute("cmi", "../member/memberquestion/MemberQuestionMain.jsp");
 		
 		return "main/main";
 		
