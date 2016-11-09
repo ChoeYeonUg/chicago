@@ -132,7 +132,7 @@
 								<tr>
 									<td style="font-size:11px; color:#505050;" height="13" colspan="4"><b>[주문수량]</b>&nbsp;
 										<img src="book_img\down.png" alt="downBtn" style="width:20px;height:20px;" onclick="btdown()"/>
-										<input type="text" value="${defAmount }" name="amount" id="defamount" readonly="readonly"/>
+										<input type="text" value="${defAmount }" name="amount" id="defamount" readonly="readonly" size="1" style="text-align: center;"/>
 										<input type="hidden" value="${detailBook.book_code }" name="book_code"/>
 										<%-- <input type="hidden" value="${detailBook.amount }" id="amount"/> --%>
 										<img src="book_img\up.png" alt="upBtn" style="width:20px;height:20px;" onclick="btup()"/>

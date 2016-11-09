@@ -65,6 +65,9 @@
 				<!-- 좌측 카테고리 끝 -->
 				<!-- 내용시작 -->
 				<div class="col-md-9">
+				<table>
+					<tr></tr>
+				</table>
 				<table width="100%" class="table_content" border="0">
 					<c:forEach items="${cateList }" var="list">
 					<tr>
