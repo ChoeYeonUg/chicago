@@ -77,7 +77,7 @@
           		   		<li><a class="drop" href="mypage.do"><spring:message code="header.mypage"/></a>
             				<ul>
               					<li><a href="memberinfo.do"><spring:message code="header.modifi"/></a></li>
-                                <li><a href="order.do"><spring:message code="header.ppl"/></a></li>
+                                <li><a href="orderlist.do"><spring:message code="header.ppl"/></a></li>
 								<li><a href="wish.do"><spring:message code="header.egd"/></a></li>
 								<li><a href="memberquestion.do"><spring:message code="header.qu"/></a></li>
             				</ul>

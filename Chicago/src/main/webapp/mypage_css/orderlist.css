@@ -20,6 +20,21 @@
 
 
 
+
+
+#OrderlistTable {display: table; width: 100%;}
+.row {display: table-row;}
+.cell {display: table-cell; padding: 3px; border-bottom: 1px solid #DDD;}
+.col1 {width: 5%;}
+.col2 {width: 30%;}
+.col3 {width: 10%;}
+.col4 {width: 15%;}
+.col5 {width: 15%;}
+.col6 {width: 10%;}
+.colB {width: 15%;}
+
+
+
 /* <My Page Main Form Set > */
 /* MyPageMainOutlineForm */
 #MyPageMainOutlineForm {

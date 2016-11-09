@@ -401,19 +401,11 @@ public class MemberController {
 	
 	
 	
-	/* Member Orderlist HeadMenu */ 
-	@RequestMapping("order.do")
-	public String member_order_page(Model model, HttpServletRequest request) {
-		
-		model.addAttribute("jsp", "member.jsp");
-		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
-		
-		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
-		model.addAttribute("cmi", "../member/orderlist/OrderListMain.jsp");
-			
-		return "main/main";
-		
-	}
+
+	
+	
+	
+	
 	
 	/* Member Wishlist HeadMenu */ 
 	@RequestMapping("wish.do")

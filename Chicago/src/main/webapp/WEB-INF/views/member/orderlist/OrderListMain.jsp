@@ -36,7 +36,6 @@
 			<hr/>
 			<div id="MyPageHeadlineForm" class="">
 				<div id="MyPageHeadline">
-					My Page
 				</div>
 			</div>
 			<hr/>
@@ -59,13 +58,13 @@
 					<div>
 						<!-- Begine MyPage Orderlist Selection -->
 						<div id="OrderPeopleType" class="">
-							<a href="" target="" title="" id="" class=""><spring:message code="OrderListMain.btMember"/></a>
-							<a href="" target="" title="" id="" class=""><spring:message code="OrderListMain.btGuest"/></a>
+							<a href="memberOrderList.do"><spring:message code="OrderListMain.btMember"/></a>
+							<a href=""><spring:message code="OrderListMain.btGuest"/></a>
 							<ul class="notcont">
 								<li>
 									<spring:message code="OrderListMain.notFy3"/>
 									&nbsp;
-									<a href="" target="" title="" id="" class=""><spring:message code="OrderListMain.btMemberJoin"/></a>
+									<a href="clause.do" target="" title="" id="" class=""><spring:message code="OrderListMain.btMemberJoin"/></a>
 								</li>
 							</ul>
 						</div>

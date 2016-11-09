@@ -69,16 +69,16 @@
 							<!-- End Modify Member Info -->
 							<!-- OrderList Info -->
 							<li class="">
-								<a data-toggle="" data-parent="" href=""><spring:message code="memberInfoModifyMain.orderhead"/></a>
+								<a data-toggle="" data-parent="" href="orderlist.do"><spring:message code="memberInfoModifyMain.orderhead"/></a>
 								<ul id="" class="">
 									<li class="">
-									<a data-toggle="" data-parent="" href=""><spring:message code="memberInfoModifyMain.btOrderInfo"/></a>
+									<a data-toggle="" data-parent="" href="orderlist.do"><spring:message code="memberInfoModifyMain.btOrderInfo"/></a>
 										<ul id="" class="">
 											<li class="">
-												<a href=""><spring:message code="memberInfoModifyMain.btMemberOrderInfo"/></a>
+												<a href="memberOrderList.do"><spring:message code="memberInfoModifyMain.btMemberOrderInfo"/></a>
 											</li>
 											<li class="">
-												<a href=""><spring:message code="memberInfoModifyMain.btGuestOrderInfo"/></a>
+												<a href="guestOrderList.do"><spring:message code="memberInfoModifyMain.btGuestOrderInfo"/></a>
 											</li>
 										</ul>
 									</li>
