@@ -113,6 +113,11 @@ public class MemberController {
 	@RequestMapping("modyfyMemberInfo.do")
 	public String modifymemberinfo_page(Model model, MemberVO vo, HttpServletRequest request) throws Exception {
 		
+		HttpSession hs = request.getSession();
+		String sessionid = (String)hs.getAttribute("id");
+		
+		vo = ms.selectMember(sessionid);
+		model.addAttribute("vo", vo);
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
