@@ -8,6 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="css/join/join.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
@@ -169,10 +170,6 @@ function sample6_execDaumPostcode() {
 				<td><spring:message code="form.pwd"/></td>
 				<td><form:password path="pwd" maxlength="16"/><form:errors path="pwd"/></td>
 			</tr>
-<%-- 			<tr>
-				<td>패스워드 확인</td>
-				<td><form:input path="confirmpwd"/></td>
-			</tr> --%>
 			<tr>
 				<td><spring:message code="form.email"/></td>
 				<td><form:input path="email"/><br/><form:errors path="email"/></td>

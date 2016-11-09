@@ -3,16 +3,15 @@
 
 <mapper namespace="com.sist.dao.mapper.BookMapper">
 	<select id="bookAllList" resultType="bookVO">
-		SELECT book_code, book_name,
-		book_category, writer, publisher, book_content, price, publication, img
-		FROM goods1
+		SELECT book_code, book_name, book_category, writer, publisher, book_content, price, publication, img
+		FROM goods
 	</select>
 
 	<!-- book 메인화면 : 카테고리 별 신간 5권씩 출력 -->
 	<select id="newBookCate" resultType="bookVO" parameterType="int">
-		SELECT book_name, publisher, book_content, price, publication, img, writer, num FROM
-		(SELECT book_name, publisher, book_content, price, publication, img, writer, rownum as num FROM
-    	(SELECT book_name, publisher, book_content, price, publication, img, writer FROM GOODS1 where book_category=#{category} ORDER BY publication DESC)) 
+		SELECT book_code, book_name, publisher, book_content, price, publication, img, writer, num FROM
+		(SELECT book_code, book_name, publisher, book_content, price, publication, img, writer, rownum as num FROM
+    	(SELECT book_code, book_name, publisher, book_content, price, publication, img, writer FROM goods where book_category=#{category} ORDER BY publication DESC)) 
     	WHERE num BETWEEN 1 AND 5
 	</select>
 
@@ -21,24 +20,24 @@
 	<select id="bookListCateFirst" resultType="bookVO" parameterType="hashmap">
 		SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img, num FROM 
 		(SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img, rownum as num FROM 
-		(SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img FROM GOODS1 WHERE book_category=#{category} ORDER BY publication DESC))
+		(SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img FROM goods WHERE book_category=#{category} ORDER BY publication DESC))
 		WHERE num BETWEEN #{start} AND #{end}
 	</select>
 	
 	<!-- 카테고리별 총 권수 -->
 	<select id="cateFirCount" resultType="int" parameterType="int">
-		SELECT COUNT(*) FROM GOODS1 WHERE book_category=#{book_category}
+		SELECT COUNT(*) FROM goods WHERE book_category=#{book_category}
 	</select>
 	
 	<!-- 카테고리별 총 페이지 수 (1페이지에 10권 목록 보이기) -->
 	<select id="cateFirTotalPage" resultType="int" parameterType="int">
-		SELECT CEIL(COUNT(*)/10) FROM goods1 WHERE book_category=#{book_category}
+		SELECT CEIL(COUNT(*)/10) FROM goods WHERE book_category=#{book_category}
 	</select>
 	
 	<!-- 상세 페이지 정보 -->
 	<select id="detailBook" resultType="bookVO" parameterType="String">
 		SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img 
-		FROM goods1 
+		FROM goods 
 		WHERE book_code = #{book_code}
 	</select>
 	
@@ -55,16 +54,44 @@
 	
 	<!-- 바로구매 페이지로 넘어갈 때 책정보 -->
 	<select id="purchase" resultType="bookVO" parameterType="String">
-		SELECT book_name, img, price,amount FROM goods1 WHERE book_code = #{book_code}
+		SELECT book_name, img, price,amount FROM goods WHERE book_code = #{book_code}
 	</select>
 	<!-- 책의 재고량을 감소시킴 -->
 	<update id="bookCount" parameterType="hashmap">
-		UPDATE goods1 SET amount = amount - #{amount} WHERE book_code = #{book_code}
+		UPDATE goods SET amount = amount - #{amount} WHERE book_code = #{book_code}
 	</update>
 	
 	<!-- 책의 절판여부를 변경함 -->
 	<update id="bookOutOfPrint" parameterType="hashmap">
-		UPDATE goods1 SET out_of_print = #{outOfPrint} WHERE book_code = #{book_code}
+		UPDATE goods SET out_of_print = #{outOfPrint} WHERE book_code = #{book_code}
 	</update>
+	<!-- 책 상세페이지 속 리뷰게시판 -->
+ 	<select id="bookReviewList" resultType="r_board" parameterType="String">
+ 		SELECT score,review_no,content,id,book_code,regdate,num
+			FROM (SELECT score,review_no,content,id,book_code,regdate,ROWNUM as num
+			FROM (SELECT score,review_no,content,id,book_code,regdate FROM review WHERE book_code=#{book_code} ORDER BY REVIEW_NO DESC )) WHERE num BETWEEN 1 AND 5
+ 	</select>
+	
+	<!-- 운영자 메뉴 -->
+	<select id="printSysopBook" resultType="bookVO" parameterType="hashmap">
+		SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img, num FROM 
+		(SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img, rownum as num FROM 
+		(SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img FROM goods ORDER BY publication DESC))
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<select id="printBookTotalPage" resultType="int" parameterType="int">
+		SELECT CEIL(COUNT(*)/#{rowSize}) FROM goods
+	</select>
+	
+	<select id="printSearchSysopBook" resultType="bookVO" parameterType="hashmap">
+		SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img, num FROM 
+		(SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img, rownum as num FROM 
+		(SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img FROM goods  WHERE ${fs} LIKE '%${ss}%' ORDER BY publication DESC))
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<select id="printSearchBookTotalPage" resultType="int" parameterType="int">
+		SELECT CEIL(COUNT(*)/#{rowSize}) FROM goods WHERE ${fs} LIKE '%${ss}%'
+	</select>
+	
 	
 </mapper>
