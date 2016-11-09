@@ -65,9 +65,20 @@
 				<!-- 좌측 카테고리 끝 -->
 				<!-- 내용시작 -->
 				<div class="col-md-9">
+				<!-- 검색창 -->
 				<table>
-					<tr></tr>
+					<tr>
+						<td align="right">
+							<input type="radio" value="통합검색" name="radioBt" id="rbtn1" checked="checked"/><spring:message code="radio.ti1"/>
+							<input type="radio" value="제목검색" name="radioBt" id="rbtn2"/><spring:message code="radio.ti2"/>
+							<input type="radio" value="저자검색" name="radioBt" id="rbtn3"/><spring:message code="radio.ti3"/>
+							<input type="radio" value="출판사검색" name="radioBt" id="rbtn4"/><spring:message code="radio.ti4"/>
+							<input type="text" size="10" name="text"/>
+							<input type="button" value="검색"/>
+						</td>
+					</tr>
 				</table>
+				<!-- 도서목록 -->
 				<table width="100%" class="table_content" border="0">
 					<c:forEach items="${cateList }" var="list">
 					<tr>
