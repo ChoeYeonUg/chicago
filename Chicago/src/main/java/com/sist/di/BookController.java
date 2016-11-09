@@ -110,12 +110,9 @@ public class BookController {
 		int defAmount = 1;
 		System.out.println("짜증ㅋㅋ큐ㅠㅠㅠ");
 		try{
-		ReviewVO rvo=bs.bookReviewList(book_code);
-		System.out.println(rvo.getBook_code());
-		System.out.println(rvo.getScore());
-		System.out.println(rvo.getContent());
+		List<ReviewVO> list=bs.bookReviewList(book_code);
 		
-		model.addAttribute("rvo",rvo);
+		model.addAttribute("list",list);
 		model.addAttribute("detailBook", detailBook);
 		model.addAttribute("book_code", book_code);
 		model.addAttribute("defAmount", defAmount);

@@ -58,7 +58,7 @@ public class BookServiceImpl implements BookService{
 	}
 
 	@Override
-	public ReviewVO bookReviewList(String book_code) {
+	public List<ReviewVO> bookReviewList(String book_code) {
 		// TODO Auto-generated method stub
 		return bm.bookReviewList(book_code);
 	}

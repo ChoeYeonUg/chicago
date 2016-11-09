@@ -17,5 +17,5 @@ public interface BookService {
 	public BookVO purchase(String book_code);
 	
 	//상세페이지리뷰게시판
-	public ReviewVO bookReviewList(String book_code);
+	public List<ReviewVO> bookReviewList(String book_code);
 }
