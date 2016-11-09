@@ -11,7 +11,7 @@
 <meta >
 <title>Made By ChoDing!!</title>
 <link href="css/bootstrap.min.css" rel="stylesheet" />
-<link href="css/mypage_css/memberinfo.css" rel="stylesheet" />
+<link href="mypage_css/memberinfo.css" rel="stylesheet" />
 
 <!-- Theme skin -->
 <link href="skins/default.css" rel="stylesheet" />
@@ -47,7 +47,7 @@
 						<ul id="" class="">
 							<!-- Modify Member Info -->
 							<li class="">
-								<a data-toggle="" data-parent="" href="modyfyMemberInfo.do"><spring:message code="memberInfoModifyMain.memberinfohead"/></a>
+								<a data-toggle="" data-parent="" href="memberinfo.do"><spring:message code="memberInfoModifyMain.memberinfohead"/></a>
 								<ul id="" class="">
 									<li class="">
 										<a href="selectMemberInfo.do"><spring:message code="memberInfoModifyMain.btMemberInfoModify"/></a>
