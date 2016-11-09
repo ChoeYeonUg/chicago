@@ -108,10 +108,19 @@ public class BookController {
 		BookVO detailBook = bs.detailBook(book_code);
 		// 수량정보
 		int defAmount = 1;
-		System.out.println("짜증ㅋㅋ큐ㅠㅠㅠ");
+		
 		try{
 		List<ReviewVO> list=bs.bookReviewList(book_code);
 		
+		Double starSum=0.0;
+		for(ReviewVO rvo:list){
+			starSum+=rvo.getScore();			
+		}
+		Double staravg=(Double)starSum/list.size();
+		double starAvg=Double.parseDouble(String.format("%.2f", staravg));
+		
+		
+		model.addAttribute("starAvg",starAvg);
 		model.addAttribute("list",list);
 		model.addAttribute("detailBook", detailBook);
 		model.addAttribute("book_code", book_code);
@@ -162,5 +171,16 @@ public class BookController {
 		return "member/wishlist";
 	}
 */
+	@RequestMapping("bookReviewContent")
+	public String bookReviewContent(Model model,String book_code){
+		
+		BookVO detailBook = bs.detailBook(book_code);
+		
+		model.addAttribute("detailBook", detailBook);
+		model.addAttribute("model", model);
+		model.addAttribute("book_code", book_code);
+		
+		return"book/bookReviewContent";
+	}
 
 }
