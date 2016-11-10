@@ -23,9 +23,9 @@ import com.sist.service.*;
 public class OrderlistController {
 	
 	/* private */
-	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
-	@Resource(name="memberService")
-	private MemberService ms;
+	private static final Logger logger = LoggerFactory.getLogger(OrderlistController.class);
+	@Resource(name="orderlistService")
+	private OrderlistService ols;
 	
 	/* Member Orderlist Head And SideHead Menu */ 
 	@RequestMapping("orderlist.do")
@@ -53,8 +53,15 @@ public class OrderlistController {
 			model.addAttribute("cmi", "../member/orderlist/MemberOrderList.jsp");
 			HttpSession hs = request.getSession();
 			String sessionid = (String)hs.getAttribute("id");
-			/*OrderlistVO ovo = ovo.selectMemberOrderlist(sessionid);
-			model.addAttribute("ovo", ovo);*/
+			
+			Map map = new HashMap();
+			
+			map.put("id", sessionid);
+			List<OrderlistVO> list = ols.selectOrderlist(map);
+			
+			model.addAttribute("list", list);
+			
+			
 		}catch(Exception ex) {
 			typecheck="mo";
 			
@@ -68,7 +75,8 @@ public class OrderlistController {
 	}
 	
 	
-	@RequestMapping("guestOrderList.do")
+	@RequestMapping("guestOrderL"
+			+ "ist.do")
 	public String guestOrderlist_page(Model model, HttpServletRequest request) {
 		
 		model.addAttribute("jsp", "member.jsp");

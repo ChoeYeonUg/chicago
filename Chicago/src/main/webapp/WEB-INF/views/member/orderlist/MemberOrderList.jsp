@@ -46,12 +46,12 @@
 			</div>
 			<div class="OrderlistSettingForm">
 				<div class="MemberOrderlistHeadlineForm">
-					<label class="MemberInfoHeadline"><%-- <%=request.getAttribute("id") %> --%>님의 주문 내역</label>
+					<label class="MemberInfoHeadline"><%=request.getAttribute("id") %>님의 주문 내역</label>
 				</div>
 				<div class="MemberOrderlistContentForm">
 					<div id="InnerBox">
-							<%-- <form:form name="frm" id="frm" commandName="com.sist.dao.OrderlistVO"> --%>
-							<%-- <input type="hidden" value="<%=request.getAttribute("id") %>"> --%>
+							<form:form name="frm" id="frm" commandName="com.sist.dao.OrderlistVO">
+							<input type="hidden" value="${vo.id}">
 							<%-- <input type="hidden"  name="typecheck" value="${typecheck}"> --%>
 							<fieldset>
 								<div id="OrderlistTable" class="OrderlistTable">
@@ -64,18 +64,20 @@
 										<span class="celH col6">배송상태</span>
 										<span class="celH colB">취소/환불</span>
 									</div>
+									<c:forEach var="vo" items="${list}">
 									<div class="row">
-										<span class="cell col1">1</span>
-										<span class="cell col2">2</span>
-										<span class="cell col3">3</span>
-										<span class="cell col4">4</span>
-										<span class="cell col5">5</span>
-										<span class="cell col6">6</span>
+										<span class="cell col1">${vo.order_id}</span>
+										<span class="cell col2">${vo.book_name}</span>
+										<span class="cell col3">${vo.amount}</span>
+										<span class="cell col4">${vo.total_price}</span>
+										<span class="cell col5">${vo.order_date}</span>
+										<span class="cell col6">${vo.delivery}</span>
 										<span class="cell colB">
 											<input type="button" onclick="#" value="주문취소">
 											<input type="button" onclick="#" value="환불신청하기">
 										</span>
 									</div>
+									</c:forEach>
 									<div class="row">
 										<span class="cell col1">1</span>
 										<span class="cell col2">2</span>
@@ -110,7 +112,7 @@
 									</ul>
 									<input type="button" onclick="javascript:location.href='main.do';" value="확인">
 								</div>
-						<%-- </form:form> --%>
+						</form:form>
 					</div>
 				</div>
 			</div>

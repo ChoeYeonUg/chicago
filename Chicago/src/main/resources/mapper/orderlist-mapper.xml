@@ -2,19 +2,22 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+  
 <mapper namespace="com.sist.dao.mapper.OrderlistMapper">
-  	<!-- Made By Choding -->
+ 	<!-- Made By Choding -->
   	<!-- memberInfo Database Query -->
 	
 	<!-- Check order_id for Orderlist list -->
     <sql id="check-order_id">
-		WHERE order_id=#{id}
+		orders.id=#{id}
 	</sql>
 	
+	
 	<!-- Select Member Orderlist -->
-	<select id="selectOrderlist" resultType="OrderlistVO" parameterType="String">
-  		SELECT order_id,book_code FROM orderlist1 <include refid="check-order_id"/>
+	<select id="selectOrderlist" resultType="OrderlistVO" parameterType="hashmap">
+  		SELECT orders.order_id,orders.id,order_book.book_code,goods.book_name,order_book.amount,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.refund_state
+  			   FROM orders,goods,order_book
+			   WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND <include refid="check-order_id"/>
   	</select>
-  	
+ 	
 </mapper>
