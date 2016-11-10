@@ -62,8 +62,8 @@ function send(){
 			<div class="MemberSettingForm">
 				<div class="InnerBox">
 					<div id="MemberSecurePassword-Box">
-						<form:form name="frm" id="frm" method="post" action="membersecurepwd_ok.do" commandName="memberVO">
-						<input type="hidden" value="<%=request.getAttribute("id") %>">
+						<form:form name="frm" id="frm" method="post" action="membersecurepwd_ok.do">
+						<%-- <input type="hidden" value="<%=request.getAttribute("id") %>"> commandName="memberVO" --%>
 						<input type="hidden" name="typecheck" value="${typecheck}">
 							<fieldset>
 								<div class="MemberSecurePwd">

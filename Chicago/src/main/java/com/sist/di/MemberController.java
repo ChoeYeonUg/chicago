@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 /* Made By Choding */
 @Controller
@@ -44,7 +46,8 @@ public class MemberController {
 	
 	/* Secure Page */
 	@RequestMapping(value="membersecurepwd_ok.do", method=RequestMethod.POST)
-	public String membersecurepwd_ok(Model model,MemberVO vo, AddressVO avo, HttpServletRequest request, String USER_Check_NewPWD, String typecheck) throws Exception {
+	public String membersecurepwd_ok(Model model, HttpServletRequest request, String USER_Check_NewPWD, String typecheck,
+			RedirectAttributes redirectAttributes) throws Exception {
 		
 		HttpSession hs = request.getSession();
 		String sessionid = (String)hs.getAttribute("id");
@@ -57,25 +60,22 @@ public class MemberController {
 		
 			if(USER_Check_NewPWD.equals(cpwd)) {
 				if(typecheck.equals("mi")) {
-						
-					vo = ms.selectMember(sessionid);
-					model.addAttribute("vo", vo);
-					
-					return "redirect:SelectMemberInfo.do";
-					//return "member/memberinfomodify/SelectMemberInfo";
+					redirectAttributes.addFlashAttribute("check", "ok");
+					/*MemberVO vo = ms.selectMember(sessionid);
+					model.addAttribute("vo", vo);*/
+					return "redirect:selectMemberInfo.do";
 					
 				} else if(typecheck.equals("ma")) {
-					
-					avo = ms.selectMemberDeliveryAddrs(sessionid);
-					model.addAttribute("vo", avo);
-					
-					return "main/main";
+					redirectAttributes.addFlashAttribute("check", "ok");
+					/*AddressVO avo = ms.selectMemberDeliveryAddrs(sessionid);
+					model.addAttribute("vo", avo);*/
+					return "redirect:memberAddrsInfo.do";
 					
 				}
 			
 			} 		
 		
-		return "redirect:selectMemberInfo.do";
+		return "redirect:membersecurepwd_ok.do";
 		
 	}
 	
@@ -95,20 +95,26 @@ public class MemberController {
 	
 	/* Member Info SideMenu Include */
 	@RequestMapping("selectMemberInfo.do")
-	public String member_side_info_page(Model model, MemberVO vo, HttpServletRequest request, String typecheck) throws Exception {
-		
-		typecheck="mi";
-		
-		model.addAttribute("typecheck", typecheck);
+	public String member_side_info_page(Model model, HttpServletRequest request, String typecheck) throws Exception {
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
-		
-		
-		model.addAttribute("MemberMain_cmi", "../MemberMain.jsp");
-		model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
+		try{
+			Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+			String check = (String) flashMap.get("check");
+			model.addAttribute("cmi", "../member/memberinfomodify/SelectMemberInfo.jsp");
+			HttpSession hs = request.getSession();
+			String sessionid = (String)hs.getAttribute("id");
+			MemberVO vo = ms.selectMember(sessionid);
+			model.addAttribute("vo", vo);
+		}catch(Exception e){
+			typecheck="mi";
+			
+			model.addAttribute("typecheck", typecheck);
+			model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
+			
+		}
 		
 		return "main/main";
-		
 	}
 	
 	@RequestMapping("modyfyMemberInfo.do")
@@ -236,17 +242,25 @@ public class MemberController {
 	}
 	
 	@RequestMapping("memberAddrsInfo.do")
-	public String memberAddrsInfo_page(Model model, AddressVO avo, HttpServletRequest request, String typecheck) throws Exception {
+	public String memberAddrsInfo_page(Model model, HttpServletRequest request) throws Exception {
 		
-		typecheck="ma";
 		
-		model.addAttribute("typecheck", typecheck);
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
-		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
-		model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
-		
+		try{
+			Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+			String check = (String) flashMap.get("check");
+			model.addAttribute("cmi", "../member/memberinfomodify/MemberAddressInfo.jsp");
+			HttpSession hs = request.getSession();
+			String sessionid = (String)hs.getAttribute("id");
+			AddressVO avo = ms.selectMemberDeliveryAddrs(sessionid);
+			model.addAttribute("vo", avo);			
+		}catch(Exception e){
+			/*typecheck="ma";*/
+			model.addAttribute("typecheck", "ma");
+			model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
+		}
 		return "main/main";
 		
 	}

@@ -72,6 +72,13 @@
 											<label for="USER_GENDER">성별</label>
 										</dt>
 										<dd>
+											<c:if test="${vo.gender == 1 }">
+												<spring:message code="memberInfoModify.genderMan"/>
+											</c:if>
+											<c:if test="${vo.gender == 2 }">
+												<spring:message code="memberInfoModify.genderWoman"/>
+											</c:if>
+																					
 											<%-- <spring:message code="memberInfoModify.genderMan"/> : <form:radiobutton name="" id="USER_M_GENDER" class="" path="" value="" disabled="true"/> --%>
 											&nbsp;
 											<%-- <spring:message code="memberInfoModify.genderWoman"/> : <form:radiobutton name="" id="USER_W_GENDER" class="" path="" value="" disabled="true"/> --%>
