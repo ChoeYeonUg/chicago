@@ -52,16 +52,17 @@
 					<div id="InnerBox">
 							<%-- <form:form name="frm" id="frm" commandName="com.sist.dao.OrderlistVO"> --%>
 							<%-- <input type="hidden" value="<%=request.getAttribute("id") %>"> --%>
+							<%-- <input type="hidden"  name="typecheck" value="${typecheck}"> --%>
 							<fieldset>
 								<div id="OrderlistTable" class="OrderlistTable">
 									<div class="row">
-										<span class="cell col1">번호</span>
-										<span class="cell col2">서적명</span>
-										<span class="cell col3">주문량</span>
-										<span class="cell col4">가격</span>
-										<span class="cell col5">주문날짜</span>
-										<span class="cell col6">배송상태</span>
-										<span class="cell colB">취소/환불</span>
+										<span class="celH col1">번호</span>
+										<span class="celH col2">서적명</span>
+										<span class="celH col3">주문량</span>
+										<span class="celH col4">가격</span>
+										<span class="celH col5">주문날짜</span>
+										<span class="celH col6">배송상태</span>
+										<span class="celH colB">취소/환불</span>
 									</div>
 									<div class="row">
 										<span class="cell col1">1</span>

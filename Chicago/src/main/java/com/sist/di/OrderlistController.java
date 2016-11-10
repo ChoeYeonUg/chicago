@@ -4,18 +4,21 @@ import java.util.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.sist.dao.*;
 import com.sist.service.*;
 
 /* Made By Choding */
-
 @Controller
 public class OrderlistController {
 	
@@ -24,7 +27,7 @@ public class OrderlistController {
 	@Resource(name="memberService")
 	private MemberService ms;
 	
-	/* Member Orderlist HeadMenu */ 
+	/* Member Orderlist Head And SideHead Menu */ 
 	@RequestMapping("orderlist.do")
 	public String orderlistMain_page(Model model, HttpServletRequest request) {
 		
@@ -38,18 +41,32 @@ public class OrderlistController {
 		
 	}
 	
+	/* Member Order SideMenu Include */
 	@RequestMapping("memberOrderList.do")
-	public String memberOrderlist_page(Model model, HttpServletRequest request) {
-		
+	public String memberOrderlist_page(Model model, HttpServletRequest request, String typecheck) {
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
-		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
-		model.addAttribute("cmi", "../member/orderlist/MemberOrderList.jsp");
+		try{
+			Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+			String check = (String) flashMap.get("check");
+			model.addAttribute("cmi", "../member/orderlist/MemberOrderList.jsp");
+			HttpSession hs = request.getSession();
+			String sessionid = (String)hs.getAttribute("id");
+			/*OrderlistVO ovo = ovo.selectMemberOrderlist(sessionid);
+			model.addAttribute("ovo", ovo);*/
+		}catch(Exception ex) {
+			typecheck="mo";
+			
+			model.addAttribute("typecheck", typecheck);
+			model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
+			
+		}
 		
 		return "main/main";
 		
 	}
+	
 	
 	@RequestMapping("guestOrderList.do")
 	public String guestOrderlist_page(Model model, HttpServletRequest request) {

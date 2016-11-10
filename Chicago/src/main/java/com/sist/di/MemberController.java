@@ -46,7 +46,7 @@ public class MemberController {
 	
 	/* Secure Page */
 	@RequestMapping(value="membersecurepwd_ok.do", method=RequestMethod.POST)
-	public String membersecurepwd_ok(Model model, HttpServletRequest request, String USER_Check_NewPWD, String typecheck,
+	public String membersecurepwd_ok(Model model, HttpServletRequest request, String USER_Check_PWD, String typecheck,
 			RedirectAttributes redirectAttributes) throws Exception {
 		
 		HttpSession hs = request.getSession();
@@ -58,7 +58,7 @@ public class MemberController {
 	
 		model.addAttribute("MemberMain_cmi", "../MemberMain.jsp");
 		
-			if(USER_Check_NewPWD.equals(cpwd)) {
+			if(USER_Check_PWD.equals(cpwd)) {
 				if(typecheck.equals("mi")) {
 					redirectAttributes.addFlashAttribute("check", "ok");
 					/*MemberVO vo = ms.selectMember(sessionid);
@@ -71,6 +71,9 @@ public class MemberController {
 					model.addAttribute("vo", avo);*/
 					return "redirect:memberAddrsInfo.do";
 					
+				} else if(typecheck.equals("mo")) {
+					redirectAttributes.addFlashAttribute("check", "ok");
+					return "redirect:memberOrderList.do";
 				}
 			
 			} 		
@@ -118,19 +121,13 @@ public class MemberController {
 	}
 	
 	@RequestMapping("modyfyMemberInfo.do")
-	public String modifymemberinfo_page(Model model, MemberVO vo, HttpServletRequest request) throws Exception {
-		
-		HttpSession hs = request.getSession();
-		String sessionid = (String)hs.getAttribute("id");
-		
-		vo = ms.selectMember(sessionid);
-		model.addAttribute("vo", vo);
+	public String modifymemberinfo_page(Model model, HttpServletRequest request) throws Exception {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
 		model.addAttribute("MemberMain_cmi", "../MemberMain.jsp");
-		model.addAttribute("cmi", "../member/memberinfomodify/ModifyMemderInfo.jsp");
+		model.addAttribute("cmi", "../member/MemberMainHome.jsp");
 		
 		return "main/main";
 		

@@ -24,6 +24,7 @@
 
 #OrderlistTable {display: table; width: 100%;}
 .row {display: table-row;}
+.celH {display: table-cell; padding: 3px; border-bottom: 1px solid #DDD; font: bolder; color: #000000;}
 .cell {display: table-cell; padding: 3px; border-bottom: 1px solid #DDD;}
 .col1 {width: 5%;}
 .col2 {width: 30%;}
