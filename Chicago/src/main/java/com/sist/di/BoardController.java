@@ -1,5 +1,7 @@
 package com.sist.di;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sist.dao.BoardVO;
+import com.sist.dao.ReviewVO;
 import com.sist.service.BoardService;
 
 
@@ -436,7 +439,7 @@ public class BoardController {
 		if(page==null)
 			page="1";		
 		int curpage = Integer.parseInt(page);
-		
+			
 		try{
 			bs.board_delete(board_no);
 			model.addAttribute("page",curpage);
@@ -449,7 +452,75 @@ public class BoardController {
 	
 	///////////////*리뷰게시판*///////////////
 	@RequestMapping("reviewboard")
-	public String reviewboard(Model model){
+	public String reviewboard(Model model,String page,String fs,String ss) throws Exception{
+		if(page==null)
+			page="1";		
+		int curpage = Integer.parseInt(page);	
+		int rowSize = 10;
+		int start = (curpage * rowSize) - (rowSize - 1);
+		int end = curpage * rowSize;
+		int block=5;
+		int fromPage = ((curpage-1)/block*block)+1;
+		int toPage = ((curpage-1)/block*block)+block;
+		
+		
+	/*	if(fs.equals("book_code")){
+			fs="review.book_code";
+			System.out.println("같음");
+		}
+		*/
+		
+
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+	    String today=sdf.format(new Date());
+	    
+	    Map map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("rowSize", rowSize);
+		map.put("fs", fs);
+		map.put("ss", ss);
+			
+	   
+		List<ReviewVO> list;
+		int totalpage;
+		try{		
+			if(ss==null || ss==""){
+				list=bs.reviewlist(map);
+				totalpage = bs.totalReviewPage(map);
+			}else{
+				
+				
+				list=bs.review_find(map);
+				totalpage= bs.review_find_total(map);
+			}
+			if(toPage> totalpage) 
+				toPage = totalpage;	
+		
+			
+			for(ReviewVO vo:list){
+				vo.setScore(vo.getScore()*20);				
+			}
+			
+			model.addAttribute("fs", fs);
+			model.addAttribute("ss", ss);
+			model.addAttribute("block",block);
+			model.addAttribute("fromPage", fromPage);
+			model.addAttribute("toPage", toPage);
+			model.addAttribute("totalpage", totalpage);
+			model.addAttribute("curpage", curpage);
+			model.addAttribute("list", list);
+			model.addAttribute("today",today);
+			
+		
+			model.addAttribute("jsp", "board.jsp");
+			model.addAttribute("board_jsp", "../board/list.jsp");
+			model.addAttribute("boardjsp","../board/secretboard.jsp" );
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		
 		
 		model.addAttribute("jsp", "board.jsp");
 		model.addAttribute("board_jsp", "../board/list.jsp");
@@ -458,4 +529,7 @@ public class BoardController {
 		return "main/main";
 	}
 
+	
+	
+	
 }

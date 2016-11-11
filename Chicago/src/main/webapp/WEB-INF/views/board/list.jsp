@@ -41,6 +41,10 @@
 						<li class="list-group-item list-toggle"><a href="secretboard.do"><spring:message
 									code="header.secretBoard" /></a></li>
 						<!-- End faqBoard -->
+						<!-- reviewBoard -->
+						<li class="list-group-item list-toggle"><a href="reviewboard.do">리뷰게시판</a></li>
+						<!-- End reviewBoard -->
+						
 						
 					</ul>
 				</div>

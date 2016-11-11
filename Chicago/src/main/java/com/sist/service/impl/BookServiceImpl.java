@@ -92,4 +92,16 @@ public class BookServiceImpl implements BookService{
 		// TODO Auto-generated method stub
 		return bm.bookReviewList(book_code);
 	}
+
+	@Override
+	public void contentReviewinsert(ReviewVO vo) {
+		// TODO Auto-generated method stub
+		bm.contentReviewinsert(vo);
+	}
+
+	@Override
+	public int reviewIdCK(ReviewVO vo) {
+		// TODO Auto-generated method stub
+		return bm.reviewIdCK(vo);
+	}
 }

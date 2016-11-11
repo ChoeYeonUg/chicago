@@ -45,10 +45,11 @@
 				<!-- 각 게시판 링크 -->
 				<table width="700">
 					<tr>
-						<td width="70%"><h2 align="left">1:1게시판</h2></td>
-						<td width="30%" align="right"><a href="noticeboard.do"
+						<td width="50%"><h2 align="left">1:1게시판</h2></td>
+						<td width="50%" align="right"><a href="noticeboard.do"
 							style="color: #b3b3b3">공지사항</a> l<a href="faqboard.do"
-							style="color: #b3b3b3"> Faq</a> l 1:1게시판</td>
+							style="color: #b3b3b3"> Faq</a> l 1:1게시판 l
+							<a href="reviewboard.do" style="color: #b3b3b3">리뷰게시판</a></td>
 					</tr>
 				</table>
 
@@ -77,12 +78,21 @@
 									
 										<!-- 삭제된 글이 아니면 정상작동--> 
 										<c:if test="${msg!=vo.subject}">
+											
+											<c:if test="${id==null || grade>1 }">
 											<c:if test="${vo.secret==1}">
 												<a href="secret_content.do?board_no=${vo.board_no }&page=${curpage}">${vo.subject }</a>
 											</c:if>
 											<c:if test="${vo.secret==2 }">
 												<img src="./board_img/lock.png" style="width: 10px; height:auto;" >
 												<a href="secretboard_pwd_check.do?board_no=${vo.board_no }&page=${curpage}">${vo.subject }</a>
+											</c:if>
+											</c:if>
+											<c:if test="${grade<=1 }">
+												<c:if test="${vo.secret==2 }">
+												<img src="./board_img/lock.png" style="width: 10px; height:auto;" >
+												</c:if>
+												<a href="secret_content.do?board_no=${vo.board_no }&page=${curpage}">${vo.subject }</a>
 											</c:if>
 											
 										<!-- new 이미지 표시 -->
