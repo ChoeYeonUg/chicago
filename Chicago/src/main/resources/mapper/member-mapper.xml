@@ -99,9 +99,14 @@
 		SELECT addr1,zipcode1,addr2,zipcode2,addr3,zipcode3 FROM addrs <include refid="where-addrid"/>
  	</select>
  	
+ 	<!-- Insert Member Address -->
+ 	<insert id="insertMemberDeliveryAddrs" parameterType="address">
+ 		INSERT INTO addrs(id,addr1,zipcode1,addr2,zipcode2,addr3,zipcode3) VALUES(#{id},#{addr1},#{zipcode1},#{addr2},#{zipcode2},#{addr3},#{zipcode3})
+ 	</insert>
+ 	
 	<!-- Modify Member Address -->
 	<update id="modyfyMemberDeliveryAddrs" parameterType="hashmap">
-		UPDATE addrs SET addr1=#{addr1},zipcode1=#{zipcode1},addr2=#{addr2},zipcode2=#{zipcode2},addr3=#{addr3},zipcode3=#{zipcode3} <include refid="where-addrid"/>
+		UPDATE addrs SET addr1=#{addr1},zipcode1=#{zipcode1},addr2=#{addr2},zipcode2=#{zipcode2},addr3=#{addr3},zipcode3=#{zipcode3} <include refid="where-id"/>
 	</update>
 	
 	<!-- Withdraw Member -->

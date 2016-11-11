@@ -25,6 +25,7 @@ public interface MemberService {
 	public void modyfyMemberInfo(MemberVO vo) throws Exception;
 	public void modyfyMemberPwd(Map map) throws Exception;
 	public AddressVO selectMemberDeliveryAddrs(String id) throws Exception;
+	public void insertMemberDeliveryAddrs(AddressVO avo) throws Exception;
 	public void modyfyMemberDeliveryAddrs(AddressVO avo) throws Exception;
 	public void withdrawMember(Map map) throws Exception;
 	

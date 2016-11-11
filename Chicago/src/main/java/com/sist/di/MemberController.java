@@ -251,19 +251,6 @@ public class MemberController {
 		
 	}
 	
-/*	@RequestMapping("modifyMemberAddrs.do")
-	public String modifyMemberAddrsInfo_page(Model model, AddressVO avo, HttpServletRequest request) throws Exception {
-		
-		model.addAttribute("jsp", "member.jsp");
-		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
-		
-		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
-		model.addAttribute("cmi", "../member/memberinfomodify/ModifyMemberAddress.jsp");
-		
-		return "main/main";
-		
-	}*/
-	
 	@RequestMapping(value="modyfyMemberAddrs_ok.do", method=RequestMethod.POST)
 	public String modyfyMemberAddrs_ok(Model model, AddressVO avo, HttpServletRequest request, int zipcode1, String addr1, int zipcode2, String addr2,int zipcode3, String addr3) throws Exception {
 		
@@ -274,6 +261,8 @@ public class MemberController {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
+		
+		
 		
 		if(ms.memberId(sessionid) && !sessionid.equals("admin")) {
 			
