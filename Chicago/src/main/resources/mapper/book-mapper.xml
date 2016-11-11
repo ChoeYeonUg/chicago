@@ -15,7 +15,7 @@
     	WHERE num BETWEEN 1 AND 5
 	</select>
 
-	
+	<!-- 카테고리 리스트  -->	
 	<!-- 카테고리별 전체 리스트 (최신순으로 정렬) -->
 	<select id="bookListCateFirst" resultType="bookVO" parameterType="hashmap">
 		SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img, num FROM 
@@ -32,6 +32,13 @@
 	<!-- 카테고리별 총 페이지 수 (1페이지에 10권 목록 보이기) -->
 	<select id="cateFirTotalPage" resultType="int" parameterType="int">
 		SELECT CEIL(COUNT(*)/10) FROM goods WHERE book_category=#{book_category}
+	</select>
+	
+	<!-- 카테고리 검색 -->
+	<select id="select" resultType="bookVO" parameterType="hashmap">
+		SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img
+		FROM goods
+		WHERE book_category=#{category} AND ${sch_type} LIKE '%${sch_value}%'
 	</select>
 	
 	<!-- 상세 페이지 정보 -->
@@ -56,6 +63,7 @@
 	<select id="purchase" resultType="bookVO" parameterType="String">
 		SELECT book_name, img, price,amount FROM goods WHERE book_code = #{book_code}
 	</select>
+	
 	<!-- 책의 재고량을 감소시킴 -->
 	<update id="bookCount" parameterType="hashmap">
 		UPDATE goods SET amount = amount - #{amount} WHERE book_code = #{book_code}
@@ -65,6 +73,7 @@
 	<update id="bookOutOfPrint" parameterType="hashmap">
 		UPDATE goods SET out_of_print = #{outOfPrint} WHERE book_code = #{book_code}
 	</update>
+	
 	<!-- 책 상세페이지 속 리뷰게시판 -->
  	<select id="bookReviewList" resultType="r_board" parameterType="String">
  		SELECT score,review_no,content,id,book_code,regdate,num

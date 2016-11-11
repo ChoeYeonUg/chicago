@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sist.dao.BookVO;
@@ -54,7 +55,7 @@ public class BookController {
 	
 	// 카테고리 별 리스트 보여주는 페이지 
 	@RequestMapping("categoryList")
-	public String book_cate_page1(Model model, String book_category, String page, String book_code) {
+	public String book_cate_page1(Model model, int book_category, String page, String book_code, String sch_type, String sch_value) {
 		// 페이지 구하기 
 		if(page == null) {
 			page = "1"; // 첫번째 페이지를 메인으로 보여주기 
@@ -65,15 +66,15 @@ public class BookController {
 		int start = (curPage * rowSize) - (rowSize-1); // 시작글
 		int end = curPage * rowSize; // 마지막글
 		
-		int bcate = Integer.parseInt(book_category);
+/*		int bcate = Integer.parseInt(book_category);*/
 		
 		Map map = new HashMap(); // 해쉬맵 생성
 		map.put("start", start); // 맵에 시작글 넣어주기
 		map.put("end", end); // 맵에 마지막글 넣어주기
-		map.put("category", bcate); // 맵에 총 권수 넣어주기
+		map.put("category", book_category); // 맵에 총 권수 넣어주기
 
-		int totalPage = bs.cateFirTotalPage(bcate);
-		int count = bs.cateFirCount(bcate);
+		int totalPage = bs.cateFirTotalPage(book_category);
+		int count = bs.cateFirCount(book_category);
 		count = count - ((curPage*5)-5);
 		
 		// 블록 나누기
@@ -83,8 +84,20 @@ public class BookController {
 		if(toPage>totalPage) {
 			toPage = totalPage;
 		}
+		List<BookVO> cateList;
 		
-		List<BookVO> cateList = bs.bookListCateFirst(map);
+		// 검색 조건이 들어가지 않을 때 
+		if(sch_type == null || sch_type.equals("")) {
+			cateList = bs.bookListCateFirst(map);
+		}
+		// 검색 조건이 들어갔을 때 
+		else{
+			model.addAttribute("sch_type", sch_type);
+			model.addAttribute("sch_value", sch_value);
+			map.put("sch_type", sch_type);
+			map.put("sch_value", sch_value);
+			cateList = bs.getSelect(map);
+		}
 		
 		model.addAttribute("curPage", curPage);
 		model.addAttribute("totalPage", totalPage);
@@ -100,7 +113,7 @@ public class BookController {
 		model.addAttribute("book_jsp", "../book/categoryList.jsp");
 		return "main/main";
 	}
-	
+		
 	// 디테일 페이지 
 	@RequestMapping("bookDetail")
 	public String detailBookList(Model model, String book_code) {
@@ -126,41 +139,22 @@ public class BookController {
 		return "main/main";
 	}
 	
-/*	@RequestMapping("wishPop")
-	public String wishPopPage(String book_code, HttpServletRequest req, Model model) {
-		HttpSession hs = req.getSession();
-		logger.info(book_code);
-		String id = (String) hs.getAttribute("id");
-		if (id != null && !id.equals("")) {
-			logger.info("hh");
-			Map map = new HashMap();
-			map.put("id", id);
-			map.put("book_code", book_code);
-
-			bs.wishpop(map);
-		} else {
-			return "javascript:histroy.back()";
-		}
-		
-		model.addAttribute("jsp","book.jsp");
-		model.addAttribute("book_jsp","../member/wishlist.jsp");
-		
-		return "main/main";
-	}*/
-
-
-
 	@RequestMapping("sbPage")
 	public String sbPage(Model model) {
 		
 		return "book/sbPage";
 	}
 	
-/*	@RequestMapping("wishlist")
-	public String wishlistPage(Model model) {
-		
-		return "member/wishlist";
-	}
-*/
+/*	//검색하기
+	String sch_type = request.getParameter("sch_type");
+	String sch_value = request.getParameter("sch_value");
+	
+	Map mapSearch = new HashMap();
+	mapSearch.put("sch_type", sch_type);
+	mapSearch.put("sch_value", sch_value);
+	model.addAttribute("mapSearch", mapSearch);
+	
+	List<BookVO> list = bs.getSelect(mapSearch);
+	model.addAttribute("list", list);*/
 
 }

@@ -127,12 +127,12 @@
 									</td>
 								</tr>
 								<tr>
-									<td style="font-size:11px; color:#505050;" colspan="4" height="13"><b>[배송정보]</b>&nbsp;18시 이전 주문 시 (도서산간 제외) "내일(화)" 배송</td>
+									<td style="font-size:11px; color:#505050;" colspan="4" height="13"><b>[배송정보]</b>&nbsp;15시 이전 주문 시 (도서산간 제외) 당일 출고</td>
 								</tr>
 								<tr>
 									<td style="font-size:11px; color:#505050;" height="13" colspan="4"><b>[주문수량]</b>&nbsp;
 										<img src="book_img\down.png" alt="downBtn" style="width:20px;height:20px;" onclick="btdown()"/>
-										<input type="text" value="${defAmount }" name="amount" id="defamount" readonly="readonly"/>
+										<input type="text" value="${defAmount }" name="amount" id="defamount" readonly="readonly" size="1" style="text-align: center;"/>
 										<input type="hidden" value="${detailBook.book_code }" name="book_code"/>
 										<%-- <input type="hidden" value="${detailBook.amount }" id="amount"/> --%>
 										<img src="book_img\up.png" alt="upBtn" style="width:20px;height:20px;" onclick="btup()"/>
@@ -175,7 +175,6 @@
 					</tr>
 					<c:forEach var="rvo" items="${list}">
 					<tr>					
-					
 						<td width="20%" style="font-size:11px; color:#505050;" align="center">${rvo.score }</td>
 						<td width="40%" style="font-size:11px; color:#505050;" align="center">${rvo.content }</td>
 						<td width="25%" style="font-size:11px; color:#505050;" align="center">${rvo.id }</td>
