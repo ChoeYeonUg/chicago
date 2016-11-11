@@ -55,7 +55,8 @@ function send(){
 		f.USER_NewPWD.focus();
 		return;
 	}
-	alert('aa');
+	
+	alert("비밀번호 수정이 완료되었습니다!");
 	f.submit();
 	
 }

@@ -240,6 +240,14 @@ function sample6_execDaumPostcode3() {
 									
 										<!-- Modify ADRESS -->
 										<dt>
+											<label for="USER_CADDRESS1">주 배송주소</label>
+										</dt>
+										<dd>
+											${zipcode1}
+											&nbsp;
+											${addr1}
+										</dd>
+										<dt>
 											<label for="USER_ADDRESS1">주 배송주소 수정</label>
 										</dt>
 										<dd>
@@ -252,6 +260,14 @@ function sample6_execDaumPostcode3() {
 										</dd>
 									
 										<dt>
+											<label for="USER_CADDRESS2">주 배송주소1</label>
+										</dt>
+										<dd>
+											${zipcode2}
+											&nbsp;
+											${addr2}
+										</dd>
+										<dt>
 											<label for="USER_ADDRESS2">보조 배송 주소1</label>
 										</dt>
 										<dd>
@@ -263,6 +279,14 @@ function sample6_execDaumPostcode3() {
 											<input type="text" id="addr2E" placeholder="<spring:message code="form.addr2"/>">
 										</dd>
 										
+										<dt>
+											<label for="USER_CADDRESS3">주 배송주소</label>
+										</dt>
+										<dd>
+											${zipcode2}
+											&nbsp;
+											${addr12}
+										</dd>
 										<dt>
 											<label for="USER_ADDRESS3">보조 배송 주소2</label>
 										</dt>

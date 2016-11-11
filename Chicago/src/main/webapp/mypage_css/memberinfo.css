@@ -72,10 +72,11 @@
 
 /* MyPageContent */
 #MyPageContent {
-	background-color: #666666;
+	background-color: #ffffff;
 	width: 90%;
 	height: 90%;
 	border-radius: 0px;
+	float: right;
 	padding: auto;
 	margin: auto;
 	position: relative;
@@ -84,7 +85,7 @@
 
 /* LeftContent */
 #LeftContent {
-	background-color: #333333;
+	background-color: #ffffff;
 	width: 20%;
 	height: 90%;
 	border-radius: 0px;
@@ -97,7 +98,7 @@
 
 /* MainContent */
 #MainContent {
-	background-color: #222222;
+	background-color: #ffffff;
 	width: 80%;
 	height: 90%;
 	border-radius: 0px;
