@@ -124,6 +124,37 @@
  	<update id="secret_depthIncrement" parameterType="int">
  		UPDATE board SET depth=depth+1 WHERE board_no=#{board_no}
  	</update>
+ 	<!-- 리뷰보드 리스트 -->
+ 	<select id="reviewlist" resultType="r_board" parameterType="hashmap">
+  		
+ 		SELECT book_name,review_no,BOOK_CODE,id,WRITER,content,IMG,score,regdate,to_char(regdate,'yyyy-MM-dd') as dbday,num
+ 		FROM (SELECT book_name,review_no,BOOK_CODE,id,WRITER,content,IMG,score,regdate,ROWNUM as num
+ 		FROM (SELECT book_name,review_no,review.BOOK_CODE as book_code,id,WRITER,content,IMG,score,regdate FROM REVIEW JOIN GOODS ON REVIEW.BOOK_CODE=GOODS.BOOK_CODE ORDER BY REVIEW_NO DESC))
+ 		WHERE num between #{start} AND #{end}
+ 		
+  	</select>  	
+ 	<!-- 리뷰보드 리스트 끝 -->
+ 	<!-- 리뷰보드 토탈 -->
+ 	<select id="totalReviewPage" resultType="int" parameterType="hashmap">
+  		SELECT CEIL(COUNT(*)/#{rowSize}) FROM REVIEW
+  	</select>  	 	
+ 	<!-- 리뷰보드 토탈 끝 -->
+ 	<!-- 리뷰보드 검색 -->
+ 	<select id="review_find" resultType="r_board" parameterType="hashmap">
+ 		SELECT book_name,review_no,BOOK_CODE,id,WRITER,content,IMG,score,regdate,to_char(regdate,'yyyy-MM-dd') as dbday,num
+ 		FROM (SELECT book_name,review_no,BOOK_CODE,id,WRITER,content,IMG,score,regdate,ROWNUM as num
+ 		FROM (SELECT book_name,review_no,BOOK_CODE,id,WRITER,content,IMG,score,regdate FROM REVIEW NATURAL JOIN GOODS WHERE ${fs} LIKE '%${ss}%' ORDER BY REVIEW_NO DESC))
+ 		WHERE num between #{start} AND #{end}
+ 	</select>
+ 	<!-- 리뷰보드 검색 끝 -->
+	
+	<!-- 리뷰보드 검색 토탈 -->
+ 	<select id="review_find_total" resultType="int" parameterType="hashmap">
+<!--  		SELECT CEIL(COUNT(*)/10) FROM REVIEW JOIN GOODS ON REVIEW.BOOK_CODE=GOODS.BOOK_CODE WHERE ${fs} LIKE '%${ss}%' 		 -->
+	SELECT CEIL(COUNT(*)/10) FROM REVIEW NATURAL JOIN GOODS WHERE ${fs} LIKE '%${ss}%'
+ 	</select>
+ 	<!-- 리뷰보드 검색 끝 -->
+ 	
  	
  	<!-- 운영자 전용 게시판 --> 	
  	
@@ -157,9 +188,9 @@
  	<!-- 관리자 일반게시판 끝-->
  	<!-- 관리자 리뷰게시판 -->
  	<select id="printSysopReviewBoard" resultType="r_board" parameterType="hashmap">
- 		SELECT review_no,subject,id,score,regdate,to_char(regdate,'yyyy-MM-dd') as dbday,num
-  		FROM (SELECT review_no,subject,id,score,regdate,ROWNUM as num
-  		FROM (SELECT review_no,subject,id,score,regdate FROM review ORDER BY review_no DESC ))
+ 		SELECT review_no,content,id,score,regdate,to_char(regdate,'yyyy-MM-dd') as dbday,num
+  		FROM (SELECT review_no,content,id,score,regdate,ROWNUM as num
+  		FROM (SELECT review_no,content,id,score,regdate FROM review ORDER BY review_no DESC ))
   		WHERE num BETWEEN #{start} AND #{end} 	
  	</select>
  	
@@ -168,9 +199,9 @@
  	</select>
  	
  	<select id="printSearchReviewSysopBoard" resultType="r_board" parameterType="hashmap">
- 	 	SELECT review_no,subject,id,score,regdate,to_char(regdate,'yyyy-MM-dd') as dbday,num
-  		FROM (SELECT review_no,subject,id,score,regdate,ROWNUM as num
-  		FROM (SELECT review_no,subject,id,score,regdate FROM review WHERE ${fs} LIKE '%${ss}%'  ORDER BY review_no DESC))
+ 	 	SELECT review_no,id,content,score,regdate,to_char(regdate,'yyyy-MM-dd') as dbday,num
+  		FROM (SELECT review_no,id,content,score,regdate,ROWNUM as num
+  		FROM (SELECT review_no,id,content,score,regdate FROM review WHERE ${fs} LIKE '%${ss}%'  ORDER BY review_no DESC))
   		WHERE num BETWEEN #{start} AND #{end}
  	</select>
  	
@@ -183,7 +214,7 @@
   	</delete>
   	
   	<select id="boardManagementReviewContent" resultType="r_board" parameterType="int">
- 		SELECT review_no,subject,id,score,content,regdate
+ 		SELECT review_no,id,score,content,regdate
 	  	FROM review WHERE REVIEW_NO=#{review_no} 
  	</select>
  	

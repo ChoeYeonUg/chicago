@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sist.dao.BookVO;
@@ -103,7 +104,11 @@ public class BookController {
 	
 	// 디테일 페이지 
 	@RequestMapping("bookDetail")
-	public String detailBookList(Model model, String book_code) {
+	public String detailBookList(Model model, String book_code, HttpServletRequest req) {
+		
+		HttpSession hs = req.getSession();
+		
+		String id = (String) hs.getAttribute("id");
 		
 		BookVO detailBook = bs.detailBook(book_code);
 		// 수량정보
@@ -116,10 +121,29 @@ public class BookController {
 		for(ReviewVO rvo:list){
 			starSum+=rvo.getScore();			
 		}
+		
+		double starAvg;
 		Double staravg=(Double)starSum/list.size();
-		double starAvg=Double.parseDouble(String.format("%.2f", staravg));
 		
+		if(starSum==0.0){
+			starAvg=0.0;
+		}else{
+			starAvg=Double.parseDouble(String.format("%.2f", staravg*20));
+		}
 		
+		for(ReviewVO rvo:list){
+			rvo.setScore(rvo.getScore()*20);				
+		}		
+		
+		ReviewVO vo=new ReviewVO();
+		int rv_idCk=0;
+		if(id != null){
+			vo.setId(id);
+			vo.setBook_code(book_code);
+			rv_idCk=bs.reviewIdCK(vo);
+		}		
+		
+		model.addAttribute("rv_idCk",rv_idCk);
 		model.addAttribute("starAvg",starAvg);
 		model.addAttribute("list",list);
 		model.addAttribute("detailBook", detailBook);
@@ -173,7 +197,6 @@ public class BookController {
 */
 	@RequestMapping("bookReviewContent")
 	public String bookReviewContent(Model model,String book_code){
-		
 		BookVO detailBook = bs.detailBook(book_code);
 		
 		model.addAttribute("detailBook", detailBook);
@@ -182,5 +205,22 @@ public class BookController {
 		
 		return"book/bookReviewContent";
 	}
-
+	
+	
+	@RequestMapping("bookContentReviewInsert")
+	@ResponseBody
+	public String bookContentReviewInsert(Model model,ReviewVO vo){
+		
+		String ss=vo.getStar_input();
+		String ss1=ss.replaceAll("_",".");
+		Double score=Double.parseDouble(ss1);
+		vo.setScore(score);
+		
+		bs.contentReviewinsert(vo);
+		
+		
+		return "<script>" + "opener.parent.location.reload();" + "window.close();"+ "</script>";
+		
+	}
+	
 }

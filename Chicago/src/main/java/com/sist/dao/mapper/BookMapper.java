@@ -25,5 +25,6 @@ public interface BookMapper {
 	
 	//상세페이지리뷰게시판
 	public List<ReviewVO> bookReviewList(String book_code);
-
+	public void contentReviewinsert(ReviewVO vo);
+	public int reviewIdCK(ReviewVO vo);
 }

@@ -38,7 +38,7 @@ function popupOpen(review_no){
 		<tr>
 			<th width="100">번호</th>
 			<th width="100">글쓴이</th>
-			<th width="100">제목</th>
+			<th width="100">내용</th>
 			<th width="200">등록일</th>
 			<th width="60">평점</th>
 			<th width="60">기타</th>
@@ -47,7 +47,7 @@ function popupOpen(review_no){
 			<tr>		
 				<td>${vo.review_no }</td>	
 				<td>${vo.id }</td>
-				<td><a href="javascript:popupOpen('${vo.review_no }');">${vo.subject }</a></td>
+				<td><a href="javascript:popupOpen('${vo.review_no }');">${vo.content }</a></td>
 				<td><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 				<td>${vo.score }</td>
 				<td>
@@ -72,7 +72,6 @@ function popupOpen(review_no){
 				<form action="reviewboard_management.do" method="post">
 					<select name="fs">
 						<option value="id">id</option>
-						<option value="subject">subject</option>
 						<option value="content">내용</option>
 					</select>
 					<input type="search" id="ss" name="ss">
