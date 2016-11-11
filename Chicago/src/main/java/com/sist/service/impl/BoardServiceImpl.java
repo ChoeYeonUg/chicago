@@ -205,6 +205,32 @@ public class BoardServiceImpl implements BoardService{
 		return mapper.boardManagementReviewContent(review_no);
 	}
 
+	@Override
+	public List<ReviewVO> reviewlist(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.reviewlist(map);
+	}
+
+	@Override
+	public int totalReviewPage(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.totalReviewPage(map);
+	}
+
+	@Override
+	public List<ReviewVO> review_find(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.review_find(map);
+	}
+
+	@Override
+	public int review_find_total(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.review_find_total(map);
+	}
+
+
+
 
 
 

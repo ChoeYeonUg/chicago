@@ -80,7 +80,16 @@
 			FROM (SELECT score,review_no,content,id,book_code,regdate,ROWNUM as num
 			FROM (SELECT score,review_no,content,id,book_code,regdate FROM review WHERE book_code=#{book_code} ORDER BY REVIEW_NO DESC )) WHERE num BETWEEN 1 AND 5
  	</select>
-	
+ 	<!-- 책 상세페이지 속 리뷰글쓰기 -->
+ 	<insert id="contentReviewinsert" parameterType="r_board">
+ 		INSERT INTO REVIEW(review_no,id,book_code,content,score) VALUES (reviwboard_seq.nextval,#{id},#{book_code},#{content},#{score})
+ 	</insert>
+ 	<!-- 리뷰보드 글제한 아이디 체크 -->
+	<select id="reviewIdCK" resultType="int" parameterType="r_board">
+		select COUNT(*) FROM REVIEW where id=#{id} AND BOOK_CODE=#{book_code}	
+	</select>	
+	<!-- 리뷰보드 글제한 아이디 체크 끝-->
+ 		
 	<!-- 운영자 메뉴 -->
 	<select id="printSysopBook" resultType="bookVO" parameterType="hashmap">
 		SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img, num FROM 
