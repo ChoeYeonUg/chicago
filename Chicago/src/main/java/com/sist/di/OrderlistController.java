@@ -75,8 +75,7 @@ public class OrderlistController {
 	}
 	
 	
-	@RequestMapping("guestOrderL"
-			+ "ist.do")
+	@RequestMapping("guestOrderList.do")
 	public String guestOrderlist_page(Model model, HttpServletRequest request) {
 		
 		model.addAttribute("jsp", "member.jsp");
