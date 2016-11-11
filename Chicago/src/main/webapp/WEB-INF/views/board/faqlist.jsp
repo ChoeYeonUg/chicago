@@ -33,10 +33,12 @@
 
 				<table width="700">
 					<tr>
-						<td width="70%"><h2 align="left">
+						<td width="50%"><h2 align="left">
 								<spring:message code="header.faqBoard" />
 							</h2></td>
-						<td width="30%" align="right"><a href="noticeboard.do" style="color: #b3b3b3">공지사항</a> l Faq l <a href="secretboard.do" style="color: #b3b3b3">1:1게시판</a></td>
+						<td width="50%" align="right"><a href="noticeboard.do" style="color: #b3b3b3">공지사항</a>
+						 l Faq l <a href="secretboard.do" style="color: #b3b3b3">1:1게시판</a> l
+						 <a href="reviewboard.do" style="color: #b3b3b3">리뷰게시판</a> </td>
 					</tr>
 				</table>
 
@@ -163,7 +165,7 @@
 					<tr>
 						<!-- 관리자만보이게 설정 -->
 						<c:if test="${grade<=1 }">
-						<td align="right"><a href="noticeboard_insert.do">글쓰기</a></td>
+						<td align="right"><a href="faqboard_insert.do">글쓰기</a></td>
 						</c:if>
 					</tr>
 				</table>

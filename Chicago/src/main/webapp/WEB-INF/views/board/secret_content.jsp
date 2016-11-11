@@ -92,9 +92,9 @@ function openPop(page,board_no){
 			</table>
 			<table>
 			<tr>
-				<td align="right">					
+				<td align="right">
+				<a href="secret_reply.do?board_no=${board_no}">답글</a>&nbsp;					
 				<c:if test="${id==vo.id || grade<=1 }">
-					<a href="secret_reply.do?board_no=${board_no}">답글</a>&nbsp;
 					<a href="secret_update.do?page=${page }&board_no=${board_no }">수정</a>&nbsp;
 					<a href="#" onclick="return openPop('${page}','${board_no}');">삭제</a>&nbsp;
 				</c:if>

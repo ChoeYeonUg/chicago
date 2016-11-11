@@ -50,6 +50,11 @@ public interface BoardService {
 	public void board_reviewManagement_delete(int review_no) throws Exception;
 	public ReviewVO boardManagementReviewContent(int review_no) throws Exception;
 	
+	//리뷰게시판
+	public List<ReviewVO> reviewlist(Map map) throws Exception;
+	public int totalReviewPage(Map map) throws Exception;
+	public List<ReviewVO> review_find(Map map) throws Exception;
+	public int review_find_total(Map map) throws Exception;
 
-	}
+}
 	

@@ -27,6 +27,7 @@
 		}
 	}
 	
+
 	function btdown() {
 		var amount = ${detailBook.amount};
 		var defamount = $('#defamount').val();
@@ -51,7 +52,14 @@
 			alert('주문 가능한 수량을 초과하였습니다.');
 		} 
 	}
-	
+
+	function popupOpen(book_code){
+		
+		var popUrl="bookReviewContent.do?book_code="+book_code;
+		var popOption="width=420, height=400, resizable=no scrollbars=no status=no;";
+		window.open(popUrl,"",popOption);
+	}
+
 </script>
 </head>
 <body>
@@ -90,11 +98,24 @@
 				<!-- 좌측 카테고리 끝 -->
 				<!-- 내용시작 -->
 				<div class="col-md-9">
-				<form>
+				<form action="purchase.do" method="post">
 				<table class="table_content" border="0">
 					<tr>
 						<!-- 책 이미지 -->
-						<td width="14%"><img alt="bookImage" src="${detailBook.img }" style="vertical-align: bottom;"></td>
+						<td width="14%">
+						<table>
+							<tr>
+								<td><img alt="bookImage" src="${detailBook.img }" style="vertical-align: bottom;"></td>
+							</tr>
+						<tr>								
+								<td  >
+									<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(board_img/icon_star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+										<p style="WIDTH: ${starAvg}%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(board_img/icon_star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+										</p>
+									</div>	
+								</td>								
+							</tr> 
+						</table>					
 						<!-- 책 기본정보 -->
 						<td width="86%">
 							<table>
@@ -127,12 +148,12 @@
 									</td>
 								</tr>
 								<tr>
-									<td style="font-size:11px; color:#505050;" colspan="4" height="13"><b>[배송정보]</b>&nbsp;18시 이전 주문 시 (도서산간 제외) "내일(화)" 배송</td>
+									<td style="font-size:11px; color:#505050;" colspan="4" height="13"><b>[배송정보]</b>&nbsp;15시 이전 주문 시 (도서산간 제외) 당일 출고</td>
 								</tr>
 								<tr>
 									<td style="font-size:11px; color:#505050;" height="13" colspan="4"><b>[주문수량]</b>&nbsp;
 										<img src="book_img\down.png" alt="downBtn" style="width:20px;height:20px;" onclick="btdown()"/>
-										<input type="text" value="${defAmount }" name="amount" id="defamount" readonly="readonly"/>
+										<input type="text" value="${defAmount }" name="amount" id="defamount" readonly="readonly" size="1" style="text-align: center;"/>
 										<input type="hidden" value="${detailBook.book_code }" name="book_code"/>
 										<%-- <input type="hidden" value="${detailBook.amount }" id="amount"/> --%>
 										<img src="book_img\up.png" alt="upBtn" style="width:20px;height:20px;" onclick="btup()"/>
@@ -144,7 +165,7 @@
 									<td align="left">
 										<input type="button" value="찜목록 담기" onclick="lkBtn()"/>&nbsp;&nbsp;
 										<input type="button" value="북카트 담기" onclick="bcBtn()"/>&nbsp;&nbsp;
-										<a href="purchase.do?book_code=${book_code }"><input type="button" value="바로구매"/></a>
+										<%-- <a href="purchase.do?book_code=${book_code }?"> --%><input type="submit" value="바로구매"/><!-- </a> -->
 									</td>
 								</tr>
 							</table>
@@ -165,25 +186,47 @@
 				
 				<!-- 여기에 리뷰칸 넣어주세용 :) -->
 				<h4><b>상품리뷰</b></h4>
-				<hr/>
 				<table>
 					<tr>
-						<td width="20%" style="font-size:11px; color:#505050;" align="center">별점</td>
-						<td width="40%" style="font-size:11px; color:#505050;" align="center">평가</td>
+						<td align="right" style="font-size:11px; color:#505050;"><a href="reviewboard.do?fs=book_code&ss=${book_code}"  >더 많은 상품리뷰 보기</a></td>
+					</tr>
+				</table>
+				<hr/>
+				<table>					
+					<tr>
+						<td width="5%" style="font-size:11px; color:#505050;" align="center">별점</td>
+						<td width="55%" style="font-size:11px; color:#505050;" align="center">평가</td>
 						<td width="25%" style="font-size:11px; color:#505050;" align="center">ID</td>
 						<td width="25%" style="font-size:11px; color:#505050;" align="center">날짜</td>
 					</tr>
 					<c:forEach var="rvo" items="${list}">
+					<tr>
 					<tr>					
-					
+<%-- 
 						<td width="20%" style="font-size:11px; color:#505050;" align="center">${rvo.score }</td>
 						<td width="40%" style="font-size:11px; color:#505050;" align="center">${rvo.content }</td>
+ --%>
+						<td>
+							<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(board_img/icon_star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+								<p style="WIDTH: ${rvo.score}%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(board_img/icon_star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+								</p>
+							</div>	
+						</td>
+						<td width="40%" style="font-size:11px; color:#505050;" align="left">${rvo.content }</td>
 						<td width="25%" style="font-size:11px; color:#505050;" align="center">${rvo.id }</td>
 						<td width="25%" style="font-size:11px; color:#505050;" align="center">
 						<fmt:formatDate value="${rvo.regdate}" pattern="yyyy년  MM월  dd일"/></td>
-					</tr> 
-					</c:forEach>
-				</table>
+					</tr> 					
+					</c:forEach>					
+					</table>
+					<c:if test="${(id!=null) && (rv_idCk==0)}">
+					<table>
+					<br/>
+					<tr>						
+						<td align="right" colspan="4"><a href="#" onclick="javascript:popupOpen('${book_code}');">리뷰쓰기</a></td>
+					</tr>
+					</table>
+					</c:if>
 				<br/><br/>
 				<h4><b>상품정보제공고시</b></h4>
 				<hr/>

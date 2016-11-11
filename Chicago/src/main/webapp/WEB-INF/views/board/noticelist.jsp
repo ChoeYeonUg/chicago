@@ -35,12 +35,13 @@
 
 				<table width="700">
 					<tr>
-						<td width="70%"><h2 align="left">
+						<td width="50%"><h2 align="left">
 								<spring:message code="header.noticBoard" />
 							</h2></td>
-						<td width="30%" align="right">공지사항 l <a href="faqboard.do"
+						<td width="50%" align="right">공지사항 l <a href="faqboard.do"
 							style="color: #b3b3b3"> Faq </a>l <a href="secretboard.do"
-							style="color: #b3b3b3">1:1게시판</a></td>
+							style="color: #b3b3b3">1:1게시판</a>l
+							<a href="reviewboard.do" style="color: #b3b3b3">리뷰게시판</a></td>
 					</tr>
 				</table>
 

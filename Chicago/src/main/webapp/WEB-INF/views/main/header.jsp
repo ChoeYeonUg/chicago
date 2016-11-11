@@ -70,7 +70,7 @@
               					<li><a href="noticeboard.do"><spring:message code="header.noticBoard"/></a></li>
                                 <li><a href="faqboard.do?faq_category=0"><spring:message code="header.faqBoard"/></a></li>
 								<li><a href="secretboard.do"><spring:message code="header.secretBoard"/></a></li>
-								<li><a href="reviewboard.do">리뷰보드</a></li>
+								<li><a href="reviewboard.do">리뷰게시판</a></li>
             				</ul>
           				</li>
           				<!-- Modified By Choding -->
