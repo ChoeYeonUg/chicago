@@ -252,7 +252,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="modyfyMemberAddrs_ok.do", method=RequestMethod.POST)
-	public String modyfyMemberAddrs_ok(Model model, AddressVO avo, HttpServletRequest request, int zipcode1, String addr1, int zipcode2, String addr2,int zipcode3, String addr3) throws Exception {
+	public String modyfyMemberAddrs_ok(Model model, AddressVO avo, HttpServletRequest request, String id, int zipcode1, String addr1, int zipcode2, String addr2,int zipcode3, String addr3) throws Exception {
 		
 		logger.info(avo.getId());
 		
@@ -265,16 +265,31 @@ public class MemberController {
 		
 		
 		if(ms.memberId(sessionid) && !sessionid.equals("admin")) {
+			if(id==null) {
+
+				avo = new AddressVO();
+				avo.setZipcode1(zipcode1);
+				avo.setAddr1(addr1);
+				avo.setZipcode2(zipcode2);
+				avo.setAddr2(addr2);
+				avo.setZipcode3(zipcode3);
+				avo.setAddr3(addr3);
+				avo.setId(sessionid);
+				ms.insertMemberDeliveryAddrs(avo);
 			
-			avo = new AddressVO();
-			avo.setZipcode1(zipcode1);
-			avo.setAddr1(addr1);
-			avo.setZipcode2(zipcode2);
-			avo.setAddr2(addr2);
-			avo.setZipcode3(zipcode3);
-			avo.setAddr3(addr3);
-			avo.setId(sessionid);
-			ms.modyfyMemberDeliveryAddrs(avo);
+			} else {
+				
+				avo = new AddressVO();
+				avo.setZipcode1(zipcode1);
+				avo.setAddr1(addr1);
+				avo.setZipcode2(zipcode2);
+				avo.setAddr2(addr2);
+				avo.setZipcode3(zipcode3);
+				avo.setAddr3(addr3);
+				avo.setId(sessionid);
+				ms.modyfyMemberDeliveryAddrs(avo);
+				
+			}
 			
 			return "redirect:main.do";
 			
