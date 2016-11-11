@@ -60,15 +60,13 @@ public class MemberController {
 		
 			if(USER_Check_PWD.equals(cpwd)) {
 				if(typecheck.equals("mi")) {
+					
 					redirectAttributes.addFlashAttribute("check", "ok");
-					/*MemberVO vo = ms.selectMember(sessionid);
-					model.addAttribute("vo", vo);*/
-					return "redirect:selectMemberInfo.do";
+					return "redirect:modifyMemberInfo.do";
 					
 				} else if(typecheck.equals("ma")) {
+					
 					redirectAttributes.addFlashAttribute("check", "ok");
-					/*AddressVO avo = ms.selectMemberDeliveryAddrs(sessionid);
-					model.addAttribute("vo", avo);*/
 					return "redirect:memberAddrsInfo.do";
 					
 				} else if(typecheck.equals("mo")) {
@@ -97,14 +95,14 @@ public class MemberController {
 	}
 	
 	/* Member Info SideMenu Include */
-	@RequestMapping("selectMemberInfo.do")
+	@RequestMapping("modifyMemberInfo.do")
 	public String member_side_info_page(Model model, HttpServletRequest request, String typecheck) throws Exception {
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		try{
 			Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
 			String check = (String) flashMap.get("check");
-			model.addAttribute("cmi", "../member/memberinfomodify/SelectMemberInfo.jsp");
+			model.addAttribute("cmi", "../member/memberinfomodify/ModifyMemderInfo.jsp");
 			HttpSession hs = request.getSession();
 			String sessionid = (String)hs.getAttribute("id");
 			MemberVO vo = ms.selectMember(sessionid);
@@ -120,21 +118,8 @@ public class MemberController {
 		return "main/main";
 	}
 	
-	@RequestMapping("modyfyMemberInfo.do")
-	public String modifymemberinfo_page(Model model, HttpServletRequest request) throws Exception {
-		
-		model.addAttribute("jsp", "member.jsp");
-		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
-		
-		model.addAttribute("MemberMain_cmi", "../MemberMain.jsp");
-		model.addAttribute("cmi", "../member/MemberMainHome.jsp");
-		
-		return "main/main";
-		
-	}
-	
 	@RequestMapping(value="modyfyMemberInfo_ok.do", method=RequestMethod.POST)
-	public String modyfyMemberInfo_ok(Model model, MemberVO vo, HttpServletRequest request, int zipcode, String addr, String email, String phone) throws Exception {
+	public String modyfyMemberInfo_ok(Model model, MemberVO vo, HttpServletRequest request, int zipcode, String addr, String email, String phone, String name, int gender) throws Exception {
 		
 		logger.info(vo.getId() + " : " + vo.getPwd());
 		
@@ -144,9 +129,13 @@ public class MemberController {
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
+		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+		
 		if(ms.memberId(sessionid) && !sessionid.equals("admin")) {
 				
 				vo = new MemberVO();
+				vo.setName(name);
+				vo.setGender(gender);
 				vo.setZipcode(zipcode);
 				vo.setAddr(addr);
 				vo.setEmail(email);
@@ -154,12 +143,12 @@ public class MemberController {
 				vo.setId(sessionid);
 				ms.modyfyMemberInfo(vo);
 				
-				model.addAttribute("jsp", "../main/main.jsp");
+				return "redirect:main.do";
 				
 		} else {
 			
 			model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
-			model.addAttribute("cmi", "../memberinfomodify/ModifyMemderInfo.jsp");
+			model.addAttribute("cmi", "../member/memberinfomodify/ModifyMemderInfo.jsp");
 			
 		}
 		
@@ -248,11 +237,11 @@ public class MemberController {
 		try{
 			Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
 			String check = (String) flashMap.get("check");
-			model.addAttribute("cmi", "../member/memberinfomodify/MemberAddressInfo.jsp");
+			model.addAttribute("cmi", "../member/memberinfomodify/ModifyMemberAddress.jsp");
 			HttpSession hs = request.getSession();
 			String sessionid = (String)hs.getAttribute("id");
 			AddressVO avo = ms.selectMemberDeliveryAddrs(sessionid);
-			model.addAttribute("vo", avo);			
+			model.addAttribute("avo", avo);			
 		}catch(Exception e){
 			/*typecheck="ma";*/
 			model.addAttribute("typecheck", "ma");
@@ -262,56 +251,7 @@ public class MemberController {
 		
 	}
 	
-	@RequestMapping("insertMemberAddrs.do")
-	public String insertMemberAddrsInfo_page(Model model, AddressVO avo, HttpServletRequest request) throws Exception {
-		
-		model.addAttribute("jsp", "member.jsp");
-		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
-		
-		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
-		model.addAttribute("cmi", "../member/memberinfomodify/InsertMemberAddress.jsp");
-		return "main/main";
-		
-	}
-	
-	@RequestMapping(value="insertMemberAddrs_ok.do", method=RequestMethod.POST)
-	public String insertMemberAddrs_ok(Model model, AddressVO avo, HttpServletRequest request, int zipcode1, String addr1, int zipcode2, String addr2,int zipcode3, String addr3) throws Exception {
-		
-		logger.info(avo.getId());
-		
-		HttpSession hs = request.getSession();
-		String sessionid = (String) hs.getAttribute("id");
-		
-		model.addAttribute("jsp", "member.jsp");
-		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
-		
-		if(ms.memberId(sessionid) && !sessionid.equals("admin")) {
-			
-			avo = new AddressVO();
-			avo.setZipcode1(zipcode1);
-			avo.setAddr1(addr1);
-			avo.setZipcode2(zipcode2);
-			avo.setAddr2(addr2);
-			avo.setZipcode3(zipcode3);
-			avo.setAddr3(addr3);
-			avo.setId(sessionid);
-			ms.insertMemberDeliveryAddrs(avo);
-			
-			model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
-			model.addAttribute("cmi", "../member/memberinfomodify/MemberAddressInfo.jsp");
-			
-		} else {
-			
-			model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
-			model.addAttribute("cmi", "../member/MemberMainHome.jsp");
-			
-		}
-		
-		return "redirect:memberAddrsInfo.do";
-		
-	}
-	
-	@RequestMapping("modifyMemberAddrs.do")
+/*	@RequestMapping("modifyMemberAddrs.do")
 	public String modifyMemberAddrsInfo_page(Model model, AddressVO avo, HttpServletRequest request) throws Exception {
 		
 		model.addAttribute("jsp", "member.jsp");
@@ -319,9 +259,10 @@ public class MemberController {
 		
 		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
 		model.addAttribute("cmi", "../member/memberinfomodify/ModifyMemberAddress.jsp");
+		
 		return "main/main";
 		
-	}
+	}*/
 	
 	@RequestMapping(value="modyfyMemberAddrs_ok.do", method=RequestMethod.POST)
 	public String modyfyMemberAddrs_ok(Model model, AddressVO avo, HttpServletRequest request, int zipcode1, String addr1, int zipcode2, String addr2,int zipcode3, String addr3) throws Exception {
@@ -346,8 +287,7 @@ public class MemberController {
 			avo.setId(sessionid);
 			ms.modyfyMemberDeliveryAddrs(avo);
 			
-			model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
-			model.addAttribute("cmi", "../member/memberinfomodify/MemberAddressInfo.jsp");
+			return "redirect:main.do";
 			
 		} else {
 			

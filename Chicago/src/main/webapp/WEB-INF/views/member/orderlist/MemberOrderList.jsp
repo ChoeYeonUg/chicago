@@ -78,30 +78,6 @@
 										</span>
 									</div>
 									</c:forEach>
-									<div class="row">
-										<span class="cell col1">1</span>
-										<span class="cell col2">2</span>
-										<span class="cell col3">3</span>
-										<span class="cell col4">4</span>
-										<span class="cell col5">5</span>
-										<span class="cell col6">6</span>
-										<span class="cell colB">
-											<input type="button" onclick="#" value="주문취소">
-											<input type="button" onclick="#" value="환불신청하기">
-										</span>
-									</div>
-									<div class="row">
-										<span class="cell col1">1</span>
-										<span class="cell col2">2</span>
-										<span class="cell col3">3</span>
-										<span class="cell col4">4</span>
-										<span class="cell col5">5</span>
-										<span class="cell col6">6</span>
-										<span class="cell colB">
-											<input type="button" onclick="#" value="주문취소">
-											<input type="button" onclick="#" value="환불신청하기">
-										</span>
-									</div>
 								</div>
 							</fieldset>
 								

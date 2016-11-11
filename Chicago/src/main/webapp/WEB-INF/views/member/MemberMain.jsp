@@ -50,7 +50,7 @@
 								<a data-toggle="" data-parent="" href="memberinfo.do"><spring:message code="memberInfoModifyMain.memberinfohead"/></a>
 								<ul id="" class="">
 									<li class="">
-										<a href="selectMemberInfo.do"><spring:message code="memberInfoModifyMain.btMemberInfoModify"/></a>
+										<a href="modifyMemberInfo.do"><spring:message code="memberInfoModifyMain.btMemberInfoModify"/></a>
 									</li>
 									<li class="">
 										<a href="modyfyMemberPwd.do"><spring:message code="memberInfoModifyMain.btMemberPasswordModify"/></a>
