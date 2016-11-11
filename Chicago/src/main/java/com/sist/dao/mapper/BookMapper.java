@@ -14,7 +14,9 @@ public interface BookMapper {
 	public int cateFirTotalPage(int book_category);
 	public BookVO detailBook(String book_code);
 	public void wishpop(Map map);
-	//관리자//////////////////////////////////////////////
+	//검색기능
+	public List<BookVO> select(Map map);
+	//관리자
 	public List<BookVO> printSysopBook(Map map);
 	public int printBookTotalPage(int rowSize);
 	public List<BookVO> printSearchSysopBook(Map map);

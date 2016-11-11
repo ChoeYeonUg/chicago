@@ -15,9 +15,10 @@ public interface BookService {
 	public BookVO detailBook (String book_code);
 	public void wishpop(Map map);
 	public BookVO purchase(String book_code);
-	
+	//검색기능
+	public List<BookVO> getSelect(Map map);
 
-	////////////관리자
+	//관리자
 	public List<BookVO> printSysopBook(Map map);
 	public int printBookTotalPage(int rowSize);
 	public List<BookVO> printSearchSysopBook(Map map);

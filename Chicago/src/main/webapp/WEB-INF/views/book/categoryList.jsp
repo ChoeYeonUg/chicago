@@ -27,6 +27,15 @@
 			return;
 		}
 	}
+	
+	function search() {
+		var sch_value = jQuery('#form_search #sch_value').val();
+		if(sch_value == '') {
+			alert('검색어를 입력해주세요.');
+		} else {
+			jQuery('#form_search').submit();
+		}
+	}
 </script>
 </head>
 <body>
@@ -66,18 +75,23 @@
 				<!-- 내용시작 -->
 				<div class="col-md-9">
 				<!-- 검색창 -->
+				<form id="form_search" method="post" action="categoryList.do">
 				<table>
 					<tr>
 						<td align="right">
-							<input type="radio" value="통합검색" name="radioBt" id="rbtn1" checked="checked"/><spring:message code="radio.ti1"/>
-							<input type="radio" value="제목검색" name="radioBt" id="rbtn2"/><spring:message code="radio.ti2"/>
-							<input type="radio" value="저자검색" name="radioBt" id="rbtn3"/><spring:message code="radio.ti3"/>
-							<input type="radio" value="출판사검색" name="radioBt" id="rbtn4"/><spring:message code="radio.ti4"/>
-							<input type="text" size="10" name="text"/>
-							<input type="button" value="검색"/>
+							<select id="sch_type" name="sch_type">
+								<option value="book_name" selected="selected"><spring:message code="radio.ti2"/>
+								<option value="writer"><spring:message code="radio.ti3"/>
+								<option value="publisher"><spring:message code="radio.ti4"/>
+							</select>
+							<input type="text" id="sch_value" name="sch_value"/>
+							<input type="hidden" name="book_category" value="${book_category }">
+							<button type="button" onclick="search()">검색</button>
 						</td>
 					</tr>
 				</table>
+				</form>
+				<br/><br/>
 				<!-- 도서목록 -->
 				<table width="100%" class="table_content" border="0">
 					<c:forEach items="${cateList }" var="list">
@@ -127,6 +141,11 @@
 						</td>
 					</tr>
 					</c:forEach>
+					<c:if test="${cateList.size()==0 }">
+					<center>
+					<h5 style="color:#999999;">검색 결과가 없습니다.</h5>
+					</center>
+					</c:if>
 				</table>
 				<!-- 페이지 -->
 				<table width="100" id="table_page">

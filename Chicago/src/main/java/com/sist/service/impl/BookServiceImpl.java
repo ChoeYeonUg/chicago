@@ -56,10 +56,13 @@ public class BookServiceImpl implements BookService{
 		// TODO Auto-generated method stub
 		return bm.purchase(book_code);
 	}
-
-
 	
-	/////////////////관리자 메뉴
+	@Override
+	public List<BookVO> getSelect(Map map) {
+		return bm.select(map);
+	}
+	
+	//관리자 메뉴
 	@Override
 	public List<BookVO> printSysopBook(Map map) {
 		// TODO Auto-generated method stub
