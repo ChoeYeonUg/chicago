@@ -123,11 +123,6 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public void insertMemberDeliveryAddrs(AddressVO avo) throws Exception {
-		mapper.insertMemberDeliveryAddrs(avo);
-	}
-	
-	@Override
 	public void modyfyMemberDeliveryAddrs(AddressVO avo) throws Exception {
 		mapper.modyfyMemberDeliveryAddrs(avo);
 	}

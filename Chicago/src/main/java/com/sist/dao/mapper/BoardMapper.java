@@ -51,6 +51,11 @@ public interface BoardMapper {
 	public int printSearchReviewBoardTotalPage(Map map);
 	public void board_reviewManagement_delete(int review_no);
 	public ReviewVO boardManagementReviewContent(int review_no);
-
+	
+	//리뷰게시판
+	public List<ReviewVO> reviewlist(Map map);
+	public int totalReviewPage(Map map);
+	public List<ReviewVO> review_find(Map map);
+	public int review_find_total(Map map);
 	
 }	

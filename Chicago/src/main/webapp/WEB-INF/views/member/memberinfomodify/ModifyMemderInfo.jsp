@@ -146,6 +146,7 @@ function sample6_execDaumPostcode() {
 					<div id="MemberInfo-Box">
 							<form:form method="post" name="frm" id="frm" action="modyfyMemberInfo_ok.do" commandName="com.sist.dao.MemberVO">
 							<input type="hidden" value="<%=request.getAttribute("id") %>">
+							<input type="hidden"  name="typecheck" value="${typecheck}">
 							<fieldset>
 								<div class="InfoModify">
 									<dl class="mim">
@@ -154,8 +155,7 @@ function sample6_execDaumPostcode() {
 											<label for="USER_NAME"><spring:message code="memberInfoModify.name"/></label>
 										</dt>
 										<dd>
-											<input type="text" id="USER_NAME" class="" maxlength="16" value="${vo.name}" readonly="readonly">
-											<%-- <form:input name="USER_NAME" id="USER_NAME" class="" path="name" maxlength="16" value="${name}" readonly="readonly"/> --%>
+											<input type="text" name="name" id="name" class="" maxlength="36" value="${vo.name}">
 										</dd>
 										
 										<!-- View GENDER -->
@@ -163,18 +163,16 @@ function sample6_execDaumPostcode() {
 											<label for="USER_GENDER"><spring:message code="memberInfoModify.gender"/></label>
 										</dt>
 										<dd>
-											<%-- <spring:message code="memberInfoModify.genderMan"/> : <form:radiobutton name="" id="USER_M_GENDER" class="" path="" value="" disabled="true"/> --%>
-											&nbsp;
-											<%-- <spring:message code="memberInfoModify.genderWoman"/> : <form:radiobutton name="" id="USER_W_GENDER" class="" path="" value="" disabled="true"/> --%>
-										</dd>
-										
-										<!-- View ID -->
-										<dt>
-											<label for="USER_ID"><spring:message code="memberInfoModify.id"/></label>
-										</dt>
-										<dd>
-											<%-- <form:input name="USER_ID" id="USER_ID" class="" path="id" maxlength="16" value="${id}" readonly="readonly"/> --%>
-											<input type="text" name="id" id="id" class="" maxlength="16" value="${vo.id}" readonly="readonly">
+											<c:if test="${vo.gender == 1 }">
+												<spring:message code="memberInfoModify.genderMan"/>
+											</c:if>
+											<c:if test="${vo.gender == 2 }">
+												<spring:message code="memberInfoModify.genderWoman"/>
+											</c:if>
+											<br/>
+											<spring:message code="form.gender"/>
+												<input type="radio" name="gender" value="1" checked="checked"><spring:message code="form.man"/>
+												<input type="radio" name="gender" value="2"><spring:message code="form.woman"/>
 										</dd>
 										
 										<!-- Modify PASSWORD -->
@@ -190,12 +188,12 @@ function sample6_execDaumPostcode() {
 											<label for="USER_ADDRESS"><spring:message code="memberInfoModify.Address"/></label>
 										</dt>
 										<dd>
+											<spring:message code="memberInfoModify.CurAddress"/>
+											${vo.zipcode}&nbsp;${vo.addr}
+											
+											<br/>
 											<input type="text" name="zipcode" id="zipcode" placeholder="<spring:message code="form.zip"/>" readonly="readonly">
 											<input type="button" class="" onclick="sample6_execDaumPostcode()" value="<spring:message code="memberInfoModify.btZipcode"/>"><br/>
-											&nbsp;
-											<spring:message code="memberInfoModify.CurAddress"/>
-											<input type="text" id="USER_OLDADDRESS" class="" maxlength="36" value="${vo.addr}" readonly="readonly">
-											
 											&nbsp;
 											<spring:message code="memberInfoModify.NewAddress"/>
 											<input type="text" name="addr" id="addr" placeholder="<spring:message code="form.addr"/>">
@@ -223,7 +221,7 @@ function sample6_execDaumPostcode() {
 								<!-- OK, Cancel Button -->
 								<div>
 									<input type="button" value="<spring:message code="memberInfoModify.btOk"/>" onclick="send()">
-									<%-- <form:button name="" id="" class="" onclick="javascript:history.back()"><spring:message code="memberInfoModify.btCancel"/></form:button> --%>
+									<input type="button" value="<spring:message code="memberInfoModify.btCancel"/>" onclick="javascript:location.href='main.do';">
 								</div>
 								
 							</fieldset>

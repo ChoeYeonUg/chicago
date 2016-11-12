@@ -122,7 +122,7 @@ public class SysopBoardController {
 				map.put("fs", fs);
 				model.addAttribute("fs", fs);
 				model.addAttribute("ss", ss);
-				list = bs.printSearchReviewSysopBoard(map2);
+				list = bs.printSearchReviewSysopBoard(map);
 				totalpage = bs.printSearchBoardTotalPage(map2);
 			}
 			

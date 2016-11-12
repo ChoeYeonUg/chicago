@@ -42,6 +42,7 @@ public class PurchaseController {
 			amountInt = 1;
 		}else{
 			try{
+				System.out.println(amount);
 				amountInt = Integer.parseInt(amount);
 			}catch(Exception e){
 				amountInt = 1;

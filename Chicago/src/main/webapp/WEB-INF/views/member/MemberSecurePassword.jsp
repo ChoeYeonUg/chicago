@@ -32,9 +32,9 @@
 function send(){
 	var f=document.frm;
 		
-	if(f.USER_Check_NewPWD.value==""){
+	if(f.USER_Check_PWD.value==""){
 		alert("올바른 비밀번호가 아닙니다!");
-		f.USER_Check_NewPWD.focus();
+		f.USER_Check_PWD.focus();
 		return;
 	}
 	
@@ -70,10 +70,10 @@ function send(){
 									<dl class="msp">
 										<!-- Input Confirm PASSWORD -->
 										<dt>
-											<label for="USER_PWD"><spring:message code="memberSecurePassword.Password"/></label>
+											<label for="USER_Check_PWD"><spring:message code="memberSecurePassword.Password"/></label>
 										</dt>
 										<dd>
-											<input type="password" name="USER_Check_NewPWD" id="USER_Check_NewPWD" class="" maxlength="16">
+											<input type="password" name="USER_Check_PWD" id="USER_Check_PWD" class="" maxlength="16">
 										</dd>
 									</dl>
 								</div>

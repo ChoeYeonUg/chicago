@@ -86,7 +86,7 @@ $(function () {
 
 				<th width="15%" align="right">내용</th>
 				<td colspan="3" width="85%" align="left"><textarea rows="10" cols="50"
-						name="content" id="chicago1" "></textarea></td>
+						name="content" id="chicago1"></textarea></td>
 
 
 			</tr>
@@ -104,9 +104,9 @@ $(function () {
 			<table>
 			<tr>
 
-				<td colspan="2" align="center"><input type="button" value="글쓰기"
-					id="sendBtn"> <input type="button" value="취소" 
-					onclick="javascript:history.back()"></td>
+				<td colspan="2" align="center">
+				<input type="button" value="글쓰기"	id="sendBtn"> 
+				<input type="button" value="취소" onclick="javascript:history.back()"></td>
 			</tr>
 			</table>
 			
