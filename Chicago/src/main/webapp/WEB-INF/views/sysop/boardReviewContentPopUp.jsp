@@ -37,14 +37,10 @@ function openPop(review_no){
 				<th width="20%">별점</th>
 				<td width="30%" align="center">	${vo.score }</td>
 			</tr>	
-			<tr>
-				<th width="20%" align="right">제목</th>
-				<td width="80%" align="left" colspan="3">
-				${vo.subject}</td>
-			</tr>			
+					
 			<tr>
 
-				<th width="15%" align="right">내용</th>
+				<th width="" align="right">내용</th>
 				<td colspan="3" valign="top" align="left" height="200"><pre>${vo.content}</pre>
 				</td>
 			</tr>

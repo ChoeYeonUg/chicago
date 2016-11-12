@@ -104,6 +104,18 @@ public class LoginController {
 
 	@RequestMapping("clause")
 	public String clause_page(HttpServletRequest req) {
+		
+		HttpSession hs = req.getSession();
+		//로그인중인 사람의 회원가입을 막음
+		try{
+			String id = (String) hs.getAttribute("id");
+			if(id != null){
+				return "redirect:main.do";
+			}
+		}catch(Exception e){
+			return "redirect:main.do";
+		}
+		
 
 		req.setAttribute("jsp", "login.jsp");
 		req.setAttribute("login_jsp", "../login/clause.jsp");
