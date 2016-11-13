@@ -20,6 +20,7 @@
  		<typeAlias type="com.sist.dao.OrderBookVO" alias="orderbook"/>
  		<typeAlias type="com.sist.dao.WriterVO" alias="writer"/>
  		<typeAlias type="com.sist.dao.BookVO" alias="book"/>
+ 		<typeAlias type="com.sist.dao.EventVO" alias="event"/>
  	</typeAliases>
  	
  	<!-- <mappers>

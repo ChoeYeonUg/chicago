@@ -60,9 +60,9 @@
           				<li><a class="drop" href="event.do"><spring:message code="header.event"/></a>
             				<ul>
               					<li><a href="event.do"><spring:message code="header.eventView"/></a></li>
-                                <li><a href="#"><spring:message code="header.month"/></a></li>
-								<li><a href="#"><spring:message code="header.week"/></a></li>
-								<li><a href="#"><spring:message code="header.day"/></a></li>
+                                <li><a href="event_month.do"><spring:message code="header.month"/></a></li>
+								<li><a href="event_week.do"><spring:message code="header.week"/></a></li>
+								<li><a href="event_day.do"><spring:message code="header.day"/></a></li>
             				</ul>
           				</li>
           				<li><a class="drop" href="noticeboard.do"><spring:message code="header.board"/></a>
