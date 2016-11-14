@@ -90,6 +90,7 @@
 	                                <li><a href="book_management.do"><spring:message code="header.saBook"/></a></li>
 									<li><a href="board_management.do"><spring:message code="header.saBoard"/></a></li>
 									<li><a href="sales_management.do"><spring:message code="header.saList"/></a></li>
+									<li><a href="writer_management.do">작가관리</a></li>
 	            				</ul>
 	          				</li>
           				</c:if>

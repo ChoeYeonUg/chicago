@@ -80,4 +80,31 @@
  		FROM (SELECT goods.writer_no,writer_name,birth,death,info,writer.img as wimg,book_code,book_name,goods.img,publication FROM writer JOIN goods ON(goods.writer_no = writer.writer_no) WHERE writer.writer_no = #{writer_no} ORDER BY writer_name, publication))
   		</select>
   		
+  		<!-- 관리자 메뉴 -->
+  		
+  		<insert id="writerInsert">
+  			INSERT INTO writer VALUES(writer_seq.nextval, #{writer_name}, #{birth, jdbcType=DATE},#{death, jdbcType=DATE}, #{info},#{img, jdbcType=VARCHAR})
+  		</insert>
+  		
+  		<select id="printSysopWriter" parameterType="hashmap" resultType="writer">
+ 			SELECT writer_no,writer_name,birth,num
+			FROM (SELECT writer_no,writer_name,birth,ROWNUM as num
+			FROM (SELECT writer_no,writer_name,birth FROM writer ORDER BY writer_no)) WHERE num BETWEEN #{start} AND #{end}
+	 	</select>
+	 	
+	 	<select id="writerTotalPage" resultType="int" parameterType="int">
+	  		SELECT CEIL(COUNT(*)/#{rowSize}) FROM writer
+	  	</select>
+	  	
+	  	<!-- order 서치 -->
+	 	<select id="printSysopSearchWriter" parameterType="hashmap" resultType="writer">
+	 		SELECT writer_no,writer_name,birth,num
+			FROM (SELECT writer_no,writer_name,birth,ROWNUM as num
+			FROM (SELECT writer_no,writer_name,birth FROM writer WHERE ${fs} LIKE '%${ss}%' ORDER BY writer_no)) WHERE num BETWEEN #{start} AND #{end}
+	 	</select>
+	 	
+	 	<select id="writerSearchTotalPage" resultType="int" parameterType="hashmap">
+	  		SELECT CEIL(COUNT(*)/#{rowSize}) FROM writer WHERE ${fs} LIKE '%${ss}%'
+	  	</select>
+  		
   </mapper>

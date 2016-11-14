@@ -46,5 +46,29 @@ public class WriterServiceImpl implements WriterService{
 		// TODO Auto-generated method stub
 		return wm.detailWriter(writer_no);
 	}
+
+	@Override
+	public List<WriterVO> printSysopWriter(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		return wm.printSysopWriter(map);
+	}
+
+	@Override
+	public int writerTotalPage(int rowSize) throws Exception {
+		// TODO Auto-generated method stub
+		return wm.writerTotalPage(rowSize);
+	}
+
+	@Override
+	public List<WriterVO> printSysopSearchWriter(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		return wm.printSearchWriter(map);
+	}
+
+	@Override
+	public int writerSearchTotalPage(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		return wm.writerSearchTotalPage(map);
+	}
 	
 }
