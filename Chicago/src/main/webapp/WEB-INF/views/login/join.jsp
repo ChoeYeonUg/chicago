@@ -198,7 +198,7 @@ function sample6_execDaumPostcode() {
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="button" value="<spring:message code="form.btn"/>" id="sendBtn" onclick="send"></td>
+				<td colspan="2"><input type="button" value="<spring:message code="form.btn"/>" id="sendBtn" onclick="send" class="btn btn-primary"></td>
 			</tr>
 		
 		</table>

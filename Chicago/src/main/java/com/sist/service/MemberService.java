@@ -10,6 +10,7 @@ import com.sist.dao.AddressVO;
 import com.sist.dao.MemberVO;
 
 public interface MemberService {
+	public boolean findPwd(MemberVO vo) throws Exception;
 	public void MemberJoin(MemberVO vo) throws Exception;
 	public boolean memberId(String id) throws Exception;
 	public int memberGrade(String id) throws Exception;

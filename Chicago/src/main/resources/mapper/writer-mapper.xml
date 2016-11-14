@@ -5,6 +5,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.sist.dao.mapper.WriterMapper">
+
   		<!-- <select id="printWriter" parameterType="hashmap" resultType="writer">
   			SELECT writer_name,birth,death, bookCount,num
  		FROM (SELECT writer_name,birth,death, bookCount,ROWNUM as num
