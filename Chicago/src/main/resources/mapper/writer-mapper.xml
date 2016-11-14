@@ -6,6 +6,6 @@
   
   <mapper namespace="com.sist.dao.mapper.WriterMapper">
   		<select id="printWriter" resultType="writer" parameterType="int">
-  			SELECT writer_name, birth, death, info, img FROM writer NATURAL JOIN goods WHERE book_category = #{book_category}
+  			SELECT writer_no,writer_name, birth, death, info, img FROM writer NATURAL JOIN goods WHERE book_category = #{book_category}
   		</select>
   </mapper>
