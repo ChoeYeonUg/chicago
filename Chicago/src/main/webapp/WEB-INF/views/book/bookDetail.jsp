@@ -98,7 +98,7 @@
 				<!-- 좌측 카테고리 끝 -->
 				<!-- 내용시작 -->
 				<div class="col-md-9">
-				<form>
+				<form action="purchase.do" method="post">
 				<table class="table_content" border="0">
 					<tr>
 						<!-- 책 이미지 -->
@@ -165,7 +165,7 @@
 									<td align="left">
 										<input type="button" value="찜목록 담기" onclick="lkBtn()"/>&nbsp;&nbsp;
 										<input type="button" value="북카트 담기" onclick="bcBtn()"/>&nbsp;&nbsp;
-										<a href="purchase.do?book_code=${book_code }"><input type="button" value="바로구매"/></a>
+										<%-- <a href="purchase.do?book_code=${book_code }?"> --%><input type="submit" value="바로구매"/><!-- </a> -->
 									</td>
 								</tr>
 							</table>
@@ -202,13 +202,17 @@
 					<c:forEach var="rvo" items="${list}">
 					<tr>
 					<tr>					
-						<td width="5%">
+<%-- 
+						<td width="20%" style="font-size:11px; color:#505050;" align="center">${rvo.score }</td>
+						<td width="40%" style="font-size:11px; color:#505050;" align="center">${rvo.content }</td>
+ --%>
+						<td>
 							<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(board_img/icon_star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
 								<p style="WIDTH: ${rvo.score}%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(board_img/icon_star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
 								</p>
 							</div>	
 						</td>
-						<td width="55%" style="font-size:11px; color:#505050;" align="left">&nbsp;&nbsp;&nbsp;${rvo.content }</td>
+						<td width="40%" style="font-size:11px; color:#505050;" align="left">${rvo.content }</td>
 						<td width="25%" style="font-size:11px; color:#505050;" align="center">${rvo.id }</td>
 						<td width="25%" style="font-size:11px; color:#505050;" align="center">
 						<fmt:formatDate value="${rvo.regdate}" pattern="yyyy년  MM월  dd일"/></td>

@@ -1,6 +1,7 @@
 package com.sist.dao;
 
 import java.util.Date;
+import java.util.List;
 
 public class WriterVO {
 	private int writer_no;
@@ -8,6 +9,29 @@ public class WriterVO {
 	private Date birth;
 	private Date death;
 	private String info;
+	private String img;
+	private int bookCount;
+	
+	private List<BookVO> list;	
+	
+	public List<BookVO> getList() {
+		return list;
+	}
+	public void setList(List<BookVO> list) {
+		this.list = list;
+	}
+	public int getBookCount() {
+		return bookCount;
+	}
+	public void setBookCount(int bookCount) {
+		this.bookCount = bookCount;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
 	public int getWriter_no() {
 		return writer_no;
 	}

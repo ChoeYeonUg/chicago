@@ -22,7 +22,11 @@
 	<sql id="where-addrid">
 		WHERE id = (SELECT id FROM member WHERE id=#{id})
 	</sql>
-      
+     
+     <select id="findPwd" resultType="int" parameterType="member">
+     	SELECT count(*) FROM member WHERE id=#{id} AND name=#{name} AND phone=#{phone}
+     </select>
+     
   	<select id="idCheck" resultType="int" parameterType="String">
   		SELECT count(*) FROM member <include refid="where-id"/>
   	</select>
@@ -81,7 +85,7 @@
 	
 	<!-- Modify Member Info -->
 	<update id="modyfyMemberInfo" parameterType="com.sist.dao.MemberVO">
-		UPDATE member SET addr=#{addr},zipcode=#{zipcode},email=#{email},phone=#{phone} <include refid="where-id"/>
+		UPDATE member SET name=#{name},gender=#{gender},addr=#{addr},zipcode=#{zipcode},email=#{email},phone=#{phone} <include refid="where-id"/>
 	</update>
 	
 	<!-- Check id, pwd for Modify Password -->
@@ -99,15 +103,9 @@
 		SELECT addr1,zipcode1,addr2,zipcode2,addr3,zipcode3 FROM addrs <include refid="where-addrid"/>
  	</select>
  	
- 	<!-- Insert Address -->
- 	<insert id="insertMemberDeliveryAddrs" parameterType="address">
-		INSERT INTO addrs(addr1,zipcode1,addr2,zipcode2,addr3,zipcode3)
-		VALUES(#{addr1},#{zipcode1},#{addr2},#{zipcode2},#{addr3},#{zipcode3}) <include refid="where-id"/>
-	</insert>
-	
 	<!-- Modify Member Address -->
 	<update id="modyfyMemberDeliveryAddrs" parameterType="hashmap">
-		UPDATE addrs SET addr1=#{addr1},zipcode1=#{zipcode1},addr2=#{addr2},zipcode2=#{zipcode2},addr3=#{addr3},zipcode3=#{zipcode3} <include refid="where-id"/>
+		UPDATE addrs SET addr1=#{addr1},zipcode1=#{zipcode1},addr2=#{addr2},zipcode2=#{zipcode2},addr3=#{addr3},zipcode3=#{zipcode3} <include refid="where-addrid"/>
 	</update>
 	
 	<!-- Withdraw Member -->

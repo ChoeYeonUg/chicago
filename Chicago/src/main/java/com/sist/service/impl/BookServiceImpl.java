@@ -109,4 +109,10 @@ public class BookServiceImpl implements BookService{
 		// TODO Auto-generated method stub
 		return bm.reviewIdCK(vo);
 	}
+
+	@Override
+	public int categoryCount() {
+		// TODO Auto-generated method stub
+		return bm.categoryCount();
+	}
 }

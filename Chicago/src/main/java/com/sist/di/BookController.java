@@ -12,12 +12,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+
 import com.sist.dao.BookVO;
 import com.sist.dao.ReviewVO;
 import com.sist.service.BookService;
@@ -192,25 +193,7 @@ public class BookController {
 		
 		return "book/sbPage";
 	}
-	/*	//검색하기
-	String sch_type = request.getParameter("sch_type");
-	String sch_value = request.getParameter("sch_value");
-	
-	Map mapSearch = new HashMap();
-	mapSearch.put("sch_type", sch_type);
-	mapSearch.put("sch_value", sch_value);
-	model.addAttribute("mapSearch", mapSearch);
-	
-	List<BookVO> list = bs.getSelect(mapSearch);
-	model.addAttribute("list", list);*/
 
-
-/*	@RequestMapping("wishlist")
-	public String wishlistPage(Model model) {
-		
-		return "member/wishlist";
-	}
-*/
 	@RequestMapping("bookReviewContent")
 	public String bookReviewContent(Model model,String book_code){
 		BookVO detailBook = bs.detailBook(book_code);
@@ -221,7 +204,6 @@ public class BookController {
 		
 		return"book/bookReviewContent";
 	}
-	
 	
 	@RequestMapping("bookContentReviewInsert")
 	@ResponseBody
@@ -238,6 +220,4 @@ public class BookController {
 		return "<script>" + "opener.parent.location.reload();" + "window.close();"+ "</script>";
 		
 	}
-	
-
 }

@@ -77,7 +77,7 @@
 							<dt>우편번호</dt>
 							<dd>
 								<div class="box_input box_postal">
-									<input type="text" class="tf_g" id="zipcode" name="zipcode" value="${vo.zipcode }">
+									<input type="text" class="tf_g" id="zipcode" name="zipcode" value="${vo.zipcode == 0 ? '' : vo.zipcode }">
 								</div>
 								<button type="button" class="btn_postal" onclick="execDaumPostcode()">우편번호</button>
 							</dd>

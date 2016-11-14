@@ -20,6 +20,22 @@
 
 
 
+
+
+#OrderlistTable {display: table; width: 100%;}
+.row {display: table-row;}
+.celH {display: table-cell; padding: 3px; border-bottom: 1px solid #DDD; font: bolder; color: #000000;}
+.cell {display: table-cell; padding: 3px; border-bottom: 1px solid #DDD;}
+.col1 {width: 5%;}
+.col2 {width: 30%;}
+.col3 {width: 10%;}
+.col4 {width: 15%;}
+.col5 {width: 15%;}
+.col6 {width: 10%;}
+.colB {width: 15%;}
+
+
+
 /* <My Page Main Form Set > */
 /* MyPageMainOutlineForm */
 #MyPageMainOutlineForm {
@@ -69,7 +85,7 @@
 
 /* MyPageContent */
 #MyPageContent {
-	background-color: #666666;
+	background-color: #ffffff;
 	width: 90%;
 	height: 100%;
 	border-radius: 0px;
@@ -80,7 +96,7 @@
 
 /* LeftContent */
 #LeftContent {
-	background-color: #333333;
+	background-color: #ffffff;
 	width: 20%;
 	height: 90%;
 	border-radius: 0px;
@@ -92,7 +108,7 @@
 
 /* MainContent */
 #MainContent {
-	background-color: #222222;
+	background-color: #ffffff;
 	width: 80%;
 	height: 90%;
 	border-radius: 0px;

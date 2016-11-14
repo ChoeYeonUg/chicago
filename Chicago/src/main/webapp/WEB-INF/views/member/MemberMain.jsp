@@ -11,7 +11,7 @@
 <meta >
 <title>Made By ChoDing!!</title>
 <link href="css/bootstrap.min.css" rel="stylesheet" />
-<link href="css/mypage_css/memberinfo.css" rel="stylesheet" />
+<link href="mypage_css/memberinfo.css" rel="stylesheet" />
 
 <!-- Theme skin -->
 <link href="skins/default.css" rel="stylesheet" />
@@ -47,10 +47,10 @@
 						<ul id="" class="">
 							<!-- Modify Member Info -->
 							<li class="">
-								<a data-toggle="" data-parent="" href="modyfyMemberInfo.do"><spring:message code="memberInfoModifyMain.memberinfohead"/></a>
+								<a data-toggle="" data-parent="" href="memberinfo.do"><spring:message code="memberInfoModifyMain.memberinfohead"/></a>
 								<ul id="" class="">
 									<li class="">
-										<a href="selectMemberInfo.do"><spring:message code="memberInfoModifyMain.btMemberInfoModify"/></a>
+										<a href="modifyMemberInfo.do"><spring:message code="memberInfoModifyMain.btMemberInfoModify"/></a>
 									</li>
 									<li class="">
 										<a href="modyfyMemberPwd.do"><spring:message code="memberInfoModifyMain.btMemberPasswordModify"/></a>
@@ -69,25 +69,20 @@
 							<!-- End Modify Member Info -->
 							<!-- OrderList Info -->
 							<li class="">
-								<a data-toggle="" data-parent="" href=""><spring:message code="memberInfoModifyMain.orderhead"/></a>
+								<a data-toggle="" data-parent="" href="orderlist.do"><spring:message code="memberInfoModifyMain.orderhead"/></a>
 								<ul id="" class="">
 									<li class="">
-									<a data-toggle="" data-parent="" href=""><spring:message code="memberInfoModifyMain.btOrderInfo"/></a>
-										<ul id="" class="">
-											<li class="">
-												<a href=""><spring:message code="memberInfoModifyMain.btMemberOrderInfo"/></a>
-											</li>
-											<li class="">
-												<a href=""><spring:message code="memberInfoModifyMain.btGuestOrderInfo"/></a>
-											</li>
-										</ul>
+										<a href="memberOrderList.do"><spring:message code="memberInfoModifyMain.btMemberOrderInfo"/></a>
+									</li>
+									<li class="">
+										<a href="guestOrderList.do"><spring:message code="memberInfoModifyMain.btGuestOrderInfo"/></a>
 									</li>
 								</ul>
 							</li>
 							<!-- End Orderlist Info -->
 							<!-- Member Wishlist Info -->
 							<li class="">
-								<a data-toggle="" data-parent="" href=""><spring:message code="memberInfoModifyMain.memberwishlisthead"/></a>
+								<a data-toggle="" data-parent="" href="wish.do"><spring:message code="memberInfoModifyMain.memberwishlisthead"/></a>
 								<ul id="" class="">
 									<li class="">
 										<a href=".do"><spring:message code="memberInfoModifyMain.btMemberWishlistInfo"/></a>
@@ -97,7 +92,7 @@
 							<!-- End Member Wishlist Info -->
 							<!-- Member Question Info -->
 							<li class="">
-								<a data-toggle="" data-parent="" href=""><spring:message code="memberInfoModifyMain.memberQuestionhead"/></a>
+								<a data-toggle="" data-parent="" href="memberquestion.do"><spring:message code="memberInfoModifyMain.memberQuestionhead"/></a>
 								<ul id="" class="">
 									<li class="">
 										<a href=".do"><spring:message code="memberInfoModifyMain.btMemberQuestion"/></a>

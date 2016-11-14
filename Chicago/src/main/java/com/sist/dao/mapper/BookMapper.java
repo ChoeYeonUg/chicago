@@ -30,4 +30,5 @@ public interface BookMapper {
 	public List<ReviewVO> bookReviewList(String book_code);
 	public void contentReviewinsert(ReviewVO vo);
 	public int reviewIdCK(ReviewVO vo);
+	public int categoryCount();
 }
