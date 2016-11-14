@@ -82,7 +82,7 @@
 							<!-- End Orderlist Info -->
 							<!-- Member Wishlist Info -->
 							<li class="">
-								<a data-toggle="" data-parent="" href="wish.do"><spring:message code="memberInfoModifyMain.memberwishlisthead"/></a>
+								<a href="wish.do" data-toggle="" data-parent=""><spring:message code="memberInfoModifyMain.memberwishlisthead"/></a>
 								<ul id="" class="">
 									<li class="">
 										<a href=".do"><spring:message code="memberInfoModifyMain.btMemberWishlistInfo"/></a>
@@ -92,13 +92,10 @@
 							<!-- End Member Wishlist Info -->
 							<!-- Member Question Info -->
 							<li class="">
-								<a data-toggle="" data-parent="" href="memberquestion.do"><spring:message code="memberInfoModifyMain.memberQuestionhead"/></a>
+								<a href="memberquestion.do" data-toggle="" data-parent=""><spring:message code="memberInfoModifyMain.memberQuestionhead"/></a>
 								<ul id="" class="">
 									<li class="">
 										<a href=".do"><spring:message code="memberInfoModifyMain.btMemberQuestion"/></a>
-									</li>
-									<li class="">
-										<a href=".do"><spring:message code="memberInfoModifyMain.btAllQuestion"/></a>
 									</li>
 								</ul>
 							</li>

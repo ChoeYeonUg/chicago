@@ -30,6 +30,7 @@ public class MemberController {
 	@Resource(name="memberService")
 	private MemberService ms;
 	
+	
 	/* HeadMenu */
 	@RequestMapping("mypage.do")
 	public String member_page(Model model, HttpServletRequest request) throws Exception {
@@ -44,7 +45,27 @@ public class MemberController {
 		
 	}
 	
+	
 	/* Secure Page */
+	@RequestMapping("membersecurepwd.do")
+	public String memberSecurePwd_page(Model model, HttpServletRequest request, String typecheck) throws Exception {
+		
+		model.addAttribute(typecheck);
+		
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
+		
+		model.addAttribute("MemberMain_cmi", "../MemberMain.jsp");
+		model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
+		
+		return "main/main";
+		
+	}
+	
+	
+	
+	
+	
 	@RequestMapping(value="membersecurepwd_ok.do", method=RequestMethod.POST)
 	public String membersecurepwd_ok(Model model, HttpServletRequest request, String USER_Check_PWD, String typecheck,
 			RedirectAttributes redirectAttributes) throws Exception {
@@ -70,15 +91,28 @@ public class MemberController {
 					return "redirect:memberAddrsInfo.do";
 					
 				} else if(typecheck.equals("mo")) {
+					
 					redirectAttributes.addFlashAttribute("check", "ok");
 					return "redirect:memberOrderList.do";
-				}
+					
+				} /*else if(typecheck.equals("mw")) {
+				
+					redirectAttributes.addFlashAttribute("check", "ok");
+					return "redirect:memberWishList.do";
+					
+				}*/
 			
-			} 		
+			} else {
+				
+				model.addAttribute("typecheck", typecheck);
+				model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
+				
+			}
 		
-		return "redirect:membersecurepwd_ok.do";
+		return "redirect:membersecurepwd.do";
 		
 	}
+	
 	
 	/* Member Info HeadMenu */
 	@RequestMapping("memberinfo.do")
@@ -94,12 +128,16 @@ public class MemberController {
 		
 	}
 	
+	
 	/* Member Info SideMenu Include */
 	@RequestMapping("modifyMemberInfo.do")
 	public String member_side_info_page(Model model, HttpServletRequest request, String typecheck) throws Exception {
+		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
+		
 		try{
+			
 			Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
 			String check = (String) flashMap.get("check");
 			model.addAttribute("cmi", "../member/memberinfomodify/ModifyMemderInfo.jsp");
@@ -107,7 +145,9 @@ public class MemberController {
 			String sessionid = (String)hs.getAttribute("id");
 			MemberVO vo = ms.selectMember(sessionid);
 			model.addAttribute("vo", vo);
-		}catch(Exception e){
+			
+		}catch(Exception ex){
+			
 			typecheck="mi";
 			
 			model.addAttribute("typecheck", typecheck);
@@ -116,7 +156,9 @@ public class MemberController {
 		}
 		
 		return "main/main";
+		
 	}
+	
 	
 	@RequestMapping(value="modyfyMemberInfo_ok.do", method=RequestMethod.POST)
 	public String modyfyMemberInfo_ok(Model model, MemberVO vo, HttpServletRequest request, int zipcode, String addr, String email, String phone, String name, int gender) throws Exception {
@@ -152,9 +194,10 @@ public class MemberController {
 			
 		}
 		
-		return "redirect:modyfyMemberInfo.do";
+		return "redirect:main.do";
 		
 	}
+	
 	
 	@RequestMapping("modyfyMemberPwd.do")
 	public String member_side_pwd_page(Model model, HttpServletRequest request) throws Exception {
@@ -168,6 +211,7 @@ public class MemberController {
 		return "main/main";
 		
 	}
+	
 	
 	@RequestMapping(value="modyfyMemberPwd_ok.do", method=RequestMethod.POST)
 	public String modyfyMemberPwd_ok(Model model, MemberVO vo, HttpServletRequest request,String USER_NewPWD, String USER_C_NewPWD) throws Exception {
@@ -188,7 +232,7 @@ public class MemberController {
 				map.put("id", sessionid);
 				ms.modyfyMemberPwd(map);
 				
-				model.addAttribute("jsp", "../main/main.jsp");
+				return "redirect:main.do";
 				
 			} else {
 				
@@ -204,17 +248,32 @@ public class MemberController {
 			
 		}
 		
-		return "redirect:modyfyMemberInfo.do";
+		return "redirect:main.do";
 		
 	}
 	
+	
 	@RequestMapping("memberPoint.do")
-	public String member_side_point_page(Model model, MemberVO vo, HttpServletRequest request) throws Exception {
+	public String member_side_point_page(Model model, MemberVO vo, HttpServletRequest request, String gradename) throws Exception {
 		
 		HttpSession hs = request.getSession();
 		String sessionid = (String) hs.getAttribute("id");
 		
 		vo = ms.selectMember(sessionid);
+		
+		if(vo.getGrade()==1) {
+			gradename = "어섭쇼 보스~~~";
+		} else if(vo.getGrade()==2) {
+			gradename = "고목클라스";
+		} else if(vo.getGrade()==3) {
+			gradename = "적당한데??";
+		} else if(vo.getGrade()==4) {
+			gradename = "아직 어리군...";
+		} else if(vo.getGrade()==5) {
+			gradename = "새싹";
+		}
+		
+		model.addAttribute("gradename", gradename);
 		model.addAttribute("vo", vo);
 		
 		model.addAttribute("jsp", "member.jsp");
@@ -242,11 +301,13 @@ public class MemberController {
 			String sessionid = (String)hs.getAttribute("id");
 			AddressVO avo = ms.selectMemberDeliveryAddrs(sessionid);
 			model.addAttribute("avo", avo);			
-		}catch(Exception e){
-			/*typecheck="ma";*/
+		}catch(Exception ex){
+			
 			model.addAttribute("typecheck", "ma");
 			model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
+			
 		}
+		
 		return "main/main";
 		
 	}
@@ -300,7 +361,7 @@ public class MemberController {
 			
 		}
 		
-		return "redirect:memberAddrsInfo.do";
+		return "redirect:main.do";
 		
 	}
 	
@@ -345,50 +406,6 @@ public class MemberController {
 		}
 		
 		return "redirect:main.do";
-		
-	}
-	
-	
-	
-
-	
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
-	/* Member Wishlist HeadMenu */ 
-	@RequestMapping("wish.do")
-	public String member_wish_page(Model model, HttpServletRequest request) {
-		
-		model.addAttribute("jsp", "member.jsp");
-		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
-		
-		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
-		model.addAttribute("cmi", "../member/memberwishlist/MemberWishList.jsp");
-		
-		return "main/main";
-		
-	}
-	
-	
-	
-	/* Member Question HeadMenu */ 
-	@RequestMapping("memberquestion.do")
-	public String member_question_page(Model model, HttpServletRequest request) {
-		
-		model.addAttribute("jsp", "member.jsp");
-		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
-		
-		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
-		model.addAttribute("cmi", "../member/memberquestion/MemberQuestionMain.jsp");
-		
-		return "main/main";
 		
 	}
 	
