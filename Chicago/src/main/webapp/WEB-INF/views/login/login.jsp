@@ -56,10 +56,10 @@
 			</div>
 		</div>
 	</form:form>
-	
+	<%-- 
 	<c:if test="${id ne null }">
 	<h2>현재 접속한 아아디 ${id }</h2>
 	</c:if>
-	
+	 --%>
 </body>
 </html>

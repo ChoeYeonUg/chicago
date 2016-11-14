@@ -70,14 +70,14 @@
               					<li><a href="noticeboard.do"><spring:message code="header.noticBoard"/></a></li>
                                 <li><a href="faqboard.do?faq_category=0"><spring:message code="header.faqBoard"/></a></li>
 								<li><a href="secretboard.do"><spring:message code="header.secretBoard"/></a></li>
-								<li><a href="reviewboard.do">리뷰보드</a></li>
+								<li><a href="reviewboard.do">리뷰게시판</a></li>
             				</ul>
           				</li>
           				<!-- Modified By Choding -->
           		   		<li><a class="drop" href="mypage.do"><spring:message code="header.mypage"/></a>
             				<ul>
               					<li><a href="memberinfo.do"><spring:message code="header.modifi"/></a></li>
-                                <li><a href="order.do"><spring:message code="header.ppl"/></a></li>
+                                <li><a href="orderlist.do"><spring:message code="header.ppl"/></a></li>
 								<li><a href="wish.do"><spring:message code="header.egd"/></a></li>
 								<li><a href="memberquestion.do"><spring:message code="header.qu"/></a></li>
             				</ul>

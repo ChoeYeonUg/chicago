@@ -13,7 +13,38 @@ public class ReviewVO {
 	private Date regdate;
 	private int num;
 	private String dbday;
+	private String star_input; 
+	private String img;
+	private String book_name;
+	private String writer;
 	
+	
+	
+	
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	public String getBook_name() {
+		return book_name;
+	}
+	public void setBook_name(String book_name) {
+		this.book_name = book_name;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	public String getStar_input() {
+		return star_input;
+	}
+	public void setStar_input(String star_input) {
+		this.star_input = star_input;
+	}
 	public Double getScore() {
 		return score;
 	}
