@@ -12,6 +12,10 @@
 		orders.id=#{id}
 	</sql>
 	
+	<!-- View Member Orderlist for PageSite -->
+	<select id="memberOrderlistTotalPage" resultType="int" parameterType="int">
+  		SELECT CEIL(COUNT(*)/7) FROM orders WHERE id=#{id}
+  	</select>
 	
 	<!-- Select Member Orderlist -->
 	<select id="selectOrderlist" resultType="OrderlistVO" parameterType="hashmap">

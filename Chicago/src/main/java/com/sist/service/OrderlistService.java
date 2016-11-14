@@ -7,6 +7,7 @@ import com.sist.dao.*;
 
 public interface OrderlistService {
 	
+	public int memberOrderlistTotalPage(int rowSize) throws Exception;
 	public List<OrderlistVO> selectOrderlist(Map map) throws Exception;
 	
 }

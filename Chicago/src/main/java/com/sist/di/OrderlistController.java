@@ -43,9 +43,21 @@ public class OrderlistController {
 	
 	/* Member Order SideMenu Include */
 	@RequestMapping("memberOrderList.do")
-	public String memberOrderlist_page(Model model, HttpServletRequest request, String typecheck) {
+	public String memberOrderlist_page(Model model, HttpServletRequest request, String typecheck, int totalOrderlist, String page) {
+		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
+		
+		if(page == null) page = "1";
+		
+		int curPage = Integer.parseInt(page);
+		
+		int rowSize = 7;
+		int start = (curPage * rowSize) - (rowSize - 1);
+		int end = curPage * rowSize;
+		int block = 5;
+		int fromPage = ((curPage - 1) / block * block) + 1;
+		int toPage = ((curPage - 1) / block * block) + block;
 		
 		try{
 			Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
@@ -54,15 +66,29 @@ public class OrderlistController {
 			HttpSession hs = request.getSession();
 			String sessionid = (String)hs.getAttribute("id");
 			
-			Map map = new HashMap();
-			
-			map.put("id", sessionid);
-			List<OrderlistVO> list = ols.selectOrderlist(map);
-			
-			model.addAttribute("list", list);
-			
-			
+				
+				Map map = new HashMap();
+				map.put("start", start);
+				map.put("end", end);
+				map.put("rowSize", rowSize);
+				map.put("totalOrderlist", totalOrderlist);
+				
+				int totalPage = ols.memberOrderlistTotalPage(totalOrderlist);
+				
+				if(toPage > totalPage) toPage = totalPage;
+				
+				map.put("id", sessionid);
+				List<OrderlistVO> list = ols.selectOrderlist(map);
+				
+				model.addAttribute("list", list);
+				model.addAttribute("block", block);
+				model.addAttribute("toPage", toPage);
+				model.addAttribute("fromPage", fromPage);
+				model.addAttribute("curPage", curPage);
+				model.addAttribute("totalPage", totalPage);
+				
 		}catch(Exception ex) {
+			
 			typecheck="mo";
 			
 			model.addAttribute("typecheck", typecheck);
@@ -89,5 +115,41 @@ public class OrderlistController {
 	}
 	
 	
+	
+	
+	
+	
+
+	
+	
+	/* Member Wishlist HeadMenu */ 
+	@RequestMapping("wish.do")
+	public String member_wish_page(Model model, HttpServletRequest request) {
+		
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
+		
+		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+		model.addAttribute("cmi", "../member/memberwishlist/MemberWishList.jsp");
+		
+		return "main/main";
+		
+	}
+	
+	
+	
+	/* Member Question HeadMenu */ 
+	@RequestMapping("memberquestion.do")
+	public String member_question_page(Model model, HttpServletRequest request) {
+		
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
+		
+		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+		model.addAttribute("cmi", "../member/memberquestion/MemberQuestionMain.jsp");
+		
+		return "main/main";
+		
+	}
 	
 }

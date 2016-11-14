@@ -61,7 +61,7 @@
 											<label for="USER_GRADE"><spring:message code="MemberPoint.myGrade"/></label>
 										</dt>
 										<dd>
-											<h3>${vo.grade}</h3>
+											<h3>${gradename}</h3>
 										</dd>
 										
 										<!-- View POINT -->

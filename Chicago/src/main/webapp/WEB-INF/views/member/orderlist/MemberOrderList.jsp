@@ -46,7 +46,7 @@
 			</div>
 			<div class="OrderlistSettingForm">
 				<div class="MemberOrderlistHeadlineForm">
-					<label class="MemberInfoHeadline"><%=request.getAttribute("id") %>님의 주문 내역</label>
+					<label class="MemberInfoHeadline">${vo.id}님의 주문 내역</label>
 				</div>
 				<div class="MemberOrderlistContentForm">
 					<div id="InnerBox">
@@ -65,18 +65,30 @@
 										<span class="celH colB">취소/환불</span>
 									</div>
 									<c:forEach var="vo" items="${list}">
-									<div class="row">
-										<span class="cell col1">${vo.order_id}</span>
-										<span class="cell col2">${vo.book_name}</span>
-										<span class="cell col3">${vo.amount}</span>
-										<span class="cell col4">${vo.total_price}</span>
-										<span class="cell col5">${vo.order_date}</span>
-										<span class="cell col6">${vo.delivery}</span>
-										<span class="cell colB">
-											<input type="button" onclick="#" value="주문취소">
-											<input type="button" onclick="#" value="환불신청하기">
-										</span>
-									</div>
+											<%-- <c:choose>
+												<c:when test="${vo !empty}"> --%>
+													<div class="row">
+														<span class="cell col1">${vo.order_id}</span>
+														<span class="cell col2">${vo.book_name}</span>
+														<span class="cell col3">${vo.amount}</span>
+														<span class="cell col4">${vo.total_price}</span>
+														<span class="cell col5">${vo.order_date}</span>
+														<span class="cell col6">${vo.delivery}</span>
+														<span class="cell colB">
+															<input type="button" onclick="#" value="주문취소">
+															<input type="button" onclick="#" value="환불신청하기">
+														</span>
+													</div>
+												<%-- </c:when>
+												
+												<c:otherwise>
+													<div class="row">
+														<span>
+															구매목록이 없습니다!!!
+														</span>
+													</div>
+												</c:otherwise>
+											</c:choose> --%>
 									</c:forEach>
 								</div>
 							</fieldset>

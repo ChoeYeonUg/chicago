@@ -16,8 +16,12 @@ public class OrderlistServiceImpl implements OrderlistService{
 	
 	@Resource(name="orderlistMapper")
 	private OrderlistMapper mapper;
-
-
+	
+	@Override
+	public int memberOrderlistTotalPage(int rowSize) throws Exception {
+		return mapper.memberOrderlistTotalPage(rowSize);
+	}
+	
 	@Override
 	public List<OrderlistVO> selectOrderlist(Map map) throws Exception {
 		return mapper.selectOrderlist(map);
