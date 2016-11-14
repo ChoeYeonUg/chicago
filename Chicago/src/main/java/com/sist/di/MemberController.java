@@ -56,14 +56,15 @@ public class MemberController {
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
 		model.addAttribute("MemberMain_cmi", "../MemberMain.jsp");
-		model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
 		
-		return "main/main";
+		//redirectAttributes.addFlashAttribute("check", "ok");
+		return "redirect:membersecurepwd.do";
+		
+		//model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
+		
+		//return "main/main";
 		
 	}
-	
-	
-	
 	
 	
 	@RequestMapping(value="membersecurepwd_ok.do", method=RequestMethod.POST)
@@ -80,6 +81,7 @@ public class MemberController {
 		model.addAttribute("MemberMain_cmi", "../MemberMain.jsp");
 		
 			if(USER_Check_PWD.equals(cpwd)) {
+				
 				if(typecheck.equals("mi")) {
 					
 					redirectAttributes.addFlashAttribute("check", "ok");
@@ -104,8 +106,7 @@ public class MemberController {
 			
 			} else {
 				
-				model.addAttribute("typecheck", typecheck);
-				model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
+				return "redirect:membersecurepwd.do";
 				
 			}
 		
@@ -152,6 +153,7 @@ public class MemberController {
 			
 			model.addAttribute("typecheck", typecheck);
 			model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
+			
 			
 		}
 		

@@ -18,8 +18,8 @@ public class OrderlistServiceImpl implements OrderlistService{
 	private OrderlistMapper mapper;
 	
 	@Override
-	public int memberOrderlistTotalPage(int rowSize) throws Exception {
-		return mapper.memberOrderlistTotalPage(rowSize);
+	public int memberOrderlistTotalPage(String id) throws Exception {
+		return mapper.memberOrderlistTotalPage(id);
 	}
 	
 	@Override

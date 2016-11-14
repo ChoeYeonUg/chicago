@@ -43,7 +43,7 @@ public class OrderlistController {
 	
 	/* Member Order SideMenu Include */
 	@RequestMapping("memberOrderList.do")
-	public String memberOrderlist_page(Model model, HttpServletRequest request, String typecheck, int totalOrderlist, String page) {
+	public String memberOrderlist_page(Model model, HttpServletRequest request, String typecheck, String page) {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
@@ -71,9 +71,8 @@ public class OrderlistController {
 				map.put("start", start);
 				map.put("end", end);
 				map.put("rowSize", rowSize);
-				map.put("totalOrderlist", totalOrderlist);
 				
-				int totalPage = ols.memberOrderlistTotalPage(totalOrderlist);
+				int totalPage = ols.memberOrderlistTotalPage(sessionid);
 				
 				if(toPage > totalPage) toPage = totalPage;
 				
