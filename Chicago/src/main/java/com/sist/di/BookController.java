@@ -57,59 +57,74 @@ public class BookController {
 	// 카테고리 별 리스트 보여주는 페이지 
 	@RequestMapping("categoryList")
 	public String book_cate_page1(Model model, int book_category, String page, String book_code, String sch_type, String sch_value) {
-		// 페이지 구하기 
-		if(page == null) {
-			page = "1"; // 첫번째 페이지를 메인으로 보여주기 
+		
+		try {
+			// 페이지 구하기 
+			if(page == null) {
+				page = "1"; // 첫번째 페이지를 메인으로 보여주기 
+			}
+			
+			int curPage = Integer.parseInt(page); // 현재 페이지를 숫자값으로 바꿔주기
+			int rowSize = 10; // 1페이지에 10개의 목록이 나오도록 값 주기
+			int start = (curPage * rowSize) - (rowSize-1); // 시작글
+			int end = curPage * rowSize; // 마지막글
+			
+			Map map = new HashMap(); // 해쉬맵 생성
+			map.put("start", start); // 맵에 시작글 넣어주기
+			map.put("end", end); // 맵에 마지막글 넣어주기
+			map.put("category", book_category); // 맵에 총 권수 넣어주기
+			
+			// list 
+			List<BookVO> cateList;
+			
+			/*int totalPage = bs.cateFirTotalPage(book_category);*/
+			int totalPage = 1;
+			int count = bs.cateFirCount(book_category);
+			count = count - ((curPage*5)-5);
+						
+			// 검색 조건이 들어가지 않을 때 
+			if(sch_type == null || sch_type.equals("")) {
+				cateList = bs.bookListCateFirst(map);
+				totalPage = bs.cateFirTotalPage(rowSize);
+			}
+			// 검색 조건이 들어갔을 때 
+			else{
+				// 검색 내용만 페이지에 나오게 하기 위해 넣음
+				Map map2 = new HashMap();
+				map2.put("sch_type", sch_type);
+				map2.put("sch_value", sch_value);
+				map2.put("rowSize", rowSize);
+				
+				model.addAttribute("sch_type", sch_type);
+				model.addAttribute("sch_value", sch_value);
+				map.put("sch_type", sch_type);
+				map.put("sch_value", sch_value);
+				
+				cateList = bs.getSelect(map);
+				totalPage = bs.getSelectTotal(map2);
+			}
+			
+			// 블록 나누기
+			int block = 5;
+			int fromPage = ((curPage-1)/block*block)+1;
+			int toPage = ((curPage-1)/block*block)+block;
+			if(toPage>totalPage) {
+				toPage = totalPage;
+			}
+			
+			model.addAttribute("curPage", curPage);
+			model.addAttribute("totalPage", totalPage);
+			model.addAttribute("book_category", book_category);
+			model.addAttribute("fromPage", fromPage);
+			model.addAttribute("toPage", toPage);
+			model.addAttribute("block", block);
+			model.addAttribute("count", count);
+			model.addAttribute("cateList", cateList);
+			model.addAttribute("page", page);
+			model.addAttribute("book_code",book_code);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		int curPage = Integer.parseInt(page); // 현재 페이지를 숫자값으로 바꿔주기
-		int rowSize = 10; // 1페이지에 10개의 목록이 나오도록 값 주기
-		int start = (curPage * rowSize) - (rowSize-1); // 시작글
-		int end = curPage * rowSize; // 마지막글
-		
-/*		int bcate = Integer.parseInt(book_category);*/
-		
-		Map map = new HashMap(); // 해쉬맵 생성
-		map.put("start", start); // 맵에 시작글 넣어주기
-		map.put("end", end); // 맵에 마지막글 넣어주기
-		map.put("category", book_category); // 맵에 총 권수 넣어주기
-
-		int totalPage = bs.cateFirTotalPage(book_category);
-		int count = bs.cateFirCount(book_category);
-		count = count - ((curPage*5)-5);
-		
-		// 블록 나누기
-		int block = 5;
-		int fromPage = ((curPage-1)/block*block)+1;
-		int toPage = ((curPage-1)/block*block)+block;
-		if(toPage>totalPage) {
-			toPage = totalPage;
-		}
-		List<BookVO> cateList;
-		
-		// 검색 조건이 들어가지 않을 때 
-		if(sch_type == null || sch_type.equals("")) {
-			cateList = bs.bookListCateFirst(map);
-		}
-		// 검색 조건이 들어갔을 때 
-		else{
-			model.addAttribute("sch_type", sch_type);
-			model.addAttribute("sch_value", sch_value);
-			map.put("sch_type", sch_type);
-			map.put("sch_value", sch_value);
-			cateList = bs.getSelect(map);
-		}
-		
-		model.addAttribute("curPage", curPage);
-		model.addAttribute("totalPage", totalPage);
-		model.addAttribute("book_category", book_category);
-		model.addAttribute("fromPage", fromPage);
-		model.addAttribute("toPage", toPage);
-		model.addAttribute("block", block);
-		model.addAttribute("count", count);
-		model.addAttribute("cateList", cateList);
-		model.addAttribute("page", page);
-		model.addAttribute("book_code",book_code);
 		model.addAttribute("jsp", "book.jsp");
 		model.addAttribute("book_jsp", "../book/categoryList.jsp");
 		return "main/main";

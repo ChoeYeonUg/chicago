@@ -36,9 +36,17 @@
 	
 	<!-- 카테고리 검색 -->
 	<select id="select" resultType="bookVO" parameterType="hashmap">
-		SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img
+		SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img, num FROM 
+		(SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img, rownum as num FROM
+		(SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img
 		FROM goods
-		WHERE book_category=#{category} AND ${sch_type} LIKE '%${sch_value}%'
+		WHERE book_category=#{category} AND ${sch_type} LIKE '%${sch_value}%'))
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- 카테고리 검색 총 페이지 -->
+	<select id="selectTotal" resultType="int" parameterType="int">
+		SELECT CEIL(COUNT(*)/#{rowSize}) FROM goods WHERE ${sch_type} LIKE '%${sch_value}%' 
 	</select>
 	
 	<!-- 상세 페이지 정보 -->
@@ -110,6 +118,7 @@
 	<select id="printSearchBookTotalPage" resultType="int" parameterType="int">
 		SELECT CEIL(COUNT(*)/#{rowSize}) FROM goods WHERE ${fs} LIKE '%${ss}%'
 	</select>
+	
 	
 	
 </mapper>

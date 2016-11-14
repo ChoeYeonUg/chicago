@@ -155,7 +155,7 @@
 										<img src="book_img\down.png" alt="downBtn" style="width:20px;height:20px;" onclick="btdown()"/>
 										<input type="text" value="${defAmount }" name="amount" id="defamount" readonly="readonly" size="1" style="text-align: center;"/>
 										<input type="hidden" value="${detailBook.book_code }" name="book_code"/>
-										<%-- <input type="hidden" value="${detailBook.amount }" id="amount"/> --%>
+										<input type="hidden" value="${detailBook.amount }" id="amount"/>
 										<img src="book_img\up.png" alt="upBtn" style="width:20px;height:20px;" onclick="btup()"/>
 									</td>
 								</tr>

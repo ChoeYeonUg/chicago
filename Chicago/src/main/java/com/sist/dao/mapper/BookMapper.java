@@ -16,6 +16,7 @@ public interface BookMapper {
 	public void wishpop(Map map);
 	//검색기능
 	public List<BookVO> select(Map map);
+	public int selectTotal(Map map);
 	//관리자
 	public List<BookVO> printSysopBook(Map map);
 	public int printBookTotalPage(int rowSize);
