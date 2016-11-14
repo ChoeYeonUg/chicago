@@ -111,5 +111,9 @@
 		SELECT CEIL(COUNT(*)/#{rowSize}) FROM goods WHERE ${fs} LIKE '%${ss}%'
 	</select>
 	
+	<select id="categoryCount" resultType="int">
+		SELECT count(DISTINCT book_category) FROM goods
+	</select>
+	
 	
 </mapper>

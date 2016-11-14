@@ -5,7 +5,79 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.sist.dao.mapper.WriterMapper">
-  		<select id="printWriter" resultType="writer" parameterType="int">
-  			SELECT writer_no,writer_name, birth, death, info, img FROM writer NATURAL JOIN goods WHERE book_category = #{book_category}
+
+  		<!-- <select id="printWriter" parameterType="hashmap" resultType="writer">
+  			SELECT writer_name,birth,death, bookCount,num
+ 		FROM (SELECT writer_name,birth,death, bookCount,ROWNUM as num
+ 		FROM (SELECT writer_name,birth,death, count(writer_name) as bookCount FROM writer JOIN goods ON(goods.writer_no = writer.writer_no) WHERE book_category = #{book_category} GROUP BY writer_name,birth,death))
+ 		WHERE num BETWEEN #{start} AND #{end}
+  		</select> -->
+  		<select id="printWriterTotalPage" parameterType="hashmap" resultType="int">
+  			SELECT CEIL(count(DISTINCT writer_name)/#{rowSize}) FROM writer JOIN goods ON(goods.writer_no = writer.writer_no) WHERE book_category = #{book_category}
   		</select>
+  		
+  		<!-- 저자란에서 검색은 저자 이름으로만 이루어짐 -->
+  		<!-- <select id="printSearchWriter" parameterType="hashmap" resultType="writer">
+  			SELECT writer_name,birth,death, bookCount,num
+ 		FROM (SELECT writer_name,birth,death, bookCount,ROWNUM as num
+ 		FROM (SELECT writer_name,birth,death, count(writer_name) as bookCount FROM writer JOIN goods ON(goods.writer_no = writer.writer_no) WHERE writer_name = #{writer_name} GROUP BY writer_name,birth,death))
+ 		WHERE num BETWEEN #{start} AND #{end}
+  		</select> -->
+  		<select id="printSearchWriterTotalPage" parameterType="hashmap" resultType="int">
+  			SELECT CEIL(count(DISTINCT writer_name)/#{rowSize}) FROM writer JOIN goods ON(goods.writer_no = writer.writer_no) WHERE writer_name LIKE '%${ss}%'
+  		</select>
+  		
+  		<resultMap type="writer" id="writerMap">
+  			<result property="writer_no" column="writer_no"/>
+  			<result property="writer_name" column="writer_name"/>
+  			<result property="birth" column="birth"/>
+  			<result property="death" column="death"/>
+  			<collection property="list" column="writer_no" ofType="book" javaType="ArrayList" resultMap="bookMap"/>
+  		</resultMap>
+  		<resultMap type="book" id="bookMap">
+  			<result property="book_code" column="book_code"  />
+  			<result property="book_name" column="book_name"/>
+  			<result property="img" column="img"/>
+  			<result property="publication" column="publication"/>
+  		</resultMap>
+  		
+  		<select id="printWriter" parameterType="hashmap" resultMap="writerMap">
+  		SELECT writer_no,writer_name,birth,death,book_code,book_name,img,publication,num
+ 		FROM (SELECT writer_no,writer_name,birth,death,book_code,book_name,img,publication,ROWNUM as num
+ 		FROM (SELECT goods.writer_no,writer_name,birth,death,book_code,book_name,goods.img,publication FROM writer JOIN goods ON(goods.writer_no = writer.writer_no) WHERE book_category = #{book_category} ORDER BY writer_name, publication))
+ 		WHERE writer_no IN (SELECT writer_no 
+ 		FROM (SELECT writer_no,num
+ 		FROM (SELECT writer_no,ROWNUM as num
+ 		FROM (SELECT goods.writer_no FROM writer JOIN goods ON(goods.writer_no = writer.writer_no) WHERE book_category = #{book_category} GROUP BY goods.writer_no))
+ 		WHERE num BETWEEN #{start} AND #{end}))
+ 		<!-- WHERE num BETWEEN #{start} AND #{end} -->
+  		</select>
+  		
+  		
+  		<select id="printSearchWriter" parameterType="hashmap" resultMap="writerMap">
+  			SELECT writer_no,writer_name,birth,death,book_code,book_name,img,publication,num
+ 		FROM (SELECT writer_no,writer_name,birth,death,book_code,book_name,img,publication,ROWNUM as num
+ 		FROM (SELECT goods.writer_no,writer_name,birth,death,book_code,book_name,goods.img,publication FROM writer JOIN goods ON(goods.writer_no = writer.writer_no) WHERE writer_name LIKE '%${ss}%' ORDER BY writer_name, publication))
+ 		WHERE writer_no IN (SELECT writer_no 
+ 		FROM (SELECT writer_no,num
+ 		FROM (SELECT writer_no,ROWNUM as num
+ 		FROM (SELECT goods.writer_no FROM writer JOIN goods ON(goods.writer_no = writer.writer_no) WHERE writer_name LIKE '%${ss}%' GROUP BY goods.writer_no))
+ 		WHERE num BETWEEN #{start} AND #{end}))
+  		</select>
+  		
+  		<resultMap type="writer" id="detailWriterMap">
+  			<result property="writer_no" column="writer_no"/>
+  			<result property="writer_name" column="writer_name"/>
+  			<result property="birth" column="birth"/>
+  			<result property="death" column="death"/>
+  			<result property="info" column="info"/>
+  			<result property="img" column="wimg"/>
+  			<collection property="list" column="writer_no" ofType="book" javaType="ArrayList" resultMap="bookMap"/>
+  		</resultMap>
+  		<select id="detailWriter" parameterType="int" resultMap="detailWriterMap">
+  			SELECT writer_no,writer_name,birth,death,info,wimg,book_code,book_name,img,publication,num
+ 		FROM (SELECT writer_no,writer_name,birth,death,info,wimg,book_code,book_name,img,publication,ROWNUM as num
+ 		FROM (SELECT goods.writer_no,writer_name,birth,death,info,writer.img as wimg,book_code,book_name,goods.img,publication FROM writer JOIN goods ON(goods.writer_no = writer.writer_no) WHERE writer.writer_no = #{writer_no} ORDER BY writer_name, publication))
+  		</select>
+  		
   </mapper>

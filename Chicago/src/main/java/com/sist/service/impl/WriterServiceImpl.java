@@ -1,6 +1,7 @@
 package com.sist.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -17,9 +18,33 @@ public class WriterServiceImpl implements WriterService{
 	private WriterMapper wm;
 	
 	@Override
-	public List<WriterVO> printWriter(int book_category) throws Exception {
+	public List<WriterVO> printWriter(Map map) throws Exception {
 		// TODO Auto-generated method stub
-		return wm.printWriter(book_category);
+		return wm.printWriter(map);
+	}
+
+	@Override
+	public int printWriterTotalPage(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		return wm.printWriterTotalPage(map);
+	}
+
+	@Override
+	public List<WriterVO> printSearchWriter(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		return wm.printSearchWriter(map);
+	}
+
+	@Override
+	public int printSearchWriterTotalPage(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		return wm.printSearchWriterTotalPage(map);
+	}
+
+	@Override
+	public WriterVO detailWriter(int writer_no) throws Exception {
+		// TODO Auto-generated method stub
+		return wm.detailWriter(writer_no);
 	}
 	
 }

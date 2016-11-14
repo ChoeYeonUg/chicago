@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -36,7 +37,7 @@ public class PurchaseController {
 	private static final Logger logger = LoggerFactory.getLogger(PurchaseController.class);
 	
 	@RequestMapping("purchase")
-	public String purchsePage(Model model,String book_code, String amount, HttpServletRequest req) {
+	public String purchsePage(Model model,String book_code, String amount, HttpServletRequest req, HttpServletResponse resp) {
 		int amountInt = 0;
 		if(amount == null){
 			amountInt = 1;
