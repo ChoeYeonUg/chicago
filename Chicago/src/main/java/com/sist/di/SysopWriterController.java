@@ -1,5 +1,6 @@
 package com.sist.di;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,24 +8,22 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.sist.dao.BookVO;
-import com.sist.service.BookService;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.sist.dao.WriterVO;
+import com.sist.service.WriterService;
 
 @Controller
-public class SysopBookController {
+public class SysopWriterController {
+
+	@Resource(name="writerService")
+	private WriterService ws;
 	
-	private static final Logger logger = LoggerFactory.getLogger(SysopBoardController.class);
-	
-	@Resource(name="bookService")
-	private BookService bs;
-	
-	@RequestMapping("book_management")
-	public String bookManagement(String page, Model model, String ss, String fs,HttpServletRequest req){
+	@RequestMapping("writer_management")
+	public String writerManagement(String page, Model model, String ss, String fs,HttpServletRequest req){
 		
 		try {
 			if (page == null)
@@ -40,11 +39,11 @@ public class SysopBookController {
 			
 			map.put("start", start);
 			map.put("end", end);
-			List<BookVO> list = null;
+			List<WriterVO> list = null;
 			int totalpage=1;
 			if(ss == null || ss.equals("")){			
-				list = bs.printSysopBook(map);
-				totalpage = bs.printBookTotalPage(rowSize);
+				list = ws.printSysopWriter(map);
+				totalpage = ws.writerTotalPage(rowSize);
 			}else{
 				Map map2 = new HashMap();
 				map2.put("ss", ss);
@@ -55,8 +54,8 @@ public class SysopBookController {
 				map.put("fs", fs);
 				model.addAttribute("fs", fs);
 				model.addAttribute("ss", ss);
-				list = bs.printSearchSysopBook(map);
-				totalpage = bs.printSearchBookTotalPage(map2);
+				list = ws.printSysopSearchWriter(map);
+				totalpage = ws.writerSearchTotalPage(map2);
 			}
 			
 			int block=10;
@@ -79,9 +78,39 @@ public class SysopBookController {
 		}
 		
 		model.addAttribute("jsp", "sysop.jsp");
-		model.addAttribute("jsp", "../sysop/book_management.jsp");
+		model.addAttribute("jsp", "../sysop/writer_management.jsp");
+		
 		return "main/main";
 	}
 	
+	@RequestMapping("add_writer")
+	public String add_writer(Model model,HttpServletRequest req){
+		
+		WriterVO vo = new WriterVO();
+		
+		model.addAttribute("writer", vo);
+		
+		model.addAttribute("jsp", "sysop.jsp");
+		model.addAttribute("jsp", "../sysop/add_writer.jsp");		
+		return "main/main";
+	}
+	
+	@RequestMapping(value ="add_writer_ok", method = RequestMethod.POST)
+	public String add_writer_ok(Model model,HttpServletRequest req, WriterVO writer, String birthVal, String deathVal){
+		
+		System.out.println(writer.getWriter_name());
+		System.out.println(birthVal);
+		System.out.println(deathVal);
+			
+		return "redirect:writer_management.do";
+	}
+	
+	
+	@RequestMapping(value ="add_writer_ok", method = RequestMethod.GET)
+	public String add_writer_ok(HttpServletRequest req){
+		
+			
+		return "redirect:writer_management.do";
+	}
 	
 }
