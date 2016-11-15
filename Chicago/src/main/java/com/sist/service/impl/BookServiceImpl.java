@@ -98,6 +98,12 @@ public class BookServiceImpl implements BookService{
 		bm.printSysopBookInsert(vo);
 	}
 	
+	// 도서관리 수정하기
+	@Override
+	public void printSysopBookUpdate(BookVO vo) {
+		bm.printSysopBookUpdate(vo);
+	}
+	
 	// 도서관리 상세페이지
 	@Override
 	public BookVO printSysopBookDetail(String book_code) {

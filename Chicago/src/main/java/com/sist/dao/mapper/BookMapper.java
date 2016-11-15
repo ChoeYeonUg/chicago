@@ -40,6 +40,9 @@ public interface BookMapper {
 	// 도서 관리자 추가하기 
 	public void printSysopBookInsert(BookVO vo);
 	
+	// 도서 관리자 수정하기
+	public void printSysopBookUpdate(BookVO vo);
+	
 	// 도서 관리자 상세 페이지
 	public BookVO printSysopBookDetail(String book_code);
 	

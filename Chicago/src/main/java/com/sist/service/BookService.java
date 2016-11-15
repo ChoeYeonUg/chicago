@@ -41,6 +41,9 @@ public interface BookService {
 	// 도서관리 추가하기
 	public void printSysopBookInsert(BookVO vo);
 	
+	// 도서관리 수정하기
+	public void printSysopBookUpdate(BookVO vo);
+	
 	// 도서관리 상세페이지
 	public BookVO printSysopBookDetail(String book_code);
 	

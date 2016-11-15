@@ -78,6 +78,7 @@
 				alert('책 소개내용을 입력하세요.');
 				return;
 			}
+			$('#form').submit();
 		})
 	});
 </script>
@@ -129,7 +130,7 @@
 						</tr>
 						<tr>
 							<td width="10%"  style="font-size:11px; color:#505050;">책소개</td>
-							<td colspan="3"><textarea cols="100" rows="3" name="book_content" id="book_content"></textarea></td>
+							<td colspan="3"><textarea cols="130" rows="3" name="book_content" id="book_content"></textarea></td>
 						</tr>
 					</table>
 					<table>

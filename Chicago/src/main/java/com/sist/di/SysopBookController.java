@@ -1,5 +1,6 @@
 package com.sist.di;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -113,5 +114,33 @@ public class SysopBookController {
 		return "main/main";
 	}
 	
+	// 도서관리 추가 기능 전달
+	@RequestMapping("book_mngInsertOk")
+	public String printSysopBookInsertOk(Model model, BookVO vo, HttpServletRequest req) {
+		try {
+			bs.printSysopBookInsert(vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("이거보여요?");
+		}
+		
+		return "redirect:board_management.do";
+	}
+	
+	// 도서관리 수정하기 
+	@RequestMapping("book_mngUpdate")
+	public String printSysopBookUpdate(Model model, String book_code, HttpServletRequest req) {
+		try {
+			BookVO vo = bs.detailBook(book_code);
+			
+			model.addAttribute("vo", vo);
+			model.addAttribute("jsp", "sysop.jsp");
+			model.addAttribute("jsp", "../sysop/book_mngUpdate.jsp");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		return "main/main";
+	}
 	
 }

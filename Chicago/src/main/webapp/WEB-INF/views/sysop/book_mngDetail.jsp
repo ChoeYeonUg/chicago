@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="book_css/bookMain.css"/>
+
 </head>
 <body>
 	<div id="content">
@@ -61,7 +62,7 @@
 					<table>
 						<tr align="right">
 							<td>
-								<a href="book_mngUpdate.do?book_code=${book_code }"><input type="button" value="수정"/></a>
+								<a href="book_mngUpdate.do?book_code=${book_code }"><input type="button" value="수정" onclick="location='book_mngUpdate.do?book_code=${bookMngDetail.book_code}'"/></a>
 								<input type="button" value="목록" onclick="javascript:history.back()"/>
 							</td>
 						</tr>

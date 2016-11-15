@@ -183,9 +183,16 @@
 			   #{publisher}, #{amount},#{out_of_print},#{pages},#{book_content},#{price},#{publication},#{writer_no})
 	</insert>
 
+	<!-- 도서관리 수정하기 -->
+	<!-- book_code는 고유번호로 수정 불가함. 다른 정보들도 협의 후 수정여부 체크해보기 -->
+	<update id="printSysopBookUpdate" parameterType="goods">
+		UPDATE goods
+		SET book_name=#{book_name}, book_category=#{book_category}, writer=#{writer}, publisher=#{publisher},
+		    amount=#{amount}, out_of_print=#{out_of_print}, pages=#{pages}, book_content=#{book_content}, price=#{price}, publication=#{publication}
+	</update>
+
 	<!-- 도서관리 디테일 페이지 -->
-	<select id="printSysopBookDetail" resultType="bookVO"
-		parameterType="String">
+	<select id="printSysopBookDetail" resultType="bookVO" parameterType="String">
 		SELECT book_code, book_name, book_category, writer,
 		publisher, amount, out_of_print, pages, book_content, price,
 		publication, img
