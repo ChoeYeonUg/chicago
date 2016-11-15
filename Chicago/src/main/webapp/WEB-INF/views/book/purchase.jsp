@@ -112,7 +112,7 @@
 											<ul class="list_append">
 												<li>
 													<em class="tit_append">금액 :</em>
-													${bVO.price } 원
+													<fmt:formatNumber value="${bVO.price }" pattern="#,###"/> 원
 												</li>
 												<li>
 													<em class="tit_append">수량 :</em>
@@ -130,8 +130,8 @@
 								<dd><fmt:formatNumber value="${price}" pattern="#,###"/> 원</dd>
 								<dt>배송비 :</dt>
 								<dd><fmt:formatNumber value="${deliveryFee}" pattern="#,###"/> 원</dd>
-								<dt>포인트 :</dt>
-								<dd>0</dd>
+								<dt>적립 포인트 :</dt>
+								<dd><fmt:formatNumber value="${point}" pattern="#,###"/> 포인트</dd>
 								<dt class="txt_total">총 결제금액 :</dt>
 								<dd class="txt_total"><fmt:formatNumber value="${totalPrice}" pattern="#,###"/> 원</dd>
 							</dl>
