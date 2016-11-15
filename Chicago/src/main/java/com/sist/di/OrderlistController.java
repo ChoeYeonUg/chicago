@@ -43,56 +43,48 @@ public class OrderlistController {
 	
 	/* Member Order SideMenu Include */
 	@RequestMapping("memberOrderList.do")
-	public String memberOrderlist_page(Model model, HttpServletRequest request, String typecheck, String page) {
+	public String memberOrderlist_page(Model model, HttpServletRequest request, String typecheck, String page) throws Exception {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
+		
+		HttpSession hs = request.getSession();
+		String sessionid = (String)hs.getAttribute("id");
+		
 		if(page == null) page = "1";
 		
 		int curPage = Integer.parseInt(page);
-		
 		int rowSize = 7;
 		int start = (curPage * rowSize) - (rowSize - 1);
 		int end = curPage * rowSize;
-		int block = 5;
+		int block = 10;
 		int fromPage = ((curPage - 1) / block * block) + 1;
 		int toPage = ((curPage - 1) / block * block) + block;
 		
-		try{
-			Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
-			String check = (String) flashMap.get("check");
+		Map map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("rowSize", rowSize);
+		map.put("id", sessionid);
+		
+		try {
+			List<OrderlistVO> list = ols.selectOrderlist(map);
+			int totalPage = ols.memberOrderlistTotalPage(sessionid);
+			
+			if(toPage > totalPage) toPage = totalPage;
+			
+			model.addAttribute("list", list);
+			model.addAttribute("block", block);
+			model.addAttribute("toPage", toPage);
+			model.addAttribute("fromPage", fromPage);
+			model.addAttribute("curPage", curPage);
+			model.addAttribute("totalPage", totalPage);
+			
 			model.addAttribute("cmi", "../member/orderlist/MemberOrderList.jsp");
-			HttpSession hs = request.getSession();
-			String sessionid = (String)hs.getAttribute("id");
 			
-				
-				Map map = new HashMap();
-				map.put("start", start);
-				map.put("end", end);
-				map.put("rowSize", rowSize);
-				
-				int totalPage = ols.memberOrderlistTotalPage(sessionid);
-				
-				if(toPage > totalPage) toPage = totalPage;
-				
-				map.put("id", sessionid);
-				List<OrderlistVO> list = ols.selectOrderlist(map);
-				
-				model.addAttribute("list", list);
-				model.addAttribute("block", block);
-				model.addAttribute("toPage", toPage);
-				model.addAttribute("fromPage", fromPage);
-				model.addAttribute("curPage", curPage);
-				model.addAttribute("totalPage", totalPage);
-				
-		}catch(Exception ex) {
-			
-			typecheck="mo";
-			
-			model.addAttribute("typecheck", typecheck);
-			model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
-			
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 		
 		return "main/main";

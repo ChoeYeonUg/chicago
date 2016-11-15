@@ -26,8 +26,5 @@ public class OrderlistServiceImpl implements OrderlistService{
 	public List<OrderlistVO> selectOrderlist(Map map) throws Exception {
 		return mapper.selectOrderlist(map);
 	}
-	
-
-	
 
 }

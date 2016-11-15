@@ -53,53 +53,89 @@
 							<form:form name="frm" id="frm" commandName="com.sist.dao.OrderlistVO">
 							<input type="hidden" value="${vo.id}">
 							<%-- <input type="hidden"  name="typecheck" value="${typecheck}"> --%>
-							<fieldset>
-								<div id="OrderlistTable" class="OrderlistTable">
-									<div class="row">
-										<span class="celH col1">번호</span>
-										<span class="celH col2">서적명</span>
-										<span class="celH col3">주문량</span>
-										<span class="celH col4">가격</span>
-										<span class="celH col5">주문날짜</span>
-										<span class="celH col6">배송상태</span>
-										<span class="celH colB">취소/환불</span>
+							<div>
+								<fieldset>
+									<div id="OrderlistTable" class="OrderlistTable">
+										<div class="row">
+											<span class="celH col1">번호</span>
+											<span class="celH col2">서적명</span>
+											<span class="celH col3">주문량</span>
+											<span class="celH col4">가격</span>
+											<span class="celH col5">주문날짜</span>
+											<span class="celH col6">배송상태</span>
+											<span class="celH colB">취소/환불</span>
+										</div>
+										<c:forEach var="vo" items="${list}">
+												<%-- <c:choose>
+													<c:when test="${vo !empty}"> --%>
+														<div class="row">
+															<span class="cell col1">${vo.order_id}</span>
+															<span class="cell col2">${vo.book_name}</span>
+															<span class="cell col3">${vo.amount}</span>
+															<span class="cell col4">${vo.total_price}</span>
+															<span class="cell col5">${vo.order_date}</span>
+															<span class="cell col6">${vo.delivery}</span>
+															<span class="cell colB">
+																<input type="button" onclick="#" value="주문취소">
+																<input type="button" onclick="#" value="환불신청하기">
+															</span>
+														</div>
+													<%-- </c:when>
+													
+													<c:otherwise>
+														<div class="row">
+															<span>
+																구매목록이 없습니다!!!
+															</span>
+														</div>
+													</c:otherwise>
+												</c:choose> --%>
+										</c:forEach>
 									</div>
-									<c:forEach var="vo" items="${list}">
-											<%-- <c:choose>
-												<c:when test="${vo !empty}"> --%>
-													<div class="row">
-														<span class="cell col1">${vo.order_id}</span>
-														<span class="cell col2">${vo.book_name}</span>
-														<span class="cell col3">${vo.amount}</span>
-														<span class="cell col4">${vo.total_price}</span>
-														<span class="cell col5">${vo.order_date}</span>
-														<span class="cell col6">${vo.delivery}</span>
-														<span class="cell colB">
-															<input type="button" onclick="#" value="주문취소">
-															<input type="button" onclick="#" value="환불신청하기">
-														</span>
-													</div>
-												<%-- </c:when>
-												
-												<c:otherwise>
-													<div class="row">
-														<span>
-															구매목록이 없습니다!!!
-														</span>
-													</div>
-												</c:otherwise>
-											</c:choose> --%>
-									</c:forEach>
-								</div>
-							</fieldset>
-								
-								<!-- OK, Cancel Button -->
-								<div>
-									<ul class="Notcont">
-										<li>확인을 누르시면 메인화면으로 이동합니다.</li>
-									</ul>
-									<input type="button" onclick="javascript:location.href='main.do';" value="확인">
-								</div>
+								</fieldset>
+							</div>
+							<div>
+								<fieldset>
+									<div class="ctn">
+										<a href="memberOrderList.do?page=1">맨 앞</a>
+										<a href="memberOrderList.do?page=${curPage>1?curPage-1:curPage}">이전</a>
+										
+										<c:forEach var="i" begin="${fromPage}" end="${toPage}">
+										[<c:if test="${curPage == i}">
+											
+											<span style="color: red">${i}</span>
+											
+										</c:if>
+										
+										<c:if test="${curPage != i}">
+										<a href="memberOrderList.do?page=${i}">${i}</a>
+										
+										</c:if>
+										]
+										</c:forEach>
+										
+										<c:if test="${toPage<totalPage}">
+											<a href="memberOrderList.do?page=${toPage+1}">다음</a>
+											<a href="memberOrderList.do?page=${totalPage}">맨 뒤</a>
+										</c:if>
+										
+										<c:if test="${toPage>=totalPage}">
+											<a href="memberOrderList.do?page=${curPage<totalPage?curPage+1:curPage}">다음</a>
+											<a href="memberOrderList.do?page=${totalPage}">맨 뒤</a>
+										</c:if>
+										&nbsp;&nbsp;
+										${curPage} page / ${totalPage} pages
+									</div>
+								</fieldset>
+							</div>
+							
+							<!-- OK, Cancel Button -->
+							<div>
+								<ul class="Notcont">
+									<li>확인을 누르시면 메인화면으로 이동합니다.</li>
+								</ul>
+								<input type="button" onclick="javascript:location.href='main.do';" value="확인">
+							</div>
 						</form:form>
 					</div>
 				</div>
