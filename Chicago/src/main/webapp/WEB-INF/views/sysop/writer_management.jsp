@@ -28,10 +28,10 @@
 				<td>${vo.writer_name }</td>
 				<td><fmt:formatDate value="${vo.birth }" pattern="yyyy.MM.dd"/></td>
 				<td>
-					수정
+					<a href="update_writer.do?writer_no=${vo.writer_no }">수정</a>
 				</td>
 				<td>
-					삭제
+					<a href="writer_delete.do?writer_no=${vo.writer_no }">삭제</a>
 				</td>
 			</tr>
 		</c:forEach>

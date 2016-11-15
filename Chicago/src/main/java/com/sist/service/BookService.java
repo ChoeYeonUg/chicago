@@ -17,6 +17,7 @@ public interface BookService {
 	public BookVO purchase(String book_code);
 	//검색기능
 	public List<BookVO> getSelect(Map map);
+	public int getSelectTotal(Map map);
 
 	//관리자
 	public List<BookVO> printSysopBook(Map map);

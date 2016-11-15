@@ -70,5 +70,29 @@ public class WriterServiceImpl implements WriterService{
 		// TODO Auto-generated method stub
 		return wm.writerSearchTotalPage(map);
 	}
+
+	@Override
+	public void writerInsert(WriterVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		wm.writerInsert(vo);		
+	}
+
+	@Override
+	public void writerDelete(int writer_no) throws Exception {
+		// TODO Auto-generated method stub
+		wm.writerDelete(writer_no);
+	}
+
+	@Override
+	public WriterVO updateWriter(int writer_no) throws Exception {
+		// TODO Auto-generated method stub
+		return wm.updateWriter(writer_no);
+	}
+
+	@Override
+	public void updateWriterData(WriterVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		wm.updateWriterData(vo);
+	}
 	
 }

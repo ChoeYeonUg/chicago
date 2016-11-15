@@ -62,6 +62,11 @@ public class BookServiceImpl implements BookService{
 		return bm.select(map);
 	}
 	
+	@Override
+	public int getSelectTotal(Map map) {
+		return bm.selectTotal(map);			
+	}
+	
 	//관리자 메뉴
 	@Override
 	public List<BookVO> printSysopBook(Map map) {
