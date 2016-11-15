@@ -92,17 +92,7 @@ public class MemberController {
 					redirectAttributes.addFlashAttribute("check", "ok");
 					return "redirect:memberAddrsInfo.do";
 					
-				} else if(typecheck.equals("mo")) {
-					
-					redirectAttributes.addFlashAttribute("check", "ok");
-					return "redirect:memberOrderList.do";
-					
-				} /*else if(typecheck.equals("mw")) {
-				
-					redirectAttributes.addFlashAttribute("check", "ok");
-					return "redirect:memberWishList.do";
-					
-				}*/
+				}
 			
 			} else {
 				

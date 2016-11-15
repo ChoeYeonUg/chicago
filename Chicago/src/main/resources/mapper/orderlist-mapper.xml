@@ -17,11 +17,16 @@
 		SELECT CEIL(COUNT(*)/7) FROM ORDERS,GOODS,ORDER_BOOK WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND <include refid="check-order_id"/>
   	</select>
 	
+	
+	
 	<!-- Select Member Orderlist -->
 	<select id="selectOrderlist" resultType="OrderlistVO" parameterType="hashmap">
-  		SELECT orders.order_id,orders.id,order_book.book_code,goods.book_name,order_book.amount,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.refund_state
-  			   FROM orders,goods,order_book
-			   WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND <include refid="check-order_id"/>
+  		SELECT orders.order_id,orders.id,order_book.book_code,goods.book_name,order_book.amount,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.refund_state, num
+  			   FROM (SELECT orders.order_id,orders.id,order_book.book_code,goods.book_name,order_book.amount,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.refund_state, rownum as num
+  			   FROM (SELECT orders.order_id,orders.id,order_book.book_code,goods.book_name,order_book.amount,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.refund_state FROM orders,goods,order_book 
+  			   ORDER BY order_date DESC)) WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND <include refid="check-order_id"/> BETWEEN #{start} AND #{END}
   	</select>
+  	
+  	<!-- Search Member Orderlist -->
  	
 </mapper>

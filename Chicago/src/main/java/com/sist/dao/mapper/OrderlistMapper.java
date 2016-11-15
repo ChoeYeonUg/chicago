@@ -10,5 +10,4 @@ public interface OrderlistMapper {
 	public int memberOrderlistTotalPage(String id);
 	public List<OrderlistVO> selectOrderlist(Map map);
 	
-	
 }
