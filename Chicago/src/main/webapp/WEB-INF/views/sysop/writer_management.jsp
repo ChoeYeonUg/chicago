@@ -11,8 +11,13 @@
 <body>
 	<table>
 		<tr>
-			<th width="100">저자번호</th>
-			<th width="100">저자명</th>
+			<td><a href="add_writer.do">작가 추가</a></td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<th width="100">작가번호</th>
+			<th width="100">작가명</th>
 			<th width="100">출생일</th>
 			<th width="200">수정</th>
 			<th width="60">비고</th>

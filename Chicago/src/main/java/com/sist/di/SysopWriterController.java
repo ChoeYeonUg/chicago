@@ -1,5 +1,6 @@
 package com.sist.di;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sist.dao.WriterVO;
 import com.sist.service.WriterService;
@@ -79,6 +81,36 @@ public class SysopWriterController {
 		model.addAttribute("jsp", "../sysop/writer_management.jsp");
 		
 		return "main/main";
+	}
+	
+	@RequestMapping("add_writer")
+	public String add_writer(Model model,HttpServletRequest req){
+		
+		WriterVO vo = new WriterVO();
+		
+		model.addAttribute("writer", vo);
+		
+		model.addAttribute("jsp", "sysop.jsp");
+		model.addAttribute("jsp", "../sysop/add_writer.jsp");		
+		return "main/main";
+	}
+	
+	@RequestMapping(value ="add_writer_ok", method = RequestMethod.POST)
+	public String add_writer_ok(Model model,HttpServletRequest req, WriterVO writer, String birthVal, String deathVal){
+		
+		System.out.println(writer.getWriter_name());
+		System.out.println(birthVal);
+		System.out.println(deathVal);
+			
+		return "redirect:writer_management.do";
+	}
+	
+	
+	@RequestMapping(value ="add_writer_ok", method = RequestMethod.GET)
+	public String add_writer_ok(HttpServletRequest req){
+		
+			
+		return "redirect:writer_management.do";
 	}
 	
 }
