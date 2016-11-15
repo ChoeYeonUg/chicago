@@ -123,6 +123,18 @@
 		SELECT count(DISTINCT book_category) FROM goods
 	</select>
 	
+	<!-- 도서관린 디테일 페이지 -->
+	<select id="printSysopBookDetail" resultType="bookVO" parameterType="String">
+		SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img 
+		FROM goods 
+		WHERE book_code = #{book_code}
+	</select> 
 	
-	
+	<!-- 도서관리  디테일페이지 > 수정하기 -->
+	<update id="printSysopBookUpdate" parameterType="goods">
+		UPDATE goods 
+		SET book_code=#{book_code}, book_name=#{book_name}, writer=#{writer}, publisher=#{publisher}, amount=#{amount},
+			out_of_print=#{out_of_print}, pages=#{pages}, book_content=#{book_content}, price=#{price}, publication=#{publication}
+		WHERE book_code = #{book_code}
+	</update>
 </mapper>

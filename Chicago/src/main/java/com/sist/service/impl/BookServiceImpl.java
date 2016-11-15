@@ -92,6 +92,19 @@ public class BookServiceImpl implements BookService{
 		return bm.printSearchBookTotalPage(map);
 	}
 	
+	// 도서관리 상세페이지
+	@Override
+	public BookVO printSysopBookDetail(String book_code) {
+		return bm.printSysopBookDetail(book_code);
+	}
+	
+	// 도서관리 수정페이지
+	@Override
+	public void printSysopBookUpdate(BookVO vo) {
+		bm.printSysopBookUpdate(vo);
+	}
+	
+	// 리뷰 게시판
 	@Override
 	public List<ReviewVO> bookReviewList(String book_code) {
 		// TODO Auto-generated method stub
