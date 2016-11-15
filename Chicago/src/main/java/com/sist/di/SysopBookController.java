@@ -25,7 +25,7 @@ public class SysopBookController {
 	private BookService bs;
 
 	@RequestMapping("book_management")
-	public String bookManagement(String page, Model model, String ss, String fs, HttpServletRequest req) {
+	public String bookManagement(String page, Model model, String ss, String fs, String book_code, HttpServletRequest req) {
 
 		try {
 			if (page == null)
@@ -66,7 +66,8 @@ public class SysopBookController {
 
 			if (toPage > totalpage)
 				toPage = totalpage;
-
+			
+			model.addAttribute("book_code", book_code);
 			model.addAttribute("formpage", formPage);
 			model.addAttribute("topage", toPage);
 			model.addAttribute("block", block);
@@ -102,14 +103,15 @@ public class SysopBookController {
 		return "main/main";
 	}
 	
-	// 도서관리 수정페이지
-	@RequestMapping("book_mngUpdate")
-	public String printSysopBookUpdate(Model model, String book_code) {
+	// 도서관리 추가하기
+	@RequestMapping("book_mngInsert")
+	public String printSysopBookInsert(Model model, HttpServletRequest req) {
 		
-		model.addAttribute("book_code", book_code);
 		model.addAttribute("jsp", "sysop.jsp");
-		model.addAttribute("jsp", ",,/sysop/book_mngUpdate.jsp");
+		model.addAttribute("jsp","../sysop/book_mngInsert.jsp");
+		
 		return "main/main";
 	}
-
+	
+	
 }

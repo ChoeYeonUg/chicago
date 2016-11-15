@@ -38,12 +38,12 @@ public interface BookService {
 
 	public int printSearchBookTotalPage(Map map);
 	
+	// 도서관리 추가하기
+	public void printSysopBookInsert(BookVO vo);
+	
 	// 도서관리 상세페이지
 	public BookVO printSysopBookDetail(String book_code);
 	
-	// 도서관리 수정페이지
-	public void printSysopBookUpdate(BookVO vo);
-
 	// 상세페이지리뷰게시판
 	public List<ReviewVO> bookReviewList(String book_code);
 
