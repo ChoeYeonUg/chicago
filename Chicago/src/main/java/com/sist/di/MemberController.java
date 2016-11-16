@@ -74,9 +74,10 @@ public class MemberController {
 		HttpSession hs = request.getSession();
 		String sessionid = (String)hs.getAttribute("id");
 		String cpwd = ms.pwdCheck(sessionid);
-
+       System.out.println("cpwd="+cpwd);
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
+		String url="";
 	
 		model.addAttribute("MemberMain_cmi", "../MemberMain.jsp");
 		
@@ -85,23 +86,24 @@ public class MemberController {
 				if(typecheck.equals("mi")) {
 					
 					redirectAttributes.addFlashAttribute("check", "ok");
-					return "redirect:modifyMemberInfo.do";
+					url= "redirect:modifyMemberInfo.do";
 					
 				} else if(typecheck.equals("ma")) {
 					
 					redirectAttributes.addFlashAttribute("check", "ok");
-					return "redirect:memberAddrsInfo.do";
+					url= "redirect:memberAddrsInfo.do";
 					
 				}
 			
 			} else {
 				
 				//return "redirect:membersecurepwd.do";
-				return "member/membersecurepwd";
+				url= "member/MemberSecurePassword";
 				
 			}
 		
-		return "redirect:membersecurepwd.do";
+		//return "redirect:membersecurepwd.do";
+			return url;
 		
 	}
 	

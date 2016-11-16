@@ -41,7 +41,7 @@ function send(){
 
 	
 	
-	var f=document.frm;
+	var f=document.frm1;
 		
 	if(f.USER_Check_PWD.value==""){
 		alert("올바른 비밀번호가 아닙니다!");
@@ -73,7 +73,7 @@ function send(){
 			<div class="MemberSettingForm">
 				<div class="InnerBox">
 					<div id="MemberSecurePassword-Box">
-						<form:form name="frm" id="frm" method="post" action="membersecurepwd_ok.do">
+						<form:form name="frm1" id="frm" method="post" action="membersecurepwd_ok.do">
 						<%-- <input type="hidden" value="<%=request.getAttribute("id") %>"> commandName="memberVO" --%>
 						<input type="hidden" name="typecheck" value="${typecheck}">
 							<fieldset>
