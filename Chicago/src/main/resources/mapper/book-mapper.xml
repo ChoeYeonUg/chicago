@@ -53,33 +53,21 @@
 
 	<!-- 카테고리 검색 -->
 	<select id="select" resultType="bookVO" parameterType="hashmap">
-		SELECT
-		book_code, book_name, book_category, writer, publisher, amount,
-		out_of_print, pages, book_content, price, publication, img, num FROM
-		(SELECT book_code, book_name, book_category, writer, publisher,
-		amount, out_of_print, pages, book_content, price, publication, img,
-		rownum as num FROM
-		(SELECT book_code, book_name, book_category, writer,
-		publisher, amount, out_of_print, pages, book_content, price,
-		publication, img
-		FROM goods
-		WHERE book_category=#{category} AND
-		${sch_type} LIKE '%${sch_value}%'))
-		WHERE num BETWEEN #{start} AND
-		#{end}
+		SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img, num FROM
+		(SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img, rownum as num FROM
+		(SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img 
+		FROM goods WHERE book_category=#{category} AND ${sch_type} LIKE '%${sch_value}%'))
+		WHERE num BETWEEN #{start} AND #{end}
 	</select>
 
 	<!-- 카테고리 검색 총 페이지 -->
 	<select id="selectTotal" resultType="int" parameterType="int">
-		SELECT
-		CEIL(COUNT(*)/#{rowSize}) FROM goods WHERE ${sch_type} LIKE
-		'%${sch_value}%'
+		SELECT CEIL(COUNT(*)/#{rowSize}) FROM goods WHERE ${sch_type} LIKE '%${sch_value}%'
 	</select>
 
 	<!-- 상세 페이지 정보 -->
 	<select id="detailBook" resultType="bookVO" parameterType="String">
-		SELECT book_code, book_name, book_category, writer, publisher, amount,
-		out_of_print, pages, book_content, price, publication, img
+		SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img
 		FROM goods
 		WHERE book_code = #{book_code}
 	</select>
@@ -87,8 +75,7 @@
 	<!-- 아래 페이지로 넘겨줄 때는 Book_code 가 같은 값들을 넘겨주면 됨 -->
 	<!-- 찜목록 페이지로 넘겨줄 때 사용하는 SQL -->
 	<insert id="wishpop" parameterType="hashmap">
-		INSERT INTO WISHLIST1
-		VALUES(#{id}, #{book_code})
+		INSERT INTO WISHLIST1 VALUES(#{id}, #{book_code})
 	</insert>
 
 	<!-- 장바구니 페이지로 넘겨줄 때 사용하는 SQL -->
@@ -176,11 +163,10 @@
 	</select>
 
 	<!-- 도서관리 추가하기 -->
-	<insert id="printSysopBookInsert" parameterType="goods">
-		INSERT INTO
-		goods
+	<insert id="printSysopBookInsert" parameterType="hashmap">
+		INSERT INTO goods(book_code, book_name, book_category, writer, publisher, amount, out_of_print pages, book_content, price, publication)
 		VALUES(#{book_code}, #{book_name}, #{book_category}, #{writer},
-			   #{publisher}, #{amount},#{out_of_print},#{pages},#{book_content},#{price},#{publication},#{writer_no})
+			   #{publisher}, #{amount},#{out_of_print},#{pages},#{book_content},#{price},#{publication})
 	</insert>
 
 	<!-- 도서관리 수정하기 -->

@@ -94,8 +94,8 @@ public class BookServiceImpl implements BookService{
 	
 	// 도서관리 추가하기
 	@Override
-	public void printSysopBookInsert(BookVO vo) {
-		bm.printSysopBookInsert(vo);
+	public void printSysopBookInsert(Map map) {
+		bm.printSysopBookInsert(map);
 	}
 	
 	// 도서관리 수정하기

@@ -24,12 +24,17 @@
 				alert('제목을 입력하세요.');
 				return;
 			}
-			/* var book_category = $('#book_category').val();
-			if(book_name.trim()=="") {
-				$('#book_name').focus();
-				alert('제목을 입력하세요.');
-				return;
-			} */
+			
+			var cate = $('#book_category').length;
+			if(!cate && $('#book_category').checked) {
+				return $('#book_category').length;
+			}
+			for(var i = 0 , v = $('#book_category').length; i < v ; i++ ) {
+				if($('#book_category')[i].checked) {
+					return $('#book_category')[i].value;
+				}
+			}
+			
 			var writer = $('#writer').val();
 			if(writer.trim()=="") {
 				$('#writer').focus();
@@ -87,7 +92,7 @@
 	<div id="content">
 		<div class="container background-white">
 			<div class="row margin-vert-40">
-				<form action="book_mngInsertOk" method="post" id="form">
+				<form action="book_mngInsertOk.do" method="post" id="form" name="form">
 					<table>
 						<tr>
 							<td width="10%" style="font-size:11px; color:#505050;">ISBN</td>
@@ -101,10 +106,11 @@
 							<td width="10%" style="font-size:11px; color:#505050;">카테고리</td>
 							<td width="40%"  style="font-size:11px; color:#505050;">
 								<div style="line-height: 11px; vertical-align: bottom;">
-								<input type="radio" value="cate1" name="book_book_category" id="book_book_category" checked="checked"/><spring:message code="book.cate1"/>
-								&nbsp;<input type="radio" value="cate2" name="book_book_category" id="book_book_category"/><spring:message code="book.cate2"/>
-								&nbsp;<input type="radio" value="cate3" name="book_book_category" id="book_book_category"/><spring:message code="book.cate3"/>
-								&nbsp;<input type="radio" value="cate4" name="book_book_category" id="book_book_category"/><spring:message code="book.cate4"/>
+								<input type="radio" value="1" name="book_category" id="book_category1" checked="checked"/><spring:message code="book.cate1"/>
+								&nbsp;<input type="radio" value="2" name="book_category" id="book_category2"/><spring:message code="book.cate2"/>
+								&nbsp;<input type="radio" value="3" name="book_category" id="book_category3"/><spring:message code="book.cate3"/>
+								&nbsp;<input type="radio" value="4" name="book_category" id="book_category4"/><spring:message code="book.cate4"/>
+								<!-- &nbsp;&nbsp;&nbsp;<input type="button" value="선택" onclick="sch_value_cate"/> -->
 								</div>							
 							</td>
 							<td width="10%"  style="font-size:11px; color:#505050;">저자</td>

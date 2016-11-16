@@ -39,7 +39,7 @@ public interface BookService {
 	public int printSearchBookTotalPage(Map map);
 	
 	// 도서관리 추가하기
-	public void printSysopBookInsert(BookVO vo);
+	public void printSysopBookInsert(Map map);
 	
 	// 도서관리 수정하기
 	public void printSysopBookUpdate(BookVO vo);
