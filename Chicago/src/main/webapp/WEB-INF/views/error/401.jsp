@@ -9,6 +9,9 @@
 <title>401</title>
 </head>
 <body>
-401
+	<center>
+		<h2>401!</h2>
+		<h5>이것은 401 페이지입니다 :)</h5>	
+	</center>
 </body>
 </html>

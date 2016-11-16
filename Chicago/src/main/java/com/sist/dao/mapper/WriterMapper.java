@@ -16,4 +16,8 @@ public interface WriterMapper {
 	public int writerTotalPage(int rowSize);
 	public List<WriterVO> printSysopSearchWriter(Map map);
 	public int writerSearchTotalPage(Map map);
+	public void writerInsert(WriterVO vo);
+	public void writerDelete(int writer_no);
+	public WriterVO updateWriter(int writer_no);
+	public void updateWriterData(WriterVO vo);
 }
