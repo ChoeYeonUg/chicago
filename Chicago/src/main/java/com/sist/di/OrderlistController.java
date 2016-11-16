@@ -43,7 +43,7 @@ public class OrderlistController {
 	
 	/* Member Order SideMenu Include */
 	@RequestMapping("memberOrderList.do")
-	public String memberOrderlist_page(Model model, HttpServletRequest request, String typecheck, String page) throws Exception {
+	public String memberOrderlist_page(Model model, OrderlistVO vo, HttpServletRequest request, String typecheck, String page, String deliveryType) throws Exception {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
@@ -51,6 +51,16 @@ public class OrderlistController {
 		
 		HttpSession hs = request.getSession();
 		String sessionid = (String)hs.getAttribute("id");
+		
+		if(vo.getDelivery()==1) {
+			deliveryType = "배송준비중";
+		} else if(vo.getDelivery()==2) {
+			deliveryType = "배송중";
+		} else if(vo.getDelivery()==2) {
+			deliveryType = "배송완료";
+		} else {
+			deliveryType = "??????";
+		}
 		
 		if(page == null) page = "1";
 		
@@ -74,6 +84,7 @@ public class OrderlistController {
 			
 			if(toPage > totalPage) toPage = totalPage;
 			
+			model.addAttribute("deliveryType", deliveryType);
 			model.addAttribute("list", list);
 			model.addAttribute("block", block);
 			model.addAttribute("toPage", toPage);

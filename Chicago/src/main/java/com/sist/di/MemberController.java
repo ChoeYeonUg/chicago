@@ -96,7 +96,8 @@ public class MemberController {
 			
 			} else {
 				
-				return "redirect:membersecurepwd.do";
+				//return "redirect:membersecurepwd.do";
+				return "member/membersecurepwd";
 				
 			}
 		
@@ -139,11 +140,10 @@ public class MemberController {
 			
 		}catch(Exception ex){
 			
-			typecheck="mi";
+			typecheck = "mi";
 			
 			model.addAttribute("typecheck", typecheck);
 			model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
-			
 			
 		}
 		
@@ -279,7 +279,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("memberAddrsInfo.do")
-	public String memberAddrsInfo_page(Model model, HttpServletRequest request) throws Exception {
+	public String memberAddrsInfo_page(Model model, HttpServletRequest request, String typecheck) throws Exception {
 		
 		
 		model.addAttribute("jsp", "member.jsp");
@@ -295,7 +295,9 @@ public class MemberController {
 			model.addAttribute("avo", avo);			
 		}catch(Exception ex){
 			
-			model.addAttribute("typecheck", "ma");
+			typecheck = "ma";
+			
+			model.addAttribute("typecheck", typecheck);
 			model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
 			
 		}

@@ -46,13 +46,12 @@
 			</div>
 			<div class="OrderlistSettingForm">
 				<div class="MemberOrderlistHeadlineForm">
-					<label class="MemberInfoHeadline">${vo.id}님의 주문 내역</label>
+					<label class="MemberInfoHeadline"><%=request.getParameter("id") %>님의 주문 내역</label>
 				</div>
 				<div class="MemberOrderlistContentForm">
 					<div id="InnerBox">
 							<form:form name="frm" id="frm" commandName="com.sist.dao.OrderlistVO">
 							<input type="hidden" value="${vo.id}">
-							<%-- <input type="hidden"  name="typecheck" value="${typecheck}"> --%>
 							<div>
 								<fieldset>
 									<div id="OrderlistTable" class="OrderlistTable">
@@ -71,10 +70,10 @@
 														<div class="row">
 															<span class="cell col1">${vo.order_id}</span>
 															<span class="cell col2">${vo.book_name}</span>
-															<span class="cell col3">${vo.amount}</span>
-															<span class="cell col4">${vo.total_price}</span>
-															<span class="cell col5">${vo.order_date}</span>
-															<span class="cell col6">${vo.delivery}</span>
+															<span class="cell col3">${vo.amount}권</span>
+															<span class="cell col4">${vo.total_price}원</span>
+															<span class="cell col5"><fmt:formatDate value="${vo.order_date}" pattern="yyyy-MM-dd"/></span>
+															<span class="cell col6">${deliveryType}</span>
 															<span class="cell colB">
 																<c:if test="${vo.delivery == 0}">
 																	<input type="button" onclick="#" value="주문취소">

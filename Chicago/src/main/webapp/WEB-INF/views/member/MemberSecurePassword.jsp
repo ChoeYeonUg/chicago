@@ -30,6 +30,17 @@
 
 <script type="text/javascript">
 function send(){
+	
+	// 곧바로 현재 페이지 주소 출력
+	document.writeln(location.href);
+
+
+	// 변수에 넣어서 출력
+	var s = location.href;
+	document.writeln(s);
+
+	
+	
 	var f=document.frm;
 		
 	if(f.USER_Check_PWD.value==""){
