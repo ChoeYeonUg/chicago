@@ -14,6 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.sist.dao.BookVO;
 import com.sist.service.BookService;
 
@@ -110,22 +112,49 @@ public class SysopBookController {
 	public String printSysopBookInsert(Model model, HttpServletRequest req) {
 		
 		model.addAttribute("jsp", "sysop.jsp");
+		/*model.addAttribute("sysop_jsp", "../sysop/book_management.jsp");*/
 		model.addAttribute("jsp","../sysop/book_mngInsert.jsp");
+		BookVO vo = new BookVO();
+		model.addAttribute("vo", vo);
 		
 		return "main/main";
 	}
 	
-	// 도서관리 추가 기능 전달
-	@RequestMapping("book_mngInsertOk")
+	// 도서관리 추가하기 전달
+	@RequestMapping(value="book_mngInsertOk", method = RequestMethod.POST)
 	public String printSysopBookInsertOk(Model model, BookVO vo, HttpServletRequest req) {
-		try {
-			bs.printSysopBookInsert(vo);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("이거보여요?");
-		}
+
+		String book_code = vo.getBook_code();
+		String book_name = vo.getBook_name();
+		int book_category = vo.getBook_category();
+		String writer = vo.getWriter();
+		String publisher = vo.getPublisher();
+		int amount = vo.getAmount();
+		int out_of_print = vo.getOut_of_print();
+		int pages = vo.getPages();
+		String book_content = vo.getBook_content();
+		int price = vo.getPrice();
+		Date publication = vo.getPublication();
 		
-		return "redirect:board_management.do";
+		Map map = new HashMap();
+		map.put("book_code", book_code);
+		map.put("book_name", book_name);
+		map.put("book_category", book_category);
+		map.put("writer", writer);
+		map.put("publisher", publisher);
+		map.put("amount", amount);
+		map.put("out_of_print", out_of_print);
+		map.put("pages", pages);
+		map.put("book_content", book_content);
+		map.put("price", price);
+		map.put("publication", publication);
+		
+		try {
+			bs.printSysopBookInsert(map);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}	
+		return "redirect:book_management.do";
 	}
 	
 	// 도서관리 수정하기 

@@ -12,9 +12,9 @@
 <link rel="stylesheet" type="text/css" href="book_css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="book_css/header1.css" />
 <script type="text/javascript">
-	function bcBtn() {
+	function bcBtn(data) {
 		if(confirm("장바구니로 이동하시겠습니까?") == true) {
-			window.location.href="sb/sb.do?book_code=${detailBook.book_code}";
+			window.location.href="sb.do?book_code="+data;
 		} else {
 			return;
 		}
@@ -115,7 +115,7 @@
 								<tr>
 									<td align="center" class="icontd">
 										<img src="book_img\like.png" alt="like.png" title="찜하기" class="icon" onclick="lkBtn()">&nbsp;
-										<img src="book_img\shopping.png" alt="shopping.png" title="장바구니" class="icon" onclick="bcBtn()">&nbsp; 
+										<img src="book_img\shopping.png" alt="shopping.png" title="장바구니" class="icon" onclick="bcBtn('${list.book_code}')">&nbsp; 
 										<a href="purchase.do?book_code=${list.book_code }">
 											<img src="book_img\purchase.png" alt="purchase.png" title="바로구매" class="icon">
 										</a>

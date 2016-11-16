@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,12 +25,17 @@
 				alert('제목을 입력하세요.');
 				return;
 			}
-			/* var book_category = $('#book_category').val();
-			if(book_name.trim()=="") {
-				$('#book_name').focus();
-				alert('제목을 입력하세요.');
-				return;
-			} */
+			
+			var cate = $('#book_category').length;
+			if(!cate && $('#book_category').checked) {
+				return $('#book_category').length;
+			}
+			for(var i = 0 , v = $('#book_category').length; i < v ; i++ ) {
+				if($('#book_category')[i].checked) {
+					return $('#book_category')[i].value;
+				}
+			}
+			
 			var writer = $('#writer').val();
 			if(writer.trim()=="") {
 				$('#writer').focus();
@@ -87,7 +93,8 @@
 	<div id="content">
 		<div class="container background-white">
 			<div class="row margin-vert-40">
-				<form action="book_mngInsertOk" method="post" id="form">
+				<!-- <form action="book_mngInsertOk.do" method="post" id="form" name="form"> -->
+				<form:form commandName="vo" action="book_mngInsertOk.do" method="post" id="form" name="form">
 					<table>
 						<tr>
 							<td width="10%" style="font-size:11px; color:#505050;">ISBN</td>
@@ -101,10 +108,11 @@
 							<td width="10%" style="font-size:11px; color:#505050;">카테고리</td>
 							<td width="40%"  style="font-size:11px; color:#505050;">
 								<div style="line-height: 11px; vertical-align: bottom;">
-								<input type="radio" value="cate1" name="book_book_category" id="book_book_category" checked="checked"/><spring:message code="book.cate1"/>
-								&nbsp;<input type="radio" value="cate2" name="book_book_category" id="book_book_category"/><spring:message code="book.cate2"/>
-								&nbsp;<input type="radio" value="cate3" name="book_book_category" id="book_book_category"/><spring:message code="book.cate3"/>
-								&nbsp;<input type="radio" value="cate4" name="book_book_category" id="book_book_category"/><spring:message code="book.cate4"/>
+								<input type="radio" value="1" name="book_category" id="book_category1" checked="checked"/><spring:message code="book.cate1"/>
+								&nbsp;<input type="radio" value="2" name="book_category" id="book_category2"/><spring:message code="book.cate2"/>
+								&nbsp;<input type="radio" value="3" name="book_category" id="book_category3"/><spring:message code="book.cate3"/>
+								&nbsp;<input type="radio" value="4" name="book_category" id="book_category4"/><spring:message code="book.cate4"/>
+								<!-- &nbsp;&nbsp;&nbsp;<input type="button" value="선택" onclick="sch_value_cate"/> -->
 								</div>							
 							</td>
 							<td width="10%"  style="font-size:11px; color:#505050;">저자</td>
@@ -114,7 +122,7 @@
 							<td width="10%"  style="font-size:11px; color:#505050;">출판사</td>
 							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" name="publisher" id="publisher" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
 							<td width="10%"  style="font-size:11px; color:#505050;">출판일</td>
-							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" name="publication" id="publication" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
+							<td width="40%"  style="font-size:11px; color:#505050;"><!-- <input type="text" size="20" name="publication" id="publication" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/> --></td>
 						</tr>
 						<tr>
 							<td width="10%"  style="font-size:11px; color:#505050;">수량</td>
@@ -141,7 +149,8 @@
 							</td>
 						</tr>
 					</table>
-				</form>
+				<%-- </form> --%>
+				</form:form>
 			</div>
 		</div>
 	</div>

@@ -38,7 +38,7 @@ public interface BookMapper {
 	public int printSearchBookTotalPage(Map map);
 	
 	// 도서 관리자 추가하기 
-	public void printSysopBookInsert(BookVO vo);
+	public void printSysopBookInsert(Map map);
 	
 	// 도서 관리자 수정하기
 	public void printSysopBookUpdate(BookVO vo);
@@ -59,4 +59,7 @@ public interface BookMapper {
 	public int reviewIdCK(ReviewVO vo);
 
 	public int categoryCount();
+	
+	//장바구니
+	public BookVO printSbList(String book_code);
 }
