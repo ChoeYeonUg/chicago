@@ -74,7 +74,7 @@ public class MemberController {
 					return "redirect:memberOrderList.do";
 				}
 			
-			} 		
+			}
 		
 		return "redirect:membersecurepwd_ok.do";
 		
