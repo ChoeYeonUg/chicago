@@ -131,7 +131,7 @@ public class BookController {
 		return "main/main";
 	}
 		
-	// 디테일 페이지 
+	// 도서 정보 자세히 보기 
 	@RequestMapping("bookDetail")
 	public String detailBookList(Model model, String book_code, HttpServletRequest req) {
 		
@@ -143,6 +143,7 @@ public class BookController {
 		// 수량정보
 		int defAmount = 1;
 		
+		// 리뷰내용
 		try{
 		List<ReviewVO> list=bs.bookReviewList(book_code);
 		
@@ -188,12 +189,16 @@ public class BookController {
 		return "main/main";
 	}
 	
+	
+	// 바로구매 페이진
 	@RequestMapping("sbPage")
 	public String sbPage(Model model) {
 		
 		return "book/sbPage";
 	}
 
+	
+	// 도서 리뷰 게시판
 	@RequestMapping("bookReviewContent")
 	public String bookReviewContent(Model model,String book_code){
 		BookVO detailBook = bs.detailBook(book_code);
