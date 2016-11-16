@@ -142,6 +142,7 @@ public class BookServiceImpl implements BookService{
 		List<BookVO> bookList = new ArrayList<BookVO>();
 		
 		for(String book_code : list){
+			System.out.println(book_code);
 			BookVO vo = bm.printSbList(book_code);
 			bookList.add(vo);
 		}
