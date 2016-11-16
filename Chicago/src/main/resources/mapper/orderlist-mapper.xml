@@ -8,23 +8,25 @@
   	<!-- memberInfo Database Query -->
 	
 	<!-- Check order_id for Orderlist list -->
+    <sql id="check-id">
+		id=#{id}
+	</sql>
+	
     <sql id="check-order_id">
 		orders.id=#{id}
 	</sql>
 	
 	<!-- View Member Orderlist for PageSite -->
 	<select id="memberOrderlistTotalPage" resultType="int" parameterType="String">
-		SELECT CEIL(COUNT(*)/7) FROM ORDERS,GOODS,ORDER_BOOK WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND <include refid="check-order_id"/>
+		SELECT CEIL(COUNT(*)/7) FROM orders,order_book,goods WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND <include refid="check-id"/>
   	</select>
-	
-	
 	
 	<!-- Select Member Orderlist -->
 	<select id="selectOrderlist" resultType="OrderlistVO" parameterType="hashmap">
-  		SELECT orders.order_id,orders.id,order_book.book_code,goods.book_name,order_book.amount,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.refund_state, num
-  			   FROM (SELECT orders.order_id,orders.id,order_book.book_code,goods.book_name,order_book.amount,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.refund_state, rownum as num
-  			   FROM (SELECT orders.order_id,orders.id,order_book.book_code,goods.book_name,order_book.amount,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.refund_state FROM orders,goods,order_book 
-  			   ORDER BY order_date DESC)) WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND <include refid="check-order_id"/> BETWEEN #{start} AND #{END}
+		SELECT order_id,id,book_code,book_name,amount,total_price,payment,order_date,account_info,refund_state,num
+				FROM (SELECT order_id,id,book_code,book_name,amount,total_price,payment,order_date,account_info,refund_state,ROWNUM AS num
+				FROM (SELECT orders.order_id,orders.id,order_book.book_code,goods.book_name,order_book.amount,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.refund_state
+				FROM orders,order_book,goods WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND <include refid="check-id"/> ORDER BY orders.order_date DESC)) WHERE num BETWEEN #{start} AND #{end}
   	</select>
   	
   	<!-- Search Member Orderlist -->

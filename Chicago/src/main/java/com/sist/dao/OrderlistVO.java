@@ -15,7 +15,16 @@ public class OrderlistVO {
 	private int delivery;
 	private int account_info;
 	private String refund_state;
+	private int num;
 	
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
 	List<OrderBookVO> oblist;
 	List<OrdersVO> olist;
 	

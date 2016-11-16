@@ -66,8 +66,8 @@
 											<span class="celH colB">취소/환불</span>
 										</div>
 										<c:forEach var="vo" items="${list}">
-												<%-- <c:choose>
-													<c:when test="${vo !empty}"> --%>
+												<c:choose>
+													<c:when test="${list.size() != 0}">
 														<div class="row">
 															<span class="cell col1">${vo.order_id}</span>
 															<span class="cell col2">${vo.book_name}</span>
@@ -76,11 +76,16 @@
 															<span class="cell col5">${vo.order_date}</span>
 															<span class="cell col6">${vo.delivery}</span>
 															<span class="cell colB">
-																<input type="button" onclick="#" value="주문취소">
-																<input type="button" onclick="#" value="환불신청하기">
+																<c:if test="${vo.delivery == 0}">
+																	<input type="button" onclick="#" value="주문취소">
+																</c:if>
+																
+																<c:if test="${vo.delivery != 0}">
+																	<input type="button" onclick="#" value="환불신청하기">
+																</c:if>
 															</span>
 														</div>
-													<%-- </c:when>
+													</c:when>
 													
 													<c:otherwise>
 														<div class="row">
@@ -89,7 +94,7 @@
 															</span>
 														</div>
 													</c:otherwise>
-												</c:choose> --%>
+												</c:choose>
 										</c:forEach>
 									</div>
 								</fieldset>
