@@ -84,6 +84,7 @@ public class SysopBookController {
 
 		model.addAttribute("jsp", "sysop.jsp");
 		model.addAttribute("jsp", "../sysop/book_management.jsp");
+
 		return "main/main";
 	}
 
@@ -101,6 +102,7 @@ public class SysopBookController {
 
 		model.addAttribute("jsp", "sysop.jsp");
 		model.addAttribute("jsp", "../sysop/book_mngDetail.jsp");
+
 		return "main/main";
 	}
 	
