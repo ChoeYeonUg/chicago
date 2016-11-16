@@ -20,7 +20,7 @@ public class EventController {
 	private EventService es;
 	
 	@RequestMapping("event")
-	public String login_page(Model model, String page){
+	public String login_page(Model model, String page, String sd){
 		if(page == null) {
 			page = "1";
 		}
@@ -29,14 +29,28 @@ public class EventController {
 		int rowSize = 10; 
 		int start = (curPage * rowSize) - (rowSize-1); 
 		int end = curPage * rowSize; 
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy");
-		String today=sdf.format(new Date());
-		
-		
+		/*SimpleDateFormat sdf=new SimpleDateFormat("yyyy");
+		String today=sdf.format(new Date());*/
+	//	System.out.println(today);
 		Map map = new HashMap(); 
 		map.put("start", start); 
 		map.put("end", end);
-		map.put("today", today);
+	//	map.put("today", today);
+		
+	//	sd=String.valueOf(Integer.parseInt(today)+1);
+	//	sd=today;		
+		
+	
+		/*if(bf!=null){
+			today=String.valueOf(Integer.parseInt(today)-1);			
+		}
+		if(af!=null){
+			today=String.valueOf(Integer.parseInt(today)+1);
+		}
+		sd=String.valueOf(Integer.parseInt(today)+1);
+		map.put("sd", sd);*/
+	//	today=String.valueOf(Integer.parseInt(today)-1);
+		
 		int totalPage = es.scheduleTotalPage(map);
 		
 		List<EventVO> eventSchedule = es.schedule(map);
@@ -48,9 +62,8 @@ public class EventController {
 			toPage = totalPage;
 		}
 		
-	    
-	    
-		model.addAttribute("today",today);
+	    model.addAttribute("sd",sd);
+	//	model.addAttribute("today",today);
 		model.addAttribute("curPage", curPage);
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("fromPage", fromPage);

@@ -1,102 +1,245 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+    <%@ page import="java.util.*, java.util.Calendar,  java.util.Date, java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+ <style TYPE="text/css">
+             body {
+             scrollbar-face-color: #F6F6F6;
+             scrollbar-highlight-color: #bbbbbb;
+             scrollbar-3dlight-color: #FFFFFF;
+             scrollbar-shadow-color: #bbbbbb;
+             scrollbar-darkshadow-color: #FFFFFF;
+             scrollbar-track-color: #FFFFFF;
+             scrollbar-arrow-color: #bbbbbb;
+             margin-left:"0px"; margin-right:"0px"; margin-top:"0px"; margin-bottom:"0px";
+             }
+ 
+             td {font-family: "돋움"; font-size: 9pt; color:#595959;}
+             th {font-family: "돋움"; font-size: 9pt; color:#000000;}
+             select {font-family: "돋움"; font-size: 9pt; color:#595959;}
+ 
+ 
+             .divDotText {
+             overflow:hidden;
+             text-overflow:ellipsis;
+             }
+ 
+            A:link { font-size:9pt; font-family:"돋움";color:#000000; text-decoration:none; }
+            A:visited { font-size:9pt; font-family:"돋움";color:#000000; text-decoration:none; }
+            A:active { font-size:9pt; font-family:"돋움";color:red; text-decoration:none; }
+            A:hover { font-size:9pt; font-family:"돋움";color:red;text-decoration:none;}
+ 
+ 
+       </style>
 </head>
 <body>
 <table width="100%" class="table_content" border="0">
-					<c:forEach items="${schedule }" var="list">
-					<tr>
-						
-						<!-- 책 간략 소개내용 -->
-						<td width="85%" height="200">
-							<table border="0">
-								<tr>
-									<td height="5" align="left" colspan="3"><h2> ${list.event_name }</h2></td>
-								</tr>								
-								<tr>
-									<td height="20" width="60%" colspan="3" style="color:#999999;">[장소]&nbsp;${list.store_name }</td>									
-								</tr>
-								<tr>
-									<td height="20"  width="33%" style="color:#999999;">[시작일]&nbsp;<fmt:formatDate value="${list.start_day }" pattern="yyyy년 M월 d일"/></td>
-									<td height="20"  width="33%" style="color:#999999;">[종료일]&nbsp; <fmt:formatDate value="${list.end_day }" pattern="yyyy년 M월 d일"/></td>																		
-								</tr>
-								<tr>
-									<td height="50"  colspan="3"><br/>&nbsp;&nbsp;&nbsp;${list.description }&nbsp;
-								</tr>
-							</table>
-						</td>
-					</tr>
-					</c:forEach>
-				</table>
-<!-- 페이지표시 -->
-	<table border="0" width="600">
-		<tr>
-		<td align="right"> 
+			
+	<%
+Calendar cal = Calendar.getInstance();
+ 
+String strYear = request.getParameter("year");
+String strMonth = request.getParameter("month");
+ 
+int year = cal.get(Calendar.YEAR);
+int month = cal.get(Calendar.MONTH);
+int date = cal.get(Calendar.DATE);
+ 
+if(strYear != null)
+{
+  year = Integer.parseInt(strYear);
+  month = Integer.parseInt(strMonth);
+ 
+}else{
+ 
+}
+//년도/월 셋팅
+cal.set(year, month, 1);
+ 
+int startDay = cal.getMinimum(java.util.Calendar.DATE);
+int endDay = cal.getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
+int start = cal.get(java.util.Calendar.DAY_OF_WEEK);
+int newLine = 0;
+ 
+//오늘 날짜 저장.
+Calendar todayCal = Calendar.getInstance();
+SimpleDateFormat sdf = new SimpleDateFormat("yyyMMdd");
+int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
+ 
+ 
+%>
+
+ 
+
+<body>
+<div class=wrap>
+
+<form name="calendarFrm" id="calendarFrm" action="" method="post">
+<DIV id="content" style="width:712px;">
+ 
+<table width="100%" border="0" cellspacing="1" cellpadding="1">
+<tr>
+       <td align ="right">
+             <input type="button" onclick="javascript:location.href='<c:url value='/CalendarExam2.jsp' />'" value="오늘"/>
+       </td>
+ 
+</tr>
+</table>
+<!--날짜 네비게이션  -->
+<table width="100%" border="0" cellspacing="1" cellpadding="1" id="KOO" bgcolor="#F3F9D7" style="border:1px solid #CED99C">
+ 
+<tr>
+<td height="60">
+ 
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+       <tr>
+             <td height="10">
+             </td>
+       </tr>
+      
+       <tr>
+             <td align="center" >
+                    <a href="<c:url value='/CalendarExam2.jsp' />?year=<%=year-1%>&amp;month=<%=month%>" target="_self">
+                           <b>&lt;&lt;</b><!-- 이전해 -->
+                    </a>
+                    <%if(month > 0 ){ %>
+                    <a href="<c:url value='/CalendarExam2.jsp' />?year=<%=year%>&amp;month=<%=month-1%>" target="_self">
+                           <b>&lt;</b><!-- 이전달 -->
+                    </a>
+                    <%} else {%>
+                           <b>&lt;</b>
+                    <%} %>
+                    &nbsp;&nbsp;
+                    <%=year%>년
+                   
+                    <%=month+1%>월
+                    &nbsp;&nbsp;
+                    <%if(month < 11 ){ %>
+                    <a href="<c:url value='/CalendarExam2.jsp' />?year=<%=year%>&amp;month=<%=month+1%>" target="_self">
+                           <!-- 다음달 --><b>&gt;</b>
+                    </a>
+                    <%}else{%>
+                           <b>&gt;</b>
+                    <%} %>
+                    <a href="<c:url value='/CalendarExam2.jsp' />?year=<%=year+1%>&amp;month=<%=month%>" target="_self">
+                           <!-- 다음해 --><b>&gt;&gt;</b>
+                    </a>
+             </td>
+       </tr>
+       </table>
+ 
+</td>
+</tr>
+</table>
+<br>
+<table border="0" cellspacing="1" cellpadding="1" bgcolor="#FFFFFF">
+<THEAD>
+<TR bgcolor="#CECECE">
+       <TD width='100px'>
+       <DIV align="center"><font color="red">일</font></DIV>
+       </TD>
+       <TD width='100px'>
+       <DIV align="center">월</DIV>
+       </TD>
+       <TD width='100px'>
+       <DIV align="center">화</DIV>
+       </TD>
+       <TD width='100px'>
+       <DIV align="center">수</DIV>
+       </TD>
+       <TD width='100px'>
+       <DIV align="center">목</DIV>
+       </TD>
+       <TD width='100px'>
+       <DIV align="center">금</DIV>
+       </TD>
+       <TD width='100px'>
+       <DIV align="center"><font color="#529dbc">토</font></DIV>
+       </TD>
+</TR>
+</THEAD>
+<TBODY>
+<TR>
+<%
+ 
+//처음 빈공란 표시
+for(int index = 1; index < start ; index++ )
+{
+  out.println("<TD >&nbsp;</TD>");
+  newLine++;
+}
+ 
+for(int index = 1; index <= endDay; index++)
+{
+       String color = "";
+ 
+       if(newLine == 0){          color = "RED";
+       }else if(newLine == 6){    color = "#529dbc";
+       }else{                     color = "BLACK"; };
+ 
+       String sUseDate = Integer.toString(year); 
+       sUseDate += Integer.toString(month+1).length() == 1 ? "0" + Integer.toString(month+1) : Integer.toString(month+1);
+       sUseDate += Integer.toString(index).length() == 1 ? "0" + Integer.toString(index) : Integer.toString(index);
+ 
+       int iUseDate = Integer.parseInt(sUseDate);
+      
+      
+       String backColor = "#EFEFEF";
+       if(iUseDate == intToday ) {
+             backColor = "#c9c9c9";
+       }
+       out.println("<TD valign='top' align='left' height='92px' bgcolor='"+backColor+"' nowrap>");
+       %>
+       <font color='<%=color%>'>
+             <%=index %>
+       </font>
+ 
+       <%
+      
+       out.println("<BR>");
+       out.println(iUseDate);
+       out.println("<BR>");
+      
+      
+       //기능 제거 
+       out.println("</TD>");
+       newLine++;
+ 
+       if(newLine == 7)
+       {
+         out.println("</TR>");
+         if(index <= endDay)
+         {
+           out.println("<TR>");
+         }
+         newLine=0;
+       }
+}
+//마지막 공란 LOOP
+while(newLine > 0 && newLine < 7)
+{
+  out.println("<TD>&nbsp;</TD>");
+  newLine++;
+}
+%>
+</TR>
+ 
+</TBODY>
+</TABLE>
+</DIV>
+</form>
+			
+
+
+</div>
+
 		
-		
-		<!-- [1][2][3][4][5] -->
-		<!-- fp           tp -->
-								
-		<%-- <c:if test="${curpage>block}">
-			<a href="noticeboard.do?page=1">
-				비긴</a> &nbsp;
-				<a href="noticeboard.do?page=${fromPage-1}">
-				프리브</a> &nbsp;
-		</c:if>    --%>
-		
-		<%-- <c:if test="${curpage<=block}"> --%>
-			<a href="noticeboard.do?page=1">비긴</a>
-				<a href="noticeboard.do?page=${curpage>1?curpage-1:curpage}">
-				프리브</a> &nbsp;
-		<%-- </c:if>    --%>
-		
-		<c:forEach var="i" begin="${fromPage }" end="${toPage }">
-		[<c:if test="${ curpage ==i}">
-		
-		<span style="color:red">${i }</span>
-		
-		</c:if>		
-		<c:if test="${ curpage !=i}">
-		<a href="noticeboard.do?page=${i }">${i }</a>
-					
-		</c:if>		
-		]
-		</c:forEach>
-		
-		<c:if test="${toPage<totalpage }">
-			<a href="noticeboard.do?page=${toPage+1 }">넥스트</a>
-			<a href="noticeboard.do?page=${totalpage }">끝</a>
-		</c:if>
-		
-		<c:if test="${toPage>=totalpage }">
-			<a href="noticeboard.do?page=${curpage<totalpage?curpage+1:curpage }">넥스트</a>&nbsp;
-			<a href="noticeboard.do?page=${totalpage }">끝</a>
-		</c:if>
-		&nbsp;&nbsp;
-		${curpage } page / ${totalpage  } pages
-		
-		</td>
-		
-		</tr>
-		</table>
-		<!-- 페이지표시 끝 -->
-		<!-- 글쓰기 -->
-				<table width="700">
-					<tr>
-						<!-- 관리자만보이게 설정 -->
-						<c:if test="${grade<=1 }">
-						<td align="right"><a href="noticeboard_insert.do">글쓰기</a></td>
-						</c:if>
-					</tr>
-				</table>
-		<!-- 글쓰기 끝 -->
-				<!-- End FAQ Item -->
 
 				<div class="clearfix margin-bottom-10"></div>
 			</div>

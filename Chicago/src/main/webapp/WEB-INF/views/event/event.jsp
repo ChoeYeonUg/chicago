@@ -7,48 +7,51 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Insert title here</title>      
 </head>
-<body>
-<table width="100%" class="table_content" border="0">
-		
-					
+
+
+
+<table width="100%" class="table_content" border="0">							
 		
 					<%-- <%String toDate = new java.text.SimpleDateFormat("yyyy년").format(new java.util.Date());%> 
 					
 					
-					<h1><%=toDate %></h1> --%>
+					<h1><%=toDate %></h1>
 						
-					
-					
-					<table>
-						<tr>
-							<td><h1>${today }</h1></td>							
+						
+						<input type="button" name=bf id=bf onclick="bf_click();" value="캬오옹"/>
+						<table>
+							<tr>
+								<td><h1>${today }</h1></td>							
+							</tr>
+						</table>
+						<input type="button" name=af id=af onclick="af_click();" value="캬옹"/> 					
+						 --%>
+						<!-- <input hidden name=sd value=${sd}>  -->
+						<c:forEach items="${schedule }" var="list">
+						<tr>					
+							<td width="85%" height="200">
+								<table border="0">								
+										<tr>
+											<td height="5" align="left" colspan="3"><h2> ${list.event_name }</h2></td>
+										</tr>								
+										<tr>
+											<td height="20" width="60%" colspan="3" style="color:#999999;">[장소]&nbsp;${list.store_name }</td>									
+										</tr>
+										<tr>
+											<td height="20"  width="33%" style="color:#999999;">[시작일]&nbsp;<fmt:formatDate value="${list.start_day }" pattern="yyyy년 M월 d일 hh시mm분ss초"/></td>
+											<td height="20"  width="33%" style="color:#999999;">[종료일]&nbsp; <fmt:formatDate value="${list.end_day }" pattern="yyyy년 M월 d일 hh시mm분ss초"/></td>																		
+										</tr>
+										<tr>
+											<td height="50"  colspan="3"><br/>&nbsp;&nbsp;&nbsp;${list.description }&nbsp;
+										</tr>
+								</table>
+							</td>
 						</tr>
+						</c:forEach>
 					</table>
-					
-					<c:forEach items="${schedule }" var="list">
-					<tr>					
-						<td width="85%" height="200">
-							<table border="0">								
-								<tr>
-									<td height="5" align="left" colspan="3"><h2> ${list.event_name }</h2></td>
-								</tr>								
-								<tr>
-									<td height="20" width="60%" colspan="3" style="color:#999999;">[장소]&nbsp;${list.store_name }</td>									
-								</tr>
-								<tr>
-									<td height="20"  width="33%" style="color:#999999;">[시작일]&nbsp;<fmt:formatDate value="${list.start_day }" pattern="yyyy년 M월 d일 hh시mm분ss초"/></td>
-									<td height="20"  width="33%" style="color:#999999;">[종료일]&nbsp; <fmt:formatDate value="${list.end_day }" pattern="yyyy년 M월 d일 hh시mm분ss초"/></td>																		
-								</tr>
-								<tr>
-									<td height="50"  colspan="3"><br/>&nbsp;&nbsp;&nbsp;${list.description }&nbsp;
-								</tr>
-							</table>
-						</td>
-					</tr>
-					</c:forEach>
-				</table>
+				
 <!-- 페이지표시 -->
 	<table border="0" width="600">
 		<tr>
