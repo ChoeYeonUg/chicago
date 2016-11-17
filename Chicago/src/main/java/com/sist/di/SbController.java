@@ -45,17 +45,37 @@ public class SbController {
 					list = new ArrayList<String>(temp);
 				}
 				hs.setAttribute("sbList", list);
-			}
-			List<BookVO> bookList = bs.printSbList(list);
-			model.addAttribute("bookList", bookList);
-			
+			}			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		
 		
-		model.addAttribute("jsp", "sb.jsp");
-		model.addAttribute("jsp", "../sb/sb.jsp");
+		/*model.addAttribute("jsp", "sb.jsp");
+		model.addAttribute("jsp", "../sb/sb.jsp");*/
+		String str = req.getHeader("referer");
+		System.out.println(str+"****************************************");
+		return "redirect:"+str.substring(str.lastIndexOf("/")+1);
+	}
+	
+	@RequestMapping("sbList")
+	public String sbList(Model model, HttpServletRequest req ){
+		
+		HttpSession hs = req.getSession();
+		List<String> list = (List<String>) hs.getAttribute("sbList");
+		
+		List<BookVO> bookList = null;
+		try {
+			if(list != null){
+				bookList = bs.printSbList(list);
+			}
+			model.addAttribute("bookList", bookList);
+			model.addAttribute("jsp", "sb.jsp");
+			model.addAttribute("jsp", "../sb/sbList.jsp");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "main/main";
 	}
 }
