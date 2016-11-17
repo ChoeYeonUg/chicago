@@ -13,7 +13,7 @@
 <script type="text/javascript">
 	function bcBtn() {
 		if(confirm("장바구니로 이동하시겠습니까?") == true) {
-			window.location.href="sb/sb.do?book_code=${detailBook.book_code}";
+			window.location.href="sb.do?book_code=${detailBook.book_code}";
 		} else {
 			return;
 		}

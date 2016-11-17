@@ -1,5 +1,6 @@
 package com.sist.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -92,6 +93,25 @@ public class BookServiceImpl implements BookService{
 		return bm.printSearchBookTotalPage(map);
 	}
 	
+	// 도서관리 추가하기
+	@Override
+	public void printSysopBookInsert(Map map) {
+		bm.printSysopBookInsert(map);
+	}
+	
+	// 도서관리 수정하기
+	@Override
+	public void printSysopBookUpdate(BookVO vo) {
+		bm.printSysopBookUpdate(vo);
+	}
+	
+	// 도서관리 상세페이지
+	@Override
+	public BookVO printSysopBookDetail(String book_code) {
+		return bm.printSysopBookDetail(book_code);
+	}
+	
+	// 리뷰 게시판
 	@Override
 	public List<ReviewVO> bookReviewList(String book_code) {
 		// TODO Auto-generated method stub
@@ -114,5 +134,19 @@ public class BookServiceImpl implements BookService{
 	public int categoryCount() {
 		// TODO Auto-generated method stub
 		return bm.categoryCount();
+	}
+
+	@Override
+	public List<BookVO> printSbList(List<String> list)throws Exception{
+		// TODO Auto-generated method stub
+		List<BookVO> bookList = new ArrayList<BookVO>();
+		
+		for(String book_code : list){
+			System.out.println(book_code);
+			BookVO vo = bm.printSbList(book_code);
+			bookList.add(vo);
+		}
+		
+		return bookList;
 	}
 }

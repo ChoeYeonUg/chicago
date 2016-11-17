@@ -12,6 +12,9 @@
 	<div id="content">
 		<div class="container background-white">
 			<div class="row margin-vert-40">
+				<table>
+					<tr><td align="left"><input type="button" value="추가" style="hegiht:8px; width:40px; border-radius:2px; font-size:11px;" onclick="location='book_mngInsert.do'"/></td></tr>
+				</table>
 				<!-- 전체 리스트 출력 -->
 				<table>
 					<tr>
@@ -23,13 +26,14 @@
 					</tr>
 					<c:forEach items="${list }" var="vo">
 						<tr>
-							<td width="8%" style="font-size: 11px; color: #505050; algin: center;">${vo.book_code }</td>
-							<td width="52%" style="font-size: 11px; color: #505050;">&nbsp;<a href=#">${vo.book_name }</a></td>
+							<td width="8%" style="font-size: 11px; color: #505050; algin: center;"><a href="book_mngDetail.do?book_code=${vo.book_code }">${vo.book_code }</a></td>
+							<td width="52%" style="font-size: 11px; color: #505050;">&nbsp;${vo.book_name }</td>
 							<td width="15%" style="font-size: 11px; color: #505050;">${vo.writer }</td>
 							<td width="10%" style="font-size: 11px; color: #505050;">
 								<c:choose>
-									<c:when test="${vo.out_of_print ==1 }"> 출간 </c:when>
-									<c:otherwise> 절판 </c:otherwise>
+									<c:when test="${vo.out_of_print == 1 }">출간 </c:when>
+									<c:when test="${vo.out_of_print == 0 }">절판 </c:when>
+									<%-- <c:otherwise>절판</c:otherwise> --%>
 								</c:choose>
 							</td>
 							<td width="10%" style="font-size: 11px; color: #505050;"><a href="#">관리</a></td>
@@ -38,7 +42,7 @@
 				</table>
 				<table>
 					<tr>
-						<td>
+						<td align="center">
 							<ul class="pagination pagination-sm">
 								<li><a href="book_management.do?fs=${fs }&ss=${ss }&page=${(formpage - block) >= 1 ? formpage-block : curpage }">&laquo;</a></li>
 								<c:forEach begin="${formpage }" end="${topage }" step="1" var="i">
@@ -60,13 +64,8 @@
 									<label><input type="radio" value="book_content" name="fs" id="fs"/>
 										<span style="font-size:11px; color:#505050; vertical-align: bottom;">내용</span></label>
 									<input type="search" id="ss" name="ss"> 
-									<input type="submit" value="검색">
+									<input type="submit" value="검색"/>
 								</div>
-								<!-- <select name="fs">
-									<option value="book_code">ISBN</option>
-									<option value="book_name">제목</option>
-									<option value="book_content">내용</option>
-								</select>  -->
 							</form>
 						</td>
 					</tr>

@@ -82,7 +82,7 @@
 								<li><a href="memberquestion.do"><spring:message code="header.qu"/></a></li>
             				</ul>
             			</li>
-          				<li><a href="sb.do"><spring:message code="header.sb"/></a></li>
+          				<li><a href="sbList.do"><spring:message code="header.sb"/></a></li>
           				<c:if test="${garde ne 'null' && grade eq 0 }">
 	          				<li><a class="drop" href="sysop.do"><spring:message code="header.saMenu"/></a>
 	            				<ul>

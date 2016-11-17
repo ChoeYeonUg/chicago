@@ -8,26 +8,54 @@ import com.sist.dao.ReviewVO;
 
 public interface BookService {
 	public List<BookVO> bookAllList();
+
 	public List<BookVO> newBookCate(int category);
+
 	public List<BookVO> bookListCateFirst(Map map);
+
+	// 카테고리별 리스트
 	public int cateFirCount(int book_category);
+
 	public int cateFirTotalPage(int book_category);
-	public BookVO detailBook (String book_code);
-	public void wishpop(Map map);
+
+	// 상세 페이지
+	public BookVO detailBook(String book_code);
+
+	/* public void wishpop(Map map); */ // 위시리스트 팝업 창 기능 --> 삭제함
 	public BookVO purchase(String book_code);
-	//검색기능
+
+	// 검색기능
 	public List<BookVO> getSelect(Map map);
+
 	public int getSelectTotal(Map map);
 
-	//관리자
+	// 도서관리
 	public List<BookVO> printSysopBook(Map map);
-	public int printBookTotalPage(int rowSize);
-	public List<BookVO> printSearchSysopBook(Map map);
-	public int printSearchBookTotalPage(Map map);
 
-	//상세페이지리뷰게시판
+	public int printBookTotalPage(int rowSize);
+
+	public List<BookVO> printSearchSysopBook(Map map);
+
+	public int printSearchBookTotalPage(Map map);
+	
+	// 도서관리 추가하기
+	public void printSysopBookInsert(Map map);
+	
+	// 도서관리 수정하기
+	public void printSysopBookUpdate(BookVO vo);
+	
+	// 도서관리 상세페이지
+	public BookVO printSysopBookDetail(String book_code);
+	
+	// 상세페이지리뷰게시판
 	public List<ReviewVO> bookReviewList(String book_code);
+
 	public void contentReviewinsert(ReviewVO vo);
+
 	public int reviewIdCK(ReviewVO vo);
+
 	public int categoryCount();
+	
+	//장바구니
+	public List<BookVO> printSbList(List<String> list) throws Exception;
 }
