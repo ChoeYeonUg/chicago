@@ -162,11 +162,16 @@
 		book_category) FROM goods
 	</select>
 
-	<!-- 도서관리 추가하기 -->
-	<insert id="printSysopBookInsert" parameterType="hashmap">
-		INSERT INTO goods(book_code, book_name, book_category, writer, publisher, amount, out_of_print pages, book_content, price, publication)
-		VALUES(#{book_code}, #{book_name}, #{book_category}, #{writer},
-			   #{publisher}, #{amount},#{out_of_print},#{pages},#{book_content},#{price},#{publication})
+	<!-- book_code 중복체크 기능 -->
+	<select id="codeCheck" resultType="int" parameterType="String">
+		SELECT count(*) FROM goods WHERE book_code = #{book_code}
+	</select>
+
+	<!-- 도서관리 추가하기 -->	
+	<!-- parameterType="hashmap" -->
+	<insert id="printSysopBookInsert">
+		INSERT INTO goods(book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img) 
+		VALUES (#{book_code}, #{book_name},#{book_category}, #{writer}, #{publisher}, #{amount},#{out_of_print}, #{pages}, #{book_content}, #{price}, #{publication}, #{img})
 	</insert>
 
 	<!-- 도서관리 수정하기 -->

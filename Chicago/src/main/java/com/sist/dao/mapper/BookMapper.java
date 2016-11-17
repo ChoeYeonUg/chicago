@@ -37,8 +37,11 @@ public interface BookMapper {
 
 	public int printSearchBookTotalPage(Map map);
 	
+	// 관리자 페이지 insert에서 book_code 확인하기
+	public int codeCheck(String book_code);
+	
 	// 도서 관리자 추가하기 
-	public void printSysopBookInsert(Map map);
+	public void printSysopBookInsert(BookVO vo);
 	
 	// 도서 관리자 수정하기
 	public void printSysopBookUpdate(BookVO vo);

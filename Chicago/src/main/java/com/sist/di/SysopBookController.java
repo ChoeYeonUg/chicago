@@ -1,5 +1,6 @@
 package com.sist.di;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.sist.dao.BookVO;
 import com.sist.service.BookService;
 
@@ -110,46 +114,49 @@ public class SysopBookController {
 	@RequestMapping("book_mngInsert")
 	public String printSysopBookInsert(Model model, HttpServletRequest req) {
 		
+		BookVO vo = new BookVO();
+		
+		model.addAttribute("goods", vo);
+		
 		model.addAttribute("jsp", "sysop.jsp");
-		/*model.addAttribute("sysop_jsp", "../sysop/book_management.jsp");*/
 		model.addAttribute("jsp","../sysop/book_mngInsert.jsp");
 		
 		return "main/main";
 	}
 	
-	// 도서관리 추가하기 전달
-	@RequestMapping("book_mngInsertOk")
-	public String printSysopBookInsertOk(Model model, BookVO vo, HttpServletRequest req) {
-
-		String book_code = vo.getBook_code();
-		String book_name = vo.getBook_name();
-		int book_category = vo.getBook_category();
-		String writer = vo.getWriter();
-		String publisher = vo.getPublisher();
-		int amount = vo.getAmount();
-		int out_of_print = vo.getOut_of_print();
-		int pages = vo.getPages();
-		String book_content = vo.getBook_content();
-		int price = vo.getPrice();
-		Date publication = vo.getPublication();
-		
-		Map map = new HashMap();
-		map.put("book_code", book_code);
-		map.put("book_name", book_name);
-		map.put("book_category", book_category);
-		map.put("writer", writer);
-		map.put("publisher", publisher);
-		map.put("amount", amount);
-		map.put("out_of_print", out_of_print);
-		map.put("pages", pages);
-		map.put("book_content", book_content);
-		map.put("price", price);
-		map.put("publication", publication);
-		
+	// ISBN 중복 체크 
+	@RequestMapping(value="code_check", method=RequestMethod.POST, produces="test/html;charset=UTF-8")
+	public void code_check(String book_code, HttpServletResponse res) {
+		boolean data = false;
 		try {
-			bs.printSysopBookInsert(map);
+			logger.info(book_code + " 호출됩니다.");
+			boolean codeCheck = bs.goodsBookCode(book_code);
+			if(!codeCheck && book_code.length()>12) {
+				data = true;
+			} else {
+				data = false;
+			}
+			
+			res.setCharacterEncoding("UTF-8");
+			res.getWriter().print(data);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+		}
+	}
+	
+	// 도서관리 추가하기 전달
+	@RequestMapping(value="book_mngInsertOk", method = RequestMethod.POST)
+	public String printSysopBookInsertOk(Model model, BookVO goods, HttpServletRequest req, String publication) {
+			
+		try {
+			if(publication != null && !publication.equals("")) {
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd");
+				goods.setPublication(transFormat.parse(publication));
+			}
+			bs.printSysopBookInsert(goods);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return "redirec:book_mngInsert.do";
 		}	
 		return "redirect:book_management.do";
 	}

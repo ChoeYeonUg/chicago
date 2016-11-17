@@ -92,10 +92,21 @@ public class BookServiceImpl implements BookService{
 		return bm.printSearchBookTotalPage(map);
 	}
 	
+	// book_code 확인
+	@Override
+	public boolean goodsBookCode(String book_code) {
+		boolean check = false;
+		int codeCheck = bm.codeCheck(book_code);
+		if(codeCheck == 1) {
+			check = true;
+		}
+		return check;
+	}
+	
 	// 도서관리 추가하기
 	@Override
-	public void printSysopBookInsert(Map map) {
-		bm.printSysopBookInsert(map);
+	public void printSysopBookInsert(BookVO vo) {
+		bm.printSysopBookInsert(vo);
 	}
 	
 	// 도서관리 수정하기

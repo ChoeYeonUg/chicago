@@ -38,8 +38,11 @@ public interface BookService {
 
 	public int printSearchBookTotalPage(Map map);
 	
+	// book_code 확인하기
+	public boolean goodsBookCode(String book_code);
+	
 	// 도서관리 추가하기
-	public void printSysopBookInsert(Map map);
+	public void printSysopBookInsert(BookVO vo);
 	
 	// 도서관리 수정하기
 	public void printSysopBookUpdate(BookVO vo);
