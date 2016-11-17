@@ -1,0 +1,188 @@
+@CHARSET "UTF-8";
+
+button {
+    background-color: transparent;
+    cursor: pointer;
+    outline: 0;
+}
+
+html input[type=button], input[type=reset], input[type=text], input[type=password], input[type=submit], input[type=search], input[type=tel], input[type=email] {
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+
+button, input, select, textarea {
+    vertical-align: middle;
+}
+
+input, textarea, keygen, select, button {
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    margin: 0em 0em 0em 0em;
+    font: 13.3333px Arial;
+}
+
+body, button, input, select, td, textarea, th {
+    font-size: 14px;
+    line-height: 1.5;
+    font-family: AppleSDGothicNeo,'Malgun Gothic','맑은 고딕',sans-serif;
+    color: #333;
+}
+
+strong, b {
+    font-weight: bold;
+}
+
+button, fieldset, img {
+    border: 0;
+}
+
+dl, li, menu, ol, ul {
+    list-style: none;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+address, caption, cite, code, dfn, em, var {
+    font-style: normal;
+    font-weight: 400;
+}
+
+blockquote, body, button, code, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, pre, select, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+}
+
+.cont_basket .info_basket {
+    position: relative;
+    width: 1000px;
+    margin: 30px auto 0;
+}
+
+.cont_basket .desc_total {
+    padding: 0 0 7px;
+    font-size: 18px;
+    color: #666;
+}
+
+.cont_basket .desc_total .emph_total {
+    font-weight: 700;
+    color: #222;
+}
+
+.cont_basket .info_basket .list_basket {
+    overflow: hidden;
+    margin-top: 27px;
+}
+
+.info_basket .list_basket li {
+    position: relative;
+    float: left;
+    width: 100%;
+    padding: 25px 0 30px;
+    border-bottom: 1px solid #efefef;
+}
+
+.info_basket .list_basket .link_thumb {
+    overflow: hidden;
+    position: relative;
+    float: left;
+    width: 120px;
+    height: 120px;
+    margin: 5px 50px 0 0;
+}
+
+.thumb_g {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.info_basket .list_basket .desc_basket {
+    overflow: hidden;
+}
+
+.list_basket .desc_basket .tit_product {
+    display: block;
+    padding-right: 50px;
+    font-size: 20px;
+    line-height: 22px;
+}
+
+.list_basket .desc_basket .list_append {
+    overflow: hidden;
+    width: 335px;
+    margin-top: 46px;
+    font-size: 16px;
+    color: #222;
+    line-height: 24px;
+}
+.list_basket .list_append li {
+    padding: 0;
+    border-bottom: 0 none;
+    text-align: right;
+}
+.list_basket .list_append .tit_append {
+    float: left;
+    color: #999;
+}
+
+.list_basket .list_append li {
+    padding: 0;
+    border-bottom: 0 none;
+    text-align: right;
+}
+
+.box_quantity {
+    width: 198px;
+    height: 38px;
+    padding: 0 39px;
+    border: 1px solid #eee;
+}
+
+.info_basket .list_basket .box_quantity {
+    position: absolute;
+    right: 80px;
+    bottom: 30px;
+    border: 1px solid #eaeaea;
+}
+
+.box_quantity .inp_quantity {
+    display: block;
+    width: 100%;
+    height: 18px;
+    padding: 10px 0;
+    border: 0;
+    font-size: 16px;
+    line-height: 19px;
+    font-family: helvetica,sans-serif;
+    color: #333;
+    background-color: #fff;
+    text-align: center;
+}
+
+.list_basket .box_quantity .btn_g {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 39px;
+    height: 38px;
+    border-right: 1px solid #eaeaea;
+}
+
+.list_basket .box_quantity .btn_plus {
+    left: auto;
+    right: 0;
+    border-right: 0 none;
+    border-left: 1px solid #eaeaea;
+}

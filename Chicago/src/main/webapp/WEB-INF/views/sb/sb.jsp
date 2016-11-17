@@ -8,11 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:if test="${sbList != null }">
-		<c:forEach items="${bookList }" var="item">
-			${item.book_name }<br/>
-			${item.img }
-		</c:forEach>
-	</c:if>
+	<form action="purchase.do" method="post">
+		<c:if test="${sbList != null }">
+			<c:forEach items="${bookList }" var="item">
+				<input type="text" name="book_code" value="${item.book_code }">
+				<input type="text" name="amount" value="1">
+			</c:forEach>
+		</c:if>
+		<input type="submit" value="전송">
+	</form>
 </body>
 </html>
