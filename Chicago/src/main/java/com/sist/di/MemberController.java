@@ -46,27 +46,6 @@ public class MemberController {
 	}
 	
 	
-	/* Secure Page */
-	@RequestMapping("membersecurepwd.do")
-	public String memberSecurePwd_page(Model model, HttpServletRequest request, String typecheck) throws Exception {
-		
-		model.addAttribute(typecheck);
-		
-		model.addAttribute("jsp", "member.jsp");
-		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
-		
-		model.addAttribute("MemberMain_cmi", "../MemberMain.jsp");
-		
-		//redirectAttributes.addFlashAttribute("check", "ok");
-		return "redirect:membersecurepwd.do";
-		
-		//model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
-		
-		//return "main/main";
-		
-	}
-	
-	
 	@RequestMapping(value="membersecurepwd_ok.do", method=RequestMethod.POST)
 	public String membersecurepwd_ok(Model model, HttpServletRequest request, String USER_Check_PWD, String typecheck,
 			RedirectAttributes redirectAttributes) throws Exception {
@@ -74,10 +53,11 @@ public class MemberController {
 		HttpSession hs = request.getSession();
 		String sessionid = (String)hs.getAttribute("id");
 		String cpwd = ms.pwdCheck(sessionid);
-
+		String url="";
+		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
-	
+		
 		model.addAttribute("MemberMain_cmi", "../MemberMain.jsp");
 		
 			if(USER_Check_PWD.equals(cpwd)) {
@@ -85,22 +65,23 @@ public class MemberController {
 				if(typecheck.equals("mi")) {
 					
 					redirectAttributes.addFlashAttribute("check", "ok");
-					return "redirect:modifyMemberInfo.do";
+					url= "redirect:modifyMemberInfo.do";
 					
 				} else if(typecheck.equals("ma")) {
 					
 					redirectAttributes.addFlashAttribute("check", "ok");
-					return "redirect:memberAddrsInfo.do";
+					url= "redirect:memberAddrsInfo.do";
 					
 				}
 			
 			} else {
-				
-				return "redirect:membersecurepwd.do";
+								
+				model.addAttribute("typecheck", typecheck);
+				url = "redirect:modifyMemberInfo.do";
 				
 			}
 		
-		return "redirect:membersecurepwd.do";
+			return url;
 		
 	}
 	
@@ -139,11 +120,10 @@ public class MemberController {
 			
 		}catch(Exception ex){
 			
-			typecheck="mi";
+			typecheck = "mi";
 			
 			model.addAttribute("typecheck", typecheck);
 			model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
-			
 			
 		}
 		
@@ -279,7 +259,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("memberAddrsInfo.do")
-	public String memberAddrsInfo_page(Model model, HttpServletRequest request) throws Exception {
+	public String memberAddrsInfo_page(Model model, HttpServletRequest request, String typecheck) throws Exception {
 		
 		
 		model.addAttribute("jsp", "member.jsp");
@@ -295,7 +275,9 @@ public class MemberController {
 			model.addAttribute("avo", avo);			
 		}catch(Exception ex){
 			
-			model.addAttribute("typecheck", "ma");
+			typecheck = "ma";
+			
+			model.addAttribute("typecheck", typecheck);
 			model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
 			
 		}

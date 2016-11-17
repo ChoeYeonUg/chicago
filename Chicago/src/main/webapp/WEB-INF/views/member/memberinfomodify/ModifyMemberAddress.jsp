@@ -32,6 +32,7 @@
 
 <script type="text/javascript">
 function send(){
+	
 	var f=document.frm;
 		
 	if(f.zipcode1.value==""){
