@@ -34,18 +34,6 @@
 function send(){
 	var f=document.frm;
 		
-	// 곧바로 현재 페이지 주소 출력
-	document.writeln(location.href);
-
-
-	// 변수에 넣어서 출력
-	var s = location.href;
-	document.writeln(s);
-	
-	
-	
-	
-	
 	/* if(f.USER_ZIPCODE.value==""){
 		alert("우편번호는 꼭 있어야합니다!");
 		f.USER_ZIPCODE.focus();

@@ -35,11 +35,12 @@
 		<div class="MiddlelineSettingForm">
 			<div class="HeadlineSettingForm">
 				<div class="Headline">
-					회원주문내역
+					회원세부주문내역
 				</div>
 				<div class="Notification">
 					<ul class="Notcont">
-						<li>회원님의 주문내역을 확인할 수 있습니다.</li>
+						<li>회원님의 세부주문내역을 확인할 수 있습니다.</li>
+						<li>환불 처리는 낙장, 파본 및 미개봉 상품에 한하며, 주문 취소는 배송되기 전에 가능합니다.</li>
 						<li>환불 처리는 낙장, 파본 및 미개봉 상품에 한하며, 주문 취소는 배송되기 전에 가능합니다.</li>
 					</ul>
 				</div>
@@ -56,30 +57,24 @@
 								<fieldset>
 									<div id="OrderlistTable" class="OrderlistTable">
 										<div class="row">
-											<span class="celH col1">주문번호</span>
+											<span class="celH col1">번호</span>
 											<span class="celH col2">서적명</span>
-											<span class="celH col3">결제금액</span>
-											<span class="celH col4">주문날짜</span>
-											<span class="celH col5">배송상태</span>
+											<span class="celH col3">주문량</span>
+											<span class="celH col4">가격</span>
+											<span class="celH col5">주문날짜</span>
+											<span class="celH col6">배송상태</span>
 											<span class="celH colB">취소/환불</span>
 										</div>
 										<c:forEach var="vo" items="${list}">
 												<c:choose>
 													<c:when test="${list.size() != 0}">
 														<div class="row">
-															<span class="cell col1"><a href="${vo.order_id}">${vo.order_id}</a></span>
-															<span class="cell col2">
-																<%-- <c:if test="${vo.ord == 0}"> --%>
-																	${vo.book_name}
-																<%-- </c:if> --%>
-																
-																<%-- <c:if test="${vo.delivery != 0}"> --%>
-																	<%-- ${vo.book_name} 외 --%> 
-																<%-- </c:if> --%>
-															</span>
-															<span class="cell col3">${vo.total_price}원</span>
-															<span class="cell col4"><fmt:formatDate value="${vo.order_date}" pattern="yyyy-MM-dd"/></span>
-															<span class="cell col5">${deliveryType}</span>
+															<span class="cell col1">${vo.order_id}</span>
+															<span class="cell col2">${vo.book_name}</span>
+															<span class="cell col3">${vo.amount}권</span>
+															<span class="cell col4">${vo.total_price}원</span>
+															<span class="cell col5"><fmt:formatDate value="${vo.order_date}" pattern="yyyy-MM-dd"/></span>
+															<span class="cell col6">${deliveryType}</span>
 															<span class="cell colB">
 																<c:if test="${vo.delivery == 0}">
 																	<input type="button" onclick="#" value="주문취소">
