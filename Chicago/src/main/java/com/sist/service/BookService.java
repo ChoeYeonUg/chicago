@@ -59,4 +59,7 @@ public interface BookService {
 	public int reviewIdCK(ReviewVO vo);
 
 	public int categoryCount();
+	
+	//장바구니
+	public List<BookVO> printSbList(List<String> list) throws Exception;
 }

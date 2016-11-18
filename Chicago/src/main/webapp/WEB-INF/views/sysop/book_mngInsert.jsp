@@ -117,7 +117,8 @@
 	<div id="content">
 		<div class="container background-white">
 			<div class="row margin-vert-40">
-				<form action="book_mngInsertOk.do" method="post" id="form" name="form">
+				<!-- <form action="book_mngInsertOk.do" method="post" id="form" name="form"> -->
+				<form:form commandName="vo" action="book_mngInsertOk.do" method="post" id="form" name="form">
 					<table>
 						<tr>
 							<td width="10%" style="font-size:11px; color:#505050;">ISBN</td>
@@ -193,7 +194,8 @@
 							</td>
 						</tr>
 					</table>
-				</form>
+				<%-- </form> --%>
+				</form:form>
 			</div>
 		</div>
 	</div>

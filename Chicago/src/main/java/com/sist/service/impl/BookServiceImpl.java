@@ -1,5 +1,6 @@
 package com.sist.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -148,5 +149,19 @@ public class BookServiceImpl implements BookService{
 	public int categoryCount() {
 		// TODO Auto-generated method stub
 		return bm.categoryCount();
+	}
+
+	@Override
+	public List<BookVO> printSbList(List<String> list)throws Exception{
+		// TODO Auto-generated method stub
+		List<BookVO> bookList = new ArrayList<BookVO>();
+		
+		for(String book_code : list){
+			System.out.println(book_code);
+			BookVO vo = bm.printSbList(book_code);
+			bookList.add(vo);
+		}
+		
+		return bookList;
 	}
 }

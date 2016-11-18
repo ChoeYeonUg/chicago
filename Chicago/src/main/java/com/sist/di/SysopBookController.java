@@ -106,7 +106,6 @@ public class SysopBookController {
 
 		model.addAttribute("jsp", "sysop.jsp");
 		model.addAttribute("jsp", "../sysop/book_mngDetail.jsp");
-
 		return "main/main";
 	}
 	
@@ -120,10 +119,13 @@ public class SysopBookController {
 		
 		model.addAttribute("jsp", "sysop.jsp");
 		model.addAttribute("jsp","../sysop/book_mngInsert.jsp");
+		/*BookVO vo = new BookVO();
+		model.addAttribute("vo", vo);*/
 		
 		return "main/main";
 	}
 	
+
 	// ISBN 중복 체크 
 	@RequestMapping(value="code_check", method=RequestMethod.POST, produces="test/html;charset=UTF-8")
 	public void code_check(String book_code, HttpServletResponse res, HttpServletRequest req) {

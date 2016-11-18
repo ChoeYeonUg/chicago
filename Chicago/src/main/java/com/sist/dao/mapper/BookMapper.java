@@ -63,4 +63,7 @@ public interface BookMapper {
 	public int reviewIdCK(ReviewVO vo);
 
 	public int categoryCount();
+	
+	//장바구니
+	public BookVO printSbList(String book_code);
 }
