@@ -112,7 +112,7 @@ public class SysopBookController {
 	
 	// 도서관리 추가하기
 	@RequestMapping("book_mngInsert")
-	public String printSysopBookInsert(Model model, HttpServletRequest req) {
+	public String printSysopBookInsert(Model model, HttpServletRequest req, HttpServletResponse res) {
 		
 		BookVO vo = new BookVO();
 		
@@ -126,15 +126,17 @@ public class SysopBookController {
 	
 	// ISBN 중복 체크 
 	@RequestMapping(value="code_check", method=RequestMethod.POST, produces="test/html;charset=UTF-8")
-	public void code_check(String book_code, HttpServletResponse res) {
+	public void code_check(String book_code, HttpServletResponse res, HttpServletRequest req) {
 		boolean data = false;
 		try {
 			logger.info(book_code + " 호출됩니다.");
 			boolean codeCheck = bs.goodsBookCode(book_code);
 			if(!codeCheck && book_code.length()>12) {
 				data = true;
+				//System.out.println(data);
 			} else {
 				data = false;
+				//System.out.println(data);
 			}
 			
 			res.setCharacterEncoding("UTF-8");

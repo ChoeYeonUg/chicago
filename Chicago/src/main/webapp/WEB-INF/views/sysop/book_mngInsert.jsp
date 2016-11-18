@@ -18,15 +18,15 @@
 			var codeVal = $('#book_code').val();
 			var params = "book_code=" + codeVal;
 			/* console.log($('form').serialize()); */
-			console.log(params);
-			if(codeVal.lenth > 12) {
+			/* console.log(params); */
+			if(codeVal.length > 12) {
 				$.ajax ({
-					url : "id_check.do",
+					url : "code_check.do",
 					type : "post",
 					data : params, 
 					dataType : 'text',
 					success : function(data) {
-						alert(data);
+						/* alert(data); */
 						if(data == "true") {
 							$('#codeResult').html("사용가능한 ISBN 입니다.");
 							$('#check').attr('value', 'Y');
@@ -47,9 +47,11 @@
 		});
 		
 		$('#sendBtn').click(function(){
-						
+			
+			var f = document.form;
+			
 			var codeVal = $('#book_code').val();
-			if(codeVal.trim()=='' || $('#check').vla=="N") {
+			if(codeVal.trim()=='' || $('#check').val()=="N" || codeVal.length < 13) {
 				alert('ISBN(도서코드)를 확인하세요.');
 				$('#book_code').focus();
 				return;
@@ -106,8 +108,8 @@
 				return;
 			}
 		/* 	alert(1234); */
-			$('#form').submit();
-		})
+			f.submit();
+		});
 	});
 </script>
 </head>
@@ -121,7 +123,7 @@
 							<td width="10%" style="font-size:11px; color:#505050;">ISBN</td>
 							<td colspan="3">
 								<input type="text" size="20" name="book_code" id="book_code"/>
-								<span id="codeResult"></span><form:errors path="code"/>
+								<span id="codeResult"></span><form:errors path="book_code"/>
 								<input type="hidden" id="check" value="Y" disabled="disabled"/>
 								<!-- <input type="text" size="20" name="book_code" id="book_code" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/> -->
 							</td>
