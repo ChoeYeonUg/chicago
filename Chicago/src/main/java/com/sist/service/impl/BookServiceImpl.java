@@ -111,8 +111,12 @@ public class BookServiceImpl implements BookService{
 	
 	// 도서관리 수정하기
 	@Override
-	public void printSysopBookUpdate(BookVO vo) {
-		bm.printSysopBookUpdate(vo);
+	public BookVO printSysopBookUpdate(String book_code) {
+		return bm.printSysopBookUpdate(book_code);
+	}
+	
+	public void printSysopBookUpdateData(BookVO vo) {
+		bm.printSysopBookUpdateData(vo);
 	}
 	
 	// 도서관리 상세페이지

@@ -166,17 +166,47 @@ public class SysopBookController {
 	// 도서관리 수정하기 
 	@RequestMapping("book_mngUpdate")
 	public String printSysopBookUpdate(Model model, String book_code, HttpServletRequest req) {
+		
+		BookVO vo;
+		
 		try {
-			BookVO vo = bs.detailBook(book_code);
+			vo = bs.printSysopBookUpdate(book_code);
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			
+			if(vo.getPublication() != null && !vo.getPublication().equals("")) {
+				String publication = sdf.format(vo.getPublication());
+				model.addAttribute("publication", publication);
+			}
 			
 			model.addAttribute("vo", vo);
-			model.addAttribute("jsp", "sysop.jsp");
-			model.addAttribute("jsp", "../sysop/book_mngUpdate.jsp");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
+		model.addAttribute("jsp", "sysop.jsp");
+		model.addAttribute("jsp", "../sysop/book_mngUpdate.jsp");
 		return "main/main";
+	}
+	
+	@RequestMapping(value="book_mngUpdateOk", method=RequestMethod.POST)
+	public String printSysopBookUpdteData(BookVO goods, HttpServletRequest req, String book_code, String publication) {
+		try {
+			if(publication != null && !publication.equals("")) {
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd");
+				goods.setPublication(transFormat.parse(publication));
+			}
+			
+			System.out.println(goods.getBook_code());
+			bs.printSysopBookUpdateData(goods);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return "redirec:book_mngUpdate.do";
+			//?book_code" + goods.getBook_code()
+		}	
+		return "redirect:book_management.do";
 	}
 	
 }
