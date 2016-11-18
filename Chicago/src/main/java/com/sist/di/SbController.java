@@ -64,10 +64,12 @@ public class SbController {
 		HttpSession hs = req.getSession();
 		List<String> list = (List<String>) hs.getAttribute("sbList");
 		
-		List<BookVO> bookList;
+		List<BookVO> bookList = null;
 		try {
-			bookList = bs.printSbList(list);
-			model.addAttribute("bookList", bookList);		
+			if(list != null){
+				bookList = bs.printSbList(list);
+			}
+			model.addAttribute("bookList", bookList);
 			model.addAttribute("jsp", "sb.jsp");
 			model.addAttribute("jsp", "../sb/sbList.jsp");
 		} catch (Exception e) {
@@ -75,5 +77,16 @@ public class SbController {
 			e.printStackTrace();
 		}
 		return "main/main";
+	}
+	
+	@RequestMapping("sbDelete")
+	public String deleteBook(Model model, HttpServletRequest req, String book_code){
+		HttpSession hs = req.getSession();
+		List<String> list = (List<String>) hs.getAttribute("sbList");
+		
+		list.remove(book_code);
+		hs.setAttribute("sbList", list);
+				
+		return "redirect:sbList.do";
 	}
 }

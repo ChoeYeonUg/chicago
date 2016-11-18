@@ -93,6 +93,35 @@ blockquote, body, button, code, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4,
     border-bottom: 1px solid #efefef;
 }
 
+.choice_g {
+    display: block;
+    position: relative;
+    height: 100%;
+}
+
+.choice_basket {
+    float: left;
+    width: 34px;
+    height: 120px;
+    margin-top: 5px;
+}
+
+
+.choice_g .inp_g {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    /* width: 100%;
+    height: 100%;
+    vertical-align: top;
+    outline: 0;
+    -webkit-appearance: none; */
+    opacity: 100;
+    filter: alpha(opacity=0);
+    cursor: pointer;
+}
+
 .info_basket .list_basket .link_thumb {
     overflow: hidden;
     position: relative;
@@ -185,4 +214,100 @@ blockquote, body, button, code, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4,
     right: 0;
     border-right: 0 none;
     border-left: 1px solid #eaeaea;
+}
+
+.cont_basket .info_price {
+    overflow: hidden;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 72px 0 46px;
+    border-bottom: 1px solid #b5b5b5;
+}
+
+.cont_basket .info_price .list_price {
+    float: left;
+    width: 450px;
+    font-size: 18px;
+    color: #999;
+    line-height: 31px;
+}
+.cont_basket .list_price dt {
+    float: left;
+}
+
+.cont_basket .list_price dd {
+    overflow: hidden;
+    color: #222;
+    text-align: right;
+}
+
+.cont_basket .info_price .list_price {
+    float: left;
+    width: 450px;
+    font-size: 18px;
+    color: #999;
+    line-height: 31px;
+}
+
+.cont_basket .list_price dt {
+    float: left;
+}
+
+.cont_basket .info_price .price_total {
+    float: right;
+    width: 450px;
+    margin-top: 30px;
+    font-size: 20px;
+    color: #1e1e1e;
+}
+
+.order_btn, .cont_write .order_btn {
+    overflow: hidden;
+    padding-top: 30px;
+    border-top: 1px solid #000;
+    clear: both;
+}
+
+.order_btn .btn_payment {
+    height: 60px;
+    color: #fff;
+    background-color: #68A4C4;
+}
+
+.product_area, .order_btn .btn_payment {
+    float: right;
+    width: 480px;
+}
+
+.order_btn .btn_order {
+    height: 60px;
+    font-size: 20px;
+    line-height: 21px;
+    font-weight: 700;
+    text-align: center;
+}
+
+#cEtc {
+    position: relative;
+    overflow: hidden;
+    width: 1000px;
+    height: 158px;
+    margin: 0 auto;
+    padding-top: 119px;
+}
+
+.info_basket .list_basket .link_delete {
+    position: absolute;
+    top: 19px;
+    right: 0;
+    width: 34px;
+    height: 34px;
+}
+
+.list_basket .link_delete .ico_delete {
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin: 11px;
+    background-position: -50px -70px;
 }
