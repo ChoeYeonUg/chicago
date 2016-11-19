@@ -52,6 +52,7 @@ public class OrderlistController {
 		HttpSession hs = request.getSession();
 		String sessionid = (String)hs.getAttribute("id");
 		
+		
 		if(vo.getDelivery()==1) {
 			deliveryType = "배송준비중";
 		} else if(vo.getDelivery()==2) {
@@ -72,22 +73,32 @@ public class OrderlistController {
 		int fromPage = ((curPage - 1) / block * block) + 1;
 		int toPage = ((curPage - 1) / block * block) + block;
 		
-		
-		
-		
-		
+		int cnt = 0;
 		
 		Map map = new HashMap();
 		map.put("start", start);
 		map.put("end", end);
 		map.put("rowSize", rowSize);
-		map.put("id", sessionid);
+		map.put("id", sessionid);				
+		
+		
 		
 		try {
 			List<OrderlistVO> list = ols.selectOrderlist(map);
 			int totalPage = ols.memberOrderlistTotalPage(sessionid);
-			
+			 
 			if(toPage > totalPage) toPage = totalPage;
+
+			for(int i=0; i<list.size(); i++){
+				System.out.println(list.get(i).getOrder_id());
+			}
+			
+			/*for(int cnt : list.get(vo.getOrder_id())) {
+				
+				bookcode를 구하라!!
+			}*/
+			
+
 			
 			model.addAttribute("deliveryType", deliveryType);
 			model.addAttribute("list", list);
