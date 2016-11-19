@@ -299,3 +299,16 @@ button, fieldset, img {
     margin: 0 auto;
     padding-top: 119px;
 }
+
+.info_pay .list_pay {
+    overflow: hidden;
+    padding-top: 35px;
+    margin-bottom: 20px;
+}
+
+.info_pay .list_pay li {
+    float: left;
+    width: 50%;
+    height: 30px;
+    margin-bottom: 20px;
+}
