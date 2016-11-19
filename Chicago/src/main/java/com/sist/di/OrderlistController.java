@@ -89,33 +89,6 @@ public class OrderlistController {
 			
 			if(toPage > totalPage) toPage = totalPage;
 			
-			/* 주문번호 중복값 거르기 */
-			int oiCnt = 0;
-			
-			List<Integer> oiList = new ArrayList<Integer>();
-			
-			List<Integer> oiCntList = new ArrayList<Integer>();
-			
-			for(int i = 0 ; i < list.get(vo.getOrder_id()) ; i++) {
-				for (int j = 1 ; j < list.get(vo.getOrder_id()) ; j++) {
-			        if (list.get(vo.getOrder_id(i)) == list.get(vo.getOrder_id(j))) {
-			            oiCnt++;
-			        }
-			    }
-			    if (oiCnt == 2) {
-			        System.out.println("중복발견 : " + list.get(vo.getOrder_id(i));
-			        break;
-			    } else {
-			    	oiCnt = 0;
-			    }
-			    
-			    
-			}
-				
-				
-			
-			
-			
 			model.addAttribute("deliveryType", deliveryType);
 			model.addAttribute("list", list);
 			model.addAttribute("block", block);
