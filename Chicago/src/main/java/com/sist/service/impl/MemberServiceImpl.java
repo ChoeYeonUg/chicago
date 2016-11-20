@@ -143,6 +143,19 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return mapper.orderData(id);
 	}
+
+	@Override
+	public boolean findPwd(MemberVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		boolean bCheck = false;
+		int result = mapper.findPwd(vo);
+		
+		if(result == 1){
+			bCheck = true;
+		}
+		
+		return bCheck;
+	}
 	
 
 }

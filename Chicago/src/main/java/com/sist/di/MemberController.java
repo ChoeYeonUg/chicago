@@ -78,7 +78,7 @@ public class MemberController {
 								
 				model.addAttribute("typecheck", typecheck);
 				url = "redirect:modifyMemberInfo.do";
-				
+
 			}
 		
 			return url;

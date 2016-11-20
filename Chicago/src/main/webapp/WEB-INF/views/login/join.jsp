@@ -153,40 +153,42 @@ function sample6_execDaumPostcode() {
 			<!-- Register Box -->
 				<div class="col-md-6 col-md-offset-3 col-sm-offset-3">
 					<h2 class="margin-bottom-20"><spring:message code="form.join"/></h2>
-						<form:form action="join_ok.do" commandName="memberVO" name="frm" id="frm">
-		<table>
+						<form:form action="add_writer.do" commandName="memberVO" name="frm" id="frm">
+							<div class="join_mem">
+								<div class="join_cont1">
+									<table width="100%">
 			<tr>
-				<td><spring:message code="form.id"/></td>
-				<td><form:input path="id" maxlength="16" id="id"/>
+				<th><span class="titR">*</span><spring:message code="form.id"/></th>
+				<td><form:input path="id" maxlength="16" id="id" placeholder="5자리 이상 입력하세요"/>
 					<span id="idResult"></span><form:errors path="id"/>
 					<input type="hidden" id="check" value="Y" disabled="disabled">
 				</td>
 			</tr>
 			<tr>
-				<td><spring:message code="form.name"/></td>
-				<td><form:input path="name" maxlength="16" /><form:errors path="name"/></td>
+				<th><span class="titR">*</span><spring:message code="form.name"/></th>
+				<td><form:input path="name" maxlength="16" placeholder="한글과 영문만 가능합니다" /><form:errors path="name"/></td>
 			</tr>
 			<tr>
-				<td><spring:message code="form.pwd"/></td>
-				<td><form:password path="pwd" maxlength="16"/><form:errors path="pwd"/></td>
+				<th><span class="titR">*</span><spring:message code="form.pwd"/></th>
+				<td><form:password path="pwd" maxlength="16" placeholder="5자리 이상 입력하세요" /><form:errors path="pwd"/></td>
 			</tr>
 			<tr>
-				<td><spring:message code="form.email"/></td>
-				<td><form:input path="email"/><br/><form:errors path="email"/></td>
+				<th><spring:message code="form.email"/></th>
+				<td><form:input path="email" placeholder="형식을 바르게 입력해주세요"/><br/><form:errors path="email"/></td>
 			</tr>
 			<tr>
-				<td><spring:message code="form.phone"/></td>
-				<td><form:input path="phone" maxlength="12" id="phone"/><form:errors path="phone"/></td>
+				<th><span class="titR">*</span><spring:message code="form.phone"/></th>
+				<td><form:input path="phone" maxlength="12" id="phone" placeholder="숫자만 입력하세요" /><form:errors path="phone"/></td>
 			</tr>
 			<tr>
-				<td><spring:message code="form.gender"/></td>
+				<th><spring:message code="form.gender"/></th>
 				<td><%-- <form:radiobuttons items="${gender }"  path="gender"/> --%>
 					<input type="radio" name="gender" value="1" checked="checked"><spring:message code="form.man"/>
 					<input type="radio" name="gender" value="2"><spring:message code="form.woman"/>
 				</td>
 			</tr>
 			<tr>
-				<td><spring:message code="form.addr"/></td>
+				<th><spring:message code="form.addr"/></th>
 				<td>
 					<input type="text" name="zipcode" id="zipcode" placeholder="<spring:message code="form.zip"/>" readonly="readonly">
 						<input type="button" onclick="sample6_execDaumPostcode()" value="<spring:message code="form.zipcode"/>"><br/>
@@ -196,10 +198,15 @@ function sample6_execDaumPostcode() {
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="button" value="<spring:message code="form.btn"/>" id="sendBtn" onclick="send"></td>
+				<td colspan="2"><input type="button" value="<spring:message code="form.btn"/>" id="sendBtn" onclick="send" class="btn btn-primary"></td>
 			</tr>
 		
 		</table>
+								
+								
+								</div>
+							</div>
+		
 		</form:form>
 	</div>
 	</div>

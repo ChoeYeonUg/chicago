@@ -8,9 +8,29 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="css/purchase.css" rel="stylesheet" />
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-	
+	$(function(){
+		sum();
+		
+		$("#usePoint").keyup(function(event){
+	        if (!(event.keyCode >=37 && event.keyCode<=40)) {
+	            var inputVal = $(this).val();
+	            $(this).val(inputVal.replace(/[^0-9]/gi,''));
+	            var val = $(this).val();
+	            if(val.trim() == ""){
+	            	$(this).val(0);
+	            }
+	            var totalPoint = $('#totalPoint').val();
+	            if(val > totalPoint){
+	            	$(this).val(totalPoint);
+	            }
+	            sum();
+	        }
+
+	    });
+	});
+
 	function send(){
 		
 		var name = $("#name").val();
@@ -41,13 +61,43 @@
 		$("#frm").submit();
 	}
 
+	//실제 결제금액을 계산
+	function sum(){
+		var sum = 0;
+		var point = $('#usePoint').val();
+		var price = $('#Originalprice').val();
+		
+		sum = price - point;
+
+		$('#txt_total_price').html(comma(sum)+' 원');
+		$('#total_price').val(sum);
+	}
+	//액수에 ,를 추가
+	function comma(num){
+	    var len, point, str;  
+	       
+	    num = num + "";
+	    point = num.length % 3 ;
+	    len = num.length;  
+	   
+	    str = num.substring(0, point);  
+	    while (point < len) {  
+	        if (str != "") str += ",";  
+	        str += num.substring(point, point + 3);  
+	        point += 3;  
+	    }  
+	     
+	    return str;
+	 
+	}
 </script>
 </head>
 <body>
 	<div id="main">
 		<div id="purchase">
 			<h2 class="tit_order">주문하기</h2>
-			<form action="purchase_ok.do" method="post" id="frm">				
+			<form action="purchase_ok.do" method="post" id="frm">
+				<input type="hidden" id="totalPoint" value="${vo.point}">		
 				<c:forEach items="${bookList }" var="bl">
 					<input type="hidden" name="bookList" value="${bl }">
 				</c:forEach>
@@ -55,8 +105,9 @@
 					<input type="hidden" name="bookCount" value="${bc }">
 				</c:forEach>
 				
-				<input type="hidden" name="payment" value="card">
-				<input type="hidden" name="total_price" value="${totalPrice }">
+				<input type="hidden" name="saving" value="${point}">
+				<input type="hidden" id="Originalprice" value="${price}">
+				<input type="hidden" name="total_price" id="total_price" value="${totalPrice }">
 				<fieldset>
 					<legend class="screen_out">주문하기 양식</legend>
 					<div class="info_delivery">
@@ -77,7 +128,7 @@
 							<dt>우편번호</dt>
 							<dd>
 								<div class="box_input box_postal">
-									<input type="text" class="tf_g" id="zipcode" name="zipcode" value="${vo.zipcode }">
+									<input type="text" class="tf_g" id="zipcode" name="zipcode" value="${vo.zipcode == 0 ? '' : vo.zipcode }">
 								</div>
 								<button type="button" class="btn_postal" onclick="execDaumPostcode()">우편번호</button>
 							</dd>
@@ -112,7 +163,7 @@
 											<ul class="list_append">
 												<li>
 													<em class="tit_append">금액 :</em>
-													${bVO.price } 원
+													<fmt:formatNumber value="${bVO.price }" pattern="#,###"/> 원
 												</li>
 												<li>
 													<em class="tit_append">수량 :</em>
@@ -130,15 +181,34 @@
 								<dd><fmt:formatNumber value="${price}" pattern="#,###"/> 원</dd>
 								<dt>배송비 :</dt>
 								<dd><fmt:formatNumber value="${deliveryFee}" pattern="#,###"/> 원</dd>
-								<dt>포인트 :</dt>
-								<dd>0</dd>
+								<dt>적립 포인트 :</dt>
+								<dd><fmt:formatNumber value="${point}" pattern="#,###"/> 포인트</dd>
+								<dt>사용 포인트 :</dt>
+								<dd><input type="text" id="usePoint" value="0"> 포인트</dd>
+								<dt>사용 가능 포인트 :</dt>
+								<dd><fmt:formatNumber value="${vo.point}" pattern="#,###"/> 포인트</dd>
 								<dt class="txt_total">총 결제금액 :</dt>
-								<dd class="txt_total"><fmt:formatNumber value="${totalPrice}" pattern="#,###"/> 원</dd>
+								<dd class="txt_total" id="txt_total_price"></dd>
 							</dl>
 							
 							<!-- 결제단 -->
 							<div class="info_pay">
 								<h3 class="tit_sub">결제수단</h3>
+								<ul class="list_pay">
+									<li>
+										<span class="choice_g choice_radio">
+											<input type="radio" name="payment" value="card" class="inp_g" checked="checked">
+											<label>카드</label>
+										</span>
+									</li>
+									<li>
+										<span class="choice_g choice_radio">
+											<input type="radio" name="payment" value="acount" class="inp_g">
+											<label>계좌이체</label>
+										</span>
+									</li>
+								
+								</ul>
 							</div>
 								
 						</div>
