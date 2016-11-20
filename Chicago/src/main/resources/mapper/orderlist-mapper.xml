@@ -12,23 +12,29 @@
 		id=#{id}
 	</sql>
 	
-    <sql id="check-order_id">
-		orders.id=#{id}
-	</sql>
-	
-	<!-- View Member Orderlist for PageSite -->
-	<select id="memberOrderlistTotalPage" resultType="int" parameterType="String">
-		SELECT CEIL(COUNT(*)/7) FROM orders,order_book,goods WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND <include refid="check-id"/>
-  	</select>
-	
 	<!-- Select Member Orderlist -->
-	<select id="selectOrderlist" resultType="OrderlistVO" parameterType="hashmap">
-		SELECT order_id,id,book_code,book_name,amount,total_price,payment,order_date,account_info,refund_state,num
-				FROM (SELECT order_id,id,book_code,book_name,amount,total_price,payment,order_date,account_info,refund_state,ROWNUM AS num
-				FROM (SELECT orders.order_id,orders.id,order_book.book_code,goods.book_name,order_book.amount,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.refund_state
+	<select id="selectOrderlist" parameterType="hashmap" resultType="orderlist">
+		SELECT order_id,name,id,book_code,book_name,amount,total_price,payment,order_date,account_info,refund_state,memo,num
+				FROM (SELECT order_id,name,id,book_code,book_name,amount,total_price,payment,order_date,account_info,refund_state,memo,ROWNUM AS num
+				FROM (SELECT orders.order_id,name,orders.id,order_book.book_code,goods.book_name,order_book.amount,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.refund_state,orders.memo
 				FROM orders,order_book,goods WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND <include refid="check-id"/> ORDER BY orders.order_date DESC)) WHERE num BETWEEN #{start} AND #{end}
   	</select>
   	
+	<!-- View Member Orderlist for PageSite -->
+	<select id="selectOrderlistTotalPage" parameterType="hashmap" resultType="orderlist">
+		SELECT CEIL(COUNT(*)/#{rowSize}) FROM orders,order_book,goods WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND <include refid="check-id"/>
+  	</select>
+  	
   	<!-- Search Member Orderlist -->
+ 	<!-- <select id="searchOrderlist" parameterType="hashmap" resultType="orders">
+ 		SELECT order_id,id,delivery,addr,payment,order_date,total_price,account_info,refund_state,memo,zipcode,name,num
+			FROM (SELECT order_id,id,delivery,addr,payment,order_date,total_price,account_info,refund_state,memo,zipcode,name,ROWNUM as num
+			FROM (SELECT order_id,id,delivery,addr,payment,order_date,total_price,account_info,refund_state,memo,zipcode,name FROM orders WHERE ${fs} LIKE '%${ss}%' ORDER BY order_date DESC)) WHERE num BETWEEN #{start} AND #{end}
+ 	</select> -->
+  	
+	<!-- View Search Member Orderlist for PageSite -->
+ 	<!-- <select id="searchOrderlistTotalPage" resultType="int" parameterType="hashmap">
+  		SELECT CEIL(COUNT(*)/#{rowSize}) FROM orders WHERE ${fs} LIKE '%${ss}%'
+  	</select> -->
  	
 </mapper>

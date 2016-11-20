@@ -24,6 +24,7 @@ public class OrderlistController {
 	
 	/* private */
 	private static final Logger logger = LoggerFactory.getLogger(OrderlistController.class);
+	
 	@Resource(name="orderlistService")
 	private OrderlistService ols;
 	
@@ -43,52 +44,87 @@ public class OrderlistController {
 	
 	/* Member Order SideMenu Include */
 	@RequestMapping("memberOrderList.do")
-	public String memberOrderlist_page(Model model, OrderlistVO vo, HttpServletRequest request, String typecheck, String page, String deliveryType) throws Exception {
+	public String memberOrderlist_page(Model model, OrderlistVO vo, HttpServletRequest request, String typecheck, String page, String ss, String fs, String deliveryType) throws Exception {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
-		
 		HttpSession hs = request.getSession();
 		String sessionid = (String)hs.getAttribute("id");
 		
-		
+		/* 배송상태 표기용 */
 		if(vo.getDelivery()==1) {
 			deliveryType = "배송준비중";
 		} else if(vo.getDelivery()==2) {
 			deliveryType = "배송중";
-		} else if(vo.getDelivery()==2) {
+		} else if(vo.getDelivery()==3) {
 			deliveryType = "배송완료";
 		} else {
 			deliveryType = "??????";
 		}
 		
-		if(page == null) page = "1";
-		
-		int curPage = Integer.parseInt(page);
-		int rowSize = 7;
-		int start = (curPage * rowSize) - (rowSize - 1);
-		int end = curPage * rowSize;
-		int block = 10;
-		int fromPage = ((curPage - 1) / block * block) + 1;
-		int toPage = ((curPage - 1) / block * block) + block;
-		
-		int cnt = 0;
-		
-		Map map = new HashMap();
-		map.put("start", start);
-		map.put("end", end);
-		map.put("rowSize", rowSize);
-		map.put("id", sessionid);				
-		
-		
-		
 		try {
-			List<OrderlistVO> list = ols.selectOrderlist(map);
-			int totalPage = ols.memberOrderlistTotalPage(sessionid);
-			 
-			if(toPage > totalPage) toPage = totalPage;
-
+			if(page == null) page = "1";
+			
+			int curPage = Integer.parseInt(page);
+			int rowSize = 7;
+			int start = (curPage * rowSize) - (rowSize - 1);
+			int end = curPage * rowSize;
+			int block = 10;
+			int fromPage = ((curPage - 1) / block * block) + 1;
+			int toPage = ((curPage - 1) / block * block) + block;
+			int count = 0;
+			
+			Map eolmap = new HashMap();
+			
+			eolmap.put("start", start);
+			eolmap.put("end", end);
+			eolmap.put("rowSize", rowSize);
+			eolmap.put("id", sessionid);
+			
+			List<OrderlistVO> list = null;
+			int totalPage = 1;
+			if(ss == null || ss.equals("")) {
+				list = ols.selectOrderlist(eolmap);
+				totalPage = ols.selectOrderlistTotalPage(eolmap);
+			} else {
+				Map olmap = new HashMap();
+				olmap.put("ss", ss);
+				olmap.put("fs", fs);
+				olmap.put("rowSize", rowSize);
+				
+				eolmap.put("start", start);
+				eolmap.put("end", end);
+				eolmap.put("rowSize", rowSize);
+				eolmap.put("id", sessionid);
+				logger.info(eolmap.get("rowSize")+"");
+				
+				olmap.put("rowSize", rowSize);
+				
+				logger.info(olmap.get("rowSize")+"");
+				eolmap.put("ss", ss);
+				eolmap.put("fs", fs);
+				model.addAttribute("fs", fs);
+				model.addAttribute("ss", ss);
+				list = ols.selectOrderlist(eolmap);
+				totalPage = ols.selectOrderlistTotalPage(olmap);
+			
+			}
+			
+			if(toPage> totalPage) toPage = totalPage;			
+			
+			model.addAttribute("deliveryType", deliveryType);
+			model.addAttribute("fromPage", fromPage);
+			model.addAttribute("toPage", toPage);
+			model.addAttribute("block", block);
+			model.addAttribute("curPage", curPage);
+			model.addAttribute("totalPage", totalPage);
+			model.addAttribute("start", start);
+			model.addAttribute("end", end);
+			model.addAttribute("list", list);
+			
+			
+			/* 중복 묶기 위한 로딕 */
 			for(int i=0; i<list.size(); i++){
 				System.out.println(list.get(i).getOrder_id());
 			}
@@ -100,13 +136,6 @@ public class OrderlistController {
 			
 
 			
-			model.addAttribute("deliveryType", deliveryType);
-			model.addAttribute("list", list);
-			model.addAttribute("block", block);
-			model.addAttribute("toPage", toPage);
-			model.addAttribute("fromPage", fromPage);
-			model.addAttribute("curPage", curPage);
-			model.addAttribute("totalPage", totalPage);
 			
 			model.addAttribute("cmi", "../member/orderlist/MemberOrderList.jsp");
 			
@@ -117,7 +146,6 @@ public class OrderlistController {
 		return "main/main";
 		
 	}
-	
 	
 	@RequestMapping("guestOrderList.do")
 	public String guestOrderlist_page(Model model, HttpServletRequest request) {
@@ -133,7 +161,39 @@ public class OrderlistController {
 	}
 	
 	
-
+	
+	
+	
+		
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	/* Member Wishlist HeadMenu */ 
