@@ -1,11 +1,17 @@
 package com.sist.service.impl;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.sist.dao.WriterVO;
 import com.sist.dao.mapper.WriterMapper;
@@ -72,9 +78,41 @@ public class WriterServiceImpl implements WriterService{
 	}
 
 	@Override
-	public void writerInsert(WriterVO vo) throws Exception {
+	public void writerInsert(WriterVO vo, HttpServletRequest req) throws Exception {
 		// TODO Auto-generated method stub
-		wm.writerInsert(vo);		
+		
+		String uploadPath = "C://download";
+
+		File dir = new File(uploadPath);
+
+		if (!dir.isDirectory()) {
+			dir.mkdirs();
+		}
+		
+		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)req;
+	    Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+	    while(iterator.hasNext()){
+	    	String uploadFileName = iterator.next();
+			MultipartFile mFile = multipartHttpServletRequest.getFile(uploadFileName);
+			String originalFileName = mFile.getOriginalFilename();
+			String saveFileName = originalFileName;
+
+			if(saveFileName != null && !saveFileName.equals("")) {
+				if(new File(uploadPath + saveFileName).exists()) {
+					saveFileName = "img_"+System.currentTimeMillis();
+				}
+				try {
+					mFile.transferTo(new File(uploadPath +"\\" + saveFileName));
+					vo.setImg(saveFileName);
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+	    }
+	    
+		wm.writerInsert(vo);
 	}
 
 	@Override
@@ -90,8 +128,45 @@ public class WriterServiceImpl implements WriterService{
 	}
 
 	@Override
-	public void updateWriterData(WriterVO vo) throws Exception {
+	public void updateWriterData(WriterVO vo, HttpServletRequest req) throws Exception {
 		// TODO Auto-generated method stub
+		
+		String uploadPath = "C://download";
+
+		File dir = new File(uploadPath);
+
+		if (!dir.isDirectory()) {
+			dir.mkdirs();
+		}
+		
+		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)req;
+	    Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+	    while(iterator.hasNext()){
+	    	String uploadFileName = iterator.next();
+			MultipartFile mFile = multipartHttpServletRequest.getFile(uploadFileName);
+			String originalFileName = mFile.getOriginalFilename();
+			String saveFileName = originalFileName;
+
+			if(saveFileName != null && !saveFileName.equals("")) {
+				if(new File(uploadPath + saveFileName).exists()) {
+					saveFileName = "img_"+System.currentTimeMillis();
+				}
+				try {
+					mFile.transferTo(new File(uploadPath +"\\" + saveFileName));
+					vo.setImg(saveFileName);
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+	    }
+	    
+	    if(vo.getImg()==null || vo.getImg().equals("")){
+	    	WriterVO check = wm.updateWriter(vo.getWriter_no());
+	    	vo.setImg(check.getImg());
+	    }	    
+		
 		wm.updateWriterData(vo);
 	}
 	

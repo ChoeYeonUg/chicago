@@ -185,6 +185,8 @@
 								<dd><fmt:formatNumber value="${point}" pattern="#,###"/> 포인트</dd>
 								<dt>사용 포인트 :</dt>
 								<dd><input type="text" id="usePoint" value="0"> 포인트</dd>
+								<dt>사용 가능 포인트 :</dt>
+								<dd><fmt:formatNumber value="${vo.point}" pattern="#,###"/> 포인트</dd>
 								<dt class="txt_total">총 결제금액 :</dt>
 								<dd class="txt_total" id="txt_total_price"></dd>
 							</dl>

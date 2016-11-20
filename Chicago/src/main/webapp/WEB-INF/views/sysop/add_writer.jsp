@@ -20,7 +20,7 @@ function send(){
 </script>
 </head>
 <body>
-<form:form action="add_writer_ok.do" commandName="writer"  id="frm" name="frm" method="post">
+<form:form action="add_writer_ok.do" commandName="writer" acceptCharset="UTF-8" enctype="multipart/form-data" id="frm" name="frm" method="post">
 <table>
 	<tr>
 		<th>이름</th>
@@ -37,6 +37,11 @@ function send(){
 	<tr>
 		<td colspan="2">
 			<form:textarea path="info" cols="40" rows="10"/>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="file" size="56" id="upload" name="upload">
 		</td>
 	</tr>
 	<tr>
