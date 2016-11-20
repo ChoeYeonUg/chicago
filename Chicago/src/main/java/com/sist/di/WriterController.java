@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -94,13 +96,23 @@ public class WriterController {
 	}
 	
 	@RequestMapping("writerDetail")
-	public String writerDetail(int writer_no, Model model){
+	public String writerDetail(int writer_no, Model model, HttpServletResponse response, HttpServletRequest request){
 		WriterVO vo = null;
 		try {
 			vo = ws.detailWriter(writer_no);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		 
+		if(vo.getImg() != null && vo.getImg().indexOf("http://") == -1){
+			String imagePath;
+			imagePath = "imageSrc.do?src="+vo.getImg();
+			model.addAttribute("imagePath", imagePath);
+		}else if(vo.getImg() != null && vo.getImg().indexOf("http://") <= 0){
+			model.addAttribute("imagePath", vo.getImg());
+		}else{
+			model.addAttribute("imagePath", "images\\writer_noimage.gif");
 		}
 		
 		model.addAttribute("vo", vo);
