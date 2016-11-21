@@ -11,14 +11,12 @@
 
 	<!-- book 메인화면 : 카테고리 별 신간 5권씩 출력 -->
 	<select id="newBookCate" resultType="bookVO" parameterType="int">
-		SELECT book_code, book_name, publisher, book_content, price,
-		publication, img, writer, num FROM
-		(SELECT book_code, book_name,
-		publisher, book_content, price, publication, img, writer, rownum as
-		num FROM
-		(SELECT book_code, book_name, publisher, book_content, price, publication,
-		img, writer FROM goods where book_category=#{category} ORDER BY
-		publication DESC))
+		SELECT book_code, book_name, publisher, book_content, price, publication, img, writer, num FROM
+		(SELECT book_code, book_name, publisher, book_content, price, publication, img, writer, rownum as num FROM
+		(SELECT book_code, book_name, publisher, book_content, price, publication, img, writer 
+		FROM goods 
+		WHERE book_category=#{category} 
+		ORDER BY publication DESC))
 		WHERE num BETWEEN 1 AND 5
 	</select>
 

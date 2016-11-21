@@ -13,7 +13,7 @@
 <link rel="stylesheet" type="text/css" href="book_css/header1.css" />
 <script type="text/javascript">
 	function bcBtn(data) {
-		if(confirm("장바구니로 이동하시겠습니까?") == true) {
+		if(confirm("장바구니에 담으시겠습니까?") == true) {
 			window.location.href="sb.do?book_code="+data;
 		} else {
 			return;

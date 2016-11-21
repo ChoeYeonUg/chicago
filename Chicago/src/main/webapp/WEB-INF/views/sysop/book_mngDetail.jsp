@@ -59,7 +59,7 @@
 							<td align="left" width="40%" style="font-size:11px; color:#505050;">${bookMngDetail.price }</td>
 							<th align="left" width="10%" style="font-size:11px; color:#000;">출판일</th>
 							<td align="left" width="40%" style="font-size:11px; color:#505050;">
-								<fmt:formatDate value="${bookMngDetail.publication }" pattern="yyyy년 MM월 dd일"/>
+								<fmt:formatDate value="${bookMngDetail.publication }" pattern="yyyy/MM/dd"/>
 							</td>
 						</tr>
 						<tr>
