@@ -86,7 +86,7 @@ public class BookController {
 			// 검색 조건이 들어가지 않을 때 
 			if(sch_type == null || sch_type.equals("")) {
 				cateList = bs.bookListCateFirst(map);
-				totalPage = bs.cateFirTotalPage(rowSize);
+				totalPage = bs.cateFirTotalPage(book_category);
 			}
 			// 검색 조건이 들어갔을 때 
 			else{

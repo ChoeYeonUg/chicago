@@ -97,7 +97,7 @@
           				<li><a class="drop" href="login.do"><spring:message code="header.login"/></a>
             				<ul>
                                 <li><a href="login.do"><spring:message code="header.login"/></a></li>
-                                <li><a href="#"><spring:message code="header.nm"/></a></li>
+                                <%-- <li><a href="#"><spring:message code="header.nm"/></a></li> --%>
             				</ul>
           				</li>
         			</ul>

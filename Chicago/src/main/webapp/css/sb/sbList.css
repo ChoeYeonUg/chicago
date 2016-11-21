@@ -93,6 +93,35 @@ blockquote, body, button, code, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4,
     border-bottom: 1px solid #efefef;
 }
 
+.choice_g {
+    display: block;
+    position: relative;
+    height: 100%;
+}
+
+.choice_basket {
+    float: left;
+    width: 34px;
+    height: 120px;
+    margin-top: 5px;
+}
+
+
+.choice_g .inp_g {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    /* width: 100%;
+    height: 100%;
+    vertical-align: top;
+    outline: 0;
+    -webkit-appearance: none; */
+    opacity: 100;
+    filter: alpha(opacity=0);
+    cursor: pointer;
+}
+
 .info_basket .list_basket .link_thumb {
     overflow: hidden;
     position: relative;
@@ -265,4 +294,20 @@ blockquote, body, button, code, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4,
     height: 158px;
     margin: 0 auto;
     padding-top: 119px;
+}
+
+.info_basket .list_basket .link_delete {
+    position: absolute;
+    top: 19px;
+    right: 0;
+    width: 34px;
+    height: 34px;
+}
+
+.list_basket .link_delete .ico_delete {
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin: 11px;
+    background-position: -50px -70px;
 }
