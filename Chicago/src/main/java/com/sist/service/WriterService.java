@@ -3,6 +3,8 @@ package com.sist.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.sist.dao.WriterVO;
 
 public interface WriterService {
@@ -17,8 +19,8 @@ public interface WriterService {
 	public int writerTotalPage(int rowSize) throws Exception;
 	public List<WriterVO> printSysopSearchWriter(Map map) throws Exception;
 	public int writerSearchTotalPage(Map map) throws Exception;
-	public void writerInsert(WriterVO vo) throws Exception;
+	public void writerInsert(WriterVO vo, HttpServletRequest req) throws Exception;
 	public void writerDelete(int writer_no) throws Exception;
 	public WriterVO updateWriter(int writer_no) throws Exception;
-	public void updateWriterData(WriterVO vo) throws Exception;
+	public void updateWriterData(WriterVO vo, HttpServletRequest req) throws Exception;
 }

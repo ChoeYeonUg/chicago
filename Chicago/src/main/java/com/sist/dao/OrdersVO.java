@@ -16,7 +16,14 @@ public class OrdersVO {
 	private int account_info;
 	private String refund_state;
 	private String memo;
+	private int saving;
 	
+	public int getSaving() {
+		return saving;
+	}
+	public void setSaving(int saving) {
+		this.saving = saving;
+	}
 	List<OrderBookVO> list;
 		
 	public List<OrderBookVO> getList() {

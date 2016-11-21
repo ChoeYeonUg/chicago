@@ -109,7 +109,8 @@ public class SysopWriterController {
 			writer.setDeath(transFormat.parse(deathVal));
 		}
 		
-		ws.writerInsert(writer);
+		
+		ws.writerInsert(writer, req);
 		
 		}catch(Exception e){
 			return "redirect:add_writer.do";
@@ -183,7 +184,7 @@ public class SysopWriterController {
 				writer.setDeath(transFormat.parse(deathVal));
 			}
 			
-			ws.updateWriterData(writer);
+			ws.updateWriterData(writer,req);
 		}catch(Exception e){
 			return "redirect:update_writer.do?writer_no"+writer.getWriter_no();
 		}

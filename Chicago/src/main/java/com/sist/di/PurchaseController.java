@@ -39,6 +39,10 @@ public class PurchaseController {
 	@RequestMapping("purchase")
 	public String purchsePage(Model model,String[] book_code, String[] amount, HttpServletRequest req, HttpServletResponse resp) {
 		
+		if(book_code == null || amount == null){
+			return null;
+		}
+		
 		int[] amountInt = new int[book_code.length];
 		for(int i = 0 ; i < book_code.length ; i++){
 			if(amount[i] == null || amount[i].equals("")){
@@ -120,6 +124,7 @@ public class PurchaseController {
 		
 		try {
 			os.orderProcess(bookList, bookCount, vo);
+			if((List<String>)hs.getAttribute("sbList") != null)	hs.removeAttribute("sbList");			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			/*e.printStackTrace();*/

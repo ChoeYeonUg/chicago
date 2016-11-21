@@ -38,9 +38,12 @@ function sum(){
 	var sum = 0;
 	
 	for(var i = 0; i < count ; i++){
-		var price = document.getElementsByName('price')[i].getAttribute('value');
-		var amount = document.getElementsByName('amount')[i].getAttribute('value');
-		sum += (price*amount);
+		var enable = document.getElementsByName('amount')[i].getAttribute('disabled');
+			if(enable == null){
+			var price = document.getElementsByName('price')[i].getAttribute('value');
+			var amount = document.getElementsByName('amount')[i].getAttribute('value');
+			sum += (price*amount);
+		}
 	}
 	var fee = 0;
 	if(sum < 25000){
@@ -76,14 +79,41 @@ function comma(num){
 }
 
 function send(){
-	document.frm.submit();
+	var a = $('#basketFee').html();
+	if(a != "0 원"){
+		document.frm.submit();
+	}else{
+		alert("선택된 상품이 없습니다.");
+	}
+};
+
+function deleteBook(data){
+	location.replace("sbDelete.do?book_code="+data);	
+};
+//disabled="disabled"
+function cancel(checkbox,book,amount){
+	if ( checkbox.checked == true ){
+		var target1 = document.getElementById(book);
+		if(target1.hasAttribute("disabled")){
+			target1.removeAttribute("disabled");
+		}
+		var target2 = document.getElementById(amount);
+		if(target2.hasAttribute("disabled")){
+			target2.removeAttribute("disabled");
+		}
+	}else{
+		document.getElementById(book).setAttribute("disabled","disabled");
+		document.getElementById(amount).setAttribute("disabled","disabled");
+	}
+	sum();
+
 };
 </script>
 </head>
 <body>
 	<div id="sb_content" class="cont_basket">
 	
-		<c:if test="${sbList != null }">
+		<c:if test="${sbList != null && sbList.size() != 0 }">
 		<fieldset>
 			<form action="purchase.do" method="post" name="frm">
 				<div class="info_basket">
@@ -96,6 +126,9 @@ function send(){
 				<c:if test="${sbList != null }">
 					<c:forEach items="${bookList }" var="item">
 						<li class="check_on">
+							<span class="choice_g choice_basket">
+								<input type="checkbox" class="inp_g" checked="checked" onclick="cancel(this,'am_${item.book_code }','${item.book_code}')">
+							</span>
 							<a href="bookDetail.do?book_code=${item.book_code }" class="link_thumb">
 								<img src="${item.img}">
 							</a>
@@ -122,10 +155,14 @@ function send(){
 								</button>
 							</div>
 							
+							<button type="button" class="link_delete" onclick="deleteBook('${item.book_code}')">
+								<span class="ico_friends ico_delete">X</span>
+							 </button>
+							
 							
 							
 						
-						<input type="hidden" name="book_code" value="${item.book_code }">
+						<input type="hidden" name="book_code" id="${item.book_code}" value="${item.book_code }">
 						<input type="hidden" name="price" value="${item.price }">
 						
 					</c:forEach>
@@ -137,7 +174,7 @@ function send(){
 					<dl class="list_price">
 						<dt>장바구니 합계 : </dt>
 						<dd>
-							<span id="basketFee"> </span>
+							<span id="basketFee"></span>
 						</dd>
 						<dt>배송비</dt>
 						<dd>
@@ -156,7 +193,7 @@ function send(){
 				</div>
 				
 				<div class="order_btn">
-					<button class="btn_order btn_payment" onclick="send();">
+					<button type="button" class="btn_order btn_payment" onclick="send();">
 						<span class="txt_g">주문하기</span>
 					</button>
 				</div>

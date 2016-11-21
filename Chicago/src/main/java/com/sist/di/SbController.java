@@ -78,4 +78,15 @@ public class SbController {
 		}
 		return "main/main";
 	}
+	
+	@RequestMapping("sbDelete")
+	public String deleteBook(Model model, HttpServletRequest req, String book_code){
+		HttpSession hs = req.getSession();
+		List<String> list = (List<String>) hs.getAttribute("sbList");
+		
+		list.remove(book_code);
+		hs.setAttribute("sbList", list);
+				
+		return "redirect:sbList.do";
+	}
 }
