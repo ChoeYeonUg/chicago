@@ -8,154 +8,101 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<link href="css/board_css/board_css.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script type="text/javascript">
-	$(function(){
-		$('#findBtn2').click(function(){						
-			var ss=$('#ss').val();
+$(function(){
+	$('#findBtn2').click(function(){						
+		var ss=$('#ss').val();
 			
-			if(ss==""){
-				
-				$('#ss').focus();
-				return;
-			}
-			$('#ff').submit();			
+		if(ss==""){
+			$('#ss').focus();
+			return;
+		}
+		$('#ff').submit();			
 		});
-	});
+});
 </script>
-<!-- Bootstrap Core CSS -->
-<link rel="stylesheet" href="board_css/bootstrap.css" rel="stylesheet">
-<!-- Template CSS -->
-<link rel="stylesheet" href="board_css/animate.css" rel="stylesheet">
-<link rel="stylesheet" href="board_css/font-awesome.css"
-	rel="stylesheet">
-<link rel="stylesheet" href="board_css/nexus.css" rel="stylesheet">
-<link rel="stylesheet" href="board_css/responsive.css" rel="stylesheet">
-<link rel="stylesheet" href="board_css/custom.css" rel="stylesheet">
-<!-- Google Fonts-->
-<link href="http://fonts.googleapis.com/css?family=Raleway:100,300,400"
-	type="text/css" rel="stylesheet">
-<link href="http://fonts.googleapis.com/css?family=Roboto:400,300"
-	type="text/css" rel="stylesheet">	
-</head>
-<body>
-	<div id="content">
-		<div class="container background-white">
-			<div class="row margin-vert-40">
-				<!-- 각 게시판 링크 -->
-				<table width="700">
-					<tr>
-						<td width="50%"><h2 align="left">1:1게시판</h2></td>
-						<td width="50%" align="right"><a href="noticeboard.do"
-							style="color: #b3b3b3">공지사항</a> l<a href="faqboard.do"
-							style="color: #b3b3b3"> Faq</a> l 1:1게시판 l
-							<a href="reviewboard.do" style="color: #b3b3b3">리뷰게시판</a></td>
-					</tr>
-				</table>
 
-				<div>
-					<h5>1:1게시판 입니다.</h5>
-				</div>
-				<!-- 리스트 시작 -->
-				<center>
-					<table width="900">
-						<tr id="title">
-							<th width="10%">번호</th>
-							<th width="50%" align="center">제목</th>
-							<th width="15%">ID</th>
-							<th width="15%">날짜</th>
-							<th width="10%">hit</th>
-						</tr>
-						<c:forEach var="vo" items="${list }">
-							<tr>
-								<td width="10%">${vo.board_no}</td>
-								<td width="45%">
-									<c:if test="${vo.group_tab>0 }">
-										<c:forEach var="i" begin="1" end="${vo.group_tab}">&nbsp;&nbsp;	</c:forEach>
-										<!-- 리플라이이미지 -->
-										<img src="./board_img/reply.png" style="width: 10px; height:auto;" >
-									</c:if> 
-									
-										<!-- 삭제된 글이 아니면 정상작동--> 
-										<c:if test="${msg!=vo.subject}">
-											
-											<c:if test="${id==null || grade>1 }">
-											<c:if test="${vo.secret==1}">
-												<a href="secret_content.do?board_no=${vo.board_no }&page=${curpage}">${vo.subject }</a>
-											</c:if>
-											<c:if test="${vo.secret==2 }">
-												<img src="./board_img/lock.png" style="width: 10px; height:auto;" >
-												<a href="secretboard_pwd_check.do?board_no=${vo.board_no }&page=${curpage}">${vo.subject }</a>
-											</c:if>
-											</c:if>
-											<c:if test="${grade<=1 }">
-												<c:if test="${vo.secret==2 }">
-												<img src="./board_img/lock.png" style="width: 10px; height:auto;" >
-												</c:if>
-												<a href="secret_content.do?board_no=${vo.board_no }&page=${curpage}">${vo.subject }</a>
-											</c:if>
-											
-										<!-- new 이미지 표시 -->
-											<c:if test="${today eq vo.dbday}">
-												<sup>
-													<img src="./board_img/new.png" style="width: 10px; height:auto;" >
-													<img src="./board_img/new1.png" style="width: 10px; height:auto;" >
-												</sup>											
-											</c:if> 
-										</c:if> 
-										<!-- 삭제된 글이면 읽을 수 없게 막음 --> 
-										<c:if test="${msg==vo.subject}">
-											<font color="#BDBDBD">${vo.subject }</font>
-										</c:if>				
-								</td>
-								<td width="15%" class="tdcenter">${vo.id }</td>
-								<td width="20%" class="tdcenter">${vo.dbday } </td>
-								<td width="10%" class="tdcenter">${vo.hit }</td>
-							</tr>
-						</c:forEach>
-					</table>
-					<!-- 리스트 끝- ->
-					
-					<!-- 페이지표시 -->
-					<table border="0" width="600">
-						<tr>
-							<td align="right"> 	
-								<a href="secretboard.do?fs=${fs }&ss=${ss }&page=1">비긴</a>
-								<a href="secretboard.do?fs=${fs }&ss=${ss }&page=${curpage>1?curpage-1:curpage}">프리브</a> &nbsp;
-			
-								<c:forEach var="i" begin="${fromPage }" end="${toPage }">
-									[<c:if test="${ curpage ==i}"><span style="color:red">${i }</span></c:if>		
-									<c:if test="${ curpage !=i}"><a href="secretboard.do?fs=${fs }&ss=${ss }&page=${i }">${i }</a></c:if>]
-								</c:forEach>
-			
-								<c:if test="${toPage<totalpage }">
-									<a href="secretboard.do?fs=${fs }&ss=${ss }&page=${toPage+1 }">넥스트</a>
-									<a href="secretboard.do?fs=${fs }&ss=${ss }&page=${totalpage }">끝</a>
-								</c:if>		
-								<c:if test="${toPage>=totalpage }">
-									<a href="secretboard.do?fs=${fs }&ss=${ss }&page=${curpage<totalpage?curpage+1:curpage }">넥스트</a>&nbsp;
-									<a href="secretboard.do?fs=${fs }&ss=${ss }&page=${totalpage }">끝</a>
-								</c:if>
-								&nbsp;&nbsp;${curpage } page / ${totalpage  } pages
-							</td>
-		
-						</tr>
-					</table>
-					<!-- 페이지표시 끝 -->
-					<!-- 글쓰기 -->
-					<table width="700">
-						<tr>
-							<!-- 관리자만보이게 설정 -->
-							<c:if test="${id!=null }">
-							<td align="right"><a href="secretboard_insert.do">글쓰기</a></td>
+
+
+<body>
+<!-- 각 게시판 링크 -->
+	<br/>
+	<table>
+		<tr>
+			<td align="left" style="font-size:30px; padding-left: 10px;">1:1 게시판</td>
+		</tr>
+		<tr>			
+			<td align="right">
+				<a href="noticeboard.do" style="color: #b3b3b3">공지사항</a> l
+				<a href="faqboard.do" style="color: #b3b3b3"> Faq</a> l 1:1게시판 l
+				<a href="reviewboard.do" style="color: #b3b3b3">리뷰게시판</a>
+			</td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<td class="bTitle">1:1게시판 입니다.</td>
+			<td align="right" style="padding-right: 20px;">							
+				&nbsp;&nbsp;${curpage } page / ${totalpage  } pages
+			</td>
+		</tr>
+	</table>
+	<!-- 리스트 시작 -->
+	
+		<table class="commonTable">
+			<tr>
+				<th width="10%" >번호</th>							
+				<th width="50%">제목</th>
+				<th width="15%" >ID</th>
+				<th width="15%" >날짜</th>
+				<th width="10%" >hit</th>
+			</tr>
+			<c:forEach var="vo" items="${list }">
+				<tr>
+					<td width="10%">${vo.board_no}</td>
+					<td width="50%" style="text-align: left;">
+					<c:if test="${vo.group_tab>0 }">
+						<c:forEach var="i" begin="1" end="${vo.group_tab}">&nbsp;&nbsp;	</c:forEach>		
+							<img src="./board_img/next.png" style="width: 15px; height:auto;" >
+					</c:if> 
+					<c:if test="${msg!=vo.subject}">
+						<c:if test="${id==null || grade>1 }">
+							<c:if test="${vo.secret==1}">
+								<a href="secret_content.do?board_no=${vo.board_no }&page=${curpage}">${vo.subject }</a>
 							</c:if>
-						</tr>
+							<c:if test="${vo.secret==2 }">
+								<img src="./board_img/lock.png" style="width: 10px; height:auto;" >
+								<a href="secretboard_pwd_check.do?board_no=${vo.board_no }&page=${curpage}">${vo.subject }</a>
+							</c:if>
+					</c:if>
+						<c:if test="${grade<=1 }">
+							<c:if test="${vo.secret==2 }">
+								<img src="./board_img/lock.png" style="width: 10px; height:auto;" >
+							</c:if>
+								<a href="secret_content.do?board_no=${vo.board_no }&page=${curpage}">${vo.subject }</a>
+						</c:if>
+						<!-- new 이미지 표시 -->
+						<c:if test="${today eq vo.dbday}">
+							<sup><img src="./board_img/new7.png" style="width: 15px; height:auto;" ></sup>											
+						</c:if> 
+					</c:if> 
+						<!-- 삭제된 글이면 읽을 수 없게 막음 --> 
+							<c:if test="${msg==vo.subject}">
+								<font color="#BDBDBD" >${vo.subject }</font>
+							</c:if>				
+					</td>
+					<td width="15%" class="tdcenter" >${vo.id }</td>
+					<td width="15%" class="tdcenter" >${vo.dbday } </td>
+					<td width="10%" class="tdcenter" >${vo.hit }</td>
+				</tr>
+			</c:forEach>
 					</table>
-					<!-- 글쓰기 끝 -->
-					<!-- 검색 시작 -->
-					<table>
+					
+					<table >						
 						<tr>
-							<td>
+							<td style="padding-left: 20px;">
 								<form method="post" action="secretboard.do" id="ff">
 									Search: 
 									<select name="fs">
@@ -180,24 +127,57 @@
 									</select>
 									
 									<c:if test="${ss eq null }">
-										<input type="text" size="10" name="ss" id="ss">
+						
+										<input type="text" size="10" name="ss" id="ss" style="border: 1px solid  #e3e3e3; height: 17px;">
 									</c:if>
 									<c:if test="${ss ne null }">
-										<input type="text" size="10" name="ss" id="ss" value="${ss }">
+										<input type="text" size="10" name="ss" id="ss" value="${ss }" style="border: 1px solid  #e3e3e3">
 									</c:if>
-									<input type="button" value="찾기" id="findBtn2"> 
+									
+									<input type="button" value="찾기" id="findBtn2" style="background-color: white;"> 
 									<input type="hidden" name="page" value="${curpage }">
 									<!-- 	<span id="print"></span> -->
 								</form>
-							</td>
+							</td>			
+							<c:if test="${id!=null }">
+							<td align="right"><a href="secretboard_insert.do" style="padding-right:30px;">글쓰기</a></td>
+							</c:if>
 						</tr>
 					</table>
-					<!-- 검색 끝 -->
+				
+					<table>
+						<tr>
+							<td align="center"> 	
+								<ul class="pagination pagination-sm" style="margin-top: 0px;">
+									<c:if test="${curpage<=block }">
+									<li><a href="secretboard.do?fs=${fs }&ss=${ss }&page=${curpage>1?curpage-1:curpage}">&laquo;</a></li>
+								</c:if>
+								<c:if test="${curpage>block }">
+									<li><a href="secretboard.do?fs=${fs }&ss=${ss }&page=${curpage-1}">&laquo;</a></li>
+								</c:if>
+								<c:forEach var="i" begin="${fromPage }" end="${toPage }">
+									<c:if test="${curpage==i }">
+										<li><a href="secretboard.do?fs=${fs }&ss=${ss }&page=${curpage}">${i }</a></li>
+									</c:if>
+									<c:if test="${curpage!=i }">
+										<li><a href="secretboard.do?fs=${fs }&ss=${ss }&page=${i}">${i }</a></li>
+									</c:if>
+								</c:forEach>
+								<c:if test="${toPage<totalPage }">
+									<li><a href="secretboard.do?fs=${fs }&ss=${ss }&page=${toPage+1}">&raquo;</a></li>
+								</c:if>
+								<c:if test="${toPage>=totalPage }">
+									<li><a href="secretboard.do?fs=${fs }&ss=${ss }&page=${curpage<totalPage?curpage+1:curpage}">&raquo;</a></li>
+								</c:if>
+								</ul>
+							
+								
+							</td>							
+						</tr>
+					</table>
+			
+					
 				</center>
-				<div class="clearfix margin-bottom-10"></div>
-			</div>
-		</div>
-	</div>
-	</div>
+				
 </body>
 </html>
