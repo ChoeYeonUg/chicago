@@ -85,7 +85,7 @@
 								<a href="wish.do" data-toggle="" data-parent=""><spring:message code="memberInfoModifyMain.memberwishlisthead"/></a>
 								<ul id="" class="">
 									<li class="">
-										<a href=".do"><spring:message code="memberInfoModifyMain.btMemberWishlistInfo"/></a>
+										<a href="wish.do"><spring:message code="memberInfoModifyMain.btMemberWishlistInfo"/></a>
 									</li>
 								</ul>
 							</li>

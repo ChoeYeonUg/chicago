@@ -24,8 +24,12 @@ public class OrderlistController {
 	
 	/* private */
 	private static final Logger logger = LoggerFactory.getLogger(OrderlistController.class);
+	
 	@Resource(name="orderlistService")
 	private OrderlistService ols;
+	
+	@Resource(name="bookService")
+	private BookService bs;
 	
 	/* Member Orderlist Head And SideHead Menu */ 
 	@RequestMapping("orderlist.do")
@@ -43,68 +47,63 @@ public class OrderlistController {
 	
 	/* Member Order SideMenu Include */
 	@RequestMapping("memberOrderList.do")
-	public String memberOrderlist_page(Model model, OrderlistVO vo, HttpServletRequest request, String typecheck, String page, String deliveryType) throws Exception {
+	public String memberOrderlist_page(Model model, OrderlistVO vo, HttpServletRequest request, String typecheck, String page, String ss, String fs, String book_cnt) throws Exception {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
-		
 		HttpSession hs = request.getSession();
 		String sessionid = (String)hs.getAttribute("id");
 		
-		
-		if(vo.getDelivery()==1) {
-			deliveryType = "배송준비중";
-		} else if(vo.getDelivery()==2) {
-			deliveryType = "배송중";
-		} else if(vo.getDelivery()==2) {
-			deliveryType = "배송완료";
-		} else {
-			deliveryType = "??????";
-		}
-		
-		if(page == null) page = "1";
-		
-		int curPage = Integer.parseInt(page);
-		int rowSize = 7;
-		int start = (curPage * rowSize) - (rowSize - 1);
-		int end = curPage * rowSize;
-		int block = 10;
-		int fromPage = ((curPage - 1) / block * block) + 1;
-		int toPage = ((curPage - 1) / block * block) + block;
-		
-		int cnt = 0;
-		
-		Map map = new HashMap();
-		map.put("start", start);
-		map.put("end", end);
-		map.put("rowSize", rowSize);
-		map.put("id", sessionid);				
-		
-		
-		
 		try {
-			List<OrderlistVO> list = ols.selectOrderlist(map);
-			int totalPage = ols.memberOrderlistTotalPage(sessionid);
-			 
-			if(toPage > totalPage) toPage = totalPage;
-			for(int i=0; i<list.size(); i++){
-				System.out.println(list.get(i).getOrder_id());
-			}
+			if(page == null) page = "1";
+			if(book_cnt == null) book_cnt = "1";
 			
-			/*for(int cnt : list.get(vo.getOrder_id())) {
+			int cnt = Integer.parseInt(book_cnt);
+			int curPage = Integer.parseInt(page);
+			int rowSize = 7;
+			int start = (curPage * rowSize) - (rowSize - 1);
+			int end = curPage * rowSize;
+			
+			Map map = new HashMap();
+			map.put("rowSize", rowSize);
+			map.put("start", start);
+			map.put("end", end);
+			map.put("id", sessionid);
+			map.put("cnt", cnt);
+			
+			List<OrderlistVO> list = null;
+			int totalPage = 1;
+			if(ss == null || ss.equals("")) {
 				
-				bookcode를 구하라!!
-			}*/
+				list = ols.selectOrderlist(map);
+				totalPage = ols.selectOrderlistTotalPage(map);
+				
+			} else {
+				
+				/*map.put("ss", ss);
+				model.addAttribute("ss", ss);
+				list = */
+				
+				
+			}
+
+			int block = 10;
+			int fromPage = ((curPage - 1) / block * block) + 1;
+			int toPage = ((curPage - 1) / block * block) + block;
 			
 			
-			model.addAttribute("deliveryType", deliveryType);
+			if(toPage> totalPage) toPage = totalPage;			
+			
+			model.addAttribute("book_cnt", book_cnt);
 			model.addAttribute("list", list);
-			model.addAttribute("block", block);
-			model.addAttribute("toPage", toPage);
 			model.addAttribute("fromPage", fromPage);
+			model.addAttribute("toPage", toPage);
+			model.addAttribute("block", block);
 			model.addAttribute("curPage", curPage);
 			model.addAttribute("totalPage", totalPage);
+			model.addAttribute("start", start);
+			model.addAttribute("end", end);
 			
 			model.addAttribute("cmi", "../member/orderlist/MemberOrderList.jsp");
 			
@@ -115,7 +114,6 @@ public class OrderlistController {
 		return "main/main";
 		
 	}
-	
 	
 	@RequestMapping("guestOrderList.do")
 	public String guestOrderlist_page(Model model, HttpServletRequest request) {
@@ -129,26 +127,6 @@ public class OrderlistController {
 		return "main/main";
 		
 	}
-	
-	
-
-	
-	
-	/* Member Wishlist HeadMenu */ 
-	@RequestMapping("wish.do")
-	public String member_wish_page(Model model, HttpServletRequest request) {
-		
-		model.addAttribute("jsp", "member.jsp");
-		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
-		
-		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
-		model.addAttribute("cmi", "../member/memberwishlist/MemberWishList.jsp");
-		
-		return "main/main";
-		
-	}
-	
-	
 	
 	/* Member Question HeadMenu */ 
 	@RequestMapping("memberquestion.do")

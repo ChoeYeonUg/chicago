@@ -1,0 +1,192 @@
+@CHARSET "UTF-8";
+
+div{
+	display: block;
+}
+
+dl, ul, ol, li {
+    list-style: none;
+}
+
+#writerLast {
+    width: 100%;
+    padding-bottom: 30px;
+}
+
+#writerLast .wL_1st {
+    position: relative;
+    width: 978px;
+}
+
+#writerLast .w1_left {
+    width: 978px;
+    position: relative;
+    float: left;
+    text-align: left;
+    border-top: 3px solid #5d3f28;
+}
+
+.wL_1st .w1_left .cateLeft {
+    clear: both;
+    width: 208px;
+    float: left;
+}
+
+.wL_1st .w1_left .cateLeft .writerPic {
+    margin: 15px 0 0 0;
+}
+
+.wL_1st .w1_left .cateLeft .writerPic .bd {
+    width: 192px;
+    height: 210px;
+    border: 1px solid #bbb;
+}
+
+.wL_1st .w1_left .cateLeft .writerPic .bd {
+    width: 192px;
+    height: 210px;
+    border: 1px solid #bbb;
+}
+
+.wL_1st .w1_left .cateCenter .writerInfo .wName {
+    color: #454545;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.wL_1st .w1_left .cateCenter .writerInfo {
+    width: 470px;
+    margin: 20px 0 0 10px;
+    padding-bottom: 10px;
+}
+
+.wL_1st .w1_left .cateCenter {
+    width: 480px;
+    float: left;
+}
+
+.wL_1st .w1_left .cateCenter .writerInfo .boneDate {
+    color: #333;
+    margin-top: 10px;
+}
+
+.wL_1st .w1_left .cateCenter .writerInfo2 {
+    width: 470px;
+    color: #666;
+    font-size: 11px;
+    margin: 0 0 0 10px;
+}
+
+.wL_1st .w1_left .cateCenter .writerInfo2 .content {
+    color: #999;
+    line-height: 17px;
+    text-align: justify;
+}
+
+.wL_1st .w1_left .cateCenter .writerInfo2 .content {
+    color: #999;
+    line-height: 17px;
+    text-align: justify;
+}
+
+#writerLast .wL_2st {
+    clear: both;
+    width: 958px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+}
+
+.wL_2st h2 {
+    text-align: left;
+}
+
+.wL_2st ul.majorList {
+    width: 945px;
+    margin: 0 auto 0 auto;
+}
+
+.wL_2st ul.majorList li {
+    float: left;
+    width: 134px;
+    height: 175px;
+    margin: 10px auto 10px auto;
+}
+
+.wL_2st ul.majorList li .bookImg {
+    position: relative;
+    width: 100px;
+    height: 130px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.wL_2st ul.majorList li .bookImg .bShadow {
+    position: absolute;
+    top: 0;
+    left: 0px;
+    padding: 0px;
+    width: 102px;
+    z-index: 1;
+}
+
+.wL_2st ul.majorList li .bookImg .bookFrontbg {
+    position: absolute;
+    width: 6px;
+    height: 128px;
+    top: 1px;
+    left: 7px;
+    z-index: 30;
+}
+
+a:link, a:visited, a:active {
+    color: #666;
+    text-decoration: none;
+}
+
+.wL_2st ul.majorList li .bookImg .bd {
+    width: 88px;
+    height: 128px;
+    border: 1px solid #bbb;
+}
+
+.wL_2st ul.majorList li .bookTxt {
+    width: 100px;
+    height: 28px;
+    text-align: center;
+    overflow: hidden;
+    color: #333;
+    font-size: 11px;
+    margin: 10px 0 0 13px;
+}
+
+.wL_1st .w1_left .cateLeft .btnIco {
+    position: relative;
+    width: 192px;
+    height: 25px;
+    margin: 5px 0 0 0;
+}
+
+#writerLast .wL_4st_L {
+    width: 700px;
+    float: left;
+    text-align: left;
+    margin-top: 20px;
+}
+
+
+
+
+
+
+
+
+.wL_2st ul.majorList:after {
+    content: '';
+    display: block;
+    display: block;
+    clear: both;
+}
+
+.wL_2st ul.majorList:after {
+    zoom: 1;
+}

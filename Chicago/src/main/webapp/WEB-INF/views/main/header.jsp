@@ -82,7 +82,7 @@
 								<li><a href="memberquestion.do"><spring:message code="header.qu"/></a></li>
             				</ul>
             			</li>
-          				<li><a href="sb.do"><spring:message code="header.sb"/></a></li>
+          				<li><a href="sbList.do"><spring:message code="header.sb"/></a></li>
           				<c:if test="${garde ne 'null' && grade eq 0 }">
 	          				<li><a class="drop" href="sysop.do"><spring:message code="header.saMenu"/></a>
 	            				<ul>
@@ -90,13 +90,14 @@
 	                                <li><a href="book_management.do"><spring:message code="header.saBook"/></a></li>
 									<li><a href="board_management.do"><spring:message code="header.saBoard"/></a></li>
 									<li><a href="sales_management.do"><spring:message code="header.saList"/></a></li>
+									<li><a href="writer_management.do">작가관리</a></li>
 	            				</ul>
 	          				</li>
           				</c:if>
           				<li><a class="drop" href="login.do"><spring:message code="header.login"/></a>
             				<ul>
                                 <li><a href="login.do"><spring:message code="header.login"/></a></li>
-                                <li><a href="#"><spring:message code="header.nm"/></a></li>
+                                <%-- <li><a href="#"><spring:message code="header.nm"/></a></li> --%>
             				</ul>
           				</li>
         			</ul>

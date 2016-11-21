@@ -23,8 +23,8 @@
 				</div>
 				
 				<div class="bt">
-					<input type="submit" value='<spring:message code="join.next"/>'/>
-					<input type="button" value='<spring:message code="memberSecurePassword.btCancel"/>' onclick="javascript:history.back()"/>
+					<input type="submit" class="btn btn-primary" value='<spring:message code="join.next"/>'/>
+					<input type="button" class="btn btn-primary" value='<spring:message code="memberSecurePassword.btCancel"/>' onclick="javascript:history.back()"/>
 				</div>
 				
 			</div>

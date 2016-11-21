@@ -13,7 +13,7 @@
 <script type="text/javascript">
 	function bcBtn() {
 		if(confirm("장바구니로 이동하시겠습니까?") == true) {
-			window.location.href="sb/sb.do?book_code=${detailBook.book_code}";
+			window.location.href="sb.do?book_code=${detailBook.book_code}";
 		} else {
 			return;
 		}
@@ -21,7 +21,7 @@
 	
 	function lkBtn() {
 		if(confirm("찜목록으로 이동하시겠습니까?") == true) {
-			window.location.href="member/memberwishlist/MemberWishList.do?book_code=${datilBook.book_code}";
+			window.location.href="memberWishList.do?book_code=${datilBook.book_code}";
 		} else {
 			return;
 		}
@@ -107,8 +107,8 @@
 							<tr>
 								<td><img alt="bookImage" src="${detailBook.img }" style="vertical-align: bottom;"></td>
 							</tr>
-						<tr>								
-								<td  >
+							<tr>								
+								<td height="20">
 									<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(board_img/icon_star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
 										<p style="WIDTH: ${starAvg}%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(board_img/icon_star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
 										</p>
@@ -155,7 +155,7 @@
 										<img src="book_img\down.png" alt="downBtn" style="width:20px;height:20px;" onclick="btdown()"/>
 										<input type="text" value="${defAmount }" name="amount" id="defamount" readonly="readonly" size="1" style="text-align: center;"/>
 										<input type="hidden" value="${detailBook.book_code }" name="book_code"/>
-										<%-- <input type="hidden" value="${detailBook.amount }" id="amount"/> --%>
+										<input type="hidden" value="${detailBook.amount }" id="amount"/>
 										<img src="book_img\up.png" alt="upBtn" style="width:20px;height:20px;" onclick="btup()"/>
 									</td>
 								</tr>

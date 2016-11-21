@@ -8,12 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<ul class="nav_bar">
-		<li class="list-group-item"><a href="member_management.do"><spring:message code="header.saMember"/></a></li>
-		<li class="list-group-item"><a href="book_management.do"><spring:message code="header.saBook"/></a></li>
-		<li class="list-group-item"><a href="board_management.do"><spring:message code="header.saBoard"/></a></li>
-		<li class="list-group-item"><a href="sales_management.do"><spring:message code="header.saList"/></a></li>
-	</ul>
+	<div class="col-md-3">
+		<ul class="nav_bar">
+			<li class="list-group-item"><a href="member_management.do"><spring:message code="header.saMember"/></a></li>
+			<li class="list-group-item"><a href="book_management.do"><spring:message code="header.saBook"/></a></li>
+			<li class="list-group-item"><a href="board_management.do"><spring:message code="header.saBoard"/></a></li>
+			<li class="list-group-item"><a href="sales_management.do"><spring:message code="header.saList"/></a></li>
+			<li class="list-group-item"><a href="sales_management.do"><spring:message code="header.writer"/></a></li>
+		</ul>
+	</div>
 </body>
 </html>
