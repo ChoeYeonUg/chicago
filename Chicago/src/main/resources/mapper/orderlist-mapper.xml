@@ -13,15 +13,32 @@
 	</sql>
 	
 	<!-- Select Member Orderlist -->
-	<select id="selectOrderlist" parameterType="hashmap" resultType="orderlist">
-		SELECT order_id,name,id,book_code,book_name,amount,total_price,payment,order_date,account_info,refund_state,memo,num
-				FROM (SELECT order_id,name,id,book_code,book_name,amount,total_price,payment,order_date,account_info,refund_state,memo,ROWNUM AS num
-				FROM (SELECT orders.order_id,name,orders.id,order_book.book_code,goods.book_name,order_book.amount,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.refund_state,orders.memo
+	<select id="selectOrderlist" parameterType="hashmap" resultType="orderlist" resultMap="orderlistMap">
+		SELECT order_id,name,id,book_code,book_name,amount,total_price,payment,order_date,account_info,delivery,refund_state,memo,num
+				FROM (SELECT order_id,name,id,book_code,book_name,amount,total_price,payment,order_date,account_info,delivery,refund_state,memo,ROWNUM AS num
+				FROM (SELECT orders.order_id,name,orders.id,order_book.book_code,goods.book_name,order_book.amount,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.delivery,orders.refund_state,orders.memo
 				FROM orders,order_book,goods WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND <include refid="check-id"/> ORDER BY orders.order_date DESC)) WHERE num BETWEEN #{start} AND #{end}
   	</select>
   	
+  	<resultMap type="orderlist" id="orderlistMap">
+  			<result property="order_id" column="order_id"/>
+  			<result property="total_price" column="total_price"/>
+  			<result property="order_date" column="order_date"/>
+  			<result property="delivery" column="delivery"/>
+  			<result property="refund_state" column="refund_state"/>
+  			<collection property="bList" column="order_id" ofType="book" javaType="ArrayList" resultMap="bookMap"/>
+  	</resultMap>
+  	
+  	<resultMap type="book" id="bookMap">
+  			<result property="book_code" column="book_code"/>
+  			<result property="book_name" column="book_name"/>
+  			<!-- <result property="img" column="img"/> -->
+  	</resultMap>
+  	
+  	
+  	
 	<!-- View Member Orderlist for PageSite -->
-	<select id="selectOrderlistTotalPage" parameterType="hashmap" resultType="orderlist">
+	<select id="selectOrderlistTotalPage" parameterType="hashmap" resultType="int">
 		SELECT CEIL(COUNT(*)/#{rowSize}) FROM orders,order_book,goods WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND <include refid="check-id"/>
   	</select>
   	

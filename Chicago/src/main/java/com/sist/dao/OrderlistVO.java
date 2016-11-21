@@ -2,6 +2,7 @@ package com.sist.dao;
 
 import java.util.*;
 
+/* Made By Choding */
 public class OrderlistVO {
 	
 	private int Order_id;
@@ -11,8 +12,16 @@ public class OrderlistVO {
 	private Date order_date;
 	private int delivery;
 	private String refund_state;
+	private int cnt;
 	
-	List<OrderBookVO> obList;
+	public int getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+
 	List<BookVO> bList;
 	
 	public int getOrder_id() {
@@ -69,14 +78,6 @@ public class OrderlistVO {
 	
 	public void setRefund_state(String refund_state) {
 		this.refund_state = refund_state;
-	}
-	
-	public List<OrderBookVO> getObList() {
-		return obList;
-	}
-	
-	public void setObList(List<OrderBookVO> obList) {
-		this.obList = obList;
 	}
 	
 	public List<BookVO> getbList() {

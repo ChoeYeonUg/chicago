@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
@@ -67,25 +68,41 @@
 												<c:choose>
 													<c:when test="${list.size() != 0}">
 														<div class="row">
-															<span class="cell col1"><a href="${vo.order_id}">${vo.order_id}</a></span>
+															<span class="cell col1">${vo.order_id}</span>
 															<span class="cell col2">
-																<%-- <c:if test="${vo.ord == 0}"> --%>
-																	${vo.book_name}
-																<%-- </c:if> --%>
-																
-																<%-- <c:if test="${vo.delivery != 0}"> --%>
-																	<%-- ${vo.book_name} 외 --%> 
-																<%-- </c:if> --%>
+																<c:forEach items="${vo.bList}" var="book" begin="0" end="1" step="1">
+																	<div class="bookName">
+																		<c:if test="${book.book_name.length() > 30 }">
+																			<a href="${vo.order_id}">${fn:substring(book.book_name, 0, 30)}...</a>
+																		</c:if>
+																		
+																		<c:if test="${book.book_name.length() <= 30 }">
+																			<a href="${vo.order_id}">${book.book_name}</a>
+																		</c:if>
+																	</div>
+																</c:forEach>
 															</span>
 															<span class="cell col3">${vo.total_price}원</span>
 															<span class="cell col4"><fmt:formatDate value="${vo.order_date}" pattern="yyyy-MM-dd"/></span>
-															<span class="cell col5">${deliveryType}</span>
+															<span class="cell col5">
+																<c:if test="${vo.delivery == 1}">
+																	배송준비중
+																</c:if>
+																
+																<c:if test="${vo.delivery == 2}">
+																	배송중
+																</c:if>
+																
+																<c:if test="${vo.delivery == 3}">
+																	배송완료
+																</c:if>
+															</span>
 															<span class="cell colB">
-																<c:if test="${vo.delivery == 0}">
+																<c:if test="${vo.delivery != 3}">
 																	<input type="button" onclick="#" value="주문취소">
 																</c:if>
 																
-																<c:if test="${vo.delivery != 0}">
+																<c:if test="${vo.delivery == 3}">
 																	<input type="button" onclick="#" value="환불신청하기">
 																</c:if>
 															</span>
