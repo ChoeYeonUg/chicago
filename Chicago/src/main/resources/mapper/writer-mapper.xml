@@ -32,6 +32,7 @@
   			<result property="writer_name" column="writer_name"/>
   			<result property="birth" column="birth"/>
   			<result property="death" column="death"/>
+  			<result property="img" column="wimg"/>
   			<collection property="list" column="writer_no" ofType="book" javaType="ArrayList" resultMap="bookMap"/>
   		</resultMap>
   		<resultMap type="book" id="bookMap">
@@ -42,9 +43,9 @@
   		</resultMap>
   		
   		<select id="printWriter" parameterType="hashmap" resultMap="writerMap">
-  		SELECT writer_no,writer_name,birth,death,book_code,book_name,img,publication,num
- 		FROM (SELECT writer_no,writer_name,birth,death,book_code,book_name,img,publication,ROWNUM as num
- 		FROM (SELECT goods.writer_no,writer_name,birth,death,book_code,book_name,goods.img,publication FROM writer JOIN goods ON(goods.writer_no = writer.writer_no) WHERE book_category = #{book_category} ORDER BY writer_name, publication))
+  		SELECT writer_no,writer_name,birth,death,wimg,book_code,book_name,img,publication,num
+ 		FROM (SELECT writer_no,writer_name,birth,death,wimg,book_code,book_name,img,publication,ROWNUM as num
+ 		FROM (SELECT goods.writer_no,writer_name,birth,death,writer.img as wimg,book_code,book_name,goods.img,publication FROM writer JOIN goods ON(goods.writer_no = writer.writer_no) WHERE book_category = #{book_category} ORDER BY writer_name, publication))
  		WHERE writer_no IN (SELECT writer_no 
  		FROM (SELECT writer_no,num
  		FROM (SELECT writer_no,ROWNUM as num
@@ -55,9 +56,9 @@
   		
   		
   		<select id="printSearchWriter" parameterType="hashmap" resultMap="writerMap">
-  			SELECT writer_no,writer_name,birth,death,book_code,book_name,img,publication,num
- 		FROM (SELECT writer_no,writer_name,birth,death,book_code,book_name,img,publication,ROWNUM as num
- 		FROM (SELECT goods.writer_no,writer_name,birth,death,book_code,book_name,goods.img,publication FROM writer JOIN goods ON(goods.writer_no = writer.writer_no) WHERE writer_name LIKE '%${ss}%' ORDER BY writer_name, publication))
+  			SELECT writer_no,writer_name,birth,death,wimg,book_code,book_name,img,publication,num
+ 		FROM (SELECT writer_no,writer_name,birth,death,wimg,book_code,book_name,img,publication,ROWNUM as num
+ 		FROM (SELECT goods.writer_no,writer_name,birth,death,writer.img as wimg,book_code,book_name,goods.img,publication FROM writer JOIN goods ON(goods.writer_no = writer.writer_no) WHERE writer_name LIKE '%${ss}%' ORDER BY writer_name, publication))
  		WHERE writer_no IN (SELECT writer_no 
  		FROM (SELECT writer_no,num
  		FROM (SELECT writer_no,ROWNUM as num
@@ -96,7 +97,7 @@
   		</delete>
   		
   		<select id="updateWriter" parameterType="int" resultType="writer">
-  			SELECT writer_no,writer_name,birth,death,info FROM writer WHERE writer_no = #{writer_no}
+  			SELECT writer_no,writer_name,birth,death,info,img FROM writer WHERE writer_no = #{writer_no}
   		</select>
   		
   		<select id="printSysopWriter" parameterType="hashmap" resultType="writer">

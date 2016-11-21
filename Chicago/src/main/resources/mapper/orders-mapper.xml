@@ -12,8 +12,8 @@
  	
  	<!-- order 생성 -->
  	<insert id="newOrder" parameterType="orders">
- 		INSERT INTO orders(order_id, id, name, delivery,zipcode,addr,payment,total_price,account_info,memo) 
- 		VALUES(#{order_id},#{id},#{name},#{delivery},#{zipcode},#{addr},#{payment},#{total_price},#{account_info},#{memo})
+ 		INSERT INTO orders(order_id, id, name, delivery,zipcode,addr,payment,total_price,account_info,memo,saving) 
+ 		VALUES(#{order_id},#{id},#{name},#{delivery},#{zipcode},#{addr},#{payment},#{total_price},#{account_info},#{memo},#{saving})
  	</insert>
  	
  	<!-- order 불러옴 -->
