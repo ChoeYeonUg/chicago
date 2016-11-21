@@ -124,7 +124,20 @@ public class PurchaseController {
 		
 		try {
 			os.orderProcess(bookList, bookCount, vo);
-			if((List<String>)hs.getAttribute("sbList") != null)	hs.removeAttribute("sbList");			
+			List<String> sbList = (List<String>)hs.getAttribute("sbList");
+			boolean bCheck = false;
+			if(sbList != null){
+				for(String book_code : sbList){
+					for(String orderBook : bookList){
+						if(book_code.equals(orderBook)){
+							hs.removeAttribute("sbList");
+							bCheck = true;
+							break;
+						}
+					}
+					if(bCheck) break;
+				}
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			/*e.printStackTrace();*/
