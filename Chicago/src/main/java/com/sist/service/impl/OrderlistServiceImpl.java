@@ -26,14 +26,19 @@ public class OrderlistServiceImpl implements OrderlistService{
 		return mapper.selectOrderlist(map);
 	}
 	
-	/*@Override
+	@Override
 	public int searchOrderlistTotalPage(Map	map) throws Exception {
 		return mapper.searchOrderlistTotalPage(map);
-	}*/
+	}
 	
-	/*@Override
+	@Override
 	public List<OrderlistVO> searchOrderlist(Map map) throws Exception {
 		return mapper.searchOrderlist(map);
-	}*/
+	}
+	
+	@Override
+	public OrderlistVO memberOrderlistDetail(int order_id) throws Exception {
+		return mapper.memberOrderlistDetail(order_id);
+	}
 
 }

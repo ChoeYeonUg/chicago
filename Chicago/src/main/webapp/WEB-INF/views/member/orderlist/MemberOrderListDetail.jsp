@@ -41,13 +41,12 @@
 					<ul class="Notcont">
 						<li>회원님의 세부주문내역을 확인할 수 있습니다.</li>
 						<li>환불 처리는 낙장, 파본 및 미개봉 상품에 한하며, 주문 취소는 배송되기 전에 가능합니다.</li>
-						<li>환불 처리는 낙장, 파본 및 미개봉 상품에 한하며, 주문 취소는 배송되기 전에 가능합니다.</li>
 					</ul>
 				</div>
 			</div>
 			<div class="OrderlistSettingForm">
 				<div class="MemberOrderlistHeadlineForm">
-					<label class="MemberInfoHeadline"><%=request.getParameter("id") %>님의 주문 내역</label>
+					<label class="MemberInfoHeadline">${vo.nsme}</label>
 				</div>
 				<div class="MemberOrderlistContentForm">
 					<div id="InnerBox">

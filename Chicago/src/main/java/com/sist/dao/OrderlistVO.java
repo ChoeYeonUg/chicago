@@ -12,16 +12,10 @@ public class OrderlistVO {
 	private Date order_date;
 	private int delivery;
 	private String refund_state;
+	private String img;
 	private int cnt;
+	private int count;
 	
-	public int getCnt() {
-		return cnt;
-	}
-
-	public void setCnt(int cnt) {
-		this.cnt = cnt;
-	}
-
 	List<BookVO> bList;
 	
 	public int getOrder_id() {
@@ -78,6 +72,30 @@ public class OrderlistVO {
 	
 	public void setRefund_state(String refund_state) {
 		this.refund_state = refund_state;
+	}
+	
+	public String getImg() {
+		return img;
+	}
+	
+	public void setImg(String img) {
+		this.img = img;
+	}
+	
+	public int getCnt() {
+		return cnt;
+	}
+	
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+	
+	public int getCount() {
+		return count;
+	}
+	
+	public void setCount(int count) {
+		this.count = count;
 	}
 	
 	public List<BookVO> getbList() {

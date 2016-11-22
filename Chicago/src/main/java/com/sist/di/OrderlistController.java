@@ -4,6 +4,7 @@ import java.util.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -28,9 +29,6 @@ public class OrderlistController {
 	@Resource(name="orderlistService")
 	private OrderlistService ols;
 	
-	@Resource(name="bookService")
-	private BookService bs;
-	
 	/* Member Orderlist Head And SideHead Menu */ 
 	@RequestMapping("orderlist.do")
 	public String orderlistMain_page(Model model, HttpServletRequest request) {
@@ -47,7 +45,7 @@ public class OrderlistController {
 	
 	/* Member Order SideMenu Include */
 	@RequestMapping("memberOrderList.do")
-	public String memberOrderlist_page(Model model, OrderlistVO vo, HttpServletRequest request, String typecheck, String page, String ss, String fs, String book_cnt) throws Exception {
+	public String memberOrderlist_page(Model model, OrderlistVO vo, HttpServletRequest request, String typecheck, String page, String book_cnt, String ss) throws Exception {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
@@ -64,6 +62,7 @@ public class OrderlistController {
 			int rowSize = 7;
 			int start = (curPage * rowSize) - (rowSize - 1);
 			int end = curPage * rowSize;
+			int count = 0;
 			
 			Map map = new HashMap();
 			map.put("rowSize", rowSize);
@@ -81,17 +80,16 @@ public class OrderlistController {
 				
 			} else {
 				
-				/*map.put("ss", ss);
+				map.put("ss", ss);
 				model.addAttribute("ss", ss);
-				list = */
-				
+				list = ols.searchOrderlist(map);
+				totalPage = ols.searchOrderlistTotalPage(map);
 				
 			}
 
 			int block = 10;
 			int fromPage = ((curPage - 1) / block * block) + 1;
 			int toPage = ((curPage - 1) / block * block) + block;
-			
 			
 			if(toPage> totalPage) toPage = totalPage;			
 			
@@ -108,25 +106,60 @@ public class OrderlistController {
 			model.addAttribute("cmi", "../member/orderlist/MemberOrderList.jsp");
 			
 		} catch (Exception ex) {
+			
 			ex.printStackTrace();
+			
 		}
 		
 		return "main/main";
 		
 	}
 	
-	@RequestMapping("guestOrderList.do")
-	public String guestOrderlist_page(Model model, HttpServletRequest request) {
+	@RequestMapping("memberOrderlistDetail")
+	public String writerDetail(int order_id, Model model, HttpServletResponse response, HttpServletRequest request) {
+		OrderlistVO vo = null;
+		try {
+			vo = ols.detailWriter(order_id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+		if(vo.getImg() != null && vo.getImg().indexOf("http://") == -1){
+			String imagePath;
+			imagePath = "imageSrc.do?src="+vo.getImg();
+			model.addAttribute("imagePath", imagePath);
+		}else if(vo.getImg() != null && vo.getImg().indexOf("http://") <= 0){
+			model.addAttribute("imagePath", vo.getImg());
+		}else{
+			model.addAttribute("imagePath", "images\\writer_noimage.gif");
+		}
 		
-		model.addAttribute("jsp", "member.jsp");
-		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
-		
-		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
-		model.addAttribute("cmi", "../member/orderlist/GuestOrderList.jsp");
-		
+		model.addAttribute("vo", vo);
+		model.addAttribute("jsp", "writer.jsp");
+		model.addAttribute("jsp", "../writer/writer_detail.jsp");		
 		return "main/main";
-		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/* Member Question HeadMenu */ 
 	@RequestMapping("memberquestion.do")

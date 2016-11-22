@@ -9,7 +9,8 @@ public interface OrderlistMapper {
 	
 	public List<OrderlistVO> selectOrderlist(Map map);
 	public int selectOrderlistTotalPage(Map map);
-	//public List<OrderlistVO> searchOrderlist(Map map);
-	//public int searchOrderlistTotalPage(Map map);
+	public List<OrderlistVO> searchOrderlist(Map map);
+	public int searchOrderlistTotalPage(Map map);
+	public OrderlistVO memberOrderlistDetail(int order_id);
 	
 }

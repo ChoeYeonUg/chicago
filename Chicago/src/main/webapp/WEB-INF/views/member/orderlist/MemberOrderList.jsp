@@ -47,7 +47,12 @@
 			</div>
 			<div class="OrderlistSettingForm">
 				<div class="MemberOrderlistHeadlineForm">
-					<label class="MemberInfoHeadline"><%=request.getParameter("id") %>님의 주문 내역</label>
+					<label class="MemberInfoHeadline">${vo.name}님의 주문 내역</label>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<form>
+						<input type="text" name="ss">
+						<input type="submit" value="검색">
+					</form>
 				</div>
 				<div class="MemberOrderlistContentForm">
 					<div id="InnerBox">
@@ -73,11 +78,31 @@
 																<c:forEach items="${vo.bList}" var="book" begin="0" end="1" step="1">
 																	<div class="bookName">
 																		<c:if test="${book.book_name.length() > 30 }">
-																			<a href="${vo.order_id}">${fn:substring(book.book_name, 0, 30)}...</a>
+																		
+																				<a href="memberOrderlistDetail.do?order_id=${vo.order_id}">${fn:substring(book.book_name, 0, 30)}...</a>
+																				
+																			<%-- <c:if test="${vo.count > 1}">
+																				<a href="${vo.order_id}">${fn:substring(book.book_name, 0, 30)}...외 &{vo.count} 종</a>
+																			</c:if>
+																			
+																			<c:if test="${vo.count = 1}">
+																				<a href="${vo.order_id}">${fn:substring(book.book_name, 0, 30)}...</a>
+																			</c:if> --%>
+																		
 																		</c:if>
 																		
 																		<c:if test="${book.book_name.length() <= 30 }">
-																			<a href="${vo.order_id}">${book.book_name}</a>
+																		
+																			<a href="memberOrderlistDetail.do?order_id=${vo.order_id}">${book.book_name}</a>
+																			
+																			<%-- <c:if test="${vo.count > 1}">
+																				<a href="${vo.order_id}">${book.book_name} 외 &{vo.count} 종</a>
+																			</c:if>
+																			
+																			<c:if test="${vo.count = 1}">
+																				<a href="${vo.order_id}">${book.book_name}</a>
+																			</c:if> --%>
+																			
 																		</c:if>
 																	</div>
 																</c:forEach>
@@ -124,8 +149,8 @@
 							<div>
 								<fieldset>
 									<div class="ctn">
-										<a href="memberOrderList.do?page=1">맨 앞</a>
-										<a href="memberOrderList.do?page=${curPage>1?curPage-1:curPage}">이전</a>
+										<a href="memberOrderList.do?ss=${ss}&page=1">맨 앞</a>
+										<a href="memberOrderList.do?ss=${ss}&page=${curPage>1?curPage-1:curPage}">이전</a>
 										
 										<c:forEach var="i" begin="${fromPage}" end="${toPage}">
 										[<c:if test="${curPage == i}">
@@ -135,20 +160,20 @@
 										</c:if>
 										
 										<c:if test="${curPage != i}">
-										<a href="memberOrderList.do?page=${i}">${i}</a>
+										<a href="memberOrderList.do?ss=${ss}&page=${i}">${i}</a>
 										
 										</c:if>
 										]
 										</c:forEach>
 										
 										<c:if test="${toPage<totalPage}">
-											<a href="memberOrderList.do?page=${toPage+1}">다음</a>
-											<a href="memberOrderList.do?page=${totalPage}">맨 뒤</a>
+											<a href="memberOrderList.do?ss=${ss}&page=${toPage+1}">다음</a>
+											<a href="memberOrderList.do?ss=${ss}&page=${totalPage}">맨 뒤</a>
 										</c:if>
 										
 										<c:if test="${toPage>=totalPage}">
-											<a href="memberOrderList.do?page=${curPage<totalPage?curPage+1:curPage}">다음</a>
-											<a href="memberOrderList.do?page=${totalPage}">맨 뒤</a>
+											<a href="memberOrderList.do?ss=${ss}&page=${curPage<totalPage?curPage+1:curPage}">다음</a>
+											<a href="memberOrderList.do?ss=${ss}&page=${totalPage}">맨 뒤</a>
 										</c:if>
 										&nbsp;&nbsp;
 										${curPage} page / ${totalPage} pages
