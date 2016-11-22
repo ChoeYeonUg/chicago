@@ -90,14 +90,15 @@
 	                                <li><a href="book_management.do"><spring:message code="header.saBook"/></a></li>
 									<li><a href="board_management.do"><spring:message code="header.saBoard"/></a></li>
 									<li><a href="sales_management.do"><spring:message code="header.saList"/></a></li>
-									<li><a href="writer_management.do">작가관리</a></li>
+									<li><a href="writer_management.do"><spring:message code="header.writer"/></a></li>
+									<li><a href="event_management.do"><spring:message code="header.event"/></a></li>
 	            				</ul>
 	          				</li>
           				</c:if>
           				<li><a class="drop" href="login.do"><spring:message code="header.login"/></a>
             				<ul>
                                 <li><a href="login.do"><spring:message code="header.login"/></a></li>
-                                <li><a href="#"><spring:message code="header.nm"/></a></li>
+                                <%-- <li><a href="#"><spring:message code="header.nm"/></a></li> --%>
             				</ul>
           				</li>
         			</ul>
