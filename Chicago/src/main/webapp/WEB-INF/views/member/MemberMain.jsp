@@ -74,9 +74,6 @@
 									<li class="">
 										<a href="memberOrderList.do"><spring:message code="memberInfoModifyMain.btMemberOrderInfo"/></a>
 									</li>
-									<li class="">
-										<a href="guestOrderList.do"><spring:message code="memberInfoModifyMain.btGuestOrderInfo"/></a>
-									</li>
 								</ul>
 							</li>
 							<!-- End Orderlist Info -->
