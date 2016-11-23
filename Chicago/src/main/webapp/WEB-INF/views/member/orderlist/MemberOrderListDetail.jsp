@@ -69,43 +69,25 @@
 												<c:choose>
 													<c:when test="${list.size() != null}">
 														<div class="row2">
+															<c:forEach items="${vo.bList}" var="book">
 															<span class="cell2 col21">${vo.order_id}</span>
-															<span class="cell2 col22"><c:forEach items="${vo.bList}" var="book" begin="0" end="1" step="1">
-																	<div class="bookName">
+															<span class="cell2 col22">
 																		<c:if test="${book.book_name.length() > 30 }">
 																			
 																			<img src="${book.img}">
 																			${fn:substring(book.book_name, 0, 30)}...
-																				
-																			<%-- <c:if test="${vo.count > 1}">
-																				<a href="${vo.order_id}">${fn:substring(book.book_name, 0, 30)}...외 &{vo.count} 종</a>
-																			</c:if>
-																			
-																			<c:if test="${vo.count = 1}">
-																				<a href="${vo.order_id}">${fn:substring(book.book_name, 0, 30)}...</a>
-																			</c:if> --%>
-																		
+																			<br/>
 																		</c:if>
 																		
 																		<c:if test="${book.book_name.length() <= 30 }">
 																		
 																			<img src="${book.img}">
 																			${book.book_name}
-																			
-																			<%-- <c:if test="${vo.count > 1}">
-																				<a href="${vo.order_id}">${book.book_name} 외 &{vo.count} 종</a>
-																			</c:if>
-																			
-																			<c:if test="${vo.count = 1}">
-																				<a href="${vo.order_id}">${book.book_name}</a>
-																			</c:if> --%>
-																			
+																			<br/>
 																		</c:if>
-																	</div>
 															</span>
 															<span class="cell2 col23">${book.amount}권</span>
 															<span class="cell2 col24">${book.price}원</span>
-															</c:forEach>
 															<span class="cell2 col25"><fmt:formatDate value="${vo.order_date}" pattern="yyyy-MM-dd"/></span>
 															<span class="cell2 col26">
 																<c:if test="${vo.delivery == 1}">
@@ -126,10 +108,12 @@
 																</c:if>
 																
 																<c:if test="${vo.delivery == 3}">
+																	<input type="button" onclick="#" value="배송완료">
 																	<input type="button" onclick="#" value="환불신청하기">
 																</c:if>
 															</span>
 														</div>
+															</c:forEach>
 													</c:when>
 													
 													<c:otherwise>
@@ -144,40 +128,6 @@
 										</c:forEach>
 									</div>
 								</fieldset>
-							</div>
-							<div>
-								<%-- <fieldset>
-									<div class="ctn">
-										<a href="memberOrderList.do?page=1">맨 앞</a>
-										<a href="memberOrderList.do?page=${curPage>1?curPage-1:curPage}">이전</a>
-										
-										<c:forEach var="i" begin="${fromPage}" end="${toPage}">
-										[<c:if test="${curPage == i}">
-											
-											<span style="color: red">${i}</span>
-											
-										</c:if>
-										
-										<c:if test="${curPage != i}">
-										<a href="memberOrderList.do?page=${i}">${i}</a>
-										
-										</c:if>
-										]
-										</c:forEach>
-										
-										<c:if test="${toPage<totalPage}">
-											<a href="memberOrderList.do?page=${toPage+1}">다음</a>
-											<a href="memberOrderList.do?page=${totalPage}">맨 뒤</a>
-										</c:if>
-										
-										<c:if test="${toPage>=totalPage}">
-											<a href="memberOrderList.do?page=${curPage<totalPage?curPage+1:curPage}">다음</a>
-											<a href="memberOrderList.do?page=${totalPage}">맨 뒤</a>
-										</c:if>
-										&nbsp;&nbsp;
-										${curPage} page / ${totalPage} pages
-									</div>
-								</fieldset> --%>
 							</div>
 							
 							<!-- OK, Cancel Button -->

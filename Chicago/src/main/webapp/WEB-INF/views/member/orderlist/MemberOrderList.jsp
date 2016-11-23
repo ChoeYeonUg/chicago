@@ -75,17 +75,17 @@
 														<div class="row">
 															<span class="cell col1">${vo.order_id}</span>
 															<span class="cell col2">
-																<c:forEach items="${vo.bList}" var="book" begin="0" end="1" step="1">
+																<c:forEach items="${vo.bList}" var="book" begin="0" end="1" step="5">
 																	<div class="bookName">
 																		<c:if test="${book.book_name.length() > 30 }">
 																		
-																				<a href="memberOrderlistDetail.do?order_id=${vo.order_id}">${fn:substring(book.book_name, 0, 30)}...</a>
+																				<<a href="memberOrderlistDetail.do?order_id=${vo.order_id}">${fn:substring(book.book_name, 0, 30)}...</a>
 																				
-																			<%-- <c:if test="${vo.count > 1}">
-																				<a href="${vo.order_id}">${fn:substring(book.book_name, 0, 30)}...외 &{vo.count} 종</a>
+																			<%-- <c:if test="${book.size() > 1}">
+																				<a href="${vo.order_id}">${fn:substring(book.book_name, 0, 30)}...외 ${book.size() - 1} 종</a>
 																			</c:if>
 																			
-																			<c:if test="${vo.count = 1}">
+																			<c:if test="${book.size() = 1}">
 																				<a href="${vo.order_id}">${fn:substring(book.book_name, 0, 30)}...</a>
 																			</c:if> --%>
 																		
@@ -128,8 +128,10 @@
 																</c:if>
 																
 																<c:if test="${vo.delivery == 3}">
+																	<input type="button" onclick="#" value="배송완료">
 																	<input type="button" onclick="#" value="환불신청하기">
 																</c:if>
+																
 															</span>
 														</div>
 													</c:when>
