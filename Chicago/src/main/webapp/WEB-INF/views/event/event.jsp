@@ -11,6 +11,10 @@
 </head>
 
 
+						 <!-- <form action="event.do" method="post">
+						 	<input type="hidden" name="af" value="1">
+						 	<input type="">
+						 </form> -->
 
 <table width="100%" class="table_content" border="0">							
 		
@@ -26,8 +30,11 @@
 								<td><h1>${today }</h1></td>							
 							</tr>
 						</table>
-						<input type="button" name=af id=af onclick="af_click();" value="캬옹"/> 					
+						<input type="button" name=af id=af "value="캬옹"/> 					
 						 --%>
+						 
+						 
+						 
 						<!-- <input hidden name=sd value=${sd}>  -->
 						<c:forEach items="${schedule }" var="list">
 						<tr>					
@@ -69,9 +76,9 @@
 		</c:if>    --%>
 		
 		<%-- <c:if test="${curpage<=block}"> --%>
-			<a href="noticeboard.do?page=1">비긴</a>
+			<%-- <a href="noticeboard.do?page=1">비긴</a>
 				<a href="noticeboard.do?page=${curpage>1?curpage-1:curpage}">
-				프리브</a> &nbsp;
+				프리브</a> &nbsp; --%>
 		<%-- </c:if>    --%>
 		
 		<c:forEach var="i" begin="${fromPage }" end="${toPage }">

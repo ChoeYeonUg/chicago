@@ -42,25 +42,25 @@
 <table width="100%" class="table_content" border="0">
 			
 	<%
-Calendar cal = Calendar.getInstance();
+//Calendar cal = Calendar.getInstance();
  
-String strYear = request.getParameter("year");
+/* String strYear = request.getParameter("year");
 String strMonth = request.getParameter("month");
  
 int year = cal.get(Calendar.YEAR);
 int month = cal.get(Calendar.MONTH);
 int date = cal.get(Calendar.DATE);
- 
-if(strYear != null)
+  */
+/* if(strYear != null)
 {
   year = Integer.parseInt(strYear);
   month = Integer.parseInt(strMonth);
  
 }else{
  
-}
+} */
 //년도/월 셋팅
-cal.set(year, month, 1);
+/* cal.set(year, month, 1);
  
 int startDay = cal.getMinimum(java.util.Calendar.DATE);
 int endDay = cal.getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
@@ -72,7 +72,7 @@ Calendar todayCal = Calendar.getInstance();
 SimpleDateFormat sdf = new SimpleDateFormat("yyyMMdd");
 int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
  
- 
+ */ 
 %>
 
  
@@ -83,21 +83,21 @@ int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
 <form name="calendarFrm" id="calendarFrm" action="" method="post">
 <DIV id="content" style="width:712px;">
  
-<table width="100%" border="0" cellspacing="1" cellpadding="1">
+<%-- <table width="100%" border="0" cellspacing="1" cellpadding="1">
 <tr>
        <td align ="right">
              <input type="button" onclick="javascript:location.href='<c:url value='/CalendarExam2.jsp' />'" value="오늘"/>
        </td>
  
 </tr>
-</table>
+</table> --%>
 <!--날짜 네비게이션  -->
 <table width="100%" border="0" cellspacing="1" cellpadding="1" id="KOO" bgcolor="#F3F9D7" style="border:1px solid #CED99C">
  
 <tr>
 <td height="60">
  
-       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <%--  <table width="100%" border="0" cellspacing="0" cellpadding="0">
        <tr>
              <td height="10">
              </td>
@@ -105,11 +105,11 @@ int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
       
        <tr>
              <td align="center" >
-                    <a href="<c:url value='/CalendarExam2.jsp' />?year=<%=year-1%>&amp;month=<%=month%>" target="_self">
+                    <a href="<c:url value='/event_month.do' />?year=<%=year-1>&amp;month=<%=month>" target="_self">
                            <b>&lt;&lt;</b><!-- 이전해 -->
                     </a>
                     <%if(month > 0 ){ %>
-                    <a href="<c:url value='/CalendarExam2.jsp' />?year=<%=year%>&amp;month=<%=month-1%>" target="_self">
+                    <a href="<c:url value='/event_month.do' />?year=<%=year>&amp;month=<%=month-1>" target="_self">
                            <b>&lt;</b><!-- 이전달 -->
                     </a>
                     <%} else {%>
@@ -121,19 +121,60 @@ int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
                     <%=month+1%>월
                     &nbsp;&nbsp;
                     <%if(month < 11 ){ %>
-                    <a href="<c:url value='/CalendarExam2.jsp' />?year=<%=year%>&amp;month=<%=month+1%>" target="_self">
+                    <a href="<c:url value='/event_month.do' />?year=<%=year%>&amp;month=<%=month+1%>" target="_self">
                            <!-- 다음달 --><b>&gt;</b>
                     </a>
                     <%}else{%>
                            <b>&gt;</b>
                     <%} %>
-                    <a href="<c:url value='/CalendarExam2.jsp' />?year=<%=year+1%>&amp;month=<%=month%>" target="_self">
+                    <a href="<c:url value='/event_month.do' />?year=<%=year+1%>&amp;month=<%=month%>" target="_self">
+                           <!-- 다음해 --><b>&gt;&gt;</b>
+                    </a>
+             </td>
+       </tr>
+       </table> --%>
+        
+ 	   <table width="100%" border="0" cellspacing="0" cellpadding="0">
+       <tr>
+             <td height="10">
+             </td>
+       </tr>
+      
+       <tr>
+             <td align="center" >
+                    <a href="<c:url value='/event_month.do' />?year=${year-1}&amp;month=${month}" target="_self">
+                           <b>&lt;&lt;</b><!-- 이전해 -->
+                    </a>
+                    <c:choose>
+                    <c:when test="${(month > 0) }">
+                    <a href="<c:url value='/event_month.do' />?year=${year}&amp;month=${month-1}" target="_self">
+                           <b>&lt;</b><!-- 이전달 -->
+                    </a>
+                    </c:when>
+                    </c:choose>
+                    
+                   <!--  <b>&lt;</b> -->
+                    &nbsp;&nbsp;
+                    ${year }년
+                   
+                    ${month+1}월
+                    &nbsp;&nbsp;
+                    <c:choose>
+                    <c:when test="${(month< 11)}" >
+                    <a href="<c:url value='/event_month.do' />?year=${year}&amp;month=${month+1 }" target="_self">
+                           <!-- 다음달 --><b>&gt;</b>
+                    </a>
+                    </c:when>
+                    <c:otherwise>
+                           <b>&gt;</b>
+                    </c:otherwise>
+                    </c:choose>
+                    <a href="<c:url value='/event_month.do' />?year=${year+1 }&amp;month=${month}" target="_self">
                            <!-- 다음해 --><b>&gt;&gt;</b>
                     </a>
              </td>
        </tr>
        </table>
- 
 </td>
 </tr>
 </table>
@@ -166,7 +207,7 @@ int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
 </THEAD>
 <TBODY>
 <TR>
-<%
+<%-- <%
  
 //처음 빈공란 표시
 for(int index = 1; index < start ; index++ )
@@ -187,8 +228,9 @@ for(int index = 1; index <= endDay; index++)
        sUseDate += Integer.toString(month+1).length() == 1 ? "0" + Integer.toString(month+1) : Integer.toString(month+1);
        sUseDate += Integer.toString(index).length() == 1 ? "0" + Integer.toString(index) : Integer.toString(index);
  
-       int iUseDate = Integer.parseInt(sUseDate);
+	   int iUseDate = Integer.parseInt(sUseDate);
       
+   //	   String iUseDate =  ;
       
        String backColor = "#EFEFEF";
        if(iUseDate == intToday ) {
@@ -196,10 +238,15 @@ for(int index = 1; index <= endDay; index++)
        }
        out.println("<TD valign='top' align='left' height='92px' bgcolor='"+backColor+"' nowrap>");
        %>
+       	
        <font color='<%=color%>'>
              <%=index %>
        </font>
  
+       <a href="<c:url value='/event_month.do' />?year=<%=year%>&amp;month=<%=month+1%>target="_self">
+                           <!-- 다음달 --><b>&gt;</b>
+                    </a>
+       
        <%
       
        out.println("<BR>");
@@ -227,7 +274,72 @@ while(newLine > 0 && newLine < 7)
   out.println("<TD>&nbsp;</TD>");
   newLine++;
 }
-%>
+%> --%>
+<c:forEach begin="1" end="${startD-1}" step="1">
+  <TD >&nbsp</TD>
+  ${newLine+1}
+</c:forEach> 
+<c:forEach begin="1" end="${endDay}" step="1" var="index">
+	<%
+		String color ="";
+		int index =1;
+	%>
+	<c:choose>
+		<c:when test="${newLine==0}">
+			color = "RED";
+		</c:when>
+		<c:when test="${newLine==6}">
+			color = "#529dbc";
+		</c:when>
+		<c:otherwise>
+			color = "BLACK";
+		</c:otherwise>
+	</c:choose>
+
+
+       
+       
+       ${sUseDate += Integer.toString(month+1).length() == 1 ? "0" + Integer.toString(month+1) : Integer.toString(month+1)};
+       ${sUseDate += Integer.toString(index).length() == 1 ? "0" + Integer.toString(index) : Integer.toString(index)};
+ 
+	   
+    <!--   
+   //	   String iUseDate =  ;
+       -->
+       <!-- String backColor = "#EFEFEF"; -->
+       <%-- <c:if test="${iUseDate } == ${intToday }">  
+           <!--   backColor = "#c9c9c9"; -->
+       </c:if> --%>
+       <TD valign='top' align='left' height='92px' nowrap>  
+       <%-- <font color='${color }'>
+             ${index }
+       </font>  
+       <BR>
+       <c:out value="${iUseDate }">
+       <BR>
+  --%>     
+      
+       </TD>
+       ${newLine+=1}
+ 
+       <c:if test="${newLine == 7 }">
+       	</TR>
+         <c:if test="${index <= endDay}">
+         	<TR>
+         </c:if>
+         ${newLine }=0;
+       </c:if>
+       ${ index=index+1}
+</c:forEach>
+	
+	<c:forEach begin="1" end="6" var="abc">
+		<c:if test="${newLine == abc}">		
+			<TD>&nbsp;</TD>
+			${newLine+=1 }
+		</c:if>
+	</c:forEach>
+
+
 </TR>
  
 </TBODY>
