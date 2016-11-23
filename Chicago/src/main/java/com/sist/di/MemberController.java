@@ -76,9 +76,18 @@ public class MemberController {
 				}
 			
 			} else {
-								
+				
 				model.addAttribute("typecheck", typecheck);
-				url = "redirect:modifyMemberInfo.do";
+				
+				if(typecheck.equals("mi")) {
+					
+					url = "redirect:modifyMemberInfo.do";
+					
+				} else {
+					
+					url= "redirect:memberAddrsInfo.do";
+					
+				}
 
 			}
 		
@@ -125,6 +134,7 @@ public class MemberController {
 			
 			model.addAttribute("typecheck", typecheck);
 			model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
+				
 			
 		}
 		

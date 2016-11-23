@@ -235,6 +235,7 @@ function sample6_execDaumPostcode3() {
 					<div id="ModifyMemberAddress-Box">
 						<form:form method="post" name="frm" id="frm" action="modyfyMemberAddrs_ok.do" commandName="com.sist.dao.AddressVO">
 						<input type="hidden" value="<%=request.getAttribute("id") %>">
+						<input type="hidden"  name="typecheck" value="${typecheck}">
 						<fieldset>
 								<div class="ModifyMemberAddress">
 									<dl class="mma">
