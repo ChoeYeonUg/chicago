@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -109,7 +110,17 @@
 							<table>
 								<!-- 책 이미지 -->
 								<tr>
-									<td align="center"><a href="bookDetail.do?book_code=${list.book_code }"><img alt="image" src="${list.img }"></a></td>
+									<td align="center">
+									<c:if test="${list.img == null }">
+										<a href="bookDetail.do?book_code=${list.book_code }"><img src="images\writer_noimage.gif" class="bd" alt="${list.book_name }"></a>
+									</c:if>
+									<c:if test="${list.img != null && fn:indexOf(list.img,'http://') == -1 }">
+										<a href="bookDetail.do?book_code=${list.book_code }"><img src="imageSrc.do?src=${list.img }" class="bd" alt="${vo.book_name }"></a>
+									</c:if>
+									<c:if test="${list.img != null && fn:indexOf(list.img,'http://') != -1 }">
+										<a href="bookDetail.do?book_code=${list.book_code }"><img src="${list.img }" class="bd" alt="${list.book_name }"></a>
+									</c:if>
+									</td>
 								</tr>
 								<!-- 주문관련 아이콘 -->
 								<tr>

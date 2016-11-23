@@ -100,6 +100,16 @@ public class SysopBookController {
 		String id = (String) hs.getAttribute("id");
 
 		BookVO bookMngDetail = bs.printSysopBookDetail(book_code);
+		
+		if(bookMngDetail.getImg() != null && bookMngDetail.getImg().indexOf("http://") == -1) {
+			String imgPath;
+			imgPath = "imageSrc.do?src=" + bookMngDetail.getImg();
+			model.addAttribute("imgPath", imgPath);
+		} else if (bookMngDetail.getImg() != null && bookMngDetail.getImg().indexOf("http://") <= 0) {
+			model.addAttribute("imgPath", bookMngDetail.getImg());
+		} else {
+			model.addAttribute("imgPath", "images\\writer_noimage.gif");
+		}
 
 		model.addAttribute("bookMngDetail", bookMngDetail);
 		model.addAttribute("book_code", book_code);
@@ -157,7 +167,7 @@ public class SysopBookController {
 				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd");
 				goods.setPublication(transFormat.parse(publication));
 			}
-			bs.printSysopBookInsert(goods);
+			bs.printSysopBookInsert(goods, req);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return "redirec:book_mngInsert.do";
@@ -181,7 +191,7 @@ public class SysopBookController {
 				model.addAttribute("publication", publication);
 			}
 			
-			model.addAttribute("vo", vo);
+			model.addAttribute("goods", vo);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -201,7 +211,7 @@ public class SysopBookController {
 			}
 			
 			System.out.println(goods.getBook_code());
-			bs.printSysopBookUpdateData(goods);
+			bs.printSysopBookUpdateData(goods, req);
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

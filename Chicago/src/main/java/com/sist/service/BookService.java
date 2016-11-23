@@ -3,6 +3,8 @@ package com.sist.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.sist.dao.BookVO;
 import com.sist.dao.ReviewVO;
 
@@ -42,11 +44,11 @@ public interface BookService {
 	public boolean goodsBookCode(String book_code);
 	
 	// 도서관리 추가하기
-	public void printSysopBookInsert(BookVO vo);
+	public void printSysopBookInsert(BookVO vo, HttpServletRequest req);
 	
 	// 도서관리 수정하기
 	public BookVO printSysopBookUpdate(String book_code);
-	public void printSysopBookUpdateData(BookVO vo);
+	public void printSysopBookUpdateData(BookVO vo, HttpServletRequest req);
 	
 	// 도서관리 상세페이지
 	public BookVO printSysopBookDetail(String book_code);

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -27,23 +27,23 @@
 	<div id="content">
 		<div class="container background-white">
 			<div class="row margin-vert-40">
-				ISBN : ${vo.book_code }
+				ISBN : ${goods.book_code }
 				<hr/>
-				<form action="book_mngUpdateOk.do" id="form" name="form" method="post">
-				<input type="hidden" value="${vo.book_code }" name="book_code"/>
+				<form:form action="book_mngUpdateOk.do" id="form" name="form" method="post" acceptCharset="UTF-8" enctype="multipart/form-data" commandName="goods">
+				<input type="hidden" value="${goods.book_code }" name="book_code"/>
 					<table>
 						<tr>
 							<td width="10%"  style="font-size:11px; color:#505050;">제목</td>
-							<td colspan="3" style="font-size:11px; color:#505050;"><input type="text" size="50" value="${vo.book_name }"  name="book_name" id="book_name"  style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
+							<td colspan="3" style="font-size:11px; color:#505050;"><input type="text" size="50" value="${goods.book_name }"  name="book_name" id="book_name"  style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
 						</tr>
 						<tr>
 							<td width="10%" style="font-size:11px; color:#505050;">카테고리</td>
 							<td width="40%"  style="font-size:11px; color:#505050;">
 								<c:choose>
-									<c:when test="${vo.book_category == 1 }"><spring:message code="book.cate1"/></c:when>
-									<c:when test="${vo.book_category == 2 }"><spring:message code="book.cate2"/></c:when>
-									<c:when test="${vo.book_category == 3 }"><spring:message code="book.cate3"/></c:when>
-									<c:when test="${vo.book_category == 4 }"><spring:message code="book.cate4"/></c:when>
+									<c:when test="${goods.book_category == 1 }"><spring:message code="book.cate1"/></c:when>
+									<c:when test="${goods.book_category == 2 }"><spring:message code="book.cate2"/></c:when>
+									<c:when test="${goods.book_category == 3 }"><spring:message code="book.cate3"/></c:when>
+									<c:when test="${goods.book_category == 4 }"><spring:message code="book.cate4"/></c:when>
 								</c:choose>
 								&nbsp;&nbsp;&nbsp;&nbsp;
 								<div style="line-height: 11px; vertical-align: bottom;">
@@ -54,22 +54,22 @@
 								</div>							
 							</td>
 							<td width="10%"  style="font-size:11px; color:#505050;">저자</td>
-							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" value="${vo.writer }" name="writer" id="writer" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
+							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" value="${goods.writer }" name="writer" id="writer" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
 						</tr>
 						<tr>
 							<td width="10%"  style="font-size:11px; color:#505050;">출판사</td>
-							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" value="${vo.publisher }" name="publisher" id="publisher" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
+							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" value="${goods.publisher }" name="publisher" id="publisher" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
 							<td width="10%"  style="font-size:11px; color:#505050;">출판일</td>
-							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" value="<form:formatDate value="${vo.publication }" pattern="yyyy/MM/dd"/>" name="publication" id="publication" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
+							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" value="<fmt:formatDate value="${goods.publication }" pattern="yyyy/MM/dd"/>" name="publication" id="publication" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
 						</tr>
 						<tr>
 							<td width="10%"  style="font-size:11px; color:#505050;">수량</td>
-							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" value="${vo.amount }" name="amount" id="amount" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
+							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" value="${goods.amount }" name="amount" id="amount" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
 							<td width="10%"  style="font-size:11px; color:#505050;">절판상태</td>
 							<td width="40%"  style="font-size:11px; color:#505050;"> 								
 								<c:choose>
-									<c:when test="${vo.out_of_print == 1 }">출판</c:when>
-									<c:when test="${vo.out_of_print == 0 }">절판</c:when>
+									<c:when test="${goods.out_of_print == 1 }">출판</c:when>
+									<c:when test="${goods.out_of_print == 0 }">절판</c:when>
 								</c:choose>
 								&nbsp;&nbsp;&nbsp;&nbsp;
 								<div style="line-height: 11px; vertical-align: bottom;">
@@ -81,17 +81,17 @@
 						</tr>
 						<tr>
 							<td width="10%"  style="font-size:11px; color:#505050;">페이지</td>
-							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" value="${vo.pages }" name="pages" id="pages" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
+							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" value="${goods.pages }" name="pages" id="pages" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
 							<td width="10%"  style="font-size:11px; color:#505050;">가격</td>
-							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" value="${vo.price }" name="price" id="price" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
+							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" value="${goods.price }" name="price" id="price" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
 						</tr>
 						<tr>
 							<td width="10%" style="font-size:11px; color:#505050;">Img</td>
-							<td colspan="3" style="font-size:11px; color:#505050;"><input type="text" size="20" value="${vo.img }" name="img" id="img"/></td>
+							<td colspan="3" style="font-size:11px; color:#505050;">${goods.img }<br/><input type="file" name="upload" id="upload"/></td>
 						</tr>
 						<tr>
 							<td width="10%"  style="font-size:11px; color:#505050;">책소개</td>
-							<td colspan="3"><textarea cols="160" rows="3" name="book_content" id="book_content" style="font-size:11px; color:#505050;">${vo.book_content }</textarea></td>
+							<td colspan="3"><textarea cols="160" rows="3" name="book_content" id="book_content" style="font-size:11px; color:#505050;">${goods.book_content }</textarea></td>
 						</tr>
 					</table>
 					<table>
@@ -102,7 +102,7 @@
 							</td>
 						</tr>
 					</table>
-				</form>
+				</form:form>
 			</div>
 		</div>
 	</div>

@@ -63,8 +63,15 @@
 							</td>
 						</tr>
 						<tr>
+							<th align="left" width="10%" style="font-size:11px; color:#000;">Img</th>
+							<td colspan="3" align="left" style="font-size:11px; color:#000;">
+								<img src="${imgPath }" onerror="/images/writer_noimage.gif"/>
+								<br>[${bookMngDetail.img }]
+							</td>
+						</tr>
+						<tr>
 							<th align="left" width="10%" style="font-size:11px; color:#000;">상세설명</th>
-							<td colspan="3" align="left" style="font-size:11px; color:#000;">${bookMngDetail.book_content }</td>
+							<td colspan="3" align="left" style="font-size:11px; color:#000;">${bookMngDetail.book_content } </td>
 						</tr>
 					</table>
 					<table>

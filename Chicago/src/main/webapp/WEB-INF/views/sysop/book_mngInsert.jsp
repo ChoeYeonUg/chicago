@@ -112,33 +112,42 @@
 		});
 	});
 </script>
+<!-- <style type="text/css">
+	input [type="text"],
+	textarea {
+		border-top: 0px;
+		border-right: 0px;
+		border-left: 0px;
+		border-bottom: #00000 1px solid;
+	}
+</style> -->
 </head>
 <body>
 	<div id="content">
 		<div class="container background-white">
 			<div class="row margin-vert-40">
 				<!-- <form action="book_mngInsertOk.do" method="post" id="form" name="form"> -->
-				<form:form commandName="vo" action="book_mngInsertOk.do" method="post" id="form" name="form">
+				<form:form commandName="vo" action="book_mngInsertOk.do" method="post" id="form" name="form" acceptCharset="UTF-8" enctype="multipart/form-data">
 					<table>
 						<tr>
 							<td width="10%" style="font-size:11px; color:#505050;">ISBN</td>
 							<td colspan="3">
-								<input type="text" size="20" name="book_code" id="book_code"/>
+								<input type="text" size="20" name="book_code" id="book_code" style="border-top:0px; border-right:0px; border-left: 0px; border-bottom:#00000 1px solid;"/>
 								<span id="codeResult"></span><form:errors path="book_code"/>
 								<input type="hidden" id="check" value="Y" disabled="disabled"/>
-								<!-- <input type="text" size="20" name="book_code" id="book_code" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/> -->
+								<!-- <input type="text" size="20" name="book_code" id="book_code"/> -->
 							</td>
 						</tr>
 						<tr>
 							<td width="10%"  style="font-size:11px; color:#505050;">제목</td>
 							<td colspan="3">
-								<input type="text" size="50" name="book_name" id="book_name" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/>
+								<input type="text" size="50" name="book_name" id="book_name" style="border-top:0px; border-right:0px; border-left: 0px; border-bottom:#00000 1px solid;"/>
 							</td>
 						</tr>
 						<tr>
 							<td width="10%"  style="font-size:11px; color:#505050;">저자</td>
 							<td width="40%"  style="font-size:11px; color:#505050;">
-								<input type="text" size="20" name="writer" id="writer" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/>
+								<input type="text" size="20" name="writer" id="writer"  style="border-top:0px; border-right:0px; border-left: 0px; border-bottom:#00000 1px solid;"/>
 							</td>
 							<td width="10%"  style="font-size:11px; color:#505050;">카테고리</td>
 							<td width="40%"  style="font-size:11px; color:#505050;">
@@ -151,16 +160,16 @@
 						<tr>
 							<td width="10%"  style="font-size:11px; color:#505050;">출판사</td>
 							<td width="40%"  style="font-size:11px; color:#505050;">
-								<input type="text" size="20" name="publisher" id="publisher" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/>
+								<input type="text" size="20" name="publisher" id="publisher"  style="border-top:0px; border-right:0px; border-left: 0px; border-bottom:#00000 1px solid;"/>
 							</td>
 							<td width="10%"  style="font-size:11px; color:#505050;">출판일</td>
 							<td width="40%"  style="font-size:11px; color:#505050;">
-								<input type="text" size="40" name="publication" id="publication" placeholder="2016/11/23 형식으로 작성하세요." style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/>
+								<input type="text" size="40" name="publication" id="publication" placeholder="2016/11/23 형식으로 작성하세요."  style="border-top:0px; border-right:0px; border-left: 0px; border-bottom:#00000 1px solid;"/>
 							</td>
 						</tr>
 						<tr>
 							<td width="10%"  style="font-size:11px; color:#505050;">수량</td>
-							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" name="amount" id="amount" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
+							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" name="amount" id="amount" style="border-top:0px; border-right:0px; border-left: 0px; border-bottom:#00000 1px solid;"/></td>
 							<td width="10%"  style="font-size:11px; color:#505050;">절판상태</td>
 							<td width="40%"  style="font-size:11px; color:#505050;">
 								<input type="radio" value="0" name="out_of_print" id="out_of_print" />&nbsp;절판&nbsp;&nbsp;
@@ -170,20 +179,20 @@
 						<tr>
 							<td width="10%"  style="font-size:11px; color:#505050;">페이지</td>
 							<td width="40%"  style="font-size:11px; color:#505050;">
-								<input type="text" size="20" name="pages" id="pages" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/>
+								<input type="text" size="20" name="pages" id="pages"  style="border-top:0px; border-right:0px; border-left: 0px; border-bottom:#00000 1px solid;"/>
 							</td>
 							<td width="10%"  style="font-size:11px; color:#505050;">가격</td>
 							<td width="40%"  style="font-size:11px; color:#505050;">
-								<input type="text" size="20" name="price" id="price" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/>
+								<input type="text" size="20" name="price" id="price" style="border-top:0px; border-right:0px; border-left: 0px; border-bottom:#00000 1px solid;"/>
 							</td>
 						</tr>
 						<tr>
 							<td width="10%" style="font-size:11px; color:#505050;">이미지</td>
-							<td colspan="3" style="font-size:11px; color:#505050;"><input type="text" size="20" name="img" id="img"/></td>
+							<td colspan="3" style="font-size:11px; color:#505050;"><input type="file" size="20" name="upload" id="upload"/></td>
 						</tr>
 						<tr>
 							<td width="10%"  style="font-size:11px; color:#505050;">책소개</td>
-							<td colspan="3"><textarea cols="130" rows="3" name="book_content" id="book_content"></textarea></td>
+							<td colspan="3" style="font-size:11px; color:#505050;"><textarea cols="130" rows="3" name="book_content" id="book_content"  style="border-top:0px; border-right:0px; border-left: 0px; border-bottom:#00000 1px solid;"></textarea></td>
 						</tr> 
 					</table>
 					<table>
