@@ -48,7 +48,7 @@ public class MemberController {
 	
 	
 	@RequestMapping(value="membersecurepwd_ok.do", method=RequestMethod.POST)
-	public String membersecurepwd_ok(Model model, HttpServletRequest request, HttpServletResponse response, String USER_Check_PWD, String typecheck,
+	public String membersecurepwd_ok(Model model, HttpServletRequest request, String USER_Check_PWD, String typecheck,
 			RedirectAttributes redirectAttributes) throws Exception {
 		
 		HttpSession hs = request.getSession();

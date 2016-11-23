@@ -79,10 +79,10 @@
 							<!-- End Orderlist Info -->
 							<!-- Member Wishlist Info -->
 							<li class="">
-								<a href="wish.do" data-toggle="" data-parent=""><spring:message code="memberInfoModifyMain.memberwishlisthead"/></a>
+								<a href="wishlist.do" data-toggle="" data-parent=""><spring:message code="memberInfoModifyMain.memberwishlisthead"/></a>
 								<ul id="" class="">
 									<li class="">
-										<a href="wish.do"><spring:message code="memberInfoModifyMain.btMemberWishlistInfo"/></a>
+										<a href="wishlist.do"><spring:message code="memberInfoModifyMain.btMemberWishlistInfo"/></a>
 									</li>
 								</ul>
 							</li>

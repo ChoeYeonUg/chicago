@@ -30,22 +30,41 @@ public class WishlistController {
 	private WishlistService ws;
 	
 	@RequestMapping("memberWishList")
-	public String wishlistForm(Model model, String book_code, HttpServletRequest request) throws Exception {
+	public String memberWishList(Model model, String book_code, HttpServletRequest request) throws Exception {
+		
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
 		try {
-			model.addAttribute("jsp", "member.jsp");
-			model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 			
 			HttpSession hs = request.getSession();
 			String sessionid = (String)hs.getAttribute("id");
 			
-			Map map = new HashMap();
-			map.put("id", sessionid);
-			map.put("book_code", book_code);
+			List<String> list = (List<String>)hs.getAttribute("wishlist");
 			
-			List<WishlistVO> list = ws.inputMemberWishlist(map);
+			if(book_code != null && !book_code.equals("")) {
+				
+				if(list == null) {
 					
-			model.addAttribute("list", list);
+					Map map = new HashMap();
+					map.put("id", sessionid);
+					map.put("book_code", book_code);
+					
+					list = (List<String>)ws.inputMemberWishlist(map);
+					
+				} else {
+					
+					list.add(sessionid);
+					list.add(book_code);
+					
+					HashSet temp = new HashSet(list);
+					list = new ArrayList<String>(temp);
+					
+				}
+				
+				hs.setAttribute("wishlist", list);
+				
+			}
 			
 		} catch (Exception ex) {
 			
@@ -53,33 +72,33 @@ public class WishlistController {
 			
 		}
 		
-		return "main/main";
+		String str = request.getHeader("referer");
+		System.out.println(str+"****************************************");
+		return "redirect:"+str.substring(str.lastIndexOf("/")+1);
 		
 	}
 	
 	/* Member Wishlist Include */
-	@RequestMapping("wish.do")
-	public String memberWishlist_page(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping("wishlist")
+	public String memberWishlist_page(Model model,String book_code, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
 		HttpSession hs = request.getSession();
-		String sessionid = (String)hs.getAttribute("id");
-		
-			List<String> list = (List<String>) hs.getAttribute("wishList");
+		List<String> list = (List<String>) hs.getAttribute("wishlist");
 			
-			List<WishlistVO> wishList = null;
-			try {
-				if(list != null){
+		List<WishlistVO> mwishList = null;
+		try {
+			if(list != null){
 					
-					wishList = ws.memberWishlist(list, request);
+				mwishList = ws.memberWishlist(list);
 					
-				}
+			}
 				
-				model.addAttribute("wishList", wishList);
-				model.addAttribute("cmi", "MemberWishform.jsp");
-				model.addAttribute("cmi", "../member/memberwishlist/MemberWishList.jsp");
+			model.addAttribute("mwishList", mwishList);
+			model.addAttribute("cmi", "MemberWishform.jsp");
+			model.addAttribute("cmi", "../member/memberwishlist/MemberWishList.jsp");
 				
 			} catch (Exception ex) {
 				
