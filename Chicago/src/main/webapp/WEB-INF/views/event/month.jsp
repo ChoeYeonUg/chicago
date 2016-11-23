@@ -316,7 +316,8 @@ while(newLine > 0 && newLine < 7)
        <c:if test="${iUseDate } == ${intToday }">  
              backColor = "#c9c9c9";
        </c:if> --%>
-       <TD valign='top' align='left' height='92px' bgcolor="${color }"  nowrap >  
+      <%--  <TD valign='top' align='left' height='92px' bgcolor="${color }"  nowrap > --%>
+        <TD valign='top' align='left' height='92px' "  nowrap >
        <font color='${color }'>
              ${index }
        </font>  
