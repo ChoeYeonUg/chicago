@@ -40,11 +40,17 @@
                 </div>
                  -->
                  
-		<div id="logo" class="fl_left">
+	<!-- 	<div id="logo" class="fl_left">
 			<h1><a class="navbar-hou" href="index.html"><span class="main-hou">C</span>hicago</a></h1>
 		</div>
-                 
-                <nav id="mainav" class="fl_right">
+                  -->
+       <br/>           
+       <div style="text-align:center">
+        	<a class="navbar-hou" href="index.html">
+        		<img alt="#" src="images\chicagologo2.png" style="width: 40%; height:auto;">
+        	</a>
+        </div>
+                <nav id="mainav" > <!--  class="fl_right" -->
        				 <ul class="clear">
           				<li><a href="store.do"><spring:message code="header.menu"/></a></li>
           				<li><a href="book.do"><spring:message code="header.book"/></a>
@@ -168,6 +174,7 @@
             </div>
         </div>
         --%>
+
 	</header>
 	
 

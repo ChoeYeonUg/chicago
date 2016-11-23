@@ -115,7 +115,7 @@ function send(){
 			</div>
 			<div class="OrderlistSettingForm">
 				<div class="MemberOrderlistHeadlineForm">
-					<label class="MemberInfoHeadline"><%=request.getParameter("id") %>님의 찜 내역</label>
+					<label class="MemberInfoHeadline">${id }님의 찜 내역</label>
 				</div>
 				<div class="MemberOrderlistContentForm">
 					<div id="InnerBox">

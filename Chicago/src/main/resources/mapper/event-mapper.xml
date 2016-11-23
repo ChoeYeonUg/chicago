@@ -25,7 +25,7 @@
 	<!-- 관리자 메뉴 -->
   		
   		<insert id="eventInsert" parameterType="event">
-  			INSERT INTO event VALUES(?!?!?!?, #{writer_name}, #{store_name},#{start_day},#{end_day},#{description})
+  			INSERT INTO event VALUES((SELECT NVL(MAX(event_no)+1,1) FROM event), #{store_name}, #{start_day},#{end_day}, #{event_name}, #{description})
   		</insert>
   		
   		<update id="updateEventData" parameterType="event">

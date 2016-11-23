@@ -56,7 +56,7 @@
 	function popupOpen(book_code){
 		
 		var popUrl="bookReviewContent.do?book_code="+book_code;
-		var popOption="width=420, height=400, resizable=no scrollbars=no status=no;";
+		var popOption="width=500, height=430, resizable=no scrollbars=no status=no;";
 		window.open(popUrl,"",popOption);
 	}
 

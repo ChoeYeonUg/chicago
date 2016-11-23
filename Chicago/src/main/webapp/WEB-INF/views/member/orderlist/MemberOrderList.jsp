@@ -75,7 +75,7 @@
 														<div class="row">
 															<span class="cell col1">${vo.order_id}</span>
 															<span class="cell col2">
-																<c:forEach items="${vo.bList}" var="book" begin="0" end="1" step="1">
+																<c:forEach items="${vo.bList}" var="book" begin="0" end="0" step="1">
 																	<div class="bookName">
 																		<c:if test="${book.book_name.length() > 30 }">
 																		
