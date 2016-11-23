@@ -30,6 +30,7 @@
 
 <script type="text/javascript">
 function send(){
+	
 	var f=document.frm;
 		
 	if(f.USER_Check_PWD.value==""){

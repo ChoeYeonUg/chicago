@@ -31,7 +31,7 @@ public class LoginAspect {
 	@Pointcut("execution(* com.sist.di.Sysop*Controller.*(..))")
 	private void admin(){}
 	
-	@Pointcut("execution(* com.sist.di.MemberController.*(..)) || execution(* com.sist.di.PurchaseController.*(..))")
+	@Pointcut("execution(* com.sist.di.MemberController.*(..)) || execution(* com.sist.di.PurchaseController.*(..))|| execution(* com.sist.di.*listController.*(..))")
 	private void mypage(){}
 	
 	@Around(value="test()")

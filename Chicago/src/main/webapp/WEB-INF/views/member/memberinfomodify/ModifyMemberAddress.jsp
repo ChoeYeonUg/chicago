@@ -32,6 +32,7 @@
 
 <script type="text/javascript">
 function send(){
+	
 	var f=document.frm;
 		
 	if(f.zipcode1.value==""){
@@ -243,9 +244,9 @@ function sample6_execDaumPostcode3() {
 											<label for="USER_CADDRESS1">주 배송주소</label>
 										</dt>
 										<dd>
-											${zipcode1}
+											${avo.zipcode1}
 											&nbsp;
-											${addr1}
+											${avo.addr1}
 										</dd>
 										<dt>
 											<label for="USER_ADDRESS1">주 배송주소 수정</label>
@@ -263,9 +264,9 @@ function sample6_execDaumPostcode3() {
 											<label for="USER_CADDRESS2">주 배송주소1</label>
 										</dt>
 										<dd>
-											${zipcode2}
+											${avo.zipcode2}
 											&nbsp;
-											${addr2}
+											${avo.addr2}
 										</dd>
 										<dt>
 											<label for="USER_ADDRESS2">보조 배송 주소1</label>
@@ -280,12 +281,12 @@ function sample6_execDaumPostcode3() {
 										</dd>
 										
 										<dt>
-											<label for="USER_CADDRESS3">주 배송주소</label>
+											<label for="USER_CADDRESS3">주 배송주소2</label>
 										</dt>
 										<dd>
-											${zipcode2}
+											${avo.zipcode3}
 											&nbsp;
-											${addr12}
+											${avo.addr3}
 										</dd>
 										<dt>
 											<label for="USER_ADDRESS3">보조 배송 주소2</label>

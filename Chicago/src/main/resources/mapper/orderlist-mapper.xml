@@ -8,16 +8,59 @@
   	<!-- memberInfo Database Query -->
 	
 	<!-- Check order_id for Orderlist list -->
-    <sql id="check-order_id">
-		orders.id=#{id}
+    <sql id="check-id">
+		id=#{id}
 	</sql>
 	
-	
 	<!-- Select Member Orderlist -->
-	<select id="selectOrderlist" resultType="OrderlistVO" parameterType="hashmap">
-  		SELECT orders.order_id,orders.id,order_book.book_code,goods.book_name,order_book.amount,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.refund_state
-  			   FROM orders,goods,order_book
-			   WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND <include refid="check-order_id"/>
+	<select id="selectOrderlist" parameterType="hashmap" resultType="orderlist" resultMap="orderlistMap">
+		SELECT order_id,id,name,book_code,book_name,img,amount,total_price,payment,order_date,account_info,delivery,refund_state,memo,num
+				FROM (SELECT order_id,id,name,book_code,book_name,img,amount,total_price,payment,order_date,account_info,delivery,refund_state,memo,ROWNUM AS num
+				FROM (SELECT orders.order_id,orders.id,orders.name,order_book.book_code,goods.book_name,goods.img,order_book.amount,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.delivery,orders.refund_state,orders.memo
+				FROM orders,order_book,goods WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND <include refid="check-id"/> ORDER BY orders.order_date DESC)) WHERE num BETWEEN #{start} AND #{end}
+  	</select>
+  	
+  	<resultMap type="orderlist" id="orderlistMap">
+  			<result property="order_id" column="order_id"/>
+  			<result property="total_price" column="total_price"/>
+  			<result property="order_date" column="order_date"/>
+  			<result property="delivery" column="delivery"/>
+  			<result property="refund_state" column="refund_state"/>
+  			<collection property="bList" column="order_id" ofType="book" javaType="ArrayList" resultMap="bookMap"/>
+  	</resultMap>
+  	
+  	<resultMap type="book" id="bookMap">
+  			<result property="book_code" column="book_code"/>
+  			<result property="book_name" column="book_name"/>
+  			<result property="amount" column="amount"/>
+  			<result property="price" column="price"/>
+  			<result property="img" column="img"/>
+  	</resultMap>
+  	
+	<!-- View Member Orderlist for PageSite -->
+	<select id="selectOrderlistTotalPage" parameterType="hashmap" resultType="int">
+		SELECT CEIL(COUNT(*)/#{rowSize}) FROM orders,order_book,goods WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND <include refid="check-id"/>
+  	</select>
+  	
+  	
+  	<!-- Search Member Orderlist -->
+ 	<select id="searchOrderlist" parameterType="hashmap" resultType="orderlistVO" resultMap="orderlistMap">
+		SELECT order_id,id,book_code,book_name,img,amount,total_price,payment,order_date,account_info,delivery,refund_state,memo,num
+				FROM (SELECT order_id,id,book_code,book_name,img,amount,total_price,payment,order_date,account_info,delivery,refund_state,memo,ROWNUM AS num
+				FROM (SELECT orders.order_id,orders.id,order_book.book_code,goods.book_name,goods.img,order_book.amount,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.delivery,orders.refund_state,orders.memo
+				FROM orders,order_book,goods WHERE order_book.book_code=goods.book_code AND <include refid="check-id"/> AND orders.order_id=order_book.order_id AND orders.order_id LIKE '%${ss}%' ORDER BY orders.order_id DESC)) WHERE num BETWEEN #{start} AND #{end}
+ 	</select>
+  	
+	<!-- View Search Member Orderlist for PageSite -->
+ 	<select id="searchOrderlistTotalPage" parameterType="hashmap" resultType="int">
+ 		SELECT CEIL(COUNT(*)/#{rowSize}) FROM orders,order_book,goods WHERE order_book.book_code=goods.book_code AND <include refid="check-id"/> AND orders.order_id=order_book.order_id AND orders.order_id LIKE '%${ss}%' ORDER BY orders.order_id DESC
+  	</select>
+  	
+  	<!-- Select Member Orderlist Detail -->
+  	<select id="memberOrderlistDetail" parameterType="hashmap" resultType="orderlist" resultMap="orderlistMap">
+  		SELECT orders.order_id,orders.id,order_book.book_code,goods.book_name,order_book.amount,goods.price,goods.img,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.delivery,orders.refund_state
+				FROM orders,order_book,goods WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND orders.id=#{id} AND orders.order_id=${order_id}
   	</select>
  	
 </mapper>
+
