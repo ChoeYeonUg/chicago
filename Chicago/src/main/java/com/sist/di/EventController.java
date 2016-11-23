@@ -119,22 +119,22 @@ public class EventController {
 		
 		Calendar cal = Calendar.getInstance();
 		 
-	/*	String strYear = req.getParameter("year");
+		String strYear = req.getParameter("year");
 		String strMonth = req.getParameter("month");
-	*/	 
+		 
 		int year = cal.get(Calendar.YEAR);
 		int month = cal.get(Calendar.MONTH);
 		int date = cal.get(Calendar.DATE);
 //		int startD = cal.get(java.util.Calendar.DAY_OF_WEEK);
 //		String sUseDate = Integer.toString(year); 
-		/*if(strYear != null)
+		if(strYear != null)
 		{
 		  year = Integer.parseInt(strYear);
 		  month = Integer.parseInt(strMonth);
 		 
 		}else{
 		 
-		}*/
+		}
 		//년도/월 셋팅
 	//	cal.set(year, month, 1);
 		 
@@ -143,7 +143,7 @@ public class EventController {
 		int startD = cal.get(java.util.Calendar.DAY_OF_WEEK);
 		int newLine = 0;
 		String sUseDate = Integer.toString(year);
-		 
+		
 		//오늘 날짜 저장.
 		Calendar todayCal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyMMdd");
@@ -208,7 +208,7 @@ public class EventController {
 	
 	
 	@RequestMapping("event_week")
-	public String event_week(Model model, String page) throws ParseException{
+	public String event_week(Model model, String page,HttpServletRequest req) throws ParseException{
 		if(page == null) {
 			page = "1";
 		}
@@ -247,6 +247,21 @@ public class EventController {
 		map.put("day",date);
 		
 		List<EventVO> eventSchedule = es.schedule(map);
+		
+		String strYear = req.getParameter("year");
+		String strMonth = req.getParameter("month");
+		 
+//		int startD = cal.get(java.util.Calendar.DAY_OF_WEEK);
+//		String sUseDate = Integer.toString(year); 
+		if(strYear != null)
+		{
+		  year = Integer.parseInt(strYear);
+		  month = Integer.parseInt(strMonth);
+		 
+		}else{
+		 
+		}
+		
 		
 		
 	/*	cal.set(Calendar.YEAR, Integer.parseInt(year));

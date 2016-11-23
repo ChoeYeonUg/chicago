@@ -243,9 +243,6 @@ for(int index = 1; index <= endDay; index++)
              <%=index %>
        </font>
  
-       <a href="<c:url value='/event_month.do' />?year=<%=year%>&amp;month=<%=month+1%>target="_self">
-                           <!-- 다음달 --><b>&gt;</b>
-                    </a>
        
        <%
       
@@ -275,10 +272,14 @@ while(newLine > 0 && newLine < 7)
   newLine++;
 }
 %> --%>
+<%-- <c:set var="newLine">0</c:set> --%>
 <c:forEach begin="1" end="${startD-1}" step="1">
-  <TD >&nbsp</TD>
-  ${newLine+1}
+  <TD >&nbsp;</TD>
+	<h1>${newLine}</h1>
+  <c:set var="newLine" value="${newLine+1}" />
 </c:forEach> 
+
+<c:set var="color" value="${color}"/>
 <c:forEach begin="1" end="${endDay}" step="1" var="index">
 	<%
 		String color ="";
@@ -286,13 +287,16 @@ while(newLine > 0 && newLine < 7)
 	%>
 	<c:choose>
 		<c:when test="${newLine==0}">
-			color = "RED";
+		<!-- 	color = "RED"; -->
+		<c:set var="color" value="red"/>
 		</c:when>
 		<c:when test="${newLine==6}">
-			color = "#529dbc";
+			<!-- color = "#529dbc"; -->
+			<c:set var="color" value="#529dbc"/>
 		</c:when>
 		<c:otherwise>
-			color = "BLACK";
+			<!-- color = "BLACK"; -->
+			<c:set var="color" value="BLACK"/>
 		</c:otherwise>
 	</c:choose>
 
@@ -307,35 +311,39 @@ while(newLine > 0 && newLine < 7)
    //	   String iUseDate =  ;
        -->
        <!-- String backColor = "#EFEFEF"; -->
-       <%-- <c:if test="${iUseDate } == ${intToday }">  
-           <!--   backColor = "#c9c9c9"; -->
+       <c:set var="iUseDate" value="${iuseDate}"/>
+       <%-- <c:set var="backColor" value="${backColor}">"#EFEFEF"</c:set>
+       <c:if test="${iUseDate } == ${intToday }">  
+             backColor = "#c9c9c9";
        </c:if> --%>
-       <TD valign='top' align='left' height='92px' nowrap>  
-       <%-- <font color='${color }'>
+       <TD valign='top' align='left' height='92px' bgcolor="${color }"  nowrap >  
+       <font color='${color }'>
              ${index }
        </font>  
-       <BR>
-       <c:out value="${iUseDate }">
-       <BR>
-  --%>     
+       <%-- <BR>
+       <c:out value="${iUseDate }"/>
+       <BR> --%>
+      
       
        </TD>
-       ${newLine+=1}
- 
+      <%--  ${newLine+=1}--%> 		
+      <c:set var="newLine" value="${newLine + 1}" />
        <c:if test="${newLine == 7 }">
        	</TR>
          <c:if test="${index <= endDay}">
          	<TR>
          </c:if>
-         ${newLine }=0;
+         <%-- ${newLine }=0; --%>
+         <c:set var="newLine" value="${newLine=0}"/>
        </c:if>
-       ${ index=index+1}
+       <c:set var="index" value="${index + 1}" />
 </c:forEach>
 	
 	<c:forEach begin="1" end="6" var="abc">
 		<c:if test="${newLine == abc}">		
 			<TD>&nbsp;</TD>
-			${newLine+=1 }
+			<%-- ${newLine+=1 } --%>
+			<c:set var="newLine" value="${newLine + 1}"/>
 		</c:if>
 	</c:forEach>
 
