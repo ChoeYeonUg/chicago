@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -7,85 +7,117 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="book_css/bookMain.css"/>
+<style type="text/css">
+	.button {
+		background-color: white;
+		color: black;
+		border: 2px solid #505050;
+		font-size: 11px;
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function(){
+		
+		$('#book_code').keyup(function(){
+			var codeVal = $('#book_code').val();
+			var params = "book_code=" + codeVal;
+			/* console.log($('form').serialize()); */
+			/* console.log(params); */
+			if(codeVal.length > 12) {
+				$.ajax ({
+					url : "code_check.do",
+					type : "post",
+					data : params, 
+					dataType : 'text',
+					success : function(data) {
+						/* alert(data); */
+						if(data == "true") {
+							$('#codeResult').html("ì‚¬ìš©ê°€ëŠ¥í•œ ISBN ì…ë‹ˆë‹¤.");
+							$('#check').attr('value', 'Y');
+						} else {
+							$('#codeResult').html("ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ISBN ì…ë‹ˆë‹¤.");
+							$('#check').attr('value','N');
+						}
+					},
+					error : function(error) {
+						alert(error.statusText);
+					}
+				});
+				return false;
+			} else {
+				$('#codeResult').html("");
+				$('#check').attr('value','N');
+			}
+		});
+		
 		$('#sendBtn').click(function(){
-			var book_code = $('#book_code').val();
-			if(book_code.trim()=="") {
+			
+			var f = document.form;
+			
+			var codeVal = $('#book_code').val();
+			if(codeVal.trim()=='' || $('#check').val()=="N" || codeVal.length < 13) {
+				alert('ISBN(ë„ì„œì½”ë“œ)ë¥¼ í™•ì¸í•˜ì„¸ìš”.');
 				$('#book_code').focus();
-				alert('ISBN(µµ¼­ÄÚµå)¸¦ ÀÔ·ÂÇÏ¼¼¿ä.');
 				return;
 			}
+			
 			var book_name = $('#book_name').val();
 			if(book_name.trim()=="") {
+				alert('ì œëª©ì„ ì…ë ¥í•˜ì„¸ìš”.');
 				$('#book_name').focus();
-				alert('Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä.');
 				return;
 			}
-			
-			var cate = $('#book_category').length;
-			if(!cate && $('#book_category').checked) {
-				return $('#book_category').length;
-			}
-			for(var i = 0 , v = $('#book_category').length; i < v ; i++ ) {
-				if($('#book_category')[i].checked) {
-					return $('#book_category')[i].value;
-				}
-			}
-			
+		
 			var writer = $('#writer').val();
 			if(writer.trim()=="") {
+				alert('ì‘ê°€ë¥¼ ì…ë ¥í•˜ì„¸ìš”.');
 				$('#writer').focus();
-				alert('ÀÛ°¡¸¦ ÀÔ·ÂÇÏ¼¼¿ä.');
 				return;
 			}
 			var publisher = $('#publisher').val();
 			if(publisher.trim()=="") {
+				alert('ì¶œíŒì‚¬ë¥¼ ì…ë ¥í•˜ì„¸ìš”.');
 				$('#publisher').focus();
-				alert('ÃâÆÇ»ç¸¦ ÀÔ·ÂÇÏ¼¼¿ä.');
 				return;
 			}
 			var publication = $('#publication').val();
 			if(publication.trim()=="") {
+				alert('ì¶œíŒì¼ì„ ì…ë ¥í•˜ì„¸ìš”.');
 				$('#publication').focus();
-				alert('ÃâÆÇÀÏÀ» ÀÔ·ÂÇÏ¼¼¿ä.');
 				return;
 			}
 			var amount = $('#amount').val();
 			if(amount.trim()=="") {
+				alert('ìˆ˜ëŸ‰ì„ ì…ë ¥í•˜ì„¸ìš”.');
 				$('#amount').focus();
-				alert('¼ö·®À» ÀÔ·ÂÇÏ¼¼¿ä.');
 				return;
 			}
-			var out_of_print = $('#out_of_print').val();
-			if(out_of_print.trim()=="") {
-				$('#out_of_print').focus();
-				alert('ÀıÆÇ¿©ºÎ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.');
-				return;
-			}
+					
 			var pages = $('#pages').val();
 			if(pages.trim()=="") {
+				alert('í˜ì´ì§€ìˆ˜ë¥¼ ì…ë ¥í•˜ì„¸ìš”.');
 				$('#pages').focus();
-				alert('ÆäÀÌÁö¼ö¸¦ ÀÔ·ÂÇÏ¼¼¿ä.');
 				return;
 			}
 			var price = $('#price').val();
 			if(price.trim()=="") {
+				alert('ê°€ê²©ì„ ì…ë ¥í•˜ì„¸ìš”.');
 				$('#price').focus();
-				alert('°¡°İÀ» ÀÔ·ÂÇÏ¼¼¿ä.');
 				return;
 			}
 			var book_content = $('#book_content').val();
 			if(book_content.trim()=="") {
+				alert('ì±… ì†Œê°œë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”.');
 				$('#book_content').focus();
-				alert('Ã¥ ¼Ò°³³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä.');
 				return;
 			}
-			$('#form').submit();
-		})
+		/* 	alert(1234); */
+			f.submit();
+		});
 	});
 </script>
 </head>
@@ -94,58 +126,79 @@
 		<div class="container background-white">
 			<div class="row margin-vert-40">
 				<!-- <form action="book_mngInsertOk.do" method="post" id="form" name="form"> -->
-				<form:form commandName="vo" action="book_mngInsertOk.do" method="post" id="form" name="form">
+				<form:form commandName="vo" action="book_mngInsertOk.do" method="post" id="form" name="form" acceptCharset="UTF-8" enctype="multipart/form-data">
 					<table>
 						<tr>
 							<td width="10%" style="font-size:11px; color:#505050;">ISBN</td>
-							<td colspan="3"><input type="text" size="20" name="book_code" id="book_code" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
-						</tr>
-						<tr>
-							<td width="10%"  style="font-size:11px; color:#505050;">Á¦¸ñ</td>
-							<td colspan="3"><input type="text" size="50" name="book_name" id="book_name" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
-						</tr>
-						<tr>
-							<td width="10%" style="font-size:11px; color:#505050;">Ä«Å×°í¸®</td>
-							<td width="40%"  style="font-size:11px; color:#505050;">
-								<div style="line-height: 11px; vertical-align: bottom;">
-								<input type="radio" value="1" name="book_category" id="book_category1" checked="checked"/><spring:message code="book.cate1"/>
-								&nbsp;<input type="radio" value="2" name="book_category" id="book_category2"/><spring:message code="book.cate2"/>
-								&nbsp;<input type="radio" value="3" name="book_category" id="book_category3"/><spring:message code="book.cate3"/>
-								&nbsp;<input type="radio" value="4" name="book_category" id="book_category4"/><spring:message code="book.cate4"/>
-								<!-- &nbsp;&nbsp;&nbsp;<input type="button" value="¼±ÅÃ" onclick="sch_value_cate"/> -->
-								</div>							
+							<td colspan="3">
+								<input type="text" size="20" name="book_code" id="book_code" style="border-top:0px; border-right:0px; border-left: 0px; border-bottom:#00000 1px solid;"/>
+								<span id="codeResult"></span><form:errors path="book_code"/>
+								<input type="hidden" id="check" value="Y" disabled="disabled"/>
+								<!-- <input type="text" size="20" name="book_code" id="book_code"/> -->
 							</td>
-							<td width="10%"  style="font-size:11px; color:#505050;">ÀúÀÚ</td>
-							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" name="writer" id="writer" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
 						</tr>
 						<tr>
-							<td width="10%"  style="font-size:11px; color:#505050;">ÃâÆÇ»ç</td>
-							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" name="publisher" id="publisher" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
-							<td width="10%"  style="font-size:11px; color:#505050;">ÃâÆÇÀÏ</td>
-							<td width="40%"  style="font-size:11px; color:#505050;"><!-- <input type="text" size="20" name="publication" id="publication" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/> --></td>
+							<td width="10%"  style="font-size:11px; color:#505050;">ì œëª©</td>
+							<td colspan="3">
+								<input type="text" size="50" name="book_name" id="book_name" style="border-top:0px; border-right:0px; border-left: 0px; border-bottom:#00000 1px solid;"/>
+							</td>
 						</tr>
 						<tr>
-							<td width="10%"  style="font-size:11px; color:#505050;">¼ö·®</td>
-							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" name="amount" id="amount" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
-							<td width="10%"  style="font-size:11px; color:#505050;">ÀıÆÇ»óÅÂ</td>
-							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" name="out_of_print" id="out_of_print" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
+							<td width="10%"  style="font-size:11px; color:#505050;">ì €ì</td>
+							<td width="40%"  style="font-size:11px; color:#505050;">
+								<input type="text" size="20" name="writer" id="writer"  style="border-top:0px; border-right:0px; border-left: 0px; border-bottom:#00000 1px solid;"/>
+							</td>
+							<td width="10%"  style="font-size:11px; color:#505050;">ì¹´í…Œê³ ë¦¬</td>
+							<td width="40%"  style="font-size:11px; color:#505050;">
+								<input type="radio" value="1" name="book_category" id="book_category" checked="checked"/><spring:message code="book.cate1"/>
+								<input type="radio" value="2" name="book_category" id="book_category"/><spring:message code="book.cate2"/>
+								<input type="radio" value="3" name="book_category" id="book_category"/><spring:message code="book.cate3"/>
+								<input type="radio" value="4" name="book_category" id="book_category"/><spring:message code="book.cate4"/>
+							</td>
 						</tr>
 						<tr>
-							<td width="10%"  style="font-size:11px; color:#505050;">ÆäÀÌÁö</td>
-							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" name="pages" id="pages" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
-							<td width="10%"  style="font-size:11px; color:#505050;">°¡°İ</td>
-							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" name="price" id="price" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
+							<td width="10%"  style="font-size:11px; color:#505050;">ì¶œíŒì‚¬</td>
+							<td width="40%"  style="font-size:11px; color:#505050;">
+								<input type="text" size="20" name="publisher" id="publisher"  style="border-top:0px; border-right:0px; border-left: 0px; border-bottom:#00000 1px solid;"/>
+							</td>
+							<td width="10%"  style="font-size:11px; color:#505050;">ì¶œíŒì¼</td>
+							<td width="40%"  style="font-size:11px; color:#505050;">
+								<input type="text" size="40" name="publication" id="publication" placeholder="2016/11/23 í˜•ì‹ìœ¼ë¡œ ì‘ì„±í•˜ì„¸ìš”."  style="border-top:0px; border-right:0px; border-left: 0px; border-bottom:#00000 1px solid;"/>
+							</td>
 						</tr>
 						<tr>
-							<td width="10%"  style="font-size:11px; color:#505050;">Ã¥¼Ò°³</td>
-							<td colspan="3"><textarea cols="130" rows="3" name="book_content" id="book_content"></textarea></td>
+							<td width="10%"  style="font-size:11px; color:#505050;">ìˆ˜ëŸ‰</td>
+							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" name="amount" id="amount" style="border-top:0px; border-right:0px; border-left: 0px; border-bottom:#00000 1px solid;"/></td>
+							<td width="10%"  style="font-size:11px; color:#505050;">ì ˆíŒìƒíƒœ</td>
+							<td width="40%"  style="font-size:11px; color:#505050;">
+								<input type="radio" value="0" name="out_of_print" id="out_of_print" />&nbsp;ì ˆíŒ&nbsp;&nbsp;
+								<input type="radio" value="1" name="out_of_print" id="out_of_print" checked="checked"/>&nbsp;ì¶œê°„
+							</td>
 						</tr>
+						<tr>
+							<td width="10%"  style="font-size:11px; color:#505050;">í˜ì´ì§€</td>
+							<td width="40%"  style="font-size:11px; color:#505050;">
+								<input type="text" size="20" name="pages" id="pages"  style="border-top:0px; border-right:0px; border-left: 0px; border-bottom:#00000 1px solid;"/>
+							</td>
+							<td width="10%"  style="font-size:11px; color:#505050;">ê°€ê²©</td>
+							<td width="40%"  style="font-size:11px; color:#505050;">
+								<input type="text" size="20" name="price" id="price" style="border-top:0px; border-right:0px; border-left: 0px; border-bottom:#00000 1px solid;"/>
+							</td>
+						</tr>
+						<tr>
+							<td width="10%" style="font-size:11px; color:#505050;">ì´ë¯¸ì§€</td>
+							<td colspan="3" style="font-size:11px; color:#505050;"><input type="file" size="20" name="upload" id="upload"/></td>
+						</tr>
+						<tr>
+							<td width="10%"  style="font-size:11px; color:#505050;">ì±…ì†Œê°œ</td>
+							<td colspan="3" style="font-size:11px; color:#505050;"><textarea cols="130" rows="3" name="book_content" id="book_content"  style="border-top:0px; border-right:0px; border-left: 0px; border-bottom:#00000 1px solid;"></textarea></td>
+						</tr> 
 					</table>
 					<table>
 						<tr>
 							<td align="right">
-								<input type="button" value="µî·Ï" id="sendBtn"/>
-								<input type="button" value="Ãë¼Ò" onclick="javascript:history.back()"/>
+								<input type="button" value="ë“±ë¡" id="sendBtn" class="button"/>
+								<input type="button" value="ì·¨ì†Œ" onclick="javascript:history.back()" class="button"/>
 							</td>
 						</tr>
 					</table>

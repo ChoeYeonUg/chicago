@@ -50,7 +50,6 @@
 									<c:if test="${vo.img != null && fn:indexOf(vo.img,'http://') != -1 }">
 										<img src="${vo.img }" class="bd" alt="${vo.writer_name }">
 									</c:if>
-									
 								</a>
 							</div>
 							<dl>

@@ -102,8 +102,8 @@ public class LoginAspect {
 	        }
 	        try{
 	            HttpSession session = request.getSession();
-	 
 	                String loginId = (String) session.getAttribute("id");
+		            
 	                if (loginId == null || "".equals(loginId)) {
 	                	if(response != null) response.sendRedirect("login.do");
 	                    //throw new RuntimeException("앙대요.");
