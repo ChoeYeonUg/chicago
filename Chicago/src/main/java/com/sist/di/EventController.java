@@ -136,7 +136,7 @@ public class EventController {
 		 
 		}
 		//년도/월 셋팅
-	//	cal.set(year, month, 1);
+		cal.set(year, month, 1);
 		 
 		int startDay = cal.getMinimum(java.util.Calendar.DATE);
 		int endDay = cal.getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
