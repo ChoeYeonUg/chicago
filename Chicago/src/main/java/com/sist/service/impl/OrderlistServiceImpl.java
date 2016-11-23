@@ -17,18 +17,13 @@ public class OrderlistServiceImpl implements OrderlistService{
 	private OrderlistMapper mapper;
 	
 	@Override
-	public int selectOrderlistTotalPage(Map map) throws Exception {
-		return mapper.selectOrderlistTotalPage(map);
-	}
-	
-	@Override
 	public List<OrderlistVO> selectOrderlist(Map map) throws Exception {
 		return mapper.selectOrderlist(map);
 	}
 	
 	@Override
-	public int searchOrderlistTotalPage(Map	map) throws Exception {
-		return mapper.searchOrderlistTotalPage(map);
+	public int selectOrderlistTotalPage(Map map) throws Exception {
+		return mapper.selectOrderlistTotalPage(map);
 	}
 	
 	@Override
@@ -37,8 +32,13 @@ public class OrderlistServiceImpl implements OrderlistService{
 	}
 	
 	@Override
-	public OrderlistVO memberOrderlistDetail(int order_id) throws Exception {
-		return mapper.memberOrderlistDetail(order_id);
+	public int searchOrderlistTotalPage(Map	map) throws Exception {
+		return mapper.searchOrderlistTotalPage(map);
+	}
+	
+	@Override
+	public List<OrderlistVO> memberOrderlistDetail(Map map) throws Exception {
+		return mapper.memberOrderlistDetail(map);
 	}
 
 }

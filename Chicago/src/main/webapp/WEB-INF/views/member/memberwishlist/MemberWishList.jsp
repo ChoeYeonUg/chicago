@@ -125,13 +125,13 @@ function send(){
 								<form action="purchase.do" method="post" name="frm">
 									<div class="info_basket">
 										<p class="desc_total">
-											<em class="emph_total">${sbList.size()}개</em>
+											<em class="emph_total">${wishList.size()}개</em>
 											상품이 찜목록에 있습니다.
 										</p>
 										
 										<ul class="list_basket">
-									<c:if test="${sbList != null }">
-										<c:forEach items="${bookList }" var="item">
+									<c:if test="${wishList != null }">
+										<c:forEach items="${bookList}" var="item">
 											<li class="check_on">
 												<a href="bookDetail.do?book_code=${item.book_code }" class="link_thumb">
 													<img src="${item.img}">

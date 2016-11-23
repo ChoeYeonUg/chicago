@@ -6,10 +6,7 @@ import com.sist.dao.*;
 /* Made By Choding */ 
 public interface WishlistMapper {
 	
-	public WishlistVO memberWishlist(String book_code);
-	
-	//public void insertWishlistColmun(WishlistVO vo);
-	//public void deleteWishlistColumn(WishlistVO vo);
-	
+	public List<WishlistVO> inputMemberWishlist(Map map) throws Exception;
+	public WishlistVO memberWishlist(Map map);
 	
 }

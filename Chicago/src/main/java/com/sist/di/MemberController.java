@@ -7,6 +7,7 @@ import com.sist.service.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -33,7 +34,7 @@ public class MemberController {
 	
 	/* HeadMenu */
 	@RequestMapping("mypage.do")
-	public String member_page(Model model, HttpServletRequest request) throws Exception {
+	public String member_page(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
@@ -47,7 +48,7 @@ public class MemberController {
 	
 	
 	@RequestMapping(value="membersecurepwd_ok.do", method=RequestMethod.POST)
-	public String membersecurepwd_ok(Model model, HttpServletRequest request, String USER_Check_PWD, String typecheck,
+	public String membersecurepwd_ok(Model model, HttpServletRequest request, HttpServletResponse response, String USER_Check_PWD, String typecheck,
 			RedirectAttributes redirectAttributes) throws Exception {
 		
 		HttpSession hs = request.getSession();
@@ -88,7 +89,7 @@ public class MemberController {
 	
 	/* Member Info HeadMenu */
 	@RequestMapping("memberinfo.do")
-	public String member_info_page(Model model, HttpServletRequest request) throws Exception {
+	public String member_info_page(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
@@ -103,7 +104,7 @@ public class MemberController {
 	
 	/* Member Info SideMenu Include */
 	@RequestMapping("modifyMemberInfo.do")
-	public String member_side_info_page(Model model, HttpServletRequest request, String typecheck) throws Exception {
+	public String member_side_info_page(Model model, HttpServletRequest request, HttpServletResponse response, String typecheck) throws Exception {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
@@ -133,7 +134,7 @@ public class MemberController {
 	
 	
 	@RequestMapping(value="modyfyMemberInfo_ok.do", method=RequestMethod.POST)
-	public String modyfyMemberInfo_ok(Model model, MemberVO vo, HttpServletRequest request, int zipcode, String addr, String email, String phone, String name, int gender) throws Exception {
+	public String modyfyMemberInfo_ok(Model model, MemberVO vo, HttpServletRequest request, HttpServletResponse response, int zipcode, String addr, String email, String phone, String name, int gender) throws Exception {
 		
 		logger.info(vo.getId() + " : " + vo.getPwd());
 		
@@ -172,7 +173,7 @@ public class MemberController {
 	
 	
 	@RequestMapping("modyfyMemberPwd.do")
-	public String member_side_pwd_page(Model model, HttpServletRequest request) throws Exception {
+	public String member_side_pwd_page(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
@@ -186,7 +187,7 @@ public class MemberController {
 	
 	
 	@RequestMapping(value="modyfyMemberPwd_ok.do", method=RequestMethod.POST)
-	public String modyfyMemberPwd_ok(Model model, MemberVO vo, HttpServletRequest request,String USER_NewPWD, String USER_C_NewPWD) throws Exception {
+	public String modyfyMemberPwd_ok(Model model, MemberVO vo, HttpServletRequest request, HttpServletResponse response,String USER_NewPWD, String USER_C_NewPWD) throws Exception {
 		
 		logger.info(vo.getId() + " : " + vo.getPwd());
 		
@@ -226,7 +227,7 @@ public class MemberController {
 	
 	
 	@RequestMapping("memberPoint.do")
-	public String member_side_point_page(Model model, MemberVO vo, HttpServletRequest request, String gradename) throws Exception {
+	public String member_side_point_page(Model model, MemberVO vo, HttpServletRequest request, HttpServletResponse response, String gradename) throws Exception {
 		
 		HttpSession hs = request.getSession();
 		String sessionid = (String) hs.getAttribute("id");
@@ -259,7 +260,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("memberAddrsInfo.do")
-	public String memberAddrsInfo_page(Model model, HttpServletRequest request, String typecheck) throws Exception {
+	public String memberAddrsInfo_page(Model model, HttpServletRequest request, HttpServletResponse response, String typecheck) throws Exception {
 		
 		
 		model.addAttribute("jsp", "member.jsp");
@@ -287,7 +288,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="modyfyMemberAddrs_ok.do", method=RequestMethod.POST)
-	public String modyfyMemberAddrs_ok(Model model, AddressVO avo, HttpServletRequest request, String id, int zipcode1, String addr1, int zipcode2, String addr2,int zipcode3, String addr3) throws Exception {
+	public String modyfyMemberAddrs_ok(Model model, AddressVO avo, HttpServletRequest request, HttpServletResponse response, String id, int zipcode1, String addr1, int zipcode2, String addr2,int zipcode3, String addr3) throws Exception {
 		
 		logger.info(avo.getId());
 		
@@ -340,7 +341,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("withdrawMember.do")
-	public String member_side_withdraw_page(Model model, HttpServletRequest request) {
+	public String member_side_withdraw_page(Model model, HttpServletRequest request, HttpServletResponse response) {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");

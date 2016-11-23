@@ -32,6 +32,8 @@
   	<resultMap type="book" id="bookMap">
   			<result property="book_code" column="book_code"/>
   			<result property="book_name" column="book_name"/>
+  			<result property="amount" column="amount"/>
+  			<result property="price" column="price"/>
   			<result property="img" column="img"/>
   	</resultMap>
   	
@@ -42,7 +44,7 @@
   	
   	
   	<!-- Search Member Orderlist -->
- 	<select id="searchOrderlist" parameterType="hashmap" resultType="orderlist" resultMap="orderlistMap">
+ 	<select id="searchOrderlist" parameterType="hashmap" resultType="orderlistVO" resultMap="orderlistMap">
 		SELECT order_id,id,book_code,book_name,img,amount,total_price,payment,order_date,account_info,delivery,refund_state,memo,num
 				FROM (SELECT order_id,id,book_code,book_name,img,amount,total_price,payment,order_date,account_info,delivery,refund_state,memo,ROWNUM AS num
 				FROM (SELECT orders.order_id,orders.id,order_book.book_code,goods.book_name,goods.img,order_book.amount,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.delivery,orders.refund_state,orders.memo
@@ -55,40 +57,10 @@
   	</select>
   	
   	<!-- Select Member Orderlist Detail -->
-  	<select id="detailWriter" parameterType="int" resultMap="detailWriterMap">
-  		SELECT order_id,id,name,book_code,book_name,img,amount,total_price,payment,order_date,account_info,delivery,refund_state,memo
-				FROM (SELECT order_id,id,name,book_code,book_name,img,amount,total_price,payment,order_date,account_info,delivery,refund_state,memo
-				FROM (SELECT orders.order_id,orders.id,orders.name,order_book.book_code,goods.book_name,goods.img,order_book.amount,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.delivery,orders.refund_state,orders.memo
-				FROM orders,order_book,goods WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND <include refid="check-id"/> ORDER BY orders.order_date DESC)) WHERE orders.order_id = #{order_id} ORDER BY 
-  	
-  	
-  	
-  		SELECT writer_no,writer_name,birth,death,info,wimg,book_code,book_name,img,publication,num
- 			FROM (SELECT writer_no,writer_name,birth,death,info,wimg,book_code,book_name,img,publication,ROWNUM as num
- 			FROM (SELECT goods.writer_no,writer_name,birth,death,info,writer.img as wimg,book_code,book_name,goods.img,publication FROM writer JOIN goods ON(goods.writer_no = writer.writer_no) WHERE writer.writer_no = #{writer_no} ORDER BY writer_name, publication))
+  	<select id="memberOrderlistDetail" parameterType="hashmap" resultType="orderlist" resultMap="orderlistMap">
+  		SELECT orders.order_id,orders.id,order_book.book_code,goods.book_name,order_book.amount,goods.price,goods.img,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.delivery,orders.refund_state
+				FROM orders,order_book,goods WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND orders.id=#{id} AND orders.order_id=${order_id}
   	</select>
-  	
-  	<resultMap type="writer" id="detailWriterMap">
-  			<result property="writer_no" column="writer_no"/>
-  			<result property="writer_name" column="writer_name"/>
-  			<result property="birth" column="birth"/>
-  			<result property="death" column="death"/>
-  			<result property="info" column="info"/>
-  			<result property="img" column="wimg"/>
-  			<collection property="list" column="writer_no" ofType="book" javaType="ArrayList" resultMap="bookMap"/>
-  		</resultMap>
-  	
-  	
-  	
-  	
-  	memberOrderlistDetail
-  	
-  	
-  	
-  	
-  	
-  	
-  	
  	
 </mapper>
 

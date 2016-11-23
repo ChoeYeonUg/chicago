@@ -4,6 +4,7 @@ import java.util.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -28,8 +29,8 @@ public class WishlistController {
 	@Resource(name="wishlistService")
 	private WishlistService ws;
 	
-	@RequestMapping("MemberWishform")
-	public String wishlistForm(Model model, String book_code, HttpServletRequest request) {
+	@RequestMapping("memberWishList")
+	public String wishlistForm(Model model, String book_code, HttpServletRequest request) throws Exception {
 		
 		try {
 			model.addAttribute("jsp", "member.jsp");
@@ -38,28 +39,13 @@ public class WishlistController {
 			HttpSession hs = request.getSession();
 			String sessionid = (String)hs.getAttribute("id");
 			
-			List<String> list = (List<String>) hs.getAttribute("wishList");
+			Map map = new HashMap();
+			map.put("id", sessionid);
+			map.put("book_code", book_code);
 			
-			if(book_code != null && !book_code.equals("")){
-				if(list == null) {
+			List<WishlistVO> list = ws.inputMemberWishlist(map);
 					
-					logger.info("************************* 위시리스트 생성");
-					list = new ArrayList<String>();
-					list.add(book_code);
-					
-				} else {
-					
-					logger.info("************************* 위시리스트 목록 추가");
-					list.add(book_code);
-					
-					HashSet temp = new HashSet(list);
-					
-					list = new ArrayList<String>(temp);
-				}
-				
-				hs.setAttribute("wishList", list);
-				
-			}			
+			model.addAttribute("list", list);
 			
 		} catch (Exception ex) {
 			
@@ -67,15 +53,13 @@ public class WishlistController {
 			
 		}
 		
-		String str = request.getHeader("referer");
-		System.out.println(str+"****************************************");
-		return "redirect:"+str.substring(str.lastIndexOf("/")+1);
+		return "main/main";
 		
 	}
 	
 	/* Member Wishlist Include */
 	@RequestMapping("wish.do")
-	public String memberWishlist_page(Model model, HttpServletRequest request) throws Exception {
+	public String memberWishlist_page(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
@@ -89,7 +73,7 @@ public class WishlistController {
 			try {
 				if(list != null){
 					
-					wishList = ws.memberWishlist(list);
+					wishList = ws.memberWishlist(list, request);
 					
 				}
 				

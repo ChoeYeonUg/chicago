@@ -8,6 +8,9 @@ public class OrderlistVO {
 	private int Order_id;
 	private String id;
 	private String name;
+	private String book_name;
+	private int amount;
+	private int price;
 	private int total_price;
 	private Date order_date;
 	private int delivery;
@@ -17,6 +20,14 @@ public class OrderlistVO {
 	private int count;
 	
 	List<BookVO> bList;
+	
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
 	
 	public int getOrder_id() {
 		return Order_id;
@@ -40,6 +51,22 @@ public class OrderlistVO {
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getBook_name() {
+		return book_name;
+	}
+
+	public void setBook_name(String book_name) {
+		this.book_name = book_name;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 	
 	public int getTotal_price() {

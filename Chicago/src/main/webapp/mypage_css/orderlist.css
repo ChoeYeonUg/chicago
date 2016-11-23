@@ -33,6 +33,28 @@
 .col5 {width: 15%;}
 .colB {width: 15%;}
 
+#OrderlistTable2 {display: table; width: 100%;}
+.row2 {display: table-row;}
+.cel2H {display: table-cell; padding: 3px; border-bottom: 1px solid #DDD; font: bolder; color: #000000;}
+.cell2 {display: table-cell; padding: 3px; border-bottom: 1px solid #DDD;}
+.col21 {width: 7%;}
+.col22 {width: 40%;}
+.col23 {width: 7%;}
+.col24 {width: 12%;}
+.col25 {width: 12%;}
+.col26 {width: 12%;}
+.col2B {width: 10%;}
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* <My Page Main Form Set > */
