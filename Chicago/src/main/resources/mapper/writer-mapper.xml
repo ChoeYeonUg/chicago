@@ -83,7 +83,7 @@
   		
   		<!-- 관리자 메뉴 -->
   		
-  		<insert id="writerInsert">
+  		<insert id="writerInsert" parameterType="writer">
   			INSERT INTO writer VALUES(writer_seq.nextval, #{writer_name}, #{birth, jdbcType=DATE},#{death, jdbcType=DATE}, #{info},#{img, jdbcType=VARCHAR})
   		</insert>
   		
