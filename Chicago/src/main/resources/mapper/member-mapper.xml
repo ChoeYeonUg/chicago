@@ -22,7 +22,11 @@
 	<sql id="where-addrid">
 		WHERE id = (SELECT id FROM member WHERE id=#{id})
 	</sql>
-      
+     
+     <select id="findPwd" resultType="int" parameterType="member">
+     	SELECT count(*) FROM member WHERE id=#{id} AND name=#{name} AND phone=#{phone}
+     </select>
+     
   	<select id="idCheck" resultType="int" parameterType="String">
   		SELECT count(*) FROM member <include refid="where-id"/>
   	</select>

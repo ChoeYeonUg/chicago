@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="css/board_css/board_css.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 function openPop(data){
@@ -21,7 +22,7 @@ function openPop(data){
 </script>
 </head>
 <body>
-<table>
+<table class="commonTable" style="	width: inherit;">
 	<tr>
 		<th width="100">구매번호</th>
 		<th width="100">금액</th>

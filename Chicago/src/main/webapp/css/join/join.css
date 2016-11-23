@@ -1,1 +1,61 @@
 @CHARSET "UTF-8";
+
+div {
+    display: block;
+}
+
+td, th {
+    display: table-cell;
+    vertical-align: inherit;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.join_mem {
+    width: 100%;
+    overflow: auto;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.join_cont1 {
+    width: 800px;
+}
+
+.join_mem table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    /* table-layout: fixed; */
+    border-top: 1px solid #bfbfbf;
+}
+
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.join_mem th {
+    padding-left: 15px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 13px;
+    background-color: #f6f6f6;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.join_mem td {
+    padding-left: 20px;
+    height: 59px;
+    font-weight: normal;
+    font-size: 12px;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.titR {
+    color: #eb0000;
+    display: inline;
+}

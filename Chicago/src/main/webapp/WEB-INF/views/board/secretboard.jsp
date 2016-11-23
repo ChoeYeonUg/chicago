@@ -79,7 +79,7 @@ $(function(){
 					</c:if>
 						<c:if test="${grade<=1 }">
 							<c:if test="${vo.secret==2 }">
-								<img src="./board_img/lock.png" style="width: 10px; height:auto;" >
+								<img src="./board_img/lock.png" style="width: 10px; height:auto;" align="middle">
 							</c:if>
 								<a href="secret_content.do?board_no=${vo.board_no }&page=${curpage}">${vo.subject }</a>
 						</c:if>
