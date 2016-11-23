@@ -7,13 +7,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="book_css/bookMain.css"/>
+<style type="text/css">
+	.button {
+		background-color: white;
+		color: black;
+		border: 2px solid #505050;
+		font-size: 11px;
+	}
+</style>
 </head>
 <body>
 	<div id="content">
 		<div class="container background-white">
 			<div class="row margin-vert-40">
 				<table>
-					<tr><td align="left"><input type="button" value="추가" style="hegiht:8px; width:40px; border-radius:2px; font-size:11px;" onclick="location='book_mngInsert.do'"/></td></tr>
+					<tr><td align="left"><input type="button" value="추가" onclick="location='book_mngInsert.do'" class="button"/></td></tr>
 				</table>
 				<!-- 전체 리스트 출력 -->
 				<table>
@@ -69,7 +78,7 @@
 									<label><input type="radio" value="book_content" name="fs" id="fs"/>
 										<span style="font-size:11px; color:#505050; vertical-align: bottom;">내용</span></label>
 									<input type="search" id="ss" name="ss"> 
-									<input type="submit" value="검색"/>
+									<input type="submit" value="검색" class="button"/>
 								</div>
 							</form>
 						</td>

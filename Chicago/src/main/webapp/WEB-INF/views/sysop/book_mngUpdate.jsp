@@ -22,6 +22,14 @@
 		f.submit();
 	};
 </script>
+<style type="text/css">
+.button {
+		background-color: white;
+		color: black;
+		border: 2px solid #505050;
+		font-size: 11px;
+	}
+</style>
 </head>
 <body>
 	<div id="content">
@@ -97,8 +105,8 @@
 					<table>
 						<tr>
 							<td align="right">
-								<input type="button" value="수정" onclick="sendBtn();"/>
-								<input type="button" value="취소" onclick="javascript:history.back();"/>
+								<input type="button" value="수정" onclick="sendBtn();" class="button"/>
+								<input type="button" value="취소" onclick="javascript:history.back();" class="button"/>
 							</td>
 						</tr>
 					</table>

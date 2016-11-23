@@ -10,6 +10,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="book_css/bookMain.css"/>
+<style type="text/css">
+	.button {
+		background-color: white;
+		color: black;
+		border: 2px solid #505050;
+		font-size: 11px;
+	}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function(){
@@ -112,15 +120,6 @@
 		});
 	});
 </script>
-<!-- <style type="text/css">
-	input [type="text"],
-	textarea {
-		border-top: 0px;
-		border-right: 0px;
-		border-left: 0px;
-		border-bottom: #00000 1px solid;
-	}
-</style> -->
 </head>
 <body>
 	<div id="content">
@@ -198,8 +197,8 @@
 					<table>
 						<tr>
 							<td align="right">
-								<input type="button" value="등록" id="sendBtn"/>
-								<input type="button" value="취소" onclick="javascript:history.back()"/>
+								<input type="button" value="등록" id="sendBtn" class="button"/>
+								<input type="button" value="취소" onclick="javascript:history.back()" class="button"/>
 							</td>
 						</tr>
 					</table>
