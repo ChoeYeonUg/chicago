@@ -7,7 +7,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<link href="css/board_css/board_css.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+
 <script type="text/javascript">
 
 function openPop(page,board_no){
@@ -21,79 +25,56 @@ function openPop(page,board_no){
 	return false;
 };
 </script>
-<!-- Meta -->
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="description" content="">
-<meta name="author" content="">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1" />
-<!-- 	Template CSS -->
-<link rel="stylesheet" href="board_css/bootstrap.css" rel="stylesheet">
-<!-- Template CSS -->
-<link rel="stylesheet" href="board_css/animate.css" rel="stylesheet">
-<link rel="stylesheet" href="board_css/font-awesome.css"
-	rel="stylesheet">
-<link rel="stylesheet" href="board_css/nexus.css" rel="stylesheet">
-<link rel="stylesheet" href="board_css/responsive.css" rel="stylesheet">
-<link rel="stylesheet" href="board_css/custom.css" rel="stylesheet">
-
-<!-- Google Fonts-->
-<link href="http://fonts.googleapis.com/css?family=Raleway:100,300,400"
-	type="text/css" rel="stylesheet">
-<link href="http://fonts.googleapis.com/css?family=Roboto:400,300"
-	type="text/css" rel="stylesheet">
 </head>
 <body>
-	<h3>1:1 게시판 글 보기</h3>
-
-
-		
-		<table border="0" bordercolor="black" width="500" >
-	
+		<table>
 			<tr>
-				<th width="20%">번호</th>
-				<td width="30%" align="center">${vo.board_no}</td>
-				<th width="20%">날짜</th>
-				<td width="30%" align="center">				
-					<fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd"/></td>
-			</tr>
-		
-			<tr>
-				<th width="20%">작성자</th>
-				<td width="30%" align="center">${vo.id }</td>
-				<th width="20%">HIT</th>
-				<td width="30%" align="center">	${vo.hit }</td>
-			</tr>			
-	
-			<tr>
-				<th width="20%" align="right">제목</th>
-				<td width="80%" align="left" colspan="3">
-				${vo.subject}</td>
-			</tr>
-			
-			<tr>
-
-				<th width="15%" align="right">내용</th>
-				<td colspan="3" valign="top" align="left" height="200"><pre>${vo.content}</pre>
+				<td style="font-size:20px; color:#505050; padding: 15px;" align="left">
+				1:1 게시판 글 보기
 				</td>
-
-
 			</tr>
-				<!-- <tr>
-					
-					<th width="15%" align="right">비밀번호</th>
-					<td colspan="3" width="85%" align="left">
-						<input type="radio" name="secret" value="1" checked="checked" class="secret">공개글  
-						<input type="radio" name="secret" value="2" id="secret_btn" class="secret">비밀글 &nbsp;&nbsp;  
-						<input type="password" name="pwd" size="10" id="pwd" style="display:none">
-					</td>
-				</tr> -->
+		</table>		
+		<table class="tableContent" width="500px" style="border: 1px solid #e3e3e3">	
+			<tr>
+				<th width="20%" align="center" style="background-color: #fbfafa; padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3; border-right: 1px solid #e3e3e3;">번호</th>
+				<td width="30%" align="center" style="padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3;">${vo.board_no}</td>
+				<th width="20%" align="center"  style="background-color: #fbfafa; padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3;  border-right: 1px solid #e3e3e3; border-left:  1px solid #e3e3e3;">날짜</th>
+				<td width="30%" align="center" style="padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3;">				
+					<fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd"/></td>
+			</tr>		
+			<tr>
+				<th width="20%" align="center"  style="background-color: #fbfafa; padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3;  border-right: 1px solid #e3e3e3;" >작성자</th>
+				<td width="30%" align="center" style="padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3;" >${vo.id }</td>
+				<th width="20%" align="center"  style="background-color: #fbfafa; padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3;  border-right: 1px solid #e3e3e3; border-left:  1px solid #e3e3e3;" >HIT</th>
+				<td width="30%" align="center" style="padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3;">	${vo.hit }</td>
+			</tr>				
+			<tr>
+				<th width="20%" align="center" style="background-color: #fbfafa; padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3;  border-right: 1px solid #e3e3e3;" >제목</th>
+				<td width="80%" align="left" colspan="3" style="padding:10px;">
+				${vo.subject}</td>
+			</tr>			
+			<tr>
 
+				<td colspan="4" valign="top" align="left" height="200" >
+					<pre style="background-color: white; padding:20px; border: 0px ; font-size:11px; color:#505050;">${vo.content}</pre>
+				</td>
+			</tr>			
 			</table>
-			<table>
+			<table class="commonTable">
 			<tr>
 				<td align="right">
-				<a href="secret_reply.do?board_no=${board_no}">답글</a>&nbsp;					
+				<c:if test="${id!=null}">
+					<a href="secret_reply.do?board_no=${board_no}">답글</a>&nbsp;					
+				</c:if>
 				<c:if test="${id==vo.id || grade<=1 }">
 					<a href="secret_update.do?page=${page }&board_no=${board_no }">수정</a>&nbsp;
 					<a href="#" onclick="return openPop('${page}','${board_no}');">삭제</a>&nbsp;

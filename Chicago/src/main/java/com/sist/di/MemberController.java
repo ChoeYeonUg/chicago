@@ -7,6 +7,7 @@ import com.sist.service.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -30,9 +31,10 @@ public class MemberController {
 	@Resource(name="memberService")
 	private MemberService ms;
 	
+	
 	/* HeadMenu */
 	@RequestMapping("mypage.do")
-	public String member_page(Model model, HttpServletRequest request) throws Exception {
+	public String member_page(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
@@ -44,7 +46,7 @@ public class MemberController {
 		
 	}
 	
-	/* Secure Page */
+	
 	@RequestMapping(value="membersecurepwd_ok.do", method=RequestMethod.POST)
 	public String membersecurepwd_ok(Model model, HttpServletRequest request, String USER_Check_PWD, String typecheck,
 			RedirectAttributes redirectAttributes) throws Exception {
@@ -52,39 +54,46 @@ public class MemberController {
 		HttpSession hs = request.getSession();
 		String sessionid = (String)hs.getAttribute("id");
 		String cpwd = ms.pwdCheck(sessionid);
-
+		String url="";
+		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
-	
+		
 		model.addAttribute("MemberMain_cmi", "../MemberMain.jsp");
 		
 			if(USER_Check_PWD.equals(cpwd)) {
+				
 				if(typecheck.equals("mi")) {
 					
 					redirectAttributes.addFlashAttribute("check", "ok");
-					return "redirect:modifyMemberInfo.do";
+					url= "redirect:modifyMemberInfo.do";
 					
 				} else if(typecheck.equals("ma")) {
 					
 					redirectAttributes.addFlashAttribute("check", "ok");
-					return "redirect:memberAddrsInfo.do";
+					url= "redirect:memberAddrsInfo.do";
 					
-				} else if(typecheck.equals("mo")) {
-					redirectAttributes.addFlashAttribute("check", "ok");
-					return "redirect:memberOrderList.do";
 				}
 			
-			}else{
-				return "redirect:main.do";
+			} else {
+								
+				model.addAttribute("typecheck", typecheck);
+				//url = "redirect:modifyMemberInfo.do";
+				
+				if(typecheck.equals("mi")) {
+					 					
+					url = "redirect:modifyMemberInfo.do";
+					} else {
+						url= "redirect:memberAddrsInfo.do";
+					}
 			}
-		
-		return "redirect:membersecurepwd_ok.do";
-		
+			return url;
 	}
+	
 	
 	/* Member Info HeadMenu */
 	@RequestMapping("memberinfo.do")
-	public String member_info_page(Model model, HttpServletRequest request) throws Exception {
+	public String member_info_page(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
@@ -96,12 +105,16 @@ public class MemberController {
 		
 	}
 	
+	
 	/* Member Info SideMenu Include */
 	@RequestMapping("modifyMemberInfo.do")
-	public String member_side_info_page(Model model, HttpServletRequest request, String typecheck) throws Exception {
+	public String member_side_info_page(Model model, HttpServletRequest request, HttpServletResponse response, String typecheck) throws Exception {
+		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
+		
 		try{
+			
 			Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
 			String check = (String) flashMap.get("check");
 			model.addAttribute("cmi", "../member/memberinfomodify/ModifyMemderInfo.jsp");
@@ -109,8 +122,10 @@ public class MemberController {
 			String sessionid = (String)hs.getAttribute("id");
 			MemberVO vo = ms.selectMember(sessionid);
 			model.addAttribute("vo", vo);
-		}catch(Exception e){
-			typecheck="mi";
+			
+		}catch(Exception ex){
+			
+			typecheck = "mi";
 			
 			model.addAttribute("typecheck", typecheck);
 			model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
@@ -118,10 +133,12 @@ public class MemberController {
 		}
 		
 		return "main/main";
+		
 	}
 	
+	
 	@RequestMapping(value="modyfyMemberInfo_ok.do", method=RequestMethod.POST)
-	public String modyfyMemberInfo_ok(Model model, MemberVO vo, HttpServletRequest request, int zipcode, String addr, String email, String phone, String name, int gender) throws Exception {
+	public String modyfyMemberInfo_ok(Model model, MemberVO vo, HttpServletRequest request, HttpServletResponse response, int zipcode, String addr, String email, String phone, String name, int gender) throws Exception {
 		
 		logger.info(vo.getId() + " : " + vo.getPwd());
 		
@@ -154,12 +171,13 @@ public class MemberController {
 			
 		}
 		
-		return "redirect:modyfyMemberInfo.do";
+		return "redirect:main.do";
 		
 	}
 	
+	
 	@RequestMapping("modyfyMemberPwd.do")
-	public String member_side_pwd_page(Model model, HttpServletRequest request) throws Exception {
+	public String member_side_pwd_page(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
@@ -171,8 +189,9 @@ public class MemberController {
 		
 	}
 	
+	
 	@RequestMapping(value="modyfyMemberPwd_ok.do", method=RequestMethod.POST)
-	public String modyfyMemberPwd_ok(Model model, MemberVO vo, HttpServletRequest request,String USER_NewPWD, String USER_C_NewPWD) throws Exception {
+	public String modyfyMemberPwd_ok(Model model, MemberVO vo, HttpServletRequest request, HttpServletResponse response,String USER_NewPWD, String USER_C_NewPWD) throws Exception {
 		
 		logger.info(vo.getId() + " : " + vo.getPwd());
 		
@@ -190,7 +209,7 @@ public class MemberController {
 				map.put("id", sessionid);
 				ms.modyfyMemberPwd(map);
 				
-				model.addAttribute("jsp", "../main/main.jsp");
+				return "redirect:main.do";
 				
 			} else {
 				
@@ -206,17 +225,32 @@ public class MemberController {
 			
 		}
 		
-		return "redirect:modyfyMemberInfo.do";
+		return "redirect:main.do";
 		
 	}
 	
+	
 	@RequestMapping("memberPoint.do")
-	public String member_side_point_page(Model model, MemberVO vo, HttpServletRequest request) throws Exception {
+	public String member_side_point_page(Model model, MemberVO vo, HttpServletRequest request, HttpServletResponse response, String gradename) throws Exception {
 		
 		HttpSession hs = request.getSession();
 		String sessionid = (String) hs.getAttribute("id");
 		
 		vo = ms.selectMember(sessionid);
+		
+		if(vo.getGrade()==1 || vo.getGrade()==0) {
+			gradename = "운영자";
+		} else if(vo.getGrade()==2) {
+			gradename = "다이아몬드";
+		} else if(vo.getGrade()==3) {
+			gradename = "플레티넘";
+		} else if(vo.getGrade()==4) {
+			gradename = "골드";
+		} else if(vo.getGrade()==5) {
+			gradename = "일반";
+		}
+		
+		model.addAttribute("gradename", gradename);
 		model.addAttribute("vo", vo);
 		
 		model.addAttribute("jsp", "member.jsp");
@@ -230,7 +264,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("memberAddrsInfo.do")
-	public String memberAddrsInfo_page(Model model, HttpServletRequest request) throws Exception {
+	public String memberAddrsInfo_page(Model model, HttpServletRequest request, HttpServletResponse response, String typecheck) throws Exception {
 		
 		
 		model.addAttribute("jsp", "member.jsp");
@@ -244,30 +278,21 @@ public class MemberController {
 			String sessionid = (String)hs.getAttribute("id");
 			AddressVO avo = ms.selectMemberDeliveryAddrs(sessionid);
 			model.addAttribute("avo", avo);			
-		}catch(Exception e){
-			/*typecheck="ma";*/
-			model.addAttribute("typecheck", "ma");
+		}catch(Exception ex){
+			
+			typecheck = "ma";
+			
+			model.addAttribute("typecheck", typecheck);
 			model.addAttribute("cmi", "../member/MemberSecurePassword.jsp");
+			
 		}
+		
 		return "main/main";
 		
 	}
 	
-/*	@RequestMapping("modifyMemberAddrs.do")
-	public String modifyMemberAddrsInfo_page(Model model, AddressVO avo, HttpServletRequest request) throws Exception {
-		
-		model.addAttribute("jsp", "member.jsp");
-		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
-		
-		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
-		model.addAttribute("cmi", "../member/memberinfomodify/ModifyMemberAddress.jsp");
-		
-		return "main/main";
-		
-	}*/
-	
 	@RequestMapping(value="modyfyMemberAddrs_ok.do", method=RequestMethod.POST)
-	public String modyfyMemberAddrs_ok(Model model, AddressVO avo, HttpServletRequest request, int zipcode1, String addr1, int zipcode2, String addr2,int zipcode3, String addr3) throws Exception {
+	public String modyfyMemberAddrs_ok(Model model, AddressVO avo, HttpServletRequest request, HttpServletResponse response, String id, int zipcode1, String addr1, int zipcode2, String addr2,int zipcode3, String addr3) throws Exception {
 		
 		logger.info(avo.getId());
 		
@@ -277,17 +302,34 @@ public class MemberController {
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
+		
+		
 		if(ms.memberId(sessionid) && !sessionid.equals("admin")) {
+			if(id==null) {
+
+				avo = new AddressVO();
+				avo.setZipcode1(zipcode1);
+				avo.setAddr1(addr1);
+				avo.setZipcode2(zipcode2);
+				avo.setAddr2(addr2);
+				avo.setZipcode3(zipcode3);
+				avo.setAddr3(addr3);
+				avo.setId(sessionid);
+				ms.insertMemberDeliveryAddrs(avo);
 			
-			avo = new AddressVO();
-			avo.setZipcode1(zipcode1);
-			avo.setAddr1(addr1);
-			avo.setZipcode2(zipcode2);
-			avo.setAddr2(addr2);
-			avo.setZipcode3(zipcode3);
-			avo.setAddr3(addr3);
-			avo.setId(sessionid);
-			ms.modyfyMemberDeliveryAddrs(avo);
+			} else {
+				
+				avo = new AddressVO();
+				avo.setZipcode1(zipcode1);
+				avo.setAddr1(addr1);
+				avo.setZipcode2(zipcode2);
+				avo.setAddr2(addr2);
+				avo.setZipcode3(zipcode3);
+				avo.setAddr3(addr3);
+				avo.setId(sessionid);
+				ms.modyfyMemberDeliveryAddrs(avo);
+				
+			}
 			
 			return "redirect:main.do";
 			
@@ -298,12 +340,12 @@ public class MemberController {
 			
 		}
 		
-		return "redirect:memberAddrsInfo.do";
+		return "redirect:main.do";
 		
 	}
 	
 	@RequestMapping("withdrawMember.do")
-	public String member_side_withdraw_page(Model model, HttpServletRequest request) {
+	public String member_side_withdraw_page(Model model, HttpServletRequest request, HttpServletResponse response) {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
@@ -343,50 +385,6 @@ public class MemberController {
 		}
 		
 		return "redirect:main.do";
-		
-	}
-	
-	
-	
-
-	
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
-	/* Member Wishlist HeadMenu */ 
-	@RequestMapping("wish.do")
-	public String member_wish_page(Model model, HttpServletRequest request) {
-		
-		model.addAttribute("jsp", "member.jsp");
-		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
-		
-		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
-		model.addAttribute("cmi", "../member/memberwishlist/MemberWishList.jsp");
-		
-		return "main/main";
-		
-	}
-	
-	
-	
-	/* Member Question HeadMenu */ 
-	@RequestMapping("memberquestion.do")
-	public String member_question_page(Model model, HttpServletRequest request) {
-		
-		model.addAttribute("jsp", "member.jsp");
-		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
-		
-		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
-		model.addAttribute("cmi", "../member/memberquestion/MemberQuestionMain.jsp");
-		
-		return "main/main";
 		
 	}
 	

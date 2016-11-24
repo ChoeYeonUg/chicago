@@ -21,6 +21,7 @@ import com.sist.dao.OrdersVO;
 import com.sist.service.BookService;
 import com.sist.service.MemberService;
 import com.sist.service.OrdersService;
+import com.sist.service.WishlistService;
 
 @Controller
 public class PurchaseController {
@@ -34,13 +35,18 @@ public class PurchaseController {
 	@Resource(name="ordersService")
 	private OrdersService os;
 	
+	@Resource(name="wishlistService")
+	private WishlistService ws;
+	
 	private static final Logger logger = LoggerFactory.getLogger(PurchaseController.class);
 	
 	@RequestMapping("purchase")
 	public String purchsePage(Model model,String[] book_code, String[] amount, HttpServletRequest req, HttpServletResponse resp) {
 		
 		if(book_code == null || amount == null){
-			return null;
+			System.out.println(book_code);
+			System.out.println(amount);
+			return "redirect:book.do";
 		}
 		
 		int[] amountInt = new int[book_code.length];
@@ -138,6 +144,9 @@ public class PurchaseController {
 					if(bCheck) break;
 				}
 			}
+			
+			ws.deleteWishlist(id, bookList[0]);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			/*e.printStackTrace();*/

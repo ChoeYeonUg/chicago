@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,16 +14,16 @@
 <link rel="stylesheet" type="text/css" href="book_css/header1.css" />
 <script type="text/javascript">
 	function bcBtn(data) {
-		if(confirm("장바구니로 이동하시겠습니까?") == true) {
+		if(confirm("장바구니에 담으시겠습니까?") == true) {
 			window.location.href="sb.do?book_code="+data;
 		} else {
 			return;
 		}
 	}
 	
-	function lkBtn() {
+	function lkBtn(book_code) {
 		if(confirm("찜목록으로 이동하시겠습니까?") == true) {
-			window.location.href="member/memberwishlist/MemberWishList.do?book_code=${datilBook.book_code}";
+			window.location.href="memberWishList.do?book_code="+book_code;
 		} else {
 			return;
 		}
@@ -109,16 +110,28 @@
 							<table>
 								<!-- 책 이미지 -->
 								<tr>
-									<td align="center"><a href="bookDetail.do?book_code=${list.book_code }"><img alt="image" src="${list.img }"></a></td>
+									<td align="center">
+									<c:if test="${list.img == null }">
+										<a href="bookDetail.do?book_code=${list.book_code }"><img src="images\writer_noimage.gif" class="bd" alt="${list.book_name }"></a>
+									</c:if>
+									<c:if test="${list.img != null && fn:indexOf(list.img,'http://') == -1 }">
+										<a href="bookDetail.do?book_code=${list.book_code }"><img src="imageSrc.do?src=${list.img }" class="bd" alt="${vo.book_name }"></a>
+									</c:if>
+									<c:if test="${list.img != null && fn:indexOf(list.img,'http://') != -1 }">
+										<a href="bookDetail.do?book_code=${list.book_code }"><img src="${list.img }" class="bd" alt="${list.book_name }"></a>
+									</c:if>
+									</td>
 								</tr>
 								<!-- 주문관련 아이콘 -->
 								<tr>
 									<td align="center" class="icontd">
-										<img src="book_img\like.png" alt="like.png" title="찜하기" class="icon" onclick="lkBtn()">&nbsp;
+										<c:if test="${list.amount != 0 }">
+										<img src="book_img\like.png" alt="like.png" title="찜하기" class="icon" onclick="lkBtn('${list.book_code}')">&nbsp;
 										<img src="book_img\shopping.png" alt="shopping.png" title="장바구니" class="icon" onclick="bcBtn('${list.book_code}')">&nbsp; 
-										<a href="purchase.do?book_code=${list.book_code }">
+										<a href="purchase.do?book_code=${list.book_code }&amount=1">
 											<img src="book_img\purchase.png" alt="purchase.png" title="바로구매" class="icon">
 										</a>
+										</c:if>
 									</td>
 								</tr>
 							</table>
