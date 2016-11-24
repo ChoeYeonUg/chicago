@@ -7,6 +7,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="css/board_css/board_css.css" rel="stylesheet" />
+<style type="text/css">
+table {
+	width: inherit;
+}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 
@@ -20,31 +26,36 @@ function openPop(board_no){
 };
 function popupOpen(board_no){
 	var popUrl="board_management_content.do?board_no="+board_no;
-	var popOption="width=500, height=460, resizable=no scrollbars=no status=no;";
+	var popOption="width=500, height=400, resizable=no scrollbars=no status=no;";
 	window.open(popUrl,"",popOption);
 };
 </script>
+<style type="text/css">
+
+
+</style>
 </head>
 <body>
-	<table width="700">
-					<tr>						
-						<td width="30%" align="left" >일반게시판 l <a href="reviewboard_management.do"
+
+	<table>
+		<tr>						
+			<td width="30%" align="left" >일반게시판 l <a href="reviewboard_management.do"
 							style="color: #b3b3b3"> 리뷰게시판 </a></td>
 					</tr>
 				</table>
-	<table>
+	<table class="commonTable" style="	width: inherit;">
 		<tr>
-			<th width="100">번호</th>
-			<th width="100">글쓴이</th>
-			<th width="100">제목</th>
-			<th width="200">등록일</th>
-			<th width="60">기타</th>
+			<th width="10%">번호</th>
+			<th width="10%">글쓴이</th>
+			<th width="45%">제목</th>
+			<th width="20%">등록일</th>
+			<th width="15%">기타</th>
 		</tr>
 		<c:forEach items="${list }" var="vo">
 			<tr>
 				<td>${vo.board_no }</td>					
 				<td>${vo.id }</td>
-				<td><a href="javascript:popupOpen('${vo.board_no }');">${vo.subject }</a></td>
+				<td style="text-align: left;"><a href="javascript:popupOpen('${vo.board_no }');" >${vo.subject }</a></td>
 				<td><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 				<td>				
 				<c:if test="${msg!=vo.subject }">
@@ -56,12 +67,14 @@ function popupOpen(board_no){
 	</table>
 	<table>
 		<tr>
-			<td>
-				<a href="board_management.do?fs=${fs }&ss=${ss }&page=${(formpage - block) >= 1 ? formpage-block : curpage }">이전</a>&nbsp;
+			<td align="center">
+				<ul class="pagination pagination-sm">				
+					<li><a href="board_management.do?fs=${fs }&ss=${ss }&page=${(formpage - block) >= 1 ? formpage-block : curpage }">&laquo;</a></li>
 				<c:forEach begin="${formpage }" end="${topage }" step="1" var="i">
-					<a href="board_management.do?fs=${fs }&ss=${ss }&page=${i }">[${i }]</a>
+					<li><a href="board_management.do?fs=${fs }&ss=${ss }&page=${i }">${i }</a></li>
 				</c:forEach>
-				&nbsp;<a href="board_management.do?fs=${fs }&ss=${ss }&page=${(formpage + block)<=totalpage ? formpage+block : curpage }">다음</a>		
+				<li><a href="board_management.do?fs=${fs }&ss=${ss }&page=${(formpage + block)<=totalpage ? formpage+block : curpage }">&raquo;</a></li>		
+				</ul>
 			</td>
 		</tr>
 		
@@ -79,5 +92,6 @@ function popupOpen(board_no){
 			</td>
 		</tr>
 	</table>
+
 </body>
 </html>

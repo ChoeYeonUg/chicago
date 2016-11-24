@@ -61,9 +61,84 @@ function send(){
 	
 }
 </script>
-
+<style type="text/css">
+	th {
+		text-align: left;
+		width: 20%;
+		
+	}
+	
+	th, td {
+		height: 50px;
+		vertical-align: middle;
+		margin: 1px;
+		padding: 1px;
+	}
+	
+	.pwd {
+		border-top: 0px;
+		border-right: 0px;
+		border-left: 0px;
+		border-bottom: #505050 1px solid;
+	}
+	
+	.button {
+	background-color: white;
+	color: black;
+	border: 2px solid #505050;
+	font-size: 11px;
+	}
+</style>
 </head>
 <body>
+	<div class="col-md-9">
+		<!-- 본인확인 안내 msg -->
+		<div id="accordion" class="panel-group">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="panel-title">
+						<h3 class="panel-title">
+							<spring:message code="memberPasswordModify.header"/>
+						</h3>
+					</div>
+					<div id="collapse-One" class="accordion-body collapse in">
+						<div class="panel-body">
+							◎&nbsp;<spring:message code="memberPasswordModify.notFy1"/><br/>
+							◎&nbsp;<spring:message code="memberPasswordModify.notFy2"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 본인확인 안내 msg 끝 -->
+		<!-- 비밀 번호 변경  -->
+		<form:form name="frm" id="frm" method="post" action="modyfyMemberPwd_ok.do" commandName="com.sist.dao.MemberVO">
+		<table>
+			<tr>
+				<th><spring:message code="memberPasswordModify.CurrentPassword"/></th>
+				<td><input type="password" name="pwd" id="USER_PWD" maxlength="16" class="pwd"></td>
+			</tr>
+			<tr>
+				<th><spring:message code="memberPasswordModify.NewPassword"/></th>
+				<td><input type="password" name="USER_NewPWD" id="USER_NewPWD" class="pwd" maxlength="16"></td>
+			</tr>
+			<tr>
+				<th><spring:message code="memberPasswordModify.ConfirmNewPassword"/></th>
+				<td><input type="password" name="USER_C_NewPWD" id="USER_C_NewPWD" class="pwd" maxlength="16"></td>
+			</tr>
+		</table>
+		<table>
+			<tr>
+				<td align="right">
+					<input type="button" onclick="send()" value="<spring:message code="memberPasswordModify.btOk"/>" class="button">
+					<button name="" id="" class="button" onclick=""><spring:message code="memberPasswordModify.btCancel"/></button>
+				</td>
+			</tr>
+		</table>
+		</form:form>
+		<!-- 비밀 번호 변경 끝 -->
+	</div>
+<%-- 
 	<!-- Modify Member PASSWORD Member -->
 	<div class="OutlineForm">
 		<div class="MiddlelineSettingForm">
@@ -84,10 +159,10 @@ function send(){
 				</div>
 				<div class="InnerBox">
 					<div id="ModifyMemberPassword-Box">
-						<%-- <form:form method="post" action="modyfyMemberPwd_ok" commandName="member"> --%>
+						<form:form method="post" action="modyfyMemberPwd_ok" commandName="member">
 						<form:form name="frm" id="frm" method="post" action="modyfyMemberPwd_ok.do" commandName="com.sist.dao.MemberVO">
 					
-						<%-- <form:hidden name="" id="" class="" path="<%=session.getAttribute("id") %>" value="<%=session.getAttribute("id") %>"/> --%>
+						<form:hidden name="" id="" class="" path="<%=session.getAttribute("id") %>" value="<%=session.getAttribute("id") %>"/>
 							<fieldset>
 								<div class="ModifyMemberPwd">
 									<dl class="mmp">
@@ -96,7 +171,7 @@ function send(){
 											<label for="USER_PWD"><spring:message code="memberPasswordModify.CurrentPassword"/></label>
 										</dt>
 										<dd>
-											<%-- <form:password name="USER_PWD" id="USER_PWD" class="" path="#" maxlength="16" value="${pwd}"/> --%>
+											<form:password name="USER_PWD" id="USER_PWD" class="" path="#" maxlength="16" value="${pwd}"/>
 											<input type="password" name="pwd" id="USER_PWD" class="" maxlength="16">
 										</dd>
 										
@@ -121,11 +196,11 @@ function send(){
 								
 								<!-- OK, Cancel Button -->
 								<div>
-									<%-- <button name="" id="" class="" onclick="send()"><spring:message code="memberPasswordModify.btOk"/></button> --%>
+									<button name="" id="" class="" onclick="send()"><spring:message code="memberPasswordModify.btOk"/></button>
 									<input type="button" onclick="send()" value="<spring:message code="memberPasswordModify.btOk"/>">
 									<button name="" id="" class="" onclick=""><spring:message code="memberPasswordModify.btCancel"/></button>
-									<%-- <form:button name="" id="" class="" onclick="send()"><spring:message code="memberPasswordModify.btOk"/></form:button> --%>
-									<%-- <form:button name="" id="" class="" onclick="javascript:history.back()"><spring:message code="memberPasswordModify.btCancel"/></form:button> --%>
+									<form:button name="" id="" class="" onclick="send()"><spring:message code="memberPasswordModify.btOk"/></form:button>
+									<form:button name="" id="" class="" onclick="javascript:history.back()"><spring:message code="memberPasswordModify.btCancel"/></form:button>
 								</div>
 								
 							</fieldset>
@@ -134,6 +209,6 @@ function send(){
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 </body>
 </html>

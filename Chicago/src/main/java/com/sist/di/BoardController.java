@@ -456,21 +456,20 @@ public class BoardController {
 		if(page==null)
 			page="1";		
 		int curpage = Integer.parseInt(page);	
-		int rowSize = 10;
+		int rowSize = 5;
 		int start = (curpage * rowSize) - (rowSize - 1);
 		int end = curpage * rowSize;
 		int block=5;
 		int fromPage = ((curpage-1)/block*block)+1;
 		int toPage = ((curpage-1)/block*block)+block;
 		
-		
-	/*	if(fs.equals("book_code")){
+		/*
+		if(fs.equals("book_code")){
 			fs="review.book_code";
 			System.out.println("같음");
 		}
 		*/
 		
-
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	    String today=sdf.format(new Date());
 	    

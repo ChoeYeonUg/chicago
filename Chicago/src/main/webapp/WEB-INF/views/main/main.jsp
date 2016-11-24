@@ -16,8 +16,11 @@
 
 </head>
 <body>
+
 	<div>
-		<jsp:include page="header.jsp"></jsp:include>
+		<div class="headerbg">	
+			<jsp:include page="header.jsp"></jsp:include>
+		</div>
 		<div id="content">
 		<div class="container background-white">
 		<jsp:include page="${jsp }"></jsp:include>

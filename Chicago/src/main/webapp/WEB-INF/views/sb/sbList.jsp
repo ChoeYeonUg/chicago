@@ -123,7 +123,7 @@ function cancel(checkbox,book,amount){
 					</p>
 					
 					<ul class="list_basket">
-				<c:if test="${sbList != null }">
+				<c:if test="${sbList != null && sbList.size() != 0 }">
 					<c:forEach items="${bookList }" var="item">
 						<li class="check_on">
 							<span class="choice_g choice_basket">
@@ -204,6 +204,11 @@ function cancel(checkbox,book,amount){
 				
 			</form>
 		</fieldset>
+		</c:if>
+		<c:if test="${sbList == null || sbList.size() == 0 }">
+			<div align="center">
+				<img src="images\cart_empty.gif">
+			 </div>
 		</c:if>
 	</div>
 	

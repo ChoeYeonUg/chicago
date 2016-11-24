@@ -64,4 +64,5 @@ public interface BookService {
 	
 	//장바구니
 	public List<BookVO> printSbList(List<String> list) throws Exception;
+	
 }

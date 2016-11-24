@@ -21,9 +21,9 @@
 		}
 	}
 	
-	function lkBtn() {
+	function lkBtn(book_code) {
 		if(confirm("찜목록으로 이동하시겠습니까?") == true) {
-			window.location.href="member/memberwishlist/MemberWishList.do?book_code=${datilBook.book_code}";
+			window.location.href="memberWishList.do?book_code="+book_code;
 		} else {
 			return;
 		}
@@ -125,11 +125,13 @@
 								<!-- 주문관련 아이콘 -->
 								<tr>
 									<td align="center" class="icontd">
+										<c:if test="${list.amount != 0 }">
 										<img src="book_img\like.png" alt="like.png" title="찜하기" class="icon" onclick="lkBtn()">&nbsp;
 										<img src="book_img\shopping.png" alt="shopping.png" title="장바구니" class="icon" onclick="bcBtn('${list.book_code}')">&nbsp; 
-										<a href="purchase.do?book_code=${list.book_code }">
+										<a href="purchase.do?book_code=${list.book_code }&amount=1">
 											<img src="book_img\purchase.png" alt="purchase.png" title="바로구매" class="icon">
 										</a>
+										</c:if>
 									</td>
 								</tr>
 							</table>

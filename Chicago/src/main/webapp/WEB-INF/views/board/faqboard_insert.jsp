@@ -5,100 +5,89 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<link href="css/board_css/board_css.css" rel="stylesheet" />
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
-	$(function(){
-		$('#sendBtn').click(function(){			
-		 	var subject=$('#subject').val();
-			if(subject.trim()==""){
-				$('#subject').focus();
-				$('#subject').val("");
-				alert("제목을 입력하세요.");
-				return;
-			} 
-			
-			var content=$('#chicago').val();
 
-			if(content.trim()==""){
-				$('#chicago').focus();
-				$('#chicago').val(""); 
-				alert("내용을 입력하세요.");
-				return;
-			}
-				
-			
-			$('#frm').submit();
-			
-		})
-	});
+function send(){
+	var f = document.frm;
+
+	var subject=$('#subject').val();
+	if(subject.trim()==""){
+		$('#subject').focus();
+		alert("제목을 입력하세요.");
+		return;
+	} 
+	
+	var content=$('#chicago1').val();
+
+	if(content.trim()==""){
+		$('#chicago1').focus();
+		alert("내용을 입력하세요.");
+		return;
+	}
+	
+	f.submit();
+	
+};	
 </script>
-<!-- Meta -->
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="description" content="">
-<meta name="author" content="">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1" />
-<!-- 	Template CSS -->
-<link rel="stylesheet" href="board_css/bootstrap.css" rel="stylesheet">
-<!-- Template CSS -->
-<link rel="stylesheet" href="board_css/animate.css" rel="stylesheet">
-<link rel="stylesheet" href="board_css/font-awesome.css"
-	rel="stylesheet">
-<link rel="stylesheet" href="board_css/nexus.css" rel="stylesheet">
-<link rel="stylesheet" href="board_css/responsive.css" rel="stylesheet">
-<link rel="stylesheet" href="board_css/custom.css" rel="stylesheet">
-
-<!-- Google Fonts-->
-<link href="http://fonts.googleapis.com/css?family=Raleway:100,300,400"
-	type="text/css" rel="stylesheet">
-<link href="http://fonts.googleapis.com/css?family=Roboto:400,300"
-	type="text/css" rel="stylesheet">
 </head>
 <body>
-
- <!-- === BEGIN CONTENT === -->
-        <div id="content">
-            <div class="container background-white">
-                <div class="row margin-vert-30">
-                    <!-- Register Box -->
-                    <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
-                        <form class="signup-page margin-top-20" action="faqboard_insert_ok.do" method="post" name="frm" id="frm">
-                            <div class="signup-header">
-                                <h2 class="margin-bottom-40">WRITE A NEW NOTE</h2>
-                                <p>새로운 공지사항을 입력하세요.</p>
-                            </div>
-                            <label>카테고리</label>                            	
-								<select name="faq_category" >
-									<option value="1">회원</option>
-									<option value="2">상품</option>
-									<option value="3">주문결제</option>
-									<option value="4">배송</option>
-									<option value="5">교환/반품/환불</option>
-									<option value="6">기타</option>
-								</select><span class="color-red">*</span>
-							<br/>
-                            <label>제목<span class="color-red">*</span></label>
-                            <input class="form-control margin-bottom-20" type="text" name="subject" id="subject">
-                            <label>내용<span class="color-red">*</span></label>
-                            <textarea class="form-control margin-bottom-90" name="content" id="chicago"></textarea>
-                            	<br/>
-                                <div align="right">
-                                <a href="#">수정</a>
-                                <input type="button" class="btn btn-primary" value="글쓰기" id="sendBtn" >
-                                <input type="button" value="취소" onclick="javascript:history.back()">                                   
-                                </div>
-                            </div>                       
-                            </div>
-                        </form>
-                    </div>
-                    <!-- End Register Box -->
-                </div>
-            </div>
-        </div>
-        <!-- === END CONTENT === -->
-
-
-
-
+	<table>
+		<tr>
+			<td style="float:inherit; font-size:15px; color:#505050; padding: 14px;" >
+				FAQ 쓰기
+			</td>
+		</tr>
+	</table>	
+    <form class="signup-page margin-top-20" action="faqboard_insert_ok.do" method="post" name="frm" id="frm">
+         <table class="tableContent1" >
+         	<tr>
+				<th width="15%" style="background-color: #fbfafa; padding:10px; padding-left:20px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3; border-right: 1px solid #e3e3e3;">ID</th>
+				<td align="left" style="padding-left:20px; padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3;">${id }
+				<input type="hidden" name="id" id="id""/>
+				</td>				
+			</tr>
+			<tr>
+				<th width="15%" style="background-color: #fbfafa; padding:10px; padding-left:20px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3; border-right: 1px solid #e3e3e3;">카테고리</th>	
+				<td align="left" style="padding-left:20px; padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3;">				                     	
+					<select name="faq_category" >
+						<option value="1">회원</option>
+						<option value="2">상품</option>
+						<option value="3">주문결제</option>
+						<option value="4">배송</option>
+						<option value="5">교환/반품/환불</option>
+						<option value="6">기타</option>
+					</select><span class="color-red">*</span>
+				</td>
+			</tr>         
+         	<tr>
+				<th style="background-color: #fbfafa; padding:10px; padding-left:20px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3; border-right: 1px solid #e3e3e3;">제목</th>
+				<td  align="left" style="border-bottom:1px solid #e3e3e3; ">
+				<input type="text" name="subject" id="subject" size="40" ></td>
+			</tr>
+			<tr>
+				<th width="center" style="background-color: #fbfafa; padding:10px; padding-left:20px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3; border-right: 1px solid #e3e3e3; vertical-align:middle;">내용</th>
+				<td align="left" style="border-bottom:1px solid #e3e3e3; "><textarea rows="10" cols="50"
+						name="content" id="chicago1" "></textarea></td>
+			</tr>	
+         
+         </table>                  
+         <table class="commonTable" >
+			<tr>
+				<td colspan="2" align="center">					
+					<a href="#" onclick="send();">글쓰기</a>
+					 &nbsp;
+					<a href="#" onclick="javascript:history.back()">닫기</a>
+				</td>
+			</tr>
+		</table>	                  
+   </form>
 </body>
 </html>

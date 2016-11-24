@@ -19,9 +19,9 @@
 		}
 	}
 	
-	function lkBtn() {
+	function lkBtn(book_code) {
 		if(confirm("찜목록으로 이동하시겠습니까?") == true) {
-			window.location.href="member/memberwishlist/MemberWishList.do?book_code=${datilBook.book_code}";
+			window.location.href="memberWishList.do?book_code="+book_code;
 		} else {
 			return;
 		}
@@ -56,7 +56,7 @@
 	function popupOpen(book_code){
 		
 		var popUrl="bookReviewContent.do?book_code="+book_code;
-		var popOption="width=420, height=400, resizable=no scrollbars=no status=no;";
+		var popOption="width=500, height=430, resizable=no scrollbars=no status=no;";
 		window.open(popUrl,"",popOption);
 	}
 
@@ -190,9 +190,9 @@
 												<input type="button" value="목록" onclick="javascript:history.back()"/>
 											</c:when>
 											<c:otherwise>
-												<input type="button" value="찜목록 담기" onclick="lkBtn()"/>&nbsp;&nbsp;
+												<input type="button" value="찜목록 담기" onclick="lkBtn('${detailBook.book_code}')"/>&nbsp;&nbsp;
 												<input type="button" value="북카트 담기" onclick="bcBtn()"/>&nbsp;&nbsp;
-												<%-- <a href="purchase.do?book_code=${book_code }?"> --%><input type="submit" value="바로구매"/><!-- </a> -->
+												<input type="submit" value="바로구매"/>
 											</c:otherwise>
 										</c:choose>
 									</td>
@@ -261,7 +261,7 @@
 				<hr/>
 				<table>
 					<tr>
-						<th width="10%" style="font-size:11px; color:#505050;">저자</th>
+						<th width="10%" style="font-size:11px; color:#505050;" align="left">저자</th>
 						<td width="40%" align="left" style="font-size:11px; color:#505050;">${detailBook.writer }</td>
 						<th width="10%" style="font-size:11px; color:#505050;">출판사</th>
 						<td width="40%" align="left" style="font-size:11px; color:#505050;">${detailBook.publisher }</td>

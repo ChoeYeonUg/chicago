@@ -59,7 +59,6 @@
 						<!-- Begine MyPage Orderlist Selection -->
 						<div id="OrderPeopleType" class="">
 							<a href="memberOrderList.do"><spring:message code="OrderListMain.btMember"/></a>
-							<a href="guestOrderList.do"><spring:message code="OrderListMain.btGuest"/></a>
 							<ul class="notcont">
 								<li>
 									<spring:message code="OrderListMain.notFy3"/>

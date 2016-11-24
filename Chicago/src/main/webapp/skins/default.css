@@ -216,9 +216,27 @@ ul.clients li:hover {
 
 /* footer */
 footer{
-	background:#68A4C4;
+/* 	background:#68A4C4; */
+	background:#745330;
+
 }
 #sub-footer{
-	background:#68A4C4;
+/* 	background:#68A4C4; */
+	background:#745330;
+	
 }
 
+/* head backgroud */
+.headerbg{
+	background-image: url('../images/CoffeePape2.jpg');
+	background-repeat: no-repeat; 
+	background-size: cover;
+	width: 100%;	
+	height: 350px;
+}
+
+#content{
+	
+	padding-top: 20px;
+	
+}

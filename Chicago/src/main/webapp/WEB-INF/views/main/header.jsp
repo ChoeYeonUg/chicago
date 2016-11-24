@@ -40,11 +40,17 @@
                 </div>
                  -->
                  
-		<div id="logo" class="fl_left">
+	<!-- 	<div id="logo" class="fl_left">
 			<h1><a class="navbar-hou" href="index.html"><span class="main-hou">C</span>hicago</a></h1>
 		</div>
-                 
-                <nav id="mainav" class="fl_right">
+                  -->
+       <br/>           
+       <div style="text-align:center">
+        	<a class="navbar-hou" href="index.html">
+        		<img alt="#" src="images\chicagologo2.png" style="width: 40%; height:auto;">
+        	</a>
+        </div>
+                <nav id="mainav" > <!--  class="fl_right" -->
        				 <ul class="clear">
           				<li><a href="store.do"><spring:message code="header.menu"/></a></li>
           				<li><a href="book.do"><spring:message code="header.book"/></a>
@@ -60,9 +66,9 @@
           				<li><a class="drop" href="event.do"><spring:message code="header.event"/></a>
             				<ul>
               					<li><a href="event.do"><spring:message code="header.eventView"/></a></li>
-                                <li><a href="#"><spring:message code="header.month"/></a></li>
-								<li><a href="#"><spring:message code="header.week"/></a></li>
-								<li><a href="#"><spring:message code="header.day"/></a></li>
+                                <li><a href="event_month.do"><spring:message code="header.month"/></a></li>
+								<li><a href="event_week.do"><spring:message code="header.week"/></a></li>
+								<li><a href="event_day.do"><spring:message code="header.day"/></a></li>
             				</ul>
           				</li>
           				<li><a class="drop" href="noticeboard.do"><spring:message code="header.board"/></a>
@@ -78,7 +84,7 @@
             				<ul>
               					<li><a href="memberinfo.do"><spring:message code="header.modifi"/></a></li>
                                 <li><a href="orderlist.do"><spring:message code="header.ppl"/></a></li>
-								<li><a href="wish.do"><spring:message code="header.egd"/></a></li>
+								<li><a href="wishlist.do"><spring:message code="header.egd"/></a></li>
 								<li><a href="memberquestion.do"><spring:message code="header.qu"/></a></li>
             				</ul>
             			</li>
@@ -90,7 +96,8 @@
 	                                <li><a href="book_management.do"><spring:message code="header.saBook"/></a></li>
 									<li><a href="board_management.do"><spring:message code="header.saBoard"/></a></li>
 									<li><a href="sales_management.do"><spring:message code="header.saList"/></a></li>
-									<li><a href="writer_management.do">작가관리</a></li>
+									<li><a href="writer_management.do"><spring:message code="header.writer"/></a></li>
+									<li><a href="event_management.do"><spring:message code="header.event"/></a></li>
 	            				</ul>
 	          				</li>
           				</c:if>
@@ -167,6 +174,7 @@
             </div>
         </div>
         --%>
+
 	</header>
 	
 
