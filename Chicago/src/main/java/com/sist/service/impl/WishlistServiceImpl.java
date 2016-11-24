@@ -21,25 +21,20 @@ public class WishlistServiceImpl implements WishlistService {
 	private WishlistMapper mapper;
 	
 	@Override
-	public List<WishlistVO> inputMemberWishlist(Map map) throws Exception {
+	public WishlistVO inputMemberWishlist(Map map) throws Exception {
 		return mapper.inputMemberWishlist(map);
 	}
 	
 	@Override
-	public List<WishlistVO> memberWishlist(List<String> list, HttpServletRequest request)throws Exception{
+	public List<WishlistVO> memberWishlist(List<String> list)throws Exception{
 		
-		HttpSession hs = request.getSession();
-		String sessionid = (String)hs.getAttribute("id");
 		
 		List<WishlistVO> wishList = new ArrayList<WishlistVO>();
 		
 		for(String book_code : list){
 			System.out.println(book_code);
-			Map map = new HashMap();
-			map.put("sessionid", sessionid);
-			map.put("book_code", book_code);
+			WishlistVO vo = mapper.memberWishlist(book_code);
 			
-			WishlistVO vo = mapper.memberWishlist(map);
 			wishList.add(vo);
 			
 		}

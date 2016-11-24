@@ -19,9 +19,9 @@
 		}
 	}
 	
-	function lkBtn() {
+	function lkBtn(book_code) {
 		if(confirm("찜목록으로 이동하시겠습니까?") == true) {
-			window.location.href="memberWishList.do?book_code=${datilBook.book_code}";
+			window.location.href="memberWishList.do?book_code="+book_code;
 		} else {
 			return;
 		}
@@ -182,6 +182,7 @@
 							<table>
 								<tr>
 									<td align="left">
+<<<<<<< HEAD
 										<c:choose>
 											<c:when test="${detailBook.amount == 0 }">
 												<input type="button" value="목록" onclick="javascript:history.back()"/>
@@ -195,6 +196,11 @@
 												<%-- <a href="purchase.do?book_code=${book_code }?"> --%><input type="submit" value="바로구매"/><!-- </a> -->
 											</c:otherwise>
 										</c:choose>
+=======
+										<input type="button" value="찜목록 담기" onclick="lkBtn('${detailBook.book_code}')"/>&nbsp;&nbsp;
+										<input type="button" value="북카트 담기" onclick="bcBtn()"/>&nbsp;&nbsp;
+										<%-- <a href="purchase.do?book_code=${book_code }?"> --%><input type="submit" value="바로구매"/><!-- </a> -->
+>>>>>>> refs/remotes/origin/chicago
 									</td>
 								</tr>
 							</table>

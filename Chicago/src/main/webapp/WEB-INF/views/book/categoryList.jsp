@@ -21,9 +21,9 @@
 		}
 	}
 	
-	function lkBtn() {
+	function lkBtn(book_code) {
 		if(confirm("찜목록으로 이동하시겠습니까?") == true) {
-			window.location.href="memberWishList.do?book_code=${datilBook.book_code}";
+			window.location.href="memberWishList.do?book_code="+book_code;
 		} else {
 			return;
 		}

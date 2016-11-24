@@ -6,7 +6,7 @@ import com.sist.dao.*;
 /* Made By Choding */ 
 public interface WishlistMapper {
 	
-	public List<WishlistVO> inputMemberWishlist(Map map) throws Exception;
-	public WishlistVO memberWishlist(Map map);
+	public WishlistVO inputMemberWishlist(Map map) throws Exception;
+	public WishlistVO memberWishlist(String book_code) throws Exception;
 	
 }
