@@ -111,7 +111,10 @@ public class WishlistController {
 		
 		HttpSession hs = request.getSession();
 		String sessionid = (String) hs.getAttribute("id");
-		List<String> list = (List<String>) hs.getAttribute("wishist");
+		
+		String id = sessionid; 
+		
+		List<WishlistVO>list = ws.memberWishlist(id);
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
@@ -119,9 +122,14 @@ public class WishlistController {
 		if(list != null) {
 			
 			Map map = new HashMap();
+			map.put("book_code", book_code);
 			map.put("id", sessionid);
 			ws.deleteMemberWishlist(map);
 			
+		} else {
+			
+			model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+			model.addAttribute("cmi", "../member/memberwishlist/MemberWishList.jsp");
 		}
 			
 			return "redirect:wishlist.do";

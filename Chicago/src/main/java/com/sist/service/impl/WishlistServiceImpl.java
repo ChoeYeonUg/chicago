@@ -39,8 +39,8 @@ public class WishlistServiceImpl implements WishlistService {
 	}
 	
 	@Override
-	public WishlistVO deleteMemberWishlist(Map map) throws Exception {
-		return mapper.deleteMemberWishlist(map);
+	public void deleteMemberWishlist(Map map) throws Exception {
+		mapper.deleteMemberWishlist(map);
 	}
 	
 }
