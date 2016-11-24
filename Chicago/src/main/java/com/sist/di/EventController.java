@@ -131,7 +131,7 @@ public class EventController {
 		{
 		  year = Integer.parseInt(strYear);
 		  month = Integer.parseInt(strMonth);
-		 
+		  cal.set(year, month,1);
 		}else{
 		 
 		}

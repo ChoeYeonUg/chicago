@@ -11,14 +11,12 @@
 
 	<!-- book 메인화면 : 카테고리 별 신간 5권씩 출력 -->
 	<select id="newBookCate" resultType="bookVO" parameterType="int">
-		SELECT book_code, book_name, publisher, book_content, price,
-		publication, img, writer, num FROM
-		(SELECT book_code, book_name,
-		publisher, book_content, price, publication, img, writer, rownum as
-		num FROM
-		(SELECT book_code, book_name, publisher, book_content, price, publication,
-		img, writer FROM goods where book_category=#{category} ORDER BY
-		publication DESC))
+		SELECT book_code, book_name, publisher, book_content, price, publication, img, writer, num FROM
+		(SELECT book_code, book_name, publisher, book_content, price, publication, img, writer, rownum as num FROM
+		(SELECT book_code, book_name, publisher, book_content, price, publication, img, writer 
+		FROM goods 
+		WHERE book_category=#{category} 
+		ORDER BY publication DESC))
 		WHERE num BETWEEN 1 AND 5
 	</select>
 
@@ -75,7 +73,7 @@
 	<!-- 아래 페이지로 넘겨줄 때는 Book_code 가 같은 값들을 넘겨주면 됨 -->
 	<!-- 찜목록 페이지로 넘겨줄 때 사용하는 SQL -->
 	<insert id="wishpop" parameterType="hashmap">
-		INSERT INTO WISHLIST1 VALUES(#{id}, #{book_code})
+		INSERT INTO wishlist VALUES(#{id}, #{book_code})
 	</insert>
 
 	<!-- 장바구니 페이지로 넘겨줄 때 사용하는 SQL -->
@@ -162,23 +160,35 @@
 		book_category) FROM goods
 	</select>
 
-	<!-- 도서관리 추가하기 -->
-	<insert id="printSysopBookInsert" parameterType="hashmap">
-		INSERT INTO goods(book_code, book_name, book_category, writer, publisher, amount, out_of_print pages, book_content, price, publication)
-		VALUES(#{book_code}, #{book_name}, #{book_category}, #{writer},
-			   #{publisher}, #{amount},#{out_of_print},#{pages},#{book_content},#{price},#{publication})
+	<!-- book_code 중복체크 기능 -->
+	<select id="codeCheck" resultType="int" parameterType="String">
+		SELECT count(*) FROM goods WHERE book_code = #{book_code}
+	</select>
+
+	<!-- 도서관리 추가하기 -->	
+	<!-- parameterType="hashmap" -->
+	<insert id="printSysopBookInsert">
+		INSERT INTO goods(book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img) 
+		VALUES (#{book_code}, #{book_name},#{book_category}, #{writer}, #{publisher}, #{amount},#{out_of_print}, #{pages}, #{book_content}, #{price}, #{publication}, #{img})
 	</insert>
 
 	<!-- 도서관리 수정하기 -->
 	<!-- book_code는 고유번호로 수정 불가함. 다른 정보들도 협의 후 수정여부 체크해보기 -->
-	<update id="printSysopBookUpdate" parameterType="goods">
+	<select id="printSysopBookUpdate" parameterType="String" resultType="goods">
+		SELECT book_code, book_name, book_category, writer, publisher, amount, out_of_print, pages, book_content, price, publication, img
+		FROM goods WHERE book_code = #{book_code}
+	</select>
+	
+	<update id="printSysopBookUpdateData" parameterType="goods">
 		UPDATE goods
 		SET book_name=#{book_name}, book_category=#{book_category}, writer=#{writer}, publisher=#{publisher},
-		    amount=#{amount}, out_of_print=#{out_of_print}, pages=#{pages}, book_content=#{book_content}, price=#{price}, publication=#{publication}
+	    amount=#{amount}, out_of_print=#{out_of_print}, pages=#{pages}, book_content=#{book_content}, price=#{price}, publication=#{publication}, img=#{img, jdbcType=VARCHAR}
+	    WHERE book_code = #{book_code}
 	</update>
 
+
 	<!-- 도서관리 디테일 페이지 -->
-	<select id="printSysopBookDetail" resultType="bookVO" parameterType="String">
+	<select id="printSysopBookDetail" resultType="goods" parameterType="String">
 		SELECT book_code, book_name, book_category, writer,
 		publisher, amount, out_of_print, pages, book_content, price,
 		publication, img

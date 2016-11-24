@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sist.dao.mapper.WishlistMapper">
+  	<!-- Check id for Wishlist list -->
+    <sql id="check-id">
+		id=#{id}
+	</sql>
+  	
+  	<!-- 위시리스트 목록 넣기 -->
+  	<insert id="inputMemberWishlist" parameterType="hashmap">
+ 		INSERT INTO wishlist(id,book_code) VALUES(#{id},#{book_code})
+ 	</insert>
+  	
+  	<!-- 위시리스트에서 보여줄 리스트 -->
+ 	<select id="List" parameterType="hashmap" resultType="wishlistVO" resultMap="wishlistMap">
+		SELECT id,book_code,book_name,img,amount,price,num
+				FROM (SELECT id,book_code,book_name,img,amount,price,ROWNUM AS num
+				FROM (SELECT wishlist.id,wishlist.book_code,goods.book_name,goods.img,goods.amount,goods.price
+				FROM wishlist,goods WHERE wishlist.book_code=goods.book_code AND <include refid="check-id"/> ORDER BY wishlist.book_code DESC)) WHERE num BETWEEN #{start} AND #{end}
+  	</select>
+  	
+  	<resultMap type="wishlist" id="wishlistMap">
+  			<result property="book_code" column="book_code"/>
+  			<result property="price" column="price"/>
+  			<collection property="bList" column="order_id" ofType="book" javaType="ArrayList" resultMap="bookMap"/>
+  	</resultMap>
+  	
+  	<resultMap type="book" id="bookMap">
+  			<result property="book_name" column="book_name"/>
+  			<result property="img" column="img"/>
+  	</resultMap>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+</mapper>

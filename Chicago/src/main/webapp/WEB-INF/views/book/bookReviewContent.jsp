@@ -5,36 +5,32 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="css/board_css/board_css.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-$(function () {	
-	
-	$('#sendBtn').click(function(){			
-		var content=$('#chicago1').val();
 
-		var $star = $(".star_input"),
-	    $result = $star.find("output>b");
-		
-		/* alert($result.text()); */
-		
-		if(($result.text())==0){
-			alert("별점을 선택하세요.");
-			$('#chicago1').focus();
-			return;
-		}
-		
-		if(content.trim()==""){
-			$('#chicago1').focus();
-			alert("내용을 입력하세요.");
-			return;
-		}		
+function send(){
+	var f = document.frm;
 	
-		
-		
-	  	
-		$('#frm').submit();		
+	var content=$('#chicago1').val();
+
+	var $star = $(".star_input"),
+    $result = $star.find("output>b");
 	
-	})
+	/* alert($result.text()); */
+	
+	if(($result.text())==0){
+		alert("별점을 선택하세요.");
+		$('#chicago1').focus();
+		return;
+	}
+	
+	if(content.trim()==""){
+		$('#chicago1').focus();
+		alert("내용을 입력하세요.");
+		return;
+	}		
+
 	
 	$(document).ready(function() {
 
@@ -49,7 +45,12 @@ $(function () {
 
 	});
 	
-});
+	
+	f.submit();
+	
+};
+
+
 
 
 </script>
@@ -83,24 +84,27 @@ star_input>.input.focus{outline:1px dotted #ddd;}
 </head>
 <body>
 	<center>
-		<form action="bookContentReviewInsert.do" method="post" id="frm">
-			<table width="400" border="1">
+		<form action="bookContentReviewInsert.do" method="post" id="frm" name="frm">
+			 <table class="tableContent" style="border: 1px solid #e3e3e3; border-collapse: collapse; width: 450px; ">
 				<tr>
-					<td width="100px" align="center">id</td>
-					<td >${id }
+					<th width="30%" align="center" style="background-color: #fbfafa; padding:10px; border-bottom: 1px solid #e3e3e3;
+						border-top: 1px solid #e3e3e3; border-right: 1px solid #e3e3e3;">id</th>
+					<td width="70%" align="center" style="padding:10px; border-bottom: 1px solid #e3e3e3;
+						border-top: 1px solid #e3e3e3;">${id }
 					<input type="hidden" name="id" id="id" value="${id }"/>		
-					<input type="hidden" name="book_code" id="book_code" value="${book_code }"/>
-								
-					</td>
+					<input type="hidden" name="book_code" id="book_code" value="${book_code }"/></td>	
 				</tr>
 				<tr>
-					<td >책 제목</td>
-					<td style="font-size:15px;">${detailBook.book_name}</td>
+					<th width="30%" align="center"  style="background-color: #fbfafa; padding:10px; border-bottom: 1px solid #e3e3e3;
+						border-top: 1px solid #e3e3e3;  border-right: 1px solid #e3e3e3;" >책제목</th>
+					<td width="70%" align="center" style="padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3;" >${detailBook.book_name}</td>
 					<input type="hidden" name="img" id="img" value="${detailBook.img }"/>	
 				</tr>
 				<tr>
-					<td>별점선택</td>	
-					<td>
+					<th width="30%" align="center"  style="background-color: #fbfafa; padding:10px; border-bottom: 1px solid #e3e3e3;
+						border-top: 1px solid #e3e3e3;  border-right: 1px solid #e3e3e3;" >별점선택</th>
+					<td width="70%" style="border-bottom: 1px solid #e3e3e3;">
 						<span class="star_input">
 							<span class="input">						
 						    	<input type="radio" name="star_input" value="0_5" id="p0_5" >
@@ -137,26 +141,28 @@ star_input>.input.focus{outline:1px dotted #ddd;}
 					</td>			
 				</tr>		
 				<tr>
-					<td>간단리뷰작성</td>
+					<th width="30%" align="center"  style="background-color: #fbfafa; padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3;  border-right: 1px solid #e3e3e3; border-left:  1px solid #e3e3e3;" >간단리뷰 작성</th>
 					<td style="font-size:11px; color:#505050;">최대 한글 140자 까지 가능합니다.</td>
 				</tr>
 				<tr>
-					<td colspan="3" width="85%" align="left">
-					<textarea rows="10" cols="50" name="content" id="chicago1" "></textarea></td>
+					<td colspan="2" width="80%" align="left">
+					<textarea rows="10" cols="60" name="content" id="chicago1" "></textarea></td>
 				</tr>				
 			</table>
-			<table width="400">
-			<tr>
-				<td align="right">				
-				<%-- onclick="return sendBtn('${book_code}');" --%>		
-					<input type="button" value="글쓰기"	id="sendBtn">&nbsp;
-					<input type="button" value="닫기" onclick="window.close();">&nbsp;
-				</td>
-			</tr>
-		</table>
-			</form>
+					
+			<table class="commonTable" style="width: 450px;">
+				<tr>
+					<td align="center">					
+						<a href="#" onclick="send();">글쓰기</a> &nbsp;
+						<a href="#" onclick="window.close();">닫기</a>&nbsp;
+					</td>
+				</tr>
+			</table>
+		</form>
 	</center>
 	<script src="board_js/jquery-1.11.3.min.js"></script>
 	<script src="board_js/star.js"></script>
 </body>
 </html>
+

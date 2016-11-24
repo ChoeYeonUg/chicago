@@ -117,7 +117,7 @@ public class SysopEventController {
 		es.eventInsert(event);
 		
 		}catch(Exception e){
-			return "redirect:add_writer.do";
+			return "redirect:add_event.do";
 		}
 			
 		return "redirect:event_management.do";
@@ -175,7 +175,7 @@ public class SysopEventController {
 		return "main/main";
 	}
 	
-	@RequestMapping("event_update_ok")
+	@RequestMapping("update_event_ok")
 	public String event_update_ok(EventVO event, HttpServletRequest req, String startDay, String endDay){
 		
 		try{
@@ -193,7 +193,8 @@ public class SysopEventController {
 			return "redirect:update_event.do?event_no"+event.getEvent_no();
 		}
 		
-		return "redirect:writer_management.do";
+		return "redirect:event_management.do";
 		
+
 	}
 }

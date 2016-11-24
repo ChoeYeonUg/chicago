@@ -60,7 +60,7 @@
   function changeContentSize() {
    var Height_Window   = Number(document.documentElement.clientHeight);
    var Height_Footer   = Number(document.getElementById("footer").clientHeight);
-   var ContentTop = Height_Window - Height_Footer - 78;
+   var ContentTop = Height_Window - Height_Footer - 350;
    document.getElementById("content").style.minHeight = Height_Index + 'px';
    document.getElementById("content").style.height = ContentTop + "px";
   }

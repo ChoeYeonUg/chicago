@@ -40,7 +40,9 @@ public class PurchaseController {
 	public String purchsePage(Model model,String[] book_code, String[] amount, HttpServletRequest req, HttpServletResponse resp) {
 		
 		if(book_code == null || amount == null){
-			return null;
+			System.out.println(book_code);
+			System.out.println(amount);
+			return "redirect:book.do";
 		}
 		
 		int[] amountInt = new int[book_code.length];
