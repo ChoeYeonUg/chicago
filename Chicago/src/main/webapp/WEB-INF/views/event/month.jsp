@@ -274,8 +274,7 @@ while(newLine > 0 && newLine < 7)
 %> --%>
 <%-- <c:set var="newLine">0</c:set> --%>
 <c:forEach begin="1" end="${startD-1}" step="1">
-  <%-- <TD >&nbsp;</TD>
-	<h1>${newLine}</h1> --%>
+  <TD >&nbsp;</TD>
   <c:set var="newLine" value="${newLine+1}" />
 </c:forEach> 
 
@@ -301,30 +300,40 @@ while(newLine > 0 && newLine < 7)
 	</c:choose>
 
 
-  <%--      
+
+       <%-- 
+
        
        ${sUseDate += Integer.toString(month+1).length() == 1 ? "0" + Integer.toString(month+1) : Integer.toString(month+1)};
        ${sUseDate += Integer.toString(index).length() == 1 ? "0" + Integer.toString(index) : Integer.toString(index)};
+	   
  
  --%>	   
+	   <%-- <c:set var="sUseDate">${sUseDate += Integer.toString(month+1).length() == 1 ? "0" + Integer.toString(month+1) : Integer.toString(month+1) }</c:set>
+	   <c:set var="sUseDate">${sUseDate += Integer.toString(index).length() == 1 ? "0" + Integer.toString(index) : Integer.toString(index) }</c:set> --%>	
     <!--   
    //	   String iUseDate =  ;
        -->
        <!-- String backColor = "#EFEFEF"; -->
-       <c:set var="iUseDate" value="${iuseDate}"/>
-       <%-- <c:set var="backColor" value="${backColor}">"#EFEFEF"</c:set>
+       <c:set var="iUseDate" value="${iUseDate}"/>
+       <c:set var="backColor">#EFEFEF</c:set>
        <c:if test="${iUseDate } == ${intToday }">  
-             backColor = "#c9c9c9";
-       </c:if> --%>
-      <%--  <TD valign='top' align='left' height='92px' bgcolor="${color }"  nowrap > --%>
-        <TD valign='top' align='left' height='92px' "  nowrap >
+             backColor = "#c9c9c9"
+       </c:if>
+       <TD valign='top' align='left' height='92px' bgcolor=#EFEFEF nowrap >  
+
        <font color='${color }'>
              ${index }
        </font>  
-       <%-- <BR>
-       <c:out value="${iUseDate }"/>
-       <BR> --%>
-      
+       <BR>
+       <c:if test="${index<10}">      
+		   <c:set var="dataUse" value="${iUseDate}0${index }"/>       
+       </c:if>
+       <c:if test="${index>=10}">
+  			<c:set var="dataUse" value="${iUseDate}${index }"/>
+  		</c:if>	
+       <c:out value="${dataUse }"/>
+       <BR>
       
        </TD>
       <%--  ${newLine+=1}--%> 		

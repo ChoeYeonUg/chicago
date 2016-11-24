@@ -18,4 +18,45 @@
 	<select id="scheduleTotalPage" resultType="int" parameterType="int">
 		SELECT CEIL(COUNT(*)/10) FROM EVENT
 	</select>
+	<select id="dateCompare" resultType="String" parameterType="String">
+		SELECT EVENT_NAME,START_DAY,END_DAY FROM EVENT WHERE TRANSLATE(START_DAY, '0123456789' || START_DAY, '0123456789')<=#{} AND TRANSLATE(END_DAY, '0123456789' || END_DAY, '0123456789')<='20161231'; 
+	</select>	
+	<!-- 관리자 메뉴 -->
+  		
+  		<insert id="eventInsert" parameterType="event">
+  			INSERT INTO event VALUES((SELECT NVL(MAX(event_no)+1,1) FROM event), #{store_name}, #{start_day},#{end_day}, #{event_name}, #{description})
+  		</insert>
+  		
+  		<update id="updateEventData" parameterType="event">
+  			UPDATE event SET event_name=#{event_name}, store_name=#{store_name},start_day=#{start_day},end_day=#{end_day}, description=#{description}
+  				WHERE event_no =#{event_no}
+  		</update>
+  		
+  		<delete id="eventDelete" parameterType="int">
+  			DELETE FROM event WHERE event_no = #{event_no}
+  		</delete>
+  		
+  		<select id="updateEvent" parameterType="int" resultType="event">
+  			SELECT event_no,event_name,store_name,start_day,end_day,description FROM event WHERE event_no = #{event_no}
+  		</select>
+  		
+  		<select id="printSysopEvent" parameterType="hashmap" resultType="event">
+ 			SELECT event_no,event_name,store_name,start_day,num
+			FROM (SELECT event_no,event_name,store_name,start_day,ROWNUM as num
+			FROM (SELECT event_no,event_name,store_name,start_day FROM event ORDER BY event_no DESC)) WHERE num BETWEEN #{start} AND #{end}
+	 	</select>
+	 	
+	 	<select id="eventTotalPage" resultType="int" parameterType="int">
+	  		SELECT CEIL(COUNT(*)/#{rowSize}) FROM event
+	  	</select>
+	  	
+	  	<select id="printSysopSearchEvent" parameterType="hashmap" resultType="event">
+	 		SELECT event_no,event_name,store_name,start_day,num
+			FROM (SELECT event_no,event_name,store_name,start_day,ROWNUM as num
+			FROM (SELECT event_no,event_name,store_name,start_day FROM event WHERE ${fs} LIKE '%${ss}%' ORDER BY event_no DESC)) WHERE num BETWEEN #{start} AND #{end}
+	 	</select>
+	 	
+	 	<select id="eventSearchTotalPage" resultType="int" parameterType="hashmap">
+	  		SELECT CEIL(COUNT(*)/#{rowSize}) FROM event WHERE ${fs} LIKE '%${ss}%'
+	  	</select>
 </mapper>

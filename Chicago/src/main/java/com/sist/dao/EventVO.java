@@ -3,6 +3,7 @@ package com.sist.dao;
 import java.util.Date;
 
 public class EventVO {
+	private int event_no;
 	private String event_name;
 	private String store_name;
 	private Date start_day;
@@ -10,6 +11,12 @@ public class EventVO {
 	private String description;
 	private String dbday;
 	
+	public int getEvent_no() {
+		return event_no;
+	}
+	public void setEvent_no(int event_no) {
+		this.event_no = event_no;
+	}
 	public String getDbday() {
 		return dbday;
 	}

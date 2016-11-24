@@ -1,5 +1,8 @@
 package com.sist.di;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +17,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.sist.dao.MemberVO;
 import com.sist.service.MemberService;
@@ -132,9 +137,11 @@ public class LoginController {
 			if(!idCheck && id.length()>4){
 				//data = "사용 가능한 아이디 입니다.";
 				data = true;
+				System.out.println(data);
 			}else{
 				//data = "사용할 수 없습니다.";
 				data = false;
+				System.out.println(data);
 			}
 			resp.setCharacterEncoding("UTF-8");
 			resp.getWriter().print(data);
@@ -171,6 +178,95 @@ public class LoginController {
 			// TODO: handle exception
 		}
 		return "main/main";
+	}
+	
+	
+	@RequestMapping("findPwd")
+	public String find_pwd(Model model, HttpServletRequest req){
+		HttpSession hs = req.getSession();
+		
+		try {
+			String id = (String) hs.getAttribute("id");
+			
+			if(id != null){
+				return "redirect:main.do";
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+		}
+		
+		
+		req.setAttribute("memberVO", new MemberVO());
+		model.addAttribute("jsp", "login.jsp");
+		model.addAttribute("login_jsp", "../login/findPwd.jsp");
+		return "main/main";
+	}
+	
+	@RequestMapping(value = "findPwd_ok", method = RequestMethod.POST)
+	public String find_pwd_ok(Model model, MemberVO vo,RedirectAttributes redirectAttributes){
+		
+		if(vo.getId().equals("amdin")){
+			return "redirect:main.do";
+		}
+		try {
+			boolean bCheck = ms.findPwd(vo);
+			
+			if(!bCheck){
+				return "redirect:login.do";
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		redirectAttributes.addFlashAttribute("id", vo.getId());
+		return "redirect:changePwd.do";
+	}
+	
+	@RequestMapping(value = "findPwd_ok", method = RequestMethod.GET)
+	public String find_pwd_ok(Model model){
+		
+		return "redirect:login.do";
+	}
+	
+	@RequestMapping("changePwd")
+	public String changePwd(Model model, HttpServletRequest request){
+		
+		try{
+			Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+			String id = (String) flashMap.get("id");
+			model.addAttribute("id", id);
+		}catch(Exception e){
+			return "redirect:findPwd.do";
+		}
+		
+		model.addAttribute("jsp", "login.jsp");
+		model.addAttribute("login_jsp", "../login/changePwd.jsp");
+		
+		return "main/main";
+	}
+	
+	@RequestMapping("changePwd_ok")
+	public String changePwd_Ok(Model model, String pwd, String pwdCheck, String id){
+		logger.info(id);
+		logger.info(pwdCheck + ", pwd : " + pwd);
+		try{
+			if(pwd.equals(pwdCheck) && id != null){
+				Map map = new HashMap();
+				map.put("id", id);
+				map.put("pwd", pwd);
+				ms.modyfyMemberPwd(map);
+			}else{
+				return "redirect:findPwd.do";
+			}
+		}catch(Exception e){
+			return "redirect:findPwd.do";
+		}
+		
+		
+		return "redirect:login.do";
 	}
 	
 }

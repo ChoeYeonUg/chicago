@@ -123,6 +123,12 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
+	public void insertMemberDeliveryAddrs(AddressVO avo) throws Exception {
+		mapper.insertMemberDeliveryAddrs(avo);
+		
+	}
+	
+	@Override
 	public void modyfyMemberDeliveryAddrs(AddressVO avo) throws Exception {
 		mapper.modyfyMemberDeliveryAddrs(avo);
 	}
@@ -136,6 +142,19 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO orderData(String id) throws Exception {
 		// TODO Auto-generated method stub
 		return mapper.orderData(id);
+	}
+
+	@Override
+	public boolean findPwd(MemberVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		boolean bCheck = false;
+		int result = mapper.findPwd(vo);
+		
+		if(result == 1){
+			bCheck = true;
+		}
+		
+		return bCheck;
 	}
 	
 

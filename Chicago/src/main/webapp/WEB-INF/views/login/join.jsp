@@ -153,7 +153,7 @@ function sample6_execDaumPostcode() {
 			<!-- Register Box -->
 				<div class="col-md-6 col-md-offset-3 col-sm-offset-3">
 					<h2 class="margin-bottom-20"><spring:message code="form.join"/></h2>
-						<form:form action="join_ok.do" commandName="memberVO" name="frm" id="frm">
+						<form:form action="add_writer.do" commandName="memberVO" name="frm" id="frm">
 							<div class="join_mem">
 								<div class="join_cont1">
 									<table width="100%">
@@ -198,7 +198,7 @@ function sample6_execDaumPostcode() {
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="button" value="<spring:message code="form.btn"/>" id="sendBtn" onclick="send"></td>
+				<td colspan="2"><input type="button" value="<spring:message code="form.btn"/>" id="sendBtn" onclick="send" class="btn btn-primary"></td>
 			</tr>
 		
 		</table>

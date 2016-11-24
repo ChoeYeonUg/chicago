@@ -1,7 +1,6 @@
 package com.sist.service.impl;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -16,14 +15,30 @@ public class OrderlistServiceImpl implements OrderlistService{
 	
 	@Resource(name="orderlistMapper")
 	private OrderlistMapper mapper;
-
-
+	
 	@Override
 	public List<OrderlistVO> selectOrderlist(Map map) throws Exception {
 		return mapper.selectOrderlist(map);
 	}
 	
-
+	@Override
+	public int selectOrderlistTotalPage(Map map) throws Exception {
+		return mapper.selectOrderlistTotalPage(map);
+	}
 	
+	@Override
+	public List<OrderlistVO> searchOrderlist(Map map) throws Exception {
+		return mapper.searchOrderlist(map);
+	}
+	
+	@Override
+	public int searchOrderlistTotalPage(Map	map) throws Exception {
+		return mapper.searchOrderlistTotalPage(map);
+	}
+	
+	@Override
+	public List<OrderlistVO> memberOrderlistDetail(Map map) throws Exception {
+		return mapper.memberOrderlistDetail(map);
+	}
 
 }

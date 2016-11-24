@@ -42,7 +42,13 @@
 							<div class="wPic">
 								<a href="writerDetail.do?writer_no=${vo.writer_no }">
 									<c:if test="${vo.img == null }">
-										<img src="http://bimage.interpark.com/renewPark/bookDB/common/writer_noimage.gif" class="bd" alt="${vo.writer_name }">
+										<img src="images\writer_noimage.gif" class="bd" alt="${vo.writer_name }">
+									</c:if>
+									<c:if test="${vo.img != null && fn:indexOf(vo.img,'http://') == -1 }">
+										<img src="imageSrc.do?src=${vo.img }" class="bd" alt="${vo.writer_name }">
+									</c:if>
+									<c:if test="${vo.img != null && fn:indexOf(vo.img,'http://') != -1 }">
+										<img src="${vo.img }" class="bd" alt="${vo.writer_name }">
 									</c:if>
 								</a>
 							</div>

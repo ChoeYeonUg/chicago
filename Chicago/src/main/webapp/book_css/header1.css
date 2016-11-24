@@ -256,8 +256,9 @@ td {
 }
 
 #mainav .active a, #mainav a:hover, #mainav li:hover>a {
-	color: #C0AB8F;
-	background-color: #FFFFFF;
+	/* color: #C0AB8F;
+	background-color: #FFFFFF; */
+	color: #FFFFFF;
 }
 
 #mainav li li a, #mainav .active li a {

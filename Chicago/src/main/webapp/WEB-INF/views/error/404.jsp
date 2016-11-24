@@ -9,6 +9,9 @@
 <title>404</title>
 </head>
 <body>
-없어! 없다고
+	<center>
+		<h2>404!</h2>
+		<h5>이것은 404  페이지입니다 :)</h5>	
+	</center>
 </body>
 </html>

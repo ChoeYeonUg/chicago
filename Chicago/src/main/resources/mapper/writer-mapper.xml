@@ -5,6 +5,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.sist.dao.mapper.WriterMapper">
+
   		<!-- <select id="printWriter" parameterType="hashmap" resultType="writer">
   			SELECT writer_name,birth,death, bookCount,num
  		FROM (SELECT writer_name,birth,death, bookCount,ROWNUM as num
@@ -31,6 +32,7 @@
   			<result property="writer_name" column="writer_name"/>
   			<result property="birth" column="birth"/>
   			<result property="death" column="death"/>
+  			<result property="img" column="wimg"/>
   			<collection property="list" column="writer_no" ofType="book" javaType="ArrayList" resultMap="bookMap"/>
   		</resultMap>
   		<resultMap type="book" id="bookMap">
@@ -41,9 +43,9 @@
   		</resultMap>
   		
   		<select id="printWriter" parameterType="hashmap" resultMap="writerMap">
-  		SELECT writer_no,writer_name,birth,death,book_code,book_name,img,publication,num
- 		FROM (SELECT writer_no,writer_name,birth,death,book_code,book_name,img,publication,ROWNUM as num
- 		FROM (SELECT goods.writer_no,writer_name,birth,death,book_code,book_name,goods.img,publication FROM writer JOIN goods ON(goods.writer_no = writer.writer_no) WHERE book_category = #{book_category} ORDER BY writer_name, publication))
+  		SELECT writer_no,writer_name,birth,death,wimg,book_code,book_name,img,publication,num
+ 		FROM (SELECT writer_no,writer_name,birth,death,wimg,book_code,book_name,img,publication,ROWNUM as num
+ 		FROM (SELECT goods.writer_no,writer_name,birth,death,writer.img as wimg,book_code,book_name,goods.img,publication FROM writer JOIN goods ON(goods.writer_no = writer.writer_no) WHERE book_category = #{book_category} ORDER BY writer_name, publication))
  		WHERE writer_no IN (SELECT writer_no 
  		FROM (SELECT writer_no,num
  		FROM (SELECT writer_no,ROWNUM as num
@@ -54,9 +56,9 @@
   		
   		
   		<select id="printSearchWriter" parameterType="hashmap" resultMap="writerMap">
-  			SELECT writer_no,writer_name,birth,death,book_code,book_name,img,publication,num
- 		FROM (SELECT writer_no,writer_name,birth,death,book_code,book_name,img,publication,ROWNUM as num
- 		FROM (SELECT goods.writer_no,writer_name,birth,death,book_code,book_name,goods.img,publication FROM writer JOIN goods ON(goods.writer_no = writer.writer_no) WHERE writer_name LIKE '%${ss}%' ORDER BY writer_name, publication))
+  			SELECT writer_no,writer_name,birth,death,wimg,book_code,book_name,img,publication,num
+ 		FROM (SELECT writer_no,writer_name,birth,death,wimg,book_code,book_name,img,publication,ROWNUM as num
+ 		FROM (SELECT goods.writer_no,writer_name,birth,death,writer.img as wimg,book_code,book_name,goods.img,publication FROM writer JOIN goods ON(goods.writer_no = writer.writer_no) WHERE writer_name LIKE '%${ss}%' ORDER BY writer_name, publication))
  		WHERE writer_no IN (SELECT writer_no 
  		FROM (SELECT writer_no,num
  		FROM (SELECT writer_no,ROWNUM as num
@@ -78,5 +80,45 @@
  		FROM (SELECT writer_no,writer_name,birth,death,info,wimg,book_code,book_name,img,publication,ROWNUM as num
  		FROM (SELECT goods.writer_no,writer_name,birth,death,info,writer.img as wimg,book_code,book_name,goods.img,publication FROM writer JOIN goods ON(goods.writer_no = writer.writer_no) WHERE writer.writer_no = #{writer_no} ORDER BY writer_name, publication))
   		</select>
+  		
+  		<!-- 관리자 메뉴 -->
+  		
+  		<insert id="writerInsert" parameterType="writer">
+  			INSERT INTO writer VALUES(writer_seq.nextval, #{writer_name}, #{birth, jdbcType=DATE},#{death, jdbcType=DATE}, #{info},#{img, jdbcType=VARCHAR})
+  		</insert>
+  		
+  		<update id="updateWriterData" parameterType="writer">
+  			UPDATE writer SET writer_name=#{writer_name}, birth=#{birth, jdbcType=DATE},death=#{death, jdbcType=DATE}, info=#{info}, img=#{img, jdbcType=VARCHAR}
+  				WHERE writer_no =#{writer_no}
+  		</update>
+  		
+  		<delete id="writerDelete" parameterType="int">
+  			DELETE FROM writer WHERE writer_no = #{writer_no}
+  		</delete>
+  		
+  		<select id="updateWriter" parameterType="int" resultType="writer">
+  			SELECT writer_no,writer_name,birth,death,info,img FROM writer WHERE writer_no = #{writer_no}
+  		</select>
+  		
+  		<select id="printSysopWriter" parameterType="hashmap" resultType="writer">
+ 			SELECT writer_no,writer_name,birth,num
+			FROM (SELECT writer_no,writer_name,birth,ROWNUM as num
+			FROM (SELECT writer_no,writer_name,birth FROM writer ORDER BY writer_no)) WHERE num BETWEEN #{start} AND #{end}
+	 	</select>
+	 	
+	 	<select id="writerTotalPage" resultType="int" parameterType="int">
+	  		SELECT CEIL(COUNT(*)/#{rowSize}) FROM writer
+	  	</select>
+	  	
+	  	<!-- order 서치 -->
+	 	<select id="printSysopSearchWriter" parameterType="hashmap" resultType="writer">
+	 		SELECT writer_no,writer_name,birth,num
+			FROM (SELECT writer_no,writer_name,birth,ROWNUM as num
+			FROM (SELECT writer_no,writer_name,birth FROM writer WHERE ${fs} LIKE '%${ss}%' ORDER BY writer_no)) WHERE num BETWEEN #{start} AND #{end}
+	 	</select>
+	 	
+	 	<select id="writerSearchTotalPage" resultType="int" parameterType="hashmap">
+	  		SELECT CEIL(COUNT(*)/#{rowSize}) FROM writer WHERE ${fs} LIKE '%${ss}%'
+	  	</select>
   		
   </mapper>

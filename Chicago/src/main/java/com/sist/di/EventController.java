@@ -131,7 +131,7 @@ public class EventController {
 		{
 		  year = Integer.parseInt(strYear);
 		  month = Integer.parseInt(strMonth);
-		 
+		  cal.set(year, month,1);
 		}else{
 		 
 		}
@@ -148,8 +148,12 @@ public class EventController {
 		Calendar todayCal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyMMdd");
 		int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
-		 
-		int iUseDate = Integer.parseInt(sUseDate);
+	//	index = Integer.parseInt(req.getParameter(Integer.toString(index))); 
+		sUseDate += Integer.toString(month+1).length() == 1 ? "0" + Integer.toString(month+1) : Integer.toString(month+1);
+	//	sUseDate += Integer.toString(index).length() == 1 ? "0" + Integer.toString(index) : Integer.toString(index);
+		
+		String iUseDate = sUseDate;
+		String dateUse = "";
 	//	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	//	SimpleDateFormat nya=new SimpleDateFormat("yyyy-MM");
 		/*SimpleDateFormat year=new SimpleDateFormat("yyyy");
@@ -160,7 +164,6 @@ public class EventController {
 		
 		//int day = Integer.toString(cal.get(Calendar.DATE));
 		
-		System.out.println(year+"샤랄라라라랄");
 		
 		/*String strYear = req.getParameter("year");
 		String strMonth = req.getParameter("month");
@@ -179,7 +182,9 @@ public class EventController {
 		
 		
 		List<EventVO> eventSchedule = es.schedule(map);
+	//	List<>
 		
+		model.addAttribute("dateUse",dateUse);
 		model.addAttribute("iUseDate",iUseDate);
 		model.addAttribute("sUseDate",sUseDate);
 		model.addAttribute("startDay",startDay);

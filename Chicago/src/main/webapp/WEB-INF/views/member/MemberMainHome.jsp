@@ -58,15 +58,6 @@
 										<li></li>
 									</ul>
 								</div>
-								
-								<!-- MemberJoin, GuestUser Button -->
-								<div>
-									<a href="clause.do">회원가입하기</a>
-									<a>비회원으로 계속하기</a>
-									<!-- <input type="button" value="회원가입하기" onclick="cluse.do">
-									<input type="button" value="비회원으로 이용하기" onclick=> -->
-								</div>
-								
 							</fieldset>
 						</form>
 					</div>

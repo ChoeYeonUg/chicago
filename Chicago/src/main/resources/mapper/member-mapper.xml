@@ -22,7 +22,11 @@
 	<sql id="where-addrid">
 		WHERE id = (SELECT id FROM member WHERE id=#{id})
 	</sql>
-      
+     
+     <select id="findPwd" resultType="int" parameterType="member">
+     	SELECT count(*) FROM member WHERE id=#{id} AND name=#{name} AND phone=#{phone}
+     </select>
+     
   	<select id="idCheck" resultType="int" parameterType="String">
   		SELECT count(*) FROM member <include refid="where-id"/>
   	</select>
@@ -99,9 +103,14 @@
 		SELECT addr1,zipcode1,addr2,zipcode2,addr3,zipcode3 FROM addrs <include refid="where-addrid"/>
  	</select>
  	
+ 	<!-- Insert Member Address -->
+ 	<insert id="insertMemberDeliveryAddrs" parameterType="address">
+ 		INSERT INTO addrs(id,addr1,zipcode1,addr2,zipcode2,addr3,zipcode3) VALUES(#{id},#{addr1},#{zipcode1},#{addr2},#{zipcode2},#{addr3},#{zipcode3})
+ 	</insert>
+ 	
 	<!-- Modify Member Address -->
 	<update id="modyfyMemberDeliveryAddrs" parameterType="hashmap">
-		UPDATE addrs SET addr1=#{addr1},zipcode1=#{zipcode1},addr2=#{addr2},zipcode2=#{zipcode2},addr3=#{addr3},zipcode3=#{zipcode3} <include refid="where-addrid"/>
+		UPDATE addrs SET addr1=#{addr1},zipcode1=#{zipcode1},addr2=#{addr2},zipcode2=#{zipcode2},addr3=#{addr3},zipcode3=#{zipcode3} <include refid="where-id"/>
 	</update>
 	
 	<!-- Withdraw Member -->
