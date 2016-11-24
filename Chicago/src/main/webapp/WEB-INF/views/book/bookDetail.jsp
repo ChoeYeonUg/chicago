@@ -162,7 +162,7 @@
 												<input type="hidden" value="${detailBook.book_code }" name="book_code"/>
 												<input type="hidden" value="${detailBook.amount }" id="amount"/>
 												<img src="book_img\up.png" alt="upBtn" style="width:20px;height:20px;" onclick="btup()"/>
-												&nbsp;<b style="color:#D50000;">현재 남아있는 ${detailBook.amount }권 만 판매가 가능합니다.</b>
+												&nbsp;<b style="color:#D50000;">절판된 상품입니다. 현재 남아있는 ${detailBook.amount }권 만 판매가 가능합니다.</b>
 											</c:when>
 											<c:when test="${detailBook.amount == 0  &&   detailBook.out_of_print == 1 }">
 												<b style="color:#D50000;">상품 준비중입니다.</b>
