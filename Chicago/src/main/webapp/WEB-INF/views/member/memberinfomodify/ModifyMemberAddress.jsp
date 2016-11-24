@@ -11,7 +11,7 @@
 <meta >
 <title>Made By ChoDing!!</title>
 <link href="css/bootstrap.min.css" rel="stylesheet" />
-<link href="css/mypage_css/memberinfo.css" rel="stylesheet" />
+<link href="mypage_css/mypage.css" rel="stylesheet" />
 
 <!-- Theme skin -->
 <link href="skins/default.css" rel="stylesheet" />
@@ -265,9 +265,15 @@ function sample6_execDaumPostcode3() {
 											<label for="USER_CADDRESS2">주 배송주소1</label>
 										</dt>
 										<dd>
-											${avo.zipcode2}
-											&nbsp;
-											${avo.addr2}
+											<c:if test="${avo.zipcode2 != null}">
+												${avo.zipcode2}
+												&nbsp;
+												${avo.addr2}
+											</c:if>
+											
+											<c:if test="${avo.zipcode2 == null}">
+												입력된 주소가 없습니다.
+											</c:if>
 										</dd>
 										<dt>
 											<label for="USER_ADDRESS2">보조 배송 주소1</label>
@@ -285,9 +291,15 @@ function sample6_execDaumPostcode3() {
 											<label for="USER_CADDRESS3">주 배송주소2</label>
 										</dt>
 										<dd>
-											${avo.zipcode3}
-											&nbsp;
-											${avo.addr3}
+											<c:if test="${avo.zipcode3 != null}">
+												${avo.zipcode3}
+												&nbsp;
+												${avo.addr3}
+											</c:if>
+											
+											<c:if test="${avo.zipcode3 == null}">
+												입력된 주소가 없습니다.
+											</c:if>
 										</dd>
 										<dt>
 											<label for="USER_ADDRESS3">보조 배송 주소2</label>

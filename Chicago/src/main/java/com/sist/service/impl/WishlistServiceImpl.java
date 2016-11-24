@@ -20,26 +20,27 @@ public class WishlistServiceImpl implements WishlistService {
 	@Resource(name="wishlistMapper")
 	private WishlistMapper mapper;
 	
+	@Resource(name="bookMapper")
+	private BookMapper bm;
+	
 	@Override
 	public WishlistVO inputMemberWishlist(Map map) throws Exception {
 		return mapper.inputMemberWishlist(map);
 	}
 	
 	@Override
-	public List<WishlistVO> memberWishlist(List<String> list)throws Exception{
-		
-		
-		List<WishlistVO> wishList = new ArrayList<WishlistVO>();
-		
-		for(String book_code : list){
-			System.out.println(book_code);
-			WishlistVO vo = mapper.memberWishlist(book_code);
-			
-			wishList.add(vo);
-			
-		}
-		
-		return wishList;
+	public List<WishlistVO> memberWishlist(String id)throws Exception {
+		return mapper.memberWishlist(id);
+	}
+	
+	@Override
+	public BookVO purchase(String book_code) {
+		return bm.purchase(book_code);
+	}
+	
+	@Override
+	public WishlistVO deleteMemberWishlist(Map map) throws Exception {
+		return mapper.deleteMemberWishlist(map);
 	}
 	
 }

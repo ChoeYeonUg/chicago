@@ -10,7 +10,7 @@
 <body>
 	<form action="purchase.do" method="post">
 		<c:if test="${wishList != null}">
-			<c:forEach items="${mwishList}" var="item">
+			<c:forEach items="${myWishList}" var="item">
 				<input type="text" name="book_code" value="${item.book_code}">
 				<input type="text" name="amount" value="1">
 			</c:forEach>

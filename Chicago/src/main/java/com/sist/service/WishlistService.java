@@ -11,6 +11,8 @@ public interface WishlistService {
 	
 	//위시리스트
 	public WishlistVO inputMemberWishlist(Map map) throws Exception;
-	public List<WishlistVO> memberWishlist(List<String> list) throws Exception;
+	public List<WishlistVO> memberWishlist(String id) throws Exception;
+	public BookVO purchase(String book_code);
+	public WishlistVO deleteMemberWishlist(Map map) throws Exception;
 
 }

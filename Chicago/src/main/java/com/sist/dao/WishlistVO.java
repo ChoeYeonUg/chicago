@@ -6,26 +6,36 @@ import java.util.*;
 public class WishlistVO {
 	
 	private String id;
-	private String name;
-	private String book_name;
 	private String book_code;
+	private String book_name;
 	private int amount;
 	private int price;
+	private String img;
 	
+	List<BookVO> bList;
+	
+	public List<BookVO> getbList() {
+		return bList;
+	}
+
+	public void setbList(List<BookVO> bList) {
+		this.bList = bList;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
 	public String getId() {
 		return id;
 	}
 	
 	public void setId(String id) {
 		this.id = id;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
 	}
 	
 	public String getBook_name() {

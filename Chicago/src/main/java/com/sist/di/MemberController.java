@@ -31,7 +31,6 @@ public class MemberController {
 	@Resource(name="memberService")
 	private MemberService ms;
 	
-	
 	/* HeadMenu */
 	@RequestMapping("mypage.do")
 	public String member_page(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -239,6 +238,8 @@ public class MemberController {
 	@RequestMapping("memberPoint.do")
 	public String member_side_point_page(Model model, MemberVO vo, HttpServletRequest request, HttpServletResponse response, String gradename) throws Exception {
 		
+		logger.info(vo.getId() + " : " + vo.getPwd());
+		
 		HttpSession hs = request.getSession();
 		String sessionid = (String) hs.getAttribute("id");
 		
@@ -351,7 +352,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("withdrawMember.do")
-	public String member_side_withdraw_page(Model model, HttpServletRequest request, HttpServletResponse response) {
+	public String member_side_withdraw_page(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
@@ -364,7 +365,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="withdrawMember_ok.do", method=RequestMethod.POST)
-	public String withdrawMember_ok(Model model, MemberVO vo, HttpServletRequest request,String USER_PWD, String USER_C_PWD) throws Exception {
+	public String withdrawMember_ok(Model model, MemberVO vo, HttpServletRequest request, HttpServletResponse response, String USER_PWD, String USER_C_PWD) throws Exception {
 		
 		logger.info(vo.getId() + " : " + vo.getPwd());
 		

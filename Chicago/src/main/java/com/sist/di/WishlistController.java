@@ -29,40 +29,37 @@ public class WishlistController {
 	@Resource(name="wishlistService")
 	private WishlistService ws;
 	
-	@RequestMapping("memberWishList")
+	@RequestMapping("memberWishform")
 	public String memberWishList(Model model, String book_code, HttpServletRequest request) throws Exception {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
+		HttpSession hs = request.getSession();
+		String sessionid = (String)hs.getAttribute("id");
+
 		try {
 			
-			HttpSession hs = request.getSession();
-			String sessionid = (String)hs.getAttribute("id");
-			
-			List<String> list = (List<String>)hs.getAttribute("wishlist");
-			
-			if(book_code != null && !book_code.equals("")) {
-				
-				if(list == null) {
+			if(sessionid != null && !sessionid.equals("")) {
+				if(book_code != null && !book_code.equals("")) {
+						
+					Map map = new HashMap();
+					map.put("id", sessionid);
+					map.put("book_code", book_code);
+					List<String> list = (List<String>)ws.inputMemberWishlist(map);
+						
+					model.addAttribute("list", list);
+					
+				} else {
 					
 					Map map = new HashMap();
 					map.put("id", sessionid);
 					map.put("book_code", book_code);
+					List<String> list = (List<String>)ws.inputMemberWishlist(map);
 					
-					list = (List<String>)ws.inputMemberWishlist(map);
-					
-				} else {
-					
-					list.add(sessionid);
-					list.add(book_code);
-					
-					HashSet temp = new HashSet(list);
-					list = new ArrayList<String>(temp);
+					model.addAttribute("list", list);
 					
 				}
-				
-				hs.setAttribute("wishlist", list);
 				
 			}
 			
@@ -80,23 +77,22 @@ public class WishlistController {
 	
 	/* Member Wishlist Include */
 	@RequestMapping("wishlist")
-	public String memberWishlist_page(Model model,String book_code, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String memberWishlist_page(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		model.addAttribute("jsp", "member.jsp");
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
 		HttpSession hs = request.getSession();
-		List<String> list = (List<String>) hs.getAttribute("wishlist");
-			
-		List<WishlistVO> mwishList = null;
+		String sessionid = (String)hs.getAttribute("id");
+		
+		String id = sessionid;
+		
 		try {
-			if(list != null){
-					
-				mwishList = ws.memberWishlist(list);
-					
-			}
+			
 				
-			model.addAttribute("mwishList", mwishList);
+			List<WishlistVO>list = ws.memberWishlist(id);
+			
+			model.addAttribute("list", list);
 			model.addAttribute("cmi", "MemberWishform.jsp");
 			model.addAttribute("cmi", "../member/memberwishlist/MemberWishList.jsp");
 				
@@ -109,5 +105,27 @@ public class WishlistController {
 			return "main/main";
 			
 		}
+	
+	@RequestMapping("deleteMemberWishlist")
+	public String deleteMemberWishlist(Model model, HttpServletRequest request, HttpServletRequest response, String book_code) throws Exception{
+		
+		HttpSession hs = request.getSession();
+		String sessionid = (String) hs.getAttribute("id");
+		List<String> list = (List<String>) hs.getAttribute("wishist");
+		
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
+		
+		if(list != null) {
+			
+			Map map = new HashMap();
+			map.put("id", sessionid);
+			ws.deleteMemberWishlist(map);
+			
+		}
+			
+			return "redirect:wishlist.do";
+		
+	}
 		
 }

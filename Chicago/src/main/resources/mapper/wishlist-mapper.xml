@@ -15,8 +15,13 @@
  	</insert>
   	
   	<!-- 위시리스트에서 보여줄 리스트 -->
- 	<select id="memberWishlist" parameterType="String" resultType="wishlistVO">
-		SELECT book_code, book_name, amount, price, img FROM goods WHERE book_code= #{book_code}
+ 	<select id="memberWishlist" parameterType="String" resultType="wishlist">
+ 		SELECT wishlist.id, wishlist.book_code, goods.book_name, goods.amount, goods.price, goods.img FROM wishlist,goods WHERE wishlist.book_code=goods.book_code AND wishlist.id=#{id}
   	</select>
-	 	
+  	
+	<!-- 위시리스트에서 항목 삭제하기 -->
+	<delete id="deleteMemberWishlist" parameterType="hashmap">
+		DELETE FROM wishlist WHERE id=#{id} AND book_code=#{book_code}
+  	</delete>
+	
 </mapper>

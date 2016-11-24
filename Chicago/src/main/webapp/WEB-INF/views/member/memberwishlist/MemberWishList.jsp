@@ -8,25 +8,9 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta >
+<meta>
 <title>Made By ChoDing!!</title>
-<link href="css/bootstrap.min.css" rel="stylesheet" />
-<link href="css/mypagecss/orderlist.css" rel="stylesheet" />
-
-<!-- Theme skin -->
-<link href="skins/default.css" rel="stylesheet" />
-
-<script src="js/animate.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/custom.js"></script>
-<script src="js/jquery.easing.1.3.js"></script>
-<script src="js/jquery.fancybox-media.js"></script>
-<script src="js/jquery.fancybox.pack.js"></script>
-<script src="js/jquery.flexslider.js"></script>
-<script src="js/jquery.js"></script>
-<script src="js/validate.js"></script>
-<script src="js/google-code-prettify/prettify.js"></script>
-
+<link href="css/sb/sbList.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 
@@ -107,7 +91,7 @@ function send(){
 };
 
 function deleteBook(data){
-	location.replace("sbDelete.do?book_code="+data);	
+	location.replace("deleteMemberWishlist.do?book_code="+data);	
 };
 //disabled="disabled"
 function cancel(checkbox,book,amount){
@@ -133,9 +117,7 @@ function cancel(checkbox,book,amount){
 	<div class="OutlineForm">
 		<div class="MiddlelineSettingForm">
 			<div class="HeadlineSettingForm">
-				<div class="Headline">
-					회원찜내역
-				</div>
+				<div class="Headline">회원찜내역</div>
 				<div class="Notification">
 					<ul class="Notcont">
 						<li>회원님의 찜내역을 확인할 수 있습니다.</li>
@@ -145,27 +127,24 @@ function cancel(checkbox,book,amount){
 			</div>
 			<div class="OrderlistSettingForm">
 				<div class="MemberWishlistHeadlineForm">
-					<label class="MemberInfoHeadline"><%=request.getParameter("id") %>님의 찜 내역</label>
+					<label class="MemberInfoHeadline"><%=request.getParameter("id")%>님의 찜 내역</label>
 				</div>
 				<div class="MemberWishlistContentForm">
 					<div id="InnerBox">
 						<div id="sb_content" class="cont_basket">
-							<c:if test="${wishList != null && wishList.size() != 0}">
+							<c:if test="${list != null && list.size() != 0}">
 								<fieldset>
 									<form action="purchase.do" method="post" name="frm">
 										<div class="info_basket">
 											<p class="desc_total">
-												<em class="emph_total">${wishList.size() }개</em> 상품이 찜목록에
-												있습니다.
+												<em class="emph_total">${list.size()}개</em> 상품이 찜목록에 있습니다.
 											</p>
 
 											<ul class="list_basket">
-												<c:if test="${wishList != null }">
-													<c:forEach items="${mwishList}" var="item">
+												<c:if test="${list != null }">
+													<c:forEach items="${list}" var="item">
 														<li class="check_on"><span
-															class="choice_g choice_basket"> <input
-																type="checkbox" class="inp_g" checked="checked"
-																onclick="cancel(this,'am_${item.book_code}','${item.book_code}')">
+															class="choice_g choice_basket"> <input type="checkbox" class="inp_g" checked="checked" onclick="cancel(this,'am_${item.book_code}','${item.book_code}')">
 														</span> <a href="bookDetail.do?book_code=${item.book_code}"
 															class="link_thumb"> <img src="${item.img}">
 														</a>
@@ -176,8 +155,7 @@ function cancel(checkbox,book,amount){
 																		${item.book_name } </a></strong>
 
 																<ul class="list_append">
-																	<li><em class="tit_append">금액 : </em> <span
-																		class="product_price"><fmt:formatNumber
+																	<li><em class="tit_append">금액 : </em> <span class="product_price"><fmt:formatNumber
 																				value="${item.price}" pattern="###,###" />원</span></li>
 																</ul>
 															</div>
@@ -236,8 +214,9 @@ function cancel(checkbox,book,amount){
 							</c:if>
 						</div>
 						<div id="cEtc"></div>
-
 					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

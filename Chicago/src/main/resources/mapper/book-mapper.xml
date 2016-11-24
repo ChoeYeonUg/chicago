@@ -75,7 +75,7 @@
 	<!-- 아래 페이지로 넘겨줄 때는 Book_code 가 같은 값들을 넘겨주면 됨 -->
 	<!-- 찜목록 페이지로 넘겨줄 때 사용하는 SQL -->
 	<insert id="wishpop" parameterType="hashmap">
-		INSERT INTO wishlist VALUES(#{id}, #{book_code})
+	
 	</insert>
 
 	<!-- 장바구니 페이지로 넘겨줄 때 사용하는 SQL -->
