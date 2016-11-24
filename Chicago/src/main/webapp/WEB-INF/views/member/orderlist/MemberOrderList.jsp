@@ -28,7 +28,15 @@
 <script src="js/validate.js"></script>
 <script src="js/google-code-prettify/prettify.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+<script type="text/javascript">
+	function deliOk(data){
+		location.replace("deliOk.do?order_id="+data);
+	};
+	
+	function cancel(data){
+		location.replace("orderCancel.do?order_id="+data);
+	}
+</script>
 </head>
 <body>
 	<!-- Member Orderlist -->
@@ -115,7 +123,7 @@
 																</c:if>
 																
 																<c:if test="${vo.delivery == 2}">
-																	배송중
+																	<input type="button" onclick="deliOk('${vo.order_id}')" value="배송중">
 																</c:if>
 																
 																<c:if test="${vo.delivery == 3}">
@@ -123,13 +131,17 @@
 																</c:if>
 															</span>
 															<span class="cell colB">
-																<c:if test="${vo.delivery != 3}">
-																	<input type="button" onclick="#" value="주문취소">
+																<c:if test="${vo.refund_state != null }">
+																	환불
 																</c:if>
-																
-																<c:if test="${vo.delivery == 3}">
-																	<input type="button" onclick="#" value="배송완료">
-																	<input type="button" onclick="#" value="환불신청하기">
+																<c:if test="${vo.refund_state == null }">
+																	<c:if test="${vo.delivery != 3}">
+																		<input type="button" onclick="cancel('${vo.order_id}')" value="주문취소">
+																	</c:if>
+																	
+																	<c:if test="${vo.delivery == 3}">
+																		<input type="button" onclick="cancel('${vo.order_id}')" value="환불신청하기">
+																	</c:if>
 																</c:if>
 																
 															</span>

@@ -10,7 +10,9 @@ import com.sist.dao.*;
 public interface WishlistService {
 	
 	//위시리스트
-	public WishlistVO inputMemberWishlist(Map map) throws Exception;
-	public List<WishlistVO> memberWishlist(List<String> list) throws Exception;
+	public void inputMemberWishlist(Map map) throws Exception;
+	public List<WishlistVO> memberWishlist(String id) throws Exception;
+	public void deleteWishlist(String id,String book_code) throws Exception;
+	public void wlDeleteBook(Map map) throws Exception;
 
 }

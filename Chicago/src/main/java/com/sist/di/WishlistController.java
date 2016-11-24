@@ -40,30 +40,17 @@ public class WishlistController {
 			HttpSession hs = request.getSession();
 			String sessionid = (String)hs.getAttribute("id");
 			
-			List<String> list = (List<String>)hs.getAttribute("wishlist");
-			
 			if(book_code != null && !book_code.equals("")) {
 				
-				if(list == null) {
+				if(sessionid != null && !sessionid.equals("")) {
 					
 					Map map = new HashMap();
 					map.put("id", sessionid);
 					map.put("book_code", book_code);
 					
-					list = (List<String>)ws.inputMemberWishlist(map);
+					ws.inputMemberWishlist(map);
 					
-				} else {
-					
-					list.add(sessionid);
-					list.add(book_code);
-					
-					HashSet temp = new HashSet(list);
-					list = new ArrayList<String>(temp);
-					
-				}
-				
-				hs.setAttribute("wishlist", list);
-				
+				}			
 			}
 			
 		} catch (Exception ex) {
@@ -86,17 +73,11 @@ public class WishlistController {
 		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
 		
 		HttpSession hs = request.getSession();
-		List<String> list = (List<String>) hs.getAttribute("wishlist");
-			
-		List<WishlistVO> mwishList = null;
+		String sessionid = (String)hs.getAttribute("id");
 		try {
-			if(list != null){
-					
-				mwishList = ws.memberWishlist(list);
-					
-			}
+			List<WishlistVO> mwishList =  ws.memberWishlist(sessionid);
 				
-			model.addAttribute("mwishList", mwishList);
+			model.addAttribute("wishList", mwishList);
 			model.addAttribute("cmi", "MemberWishform.jsp");
 			model.addAttribute("cmi", "../member/memberwishlist/MemberWishList.jsp");
 				
@@ -109,5 +90,34 @@ public class WishlistController {
 			return "main/main";
 			
 		}
+	
+	@RequestMapping("wlbookdelete")
+	public String deleteBook(Model model, HttpServletRequest req, HttpServletResponse resp, String book_code){
+		
+		HttpSession hs = req.getSession();
+		String sessionid = (String)hs.getAttribute("id");
+		
+		try {
+			
+			
+			if(book_code != null && !book_code.equals("")) {
+				
+				if(sessionid != null && !sessionid.equals("")) {
+					
+					Map map = new HashMap();
+					map.put("id", sessionid);
+					map.put("book_code", book_code);
+					
+					ws.wlDeleteBook(map);
+					
+				}			
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		return "redirect:wishlist.do";
+	}
 		
 }
