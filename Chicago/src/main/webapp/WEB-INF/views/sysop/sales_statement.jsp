@@ -50,14 +50,16 @@ function openPop(data){
 		</tr>
 	</c:forEach>	
 </table>
-<table>
+<table style="	width: inherit;">
 	<tr>
-		<td>
-			<a href="sales_management.do?fs=${fs }&ss=${ss }&page=${(formpage - block) >= 1 ? formpage-block : curpage }">이전</a>&nbsp;
-			<c:forEach begin="${formpage }" end="${topage }" step="1" var="i">
-				<a href="sales_management.do?fs=${fs }&ss=${ss }&page=${i }">[${i }]</a>
-			</c:forEach>
-			&nbsp;<a href="sales_management.do?fs=${fs }&ss=${ss }&page=${(formpage + block)<=totalpage ? formpage+block : curpage }">다음</a>		
+		<td align="center">
+			<ul class="pagination pagination-sm">
+				<li><a href="sales_management.do?fs=${fs }&ss=${ss }&page=${(formpage - block) >= 1 ? formpage-block : curpage }">&laquo;</a></li>
+				<c:forEach begin="${formpage }" end="${topage }" step="1" var="i">
+					<li><a href="sales_management.do?fs=${fs }&ss=${ss }&page=${i }">${i }</a></li>
+				</c:forEach>
+				<li><a href="sales_management.do?fs=${fs }&ss=${ss }&page=${(formpage + block)<=totalpage ? formpage+block : curpage }">&raquo;</a></li>
+			</ul>	
 		</td>
 	</tr>
 	

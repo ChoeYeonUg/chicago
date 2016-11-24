@@ -91,7 +91,7 @@ nav ul, nav ol{margin:0; padding:0; list-style:none;}
 #mainav ul ul ul{left:180px; top:0;}
 #mainav li{display:inline-block; position:relative; margin:0 15px 0 0; padding:0;}
 #mainav li:last-child{margin-right:0;}
-#mainav li li{width:100%; margin:0;}
+#mainav li li{width:100%; margin:0; text-align: left;}
 #mainav li a{display:block; padding:30px 0;}
 #mainav li li a{border:solid; border-width:0 0 1px 0;}
 #mainav .drop{padding-left:15px;}
@@ -123,7 +123,7 @@ td{border-width:0 1px;}
 
 /* Navigation */
 #mainav li a{color:inherit; font-weight: bold;}
-#mainav .active a, #mainav a:hover, #mainav li:hover > a{color:#C0AB8F; background-color: #FFFFFF;}
+#mainav .active a, #mainav a:hover, #mainav li:hover > a{/* color:#C0AB8F; background-color: #FFFFFF; */ color: #FFFFFF;}
 #mainav li li a, #mainav .active li a{color:#000000; background-color:rgba(255,255,255,.6); border-color:rgba(255,255,255,.6);}
 #mainav li li:hover > a, #mainav .active .active > a{color:#000000; background-color:#C0AB8F;}
 #mainav form select{color:#000000; background-color:#FFFFFF; border-color:rgba(255,255,255,.3);}

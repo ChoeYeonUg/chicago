@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="css/board_css/board_css.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 
@@ -32,7 +33,7 @@ function openPop(data){
 </script>
 </head>
 <body>
-<table style="width: 600px">
+<table class="commonTable" style="	width: inherit;">
 	<tr>
 		<th width="100">id</th>
 		<th width="100">이름</th>
@@ -63,14 +64,16 @@ function openPop(data){
 		</tr>
 	</c:forEach>	
 </table>
-<table>
+<table style="	width: inherit;">
 	<tr>
-		<td>
-			<a href="member_management.do?fs=${fs }&ss=${ss }&page=${(formpage - block) >= 1 ? formpage-block : curpage }">이전</a>&nbsp;
-			<c:forEach begin="${formpage }" end="${topage }" step="1" var="i">
-				<a href="member_management.do?fs=${fs }&ss=${ss }&page=${i }">[${i }]</a>
-			</c:forEach>
-			&nbsp;<a href="member_management.do?fs=${fs }&ss=${ss }&page=${(formpage + block)<=totalpage ? formpage+block : curpage }">다음</a>		
+		<td align="center">
+			<ul class="pagination pagination-sm">
+				<li><a href="member_management.do?fs=${fs }&ss=${ss }&page=${(formpage - block) >= 1 ? formpage-block : curpage }">&laquo;</a></li>
+				<c:forEach begin="${formpage }" end="${topage }" step="1" var="i">
+					<li><a href="member_management.do?fs=${fs }&ss=${ss }&page=${i }">${i }</a></li>
+				</c:forEach>
+				<li><a href="member_management.do?fs=${fs }&ss=${ss }&page=${(formpage + block)<=totalpage ? formpage+block : curpage }">&raquo;</a></li>
+			</ul>
 		</td>
 	</tr>
 	

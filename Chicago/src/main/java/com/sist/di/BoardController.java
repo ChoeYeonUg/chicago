@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -218,7 +220,7 @@ public class BoardController {
 			page="1";	
 		
 		int curpage = Integer.parseInt(page);
-		int rowSize = 10;
+		int rowSize = 10;	
 		int start = (curpage * rowSize) - (rowSize - 1);
 		int end = curpage * rowSize;
 		int block=5;
@@ -247,9 +249,23 @@ public class BoardController {
 				list=bs.secret_find(map);
 				totalpage= bs.secret_find_total(map);
 			}
+			
+			for(BoardVO vo: list){
+				if(vo.getGroup_tab()!=0){
+					//그룹의 mine 아이디를 가져옴
+					//vo.mine에 그 수를 넣음					
+					map.put("group_id",vo.getGroup_id());
+					String mine=bs.idMine(map);
+					map.put("mine", mine);
+					bs.insertMine(map);
+				}				
+			}
+			
 			if(toPage> totalpage) 
 				toPage = totalpage;	
-		
+			if(totalpage==0)
+				totalpage=1;
+			
 			model.addAttribute("fs", fs);
 			model.addAttribute("ss", ss);
 			model.addAttribute("block",block);
@@ -436,7 +452,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("board_delete")
-	public String secret_delete(Model model,int board_no, String page){
+	public String secret_delete(Model model,int board_no, String page, HttpServletRequest request, HttpServletResponse response){
 		if(page==null)
 			page="1";		
 		int curpage = Integer.parseInt(page);
@@ -449,6 +465,7 @@ public class BoardController {
 			e.getStackTrace();
 		}
 		return "redirect:secretboard.do";
+	
 	}
 	
 	///////////////*리뷰게시판*///////////////
@@ -501,6 +518,9 @@ public class BoardController {
 			for(ReviewVO vo:list){
 				vo.setScore(vo.getScore()*20);				
 			}
+			
+			if(totalpage==0)
+				totalpage=1;
 			
 			model.addAttribute("fs", fs);
 			model.addAttribute("ss", ss);

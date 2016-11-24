@@ -31,12 +31,10 @@ $(function(){
 	<br/>
 	<table>
 		<tr>
-			<c:if test="${pCheck==1 }">
+
 				<td align="left" style="font-size:30px; padding-left: 10px;">1:1 게시판</td>
-			</c:if>
-			<c:if test="${pCheck==2}">
-				<td align="left" style="font-size:30px; padding-left: 10px;">내 문의내역</td>
-			</c:if>			
+
+				
 		</tr>
 		<tr>			
 			<td align="right">
@@ -47,16 +45,13 @@ $(function(){
 		</tr>
 	</table>
 	<table>
-		<tr>
-			<c:if test="${pCheck==1 }">
+		<tr>		
 				<td class="bTitle">1:1게시판 입니다.</td>
-			</c:if>
-			<c:if test="${pCheck==2}">
-				<td class="bTitle">내 문의사항 입니다.</td>
-			</c:if>
-				<td align="right" style="padding-right: 20px;">							
-					&nbsp;&nbsp;${curpage } page / ${totalpage  } pages
 			
+				<td align="right" style="padding-right: 20px;">			
+						
+					&nbsp;&nbsp;${curpage } page / ${totalpage  } pages			
+				
 				</td>
 		</tr>
 	</table>
@@ -84,8 +79,16 @@ $(function(){
 								<a href="secret_content.do?board_no=${vo.board_no }&page=${curpage}">${vo.subject }</a>
 							</c:if>
 							<c:if test="${vo.secret==2 }">
-								<img src="./board_img/lock.png" style="width: 10px; height:auto;" >
-								<a href="secretboard_pwd_check.do?board_no=${vo.board_no }&page=${curpage}">${vo.subject }</a>
+								<c:if test="${vo.mine == null || id!=vo.mine}">
+									<img src="./board_img/lock.png" style="width: 10px; height:auto;" >
+									<a href="secretboard_pwd_check.do?board_no=${vo.board_no }&page=${curpage}">${vo.subject }</a>
+								</c:if>
+								<c:if test="${vo.mine !=null && id==vo.mine }">
+								
+									<img src="./board_img/unlocked.png" style="width: 20px; height:auto;" >
+									<a href="secret_content.do?board_no=${vo.board_no }&page=${curpage}">${vo.subject }</a>
+								</c:if>
+								
 							</c:if>
 					</c:if>
 						<c:if test="${grade<=1 }">
@@ -94,10 +97,10 @@ $(function(){
 							</c:if>
 								<a href="secret_content.do?board_no=${vo.board_no }&page=${curpage}">${vo.subject }</a>
 						</c:if>
-						<!-- new 이미지 표시 -->
-						<c:if test="${today eq vo.dbday}">
+						<%-- <!-- new 이미지 표시 -->
+						 <c:if test="${today eq vo.dbday}">
 							<sup><img src="./board_img/new7.png" style="width: 15px; height:auto;" ></sup>											
-						</c:if> 
+						</c:if>   --%>
 					</c:if> 
 						<!-- 삭제된 글이면 읽을 수 없게 막음 --> 
 							<c:if test="${msg==vo.subject}">
@@ -179,9 +182,9 @@ $(function(){
 								</c:if>
 								<c:if test="${toPage>=totalPage }">
 									<li><a href="secretboard.do?fs=${fs }&ss=${ss }&page=${curpage<totalPage?curpage+1:curpage}">&raquo;</a></li>
-								</c:if>
+								</c:if>								
 								</ul>
-							
+								
 								
 							</td>							
 						</tr>

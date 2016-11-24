@@ -229,6 +229,19 @@ public class BoardServiceImpl implements BoardService{
 		return mapper.review_find_total(map);
 	}
 
+	@Override
+	public String idMine(Map map) throws Exception {
+		// TODO Auto-generated method stub
+	
+		return mapper.idMine(map);
+	}
+
+	@Override
+	public void insertMine(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		mapper.insertMine(map);
+	}
+
 
 
 
