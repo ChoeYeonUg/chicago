@@ -390,4 +390,23 @@ public class MemberController {
 		
 	}
 	
+	/* Member Question HeadMenu */ 
+	@RequestMapping("myMemberquestion.do")
+	public String myMemberquestion(Model model,String page, HttpServletRequest request) {
+		
+		if(page==null)
+			page="1";
+		
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");
+		
+		model.addAttribute("pCheck",2);
+		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+		model.addAttribute("cmi","../board/secretboard.jsp" );
+		
+		return "main/main";
+		
+	}
+	
+	
 }

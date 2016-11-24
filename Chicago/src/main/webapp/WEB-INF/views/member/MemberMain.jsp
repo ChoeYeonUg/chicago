@@ -95,7 +95,7 @@
 								<a data-toggle="" data-parent="" href="memberquestion.do"><spring:message code="memberInfoModifyMain.memberQuestionhead"/></a>
 								<ul id="" class="">
 									<li class="">
-										<a href=".do"><spring:message code="memberInfoModifyMain.btMemberQuestion"/></a>
+										<a href="myMemberquestion.do"><spring:message code="memberInfoModifyMain.btMemberQuestion"/></a>
 									</li>
 									<li class="">
 										<a href=".do"><spring:message code="memberInfoModifyMain.btAllQuestion"/></a>

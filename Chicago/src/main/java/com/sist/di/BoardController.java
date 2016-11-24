@@ -260,7 +260,8 @@ public class BoardController {
 			model.addAttribute("list", list);
 			model.addAttribute("today",today);
 			model.addAttribute("msg",msg);
-		
+			model.addAttribute("pCheck",1);
+			
 			model.addAttribute("jsp", "board.jsp");
 			model.addAttribute("board_jsp", "../board/list.jsp");
 			model.addAttribute("boardjsp","../board/secretboard.jsp" );

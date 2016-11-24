@@ -31,7 +31,12 @@ $(function(){
 	<br/>
 	<table>
 		<tr>
-			<td align="left" style="font-size:30px; padding-left: 10px;">1:1 게시판</td>
+			<c:if test="${pCheck==1 }">
+				<td align="left" style="font-size:30px; padding-left: 10px;">1:1 게시판</td>
+			</c:if>
+			<c:if test="${pCheck==2}">
+				<td align="left" style="font-size:30px; padding-left: 10px;">내 문의내역</td>
+			</c:if>			
 		</tr>
 		<tr>			
 			<td align="right">
@@ -43,10 +48,16 @@ $(function(){
 	</table>
 	<table>
 		<tr>
-			<td class="bTitle">1:1게시판 입니다.</td>
-			<td align="right" style="padding-right: 20px;">							
-				&nbsp;&nbsp;${curpage } page / ${totalpage  } pages
-			</td>
+			<c:if test="${pCheck==1 }">
+				<td class="bTitle">1:1게시판 입니다.</td>
+			</c:if>
+			<c:if test="${pCheck==2}">
+				<td class="bTitle">내 문의사항 입니다.</td>
+			</c:if>
+				<td align="right" style="padding-right: 20px;">							
+					&nbsp;&nbsp;${curpage } page / ${totalpage  } pages
+			
+				</td>
 		</tr>
 	</table>
 	<!-- 리스트 시작 -->
@@ -98,7 +109,7 @@ $(function(){
 					<td width="10%" class="tdcenter" >${vo.hit }</td>
 				</tr>
 			</c:forEach>
-					</table>
+		</table>
 					
 					<table >						
 						<tr>
