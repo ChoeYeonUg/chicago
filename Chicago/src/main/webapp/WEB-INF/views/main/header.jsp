@@ -40,11 +40,17 @@
                 </div>
                  -->
                  
-		<div id="logo" class="fl_left">
+	<!-- 	<div id="logo" class="fl_left">
 			<h1><a class="navbar-hou" href="index.html"><span class="main-hou">C</span>hicago</a></h1>
 		</div>
-                 
-                <nav id="mainav" class="fl_right">
+                  -->
+       <br/>           
+       <div style="text-align:center">
+        	<a class="navbar-hou" href="index.html">
+        		<img alt="#" src="images\chicagologo2.png" style="width: 40%; height:auto;">
+        	</a>
+        </div>
+                <nav id="mainav" > <!--  class="fl_right" -->
        				 <ul class="clear">
           				<li><a href="store.do"><spring:message code="header.menu"/></a></li>
           				<li><a href="book.do"><spring:message code="header.book"/></a>
@@ -77,12 +83,12 @@
           		   		<li><a class="drop" href="mypage.do"><spring:message code="header.mypage"/></a>
             				<ul>
               					<li><a href="memberinfo.do"><spring:message code="header.modifi"/></a></li>
-                                <li><a href="order.do"><spring:message code="header.ppl"/></a></li>
+                                <li><a href="orderlist.do"><spring:message code="header.ppl"/></a></li>
 								<li><a href="wish.do"><spring:message code="header.egd"/></a></li>
 								<li><a href="memberquestion.do"><spring:message code="header.qu"/></a></li>
             				</ul>
             			</li>
-          				<li><a href="sb.do"><spring:message code="header.sb"/></a></li>
+          				<li><a href="sbList.do"><spring:message code="header.sb"/></a></li>
           				<c:if test="${garde ne 'null' && grade eq 0 }">
 	          				<li><a class="drop" href="sysop.do"><spring:message code="header.saMenu"/></a>
 	            				<ul>
@@ -90,13 +96,14 @@
 	                                <li><a href="book_management.do"><spring:message code="header.saBook"/></a></li>
 									<li><a href="board_management.do"><spring:message code="header.saBoard"/></a></li>
 									<li><a href="sales_management.do"><spring:message code="header.saList"/></a></li>
+									<li><a href="writer_management.do">작가관리</a></li>
 	            				</ul>
 	          				</li>
           				</c:if>
           				<li><a class="drop" href="login.do"><spring:message code="header.login"/></a>
             				<ul>
                                 <li><a href="login.do"><spring:message code="header.login"/></a></li>
-                                <li><a href="#"><spring:message code="header.nm"/></a></li>
+                                <%-- <li><a href="#"><spring:message code="header.nm"/></a></li> --%>
             				</ul>
           				</li>
         			</ul>
@@ -166,6 +173,7 @@
             </div>
         </div>
         --%>
+
 	</header>
 	
 

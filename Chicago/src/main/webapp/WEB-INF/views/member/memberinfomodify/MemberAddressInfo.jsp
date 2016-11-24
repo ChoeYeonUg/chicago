@@ -63,25 +63,25 @@
 											<label for="ADDRESS_1">주소1</label>
 										</dt>
 										<dd>
-											${vo.zipcode1}
+											${zipcode1}
 											&nbsp;
-											${vo.addr1}
+											${addr1}
 										</dd>
 										<dt>
 											<label for="ADDRESS_2">주소2</label>
 										</dt>
 										<dd>
-											${vo.zipcode2}
+											${zipcode2}
 											&nbsp;
-											${vo.addr2}
+											${addr2}
 										</dd>
 										<dt>
 											<label for="ADDRESS_3">주소3</label>
 										</dt>
 										<dd>
-											${vo.zipcode3}
+											${zipcode3}
 											&nbsp;
-											${vo.addr3}
+											${addr3}
 										</dd>
 									</dl>
 								</div>

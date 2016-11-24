@@ -1,6 +1,8 @@
 package com.sist.aop;
 
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -92,22 +94,26 @@ public class LoginAspect {
 	            if ( o instanceof HttpServletRequest ) {
 	                request = (HttpServletRequest)o;
 	            } 
+	            
+	            if( o instanceof HttpServletResponse){
+	            	response = (HttpServletResponse) o;
+	            }
+	            
 	        }
 	        try{
 	            HttpSession session = request.getSession();
 	 
 	                String loginId = (String) session.getAttribute("id");
 	                if (loginId == null || "".equals(loginId)) {
-	                    throw new RuntimeException("앙대요.");
+	                	if(response != null) response.sendRedirect("login.do");
+	                    //throw new RuntimeException("앙대요.");
 	                }
 	        }catch(Exception e){
-	             
-	            throw new RuntimeException("앙대요");
-	 
+	        	if(response != null) response.sendRedirect("login.do");
+	            //throw new RuntimeException("앙대요");
+	        	return null;	 
 	        }
-
-
-		
+	        
 		return joinPoint.proceed();
 	}
 

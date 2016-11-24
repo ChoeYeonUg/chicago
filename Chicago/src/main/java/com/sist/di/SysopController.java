@@ -42,7 +42,7 @@ public class SysopController {
 			
 			int curpage = Integer.parseInt(page);
 			
-			int rowSize = 1;
+			int rowSize = 10;
 			int start = (curpage * rowSize) - (rowSize - 1);
 			int end = curpage * rowSize;			
 		

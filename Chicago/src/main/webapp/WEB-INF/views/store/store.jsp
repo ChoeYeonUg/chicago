@@ -30,22 +30,21 @@ a{color: #68A4C4}
 				</div>
 				<div class="col-md-9">
 					<div class="w3-content" style="max-width:1200px">
-  <img class="mySlides" src="http://www.w3schools.com/w3css/img_nature_wide.jpg" style="width:100%">
-  <img class="mySlides" src="http://www.w3schools.com/w3css/img_fjords_wide.jpg" style="width:100%">
-  <img class="mySlides" src="http://www.w3schools.com/w3css/img_mountains_wide.jpg" style="width:100%">
-
+  <img class="mySlides" src="images\store_1.jpg" style="width:100%">
+  <img class="mySlides" src="images\store_2.jpg" style="width:100%">
+  <img class="mySlides" src="images\store_3.jpg" style="width:100%">
   <div class="w3-row-padding w3-section">
     <div class="w3-col s4">
       <img class="demo w3-opacity" 
-      src="http://www.w3schools.com/w3css/img_nature_wide.jpg" onclick="currentDiv(1)">
+      src="images\store_1.jpg" onclick="currentDiv(1)">
     </div>
     <div class="w3-col s4">
       <img class="demo w3-opacity"
-      src="http://www.w3schools.com/w3css/img_fjords_wide.jpg" onclick="currentDiv(2)">
+      src="images\store_2.jpg" onclick="currentDiv(2)">
     </div>
     <div class="w3-col s4">
       <img class="demo w3-opacity" 
-      src="http://www.w3schools.com/w3css/img_mountains_wide.jpg" onclick="currentDiv(3)">
+      src="images\store_3.jpg" onclick="currentDiv(3)">
     </div>
   </div>
 </div>

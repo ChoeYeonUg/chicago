@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="css/board_css/board_css.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 
@@ -22,32 +23,43 @@ function openPop(review_no){
 </script>
 </head>
 <body>
-<center>
-		<table>
+	<center>
+		<table class="tableContent" style="border: 1px solid #e3e3e3; border-collapse: collapse; width: 450px; ">
 			<tr>
-				<th width="20%">번호</th>
-				<td width="30%" align="center">${vo.review_no}</td>
-				<th width="20%">날짜</th>
-				<td width="30%" align="center">				
+				<th width="20%" align="center" style="background-color: #fbfafa; padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3; border-right: 1px solid #e3e3e3;">번호</th>
+				<td width="30%" align="center" style="padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3;">${vo.review_no}</td>
+				<th width="20%" align="center"  style="background-color: #fbfafa; padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3;  border-right: 1px solid #e3e3e3; border-left:  1px solid #e3e3e3;">날짜</th>
+				<td width="30%" align="center" style="padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3;">				
 					<fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd"/></td>
-			</tr>		
+			</tr>			
 			<tr>
-				<th width="20%">작성자</th>
-				<td width="30%" align="center">${vo.id }</td>
-				<th width="20%">별점</th>
-				<td width="30%" align="center">	${vo.score }</td>
-			</tr>	
-					
-			<tr>
-
-				<th width="" align="right">내용</th>
-				<td colspan="3" valign="top" align="left" height="200"><pre>${vo.content}</pre>
+				<th width="20%" align="center"  style="background-color: #fbfafa; padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3;  border-right: 1px solid #e3e3e3;" >작성자</th>
+				<td width="30%" align="center" style="padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3;" >${vo.id }</td>
+				<th width="20%" align="center"  style="background-color: #fbfafa; padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3;  border-right: 1px solid #e3e3e3; border-left:  1px solid #e3e3e3;" >별점</th>
+				<td width="30%" style="padding:10px; border-bottom: 1px solid #e3e3e3;
+					border-top: 1px solid #e3e3e3;">
+					<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(board_img/icon_star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+						<p style="WIDTH: ${vo.score*20}%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(board_img/icon_star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+						</p>
+					</div>				
 				</td>
-			</tr>
-		</table>
-		<table>
+			</tr>	
 			<tr>
-				<td align="right">					
+				<td colspan="4" valign="top" align="left" height="200" >
+					<pre style="background-color: white; padding:20px; border: 0px ; font-size:11px; color:#505050;">${vo.content}</pre>
+				</td>
+			</tr>		
+		</table>
+		<table class="commonTable" style="width: 450px;">
+			<tr>
+				<td align="center" style="padding-top: 20px;">					
 					<a href="#" onclick="return openPop('${vo.review_no}');">삭제</a>&nbsp;
 					<a href="#" onclick="window.close();">닫기</a>&nbsp;
 				</td>

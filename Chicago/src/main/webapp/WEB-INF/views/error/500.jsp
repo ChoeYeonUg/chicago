@@ -9,6 +9,9 @@
 <title>500</title>
 </head>
 <body>
-500
+	<center>
+		<h2>500!</h2>
+		<h5>이것은 500 페이지입니다 :)</h5>	
+	</center>
 </body>
 </html>

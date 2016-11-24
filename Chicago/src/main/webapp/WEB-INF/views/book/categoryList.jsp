@@ -12,9 +12,9 @@
 <link rel="stylesheet" type="text/css" href="book_css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="book_css/header1.css" />
 <script type="text/javascript">
-	function bcBtn() {
+	function bcBtn(data) {
 		if(confirm("장바구니로 이동하시겠습니까?") == true) {
-			window.location.href="sb/sb.do?book_code=${detailBook.book_code}";
+			window.location.href="sb.do?book_code="+data;
 		} else {
 			return;
 		}
@@ -25,6 +25,15 @@
 			window.location.href="member/memberwishlist/MemberWishList.do?book_code=${datilBook.book_code}";
 		} else {
 			return;
+		}
+	}
+	
+	function search() {
+		var sch_value = jQuery('#form_search #sch_value').val();
+		if(sch_value == '') {
+			alert('검색어를 입력해주세요.');
+		} else {
+			jQuery('#form_search').submit();
 		}
 	}
 </script>
@@ -65,6 +74,34 @@
 				<!-- 좌측 카테고리 끝 -->
 				<!-- 내용시작 -->
 				<div class="col-md-9">
+				<!-- 검색창 -->
+				<form id="form_search" method="post" action="categoryList.do">
+				<table>
+					<tr>
+						<td align="right">
+							<div style="line-height: 15px;">
+							<label><input type="radio" value="book_name" checked="checked" name="sch_type" id="sch_type" />
+								<span style="font-size:11px; color:#505050; vertical-align: bottom;"><spring:message code="radio.ti2"/></span></label>
+							<label><input type="radio" value="writer" name="sch_type" id="sch_type" />
+								<span style="font-size:11px; color:#505050; vertical-align: bottom;"><spring:message code="radio.ti3"/></span></label>
+							<label><input type="radio" value="publisher" name="sch_type" id="sch_type" />
+								<span style="font-size:11px; color:#505050; vertical-align: bottom;"><spring:message code="radio.ti4"/></span></label>
+							&nbsp;&nbsp;
+							<%-- <select id="sch_type" name="sch_type" style="height:20;">
+								<option value="book_name" selected="selected"><spring:message code="radio.ti2"/>
+								<option value="writer"><spring:message code="radio.ti3"/>
+								<option value="publisher"><spring:message code="radio.ti4"/>
+							</select> --%>
+							<input type="text" id="sch_value" name="sch_value" height="15"/>
+							<input type="hidden" name="book_category" value="${book_category }">
+							<button type="button" onclick="search()" style="height:15;">검색</button>
+							</div>
+						</td>
+					</tr>
+				</table>
+				</form>
+				<hr/>
+				<!-- 도서목록 -->
 				<table width="100%" class="table_content" border="0">
 					<c:forEach items="${cateList }" var="list">
 					<tr>
@@ -78,7 +115,7 @@
 								<tr>
 									<td align="center" class="icontd">
 										<img src="book_img\like.png" alt="like.png" title="찜하기" class="icon" onclick="lkBtn()">&nbsp;
-										<img src="book_img\shopping.png" alt="shopping.png" title="장바구니" class="icon" onclick="bcBtn()">&nbsp; 
+										<img src="book_img\shopping.png" alt="shopping.png" title="장바구니" class="icon" onclick="bcBtn('${list.book_code}')">&nbsp; 
 										<a href="purchase.do?book_code=${list.book_code }">
 											<img src="book_img\purchase.png" alt="purchase.png" title="바로구매" class="icon">
 										</a>
@@ -113,6 +150,11 @@
 						</td>
 					</tr>
 					</c:forEach>
+					<c:if test="${cateList.size()==0 }">
+					<center>
+					<h5 style="color:#999999;">검색 결과가 없습니다.</h5>
+					</center>
+					</c:if>
 				</table>
 				<!-- 페이지 -->
 				<table width="100" id="table_page">
@@ -120,24 +162,24 @@
 						<td align="center">
 							<ul class="pagination pagination-sm">
 								<c:if test="${curPage<=block }">
-									<li><a href="categoryList.do?book_category=${book_category }&page=${curPage>1?curPage-1:curPage}">&laquo;</a></li>
+									<li><a href="categoryList.do?book_category=${book_category }&page=${curPage>1?curPage-1:curPage}&sch_type=${sch_type }&sch_value=${sch_value}">&laquo;</a></li>
 								</c:if>
 								<c:if test="${curPage>block }">
-									<li><a href="categoryList.do?book_category=${book_category }&page=${curPage-1}">&laquo;</a></li>
+									<li><a href="categoryList.do?book_category=${book_category }&page=${curPage-1}&sch_type=${sch_type }&sch_value=${sch_value}">&laquo;</a></li>
 								</c:if>
 								<c:forEach var="i" begin="${fromPage }" end="${toPage }">
 									<c:if test="${curPage==i }">
-										<li><a href="categoryList.do?book_category=${book_category }&page=${curPage}">${i }</a></li>
+										<li><a href="categoryList.do?book_category=${book_category }&page=${curPage}&sch_type=${sch_type }&sch_value=${sch_value}">${i }</a></li>
 									</c:if>
 									<c:if test="${curPage!=i }">
-										<li><a href="categoryList.do?book_category=${book_category }&page=${i}">${i }</a></li>
+										<li><a href="categoryList.do?book_category=${book_category }&page=${i}&sch_type=${sch_type }&sch_value=${sch_value}">${i }</a></li>
 									</c:if>
 								</c:forEach>
 								<c:if test="${toPage<totalPage }">
-									<li><a href="categoryList.do?book_category=${book_category }&page=${toPage+1}">&raquo;</a></li>
+									<li><a href="categoryList.do?book_category=${book_category }&page=${toPage+1}&sch_type=${sch_type }&sch_value=${sch_value}">&raquo;</a></li>
 								</c:if>
 								<c:if test="${toPage>=totalPage }">
-									<li><a href="categoryList.do?book_category=${book_category }&page=${curPage<totalPage?curPage+1:curPage}">&raquo;</a></li>
+									<li><a href="categoryList.do?book_category=${book_category }&page=${curPage<totalPage?curPage+1:curPage}&sch_type=${sch_type }&sch_value=${sch_value}">&raquo;</a></li>
 								</c:if>
 							</ul>
 						</td>

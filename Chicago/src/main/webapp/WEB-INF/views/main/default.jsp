@@ -15,9 +15,9 @@
 		호우
 	</section> -->
 	<div class="w3-content w3-section" style="max-width:100%">
-  <img class="mySlides" src="http://www.w3schools.com/w3css/img_la.jpg" style="width:100%">
-  <img class="mySlides" src="http://www.w3schools.com/w3css/img_ny.jpg" style="width:100%">
-  <img class="mySlides" src="http://www.w3schools.com/w3css/img_chicago.jpg" style="width:100%">
+  <a href="writerDetail.do?writer_no=61"><img class="mySlides" src="images\f2.jpg" style="width:100%"></a>
+  <a href="writerDetail.do?writer_no=5"><img class="mySlides" src="images\f3.jpg" style="width:100%"></a>
+  <a href="writerDetail.do?writer_no=8"><img class="mySlides" src="images\f1.jpg" style="width:100%"></a>
 </div>
 
 <script>

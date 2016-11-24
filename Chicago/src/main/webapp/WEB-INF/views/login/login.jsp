@@ -44,7 +44,7 @@
 						<hr>
 						<h4>비밀번호를 잊어버리셨나요?</h4>
 						<p>
-						<a href="#">비밀번호 찾기</a>를 눌러주세요</p>
+						<a href="findPwd.do">비밀번호 찾기</a>를 눌러주세요</p>
 					</c:if>
 					<c:if test="${id ne null }">
 						<hr>
@@ -56,10 +56,10 @@
 			</div>
 		</div>
 	</form:form>
-	
+	<%-- 
 	<c:if test="${id ne null }">
 	<h2>현재 접속한 아아디 ${id }</h2>
 	</c:if>
-	
+	 --%>
 </body>
 </html>

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -36,15 +37,22 @@ public class PurchaseController {
 	private static final Logger logger = LoggerFactory.getLogger(PurchaseController.class);
 	
 	@RequestMapping("purchase")
-	public String purchsePage(Model model,String book_code, String amount, HttpServletRequest req) {
-		int amountInt = 0;
-		if(amount == null){
-			amountInt = 1;
-		}else{
-			try{
-				amountInt = Integer.parseInt(amount);
-			}catch(Exception e){
-				amountInt = 1;
+	public String purchsePage(Model model,String[] book_code, String[] amount, HttpServletRequest req, HttpServletResponse resp) {
+		
+		if(book_code == null || amount == null){
+			return null;
+		}
+		
+		int[] amountInt = new int[book_code.length];
+		for(int i = 0 ; i < book_code.length ; i++){
+			if(amount[i] == null || amount[i].equals("")){
+				amountInt[i] = 1;
+			}else{
+				try{
+					amountInt[i] = Integer.parseInt(amount[i]);
+				}catch(Exception e){
+					amountInt[i] = 1;
+				}
 			}
 		}
 		
@@ -57,18 +65,24 @@ public class PurchaseController {
 			model.addAttribute("vo", vo);
 			
 			//책에 관한 정보를 가져옴
-			BookVO bVO = bs.purchase(book_code);
-			
-			//소장하고 있는 수가 없으면
-			if((bVO.getAmount()) <= 0){
-				return "redirct:bookDetail.do?book_code="+book_code;
-			}
-			String[] bookList = {book_code};
-			int[] bookCount = {amountInt};
-			bVO.setAmount(amountInt);
+			int price = 0;
 			List<BookVO> list = new ArrayList<BookVO>();
-			list.add(bVO);
-			int price = bVO.getPrice() * amountInt;
+			for(int i = 0; i < book_code.length ; i++){
+				BookVO bVO = bs.purchase(book_code[i]);
+				price += bVO.getPrice() * amountInt[i];
+				if((bVO.getAmount()) <= 0){
+					return "redirct:bookDetail.do?book_code="+book_code;
+				}
+				bVO.setAmount(amountInt[i]);
+				list.add(bVO);
+			}
+			//소장하고 있는 수가 없으면
+			
+			String[] bookList = book_code;
+			int[] bookCount = amountInt;
+			
+			int point = price/10;
+			
 			int deliveryFee = 0;
 			if(price > 25000){
 				deliveryFee = 0;
@@ -78,13 +92,14 @@ public class PurchaseController {
 			
 			//총 금액은 배송비 포함임
 			int totalPrice = price + deliveryFee;
+			model.addAttribute("point", point);
 			model.addAttribute("totalPrice", totalPrice);
 			model.addAttribute("deliveryFee", deliveryFee);
 			model.addAttribute("list", list);
 			model.addAttribute("price", price);
 			
 			model.addAttribute("bookList", bookList);
-			model.addAttribute("bookCount", bookCount);			
+			model.addAttribute("bookCount", bookCount);	
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -96,9 +111,6 @@ public class PurchaseController {
 	
 		return "main/main";
 	}
-	
-	
-	
 	
 	@RequestMapping("purchase_ok")
 	public String purchseokPage(Model model, OrdersVO vo, int[] bookCount, String[] bookList, HttpServletRequest req){
@@ -112,6 +124,7 @@ public class PurchaseController {
 		
 		try {
 			os.orderProcess(bookList, bookCount, vo);
+			if((List<String>)hs.getAttribute("sbList") != null)	hs.removeAttribute("sbList");			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			/*e.printStackTrace();*/

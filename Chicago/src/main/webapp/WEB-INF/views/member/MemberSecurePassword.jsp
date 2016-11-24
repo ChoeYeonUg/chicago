@@ -32,14 +32,9 @@
 function send(){
 	var f=document.frm;
 		
-	if(f.USER_Check_NewPWD.value=="" && f.USER_Check_NewPWD.value!="${pwd}"){
+	if(f.USER_Check_PWD.value==""){
 		alert("올바른 비밀번호가 아닙니다!");
-		f.USER_PWD.focus();
-		return;
-	}
-	
-	if(f.USER_Check_NewPWD.value=="${pwd}"){
-		alert("본인인증이 완료되었습니다.감사합니다!");
+		f.USER_Check_PWD.focus();
 		return;
 	}
 	
@@ -67,18 +62,18 @@ function send(){
 			<div class="MemberSettingForm">
 				<div class="InnerBox">
 					<div id="MemberSecurePassword-Box">
-						<form:form method="post" action="membersecurepwd_ok.do" commandName="memberVO">
-						<input type="hidden" value="<%=request.getAttribute("id") %>">
-						<input type="hidden"  name="typecheck" value="${typecheck}">
+						<form:form name="frm" id="frm" method="post" action="membersecurepwd_ok.do">
+						<%-- <input type="hidden" value="<%=request.getAttribute("id") %>"> commandName="memberVO" --%>
+						<input type="hidden" name="typecheck" value="${typecheck}">
 							<fieldset>
 								<div class="MemberSecurePwd">
 									<dl class="msp">
 										<!-- Input Confirm PASSWORD -->
 										<dt>
-											<label for="USER_PWD"><spring:message code="memberSecurePassword.Password"/></label>
+											<label for="USER_Check_PWD"><spring:message code="memberSecurePassword.Password"/></label>
 										</dt>
 										<dd>
-											<input type="password" name="USER_Check_NewPWD" id="USER_Check_NewPWD" class="" maxlength="16">
+											<input type="password" name="USER_Check_PWD" id="USER_Check_PWD" class="" maxlength="16">
 										</dd>
 									</dl>
 								</div>

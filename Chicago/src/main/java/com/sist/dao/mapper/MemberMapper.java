@@ -6,6 +6,7 @@ import java.util.Map;
 import com.sist.dao.*;
 
 public interface MemberMapper {
+	public int findPwd(MemberVO vo);
 	public int idCheck(String id);
 	public String pwdCheck(String pwd);
 	public void joinMember(MemberVO vo);

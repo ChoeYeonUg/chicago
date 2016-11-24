@@ -81,7 +81,11 @@ nav ul, nav ol{margin:0; padding:0; list-style:none;}
 #mainav .drop::after, #mainav li li .drop::after, #breadcrumb li a::after, .sidebar nav a::after{position:absolute; font-family:"FontAwesome"; font-size:10px; line-height:10px;}
 
 /* Top Navigation */
-#mainav{}
+#mainav{
+	
+	text-align: center;
+	
+}
 #mainav ul{text-transform:uppercase;}
 #mainav ul ul{z-index:9999; position:absolute; width:180px; text-transform:none;}
 #mainav ul ul ul{left:180px; top:0;}

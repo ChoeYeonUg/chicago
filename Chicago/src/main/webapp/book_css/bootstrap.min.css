@@ -1,10 +1,10 @@
+* Bootstrap v3.1.0 (http: //getbootstrap.com )
+ * Copyright 2011-2014 Twitter, Inc .
+ * Licensed under MIT (https: //github.com
+	/twbs/bootstrap/blob/master/LICENSE)
 
- * Bootstrap v3.1.0 (http://getbootstrap.com)
- * Copyright 2011-2014 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
 
-
-! normalize.css v3.0.0 | MIT License | git.io/normalize
+ ! normalize.css v3.0.0 | MIT License | git.io /normalize
 html {
 	font-family: sans-serif;
 	-ms-text-size-adjust: 100%;
@@ -28,35 +28,51 @@ audio, canvas, progress, video {
 audio
 
 
+
+
 :not
 
+
  
+
 
 (
 [
 controls
 ]
 
+
  
+
 
 ){
 display
 
 
+
+
 :
+
 
  
 
+
 none
+
+
 
 
 ;
 height
 
 
+
+
 :
 
+
  
+
 
 0
 }
@@ -120,24 +136,36 @@ img {
 svg
 
 
+
+
 :not
 
+
  
+
 
 (
 :root
 
+
  
+
 
 ){
 overflow
 
 
+
+
 :
+
 
  
 
+
 hidden
+
+
 
 
 
@@ -1524,9 +1552,9 @@ table {
 	background-color: transparent
 }
 
-th {
+/* th {
 	text-align: left
-}
+} */
 
 .table {
 	width: 100%;
@@ -1537,8 +1565,8 @@ th {
 	.table>tbody>tr>td, .table>tfoot>tr>td {
 	padding: 8px;
 	line-height: 2;
-	vertical-align: middel; 수정
-	border-top: 1px solid #ddd
+	vertical-align: middel;
+	수정 border-top: 1px solid #ddd
 }
 
 .table>thead>tr>th {
@@ -3462,43 +3490,61 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
 .btn
 
 
+
+
 :not
 
+
  
+
 
 (
 :first-child
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 :last-child
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 .dropdown-toggle
 
 
+
 	
+
 
 ){
 border-radius
 
 
+
+
 :
 
+
  
+
 
 0
 }
@@ -3511,43 +3557,63 @@ border-radius
 .btn
 
 
+
+
 :first-child
+
+
 
 
 :not
 
+
  
+
 
 (
 :last-child
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 .dropdown-toggle
 
+
  
+
 
 ){
 border-bottom-right-radius
 
 
+
+
 :
 
+
  
+
 
 0;
 border-top-right-radius
 
 
+
+
 :
 
+
  
+
 
 0
 }
@@ -3556,17 +3622,25 @@ border-top-right-radius
 .btn
 
 
+
+
 :last-child
+
+
 
 
 :not
 
+
  
+
 
 (
 :first-child
 
+
  
+
 
 ),
 .btn-group
@@ -3574,31 +3648,45 @@ border-top-right-radius
 .dropdown-toggle
 
 
+
+
 :not
+
 
 
 	
 
+
 (
 :first-child
 
+
  
+
 
 ){
 border-bottom-left-radius
 
 
+
+
 :
 
+
  
+
 
 0;
 border-top-left-radius
 
 
+
+
 :
 
+
  
+
 
 0
 }
@@ -3703,32 +3791,46 @@ border-top-left-radius
 .btn
 
 
+
+
 :not
 
+
  
+
 
 (
 :first-child
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 :last-child
 
+
  
+
 
 ){
 border-radius
 
 
+
+
 :
 
+
  
+
 
 0
 }
@@ -3737,45 +3839,67 @@ border-radius
 .btn
 
 
+
+
 :first-child
+
+
 
 
 :not
 
+
  
+
 
 (
 :last-child
 
+
  
+
 
 ){
 border-top-right-radius
 
 
+
+
 :
+
 
  
 
+
 4
 px
+
+
 
 
 ;
 border-bottom-right-radius
 
 
+
+
 :
 
+
  
+
 
 0;
 border-bottom-left-radius
 
 
+
+
 :
 
+
  
+
 
 0
 }
@@ -3784,45 +3908,67 @@ border-bottom-left-radius
 .btn
 
 
+
+
 :last-child
+
+
 
 
 :not
 
+
  
+
 
 (
 :first-child
 
+
  
+
 
 ){
 border-bottom-left-radius
 
 
+
+
 :
+
 
  
 
+
 4
 px
+
+
 
 
 ;
 border-top-right-radius
 
 
+
+
 :
 
+
  
+
 
 0;
 border-top-left-radius
 
 
+
+
 :
 
+
  
+
 
 0
 }
@@ -3935,83 +4081,119 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 .input-group-addon
 
 
+
+
 :not
 
+
  
+
 
 (
 :first-child
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 :last-child
 
+
  
+
 
 ),
 .input-group-btn
 
 
+
+
 :not
 
+
  
+
 
 (
 :first-child
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 :last-child
 
+
  
+
 
 ),
 .input-group
 
+
  
+
 
 .form-control
 
 
+
+
 :not
+
 
 
 	
 
+
 (
 :first-child
 
+
  
+
 
 )
 :not
 
+
  
+
 
 (
 :last-child
 
+
  
+
 
 ){
 border-radius
 
 
+
+
 :
 
+
  
+
 
 0
 }
@@ -6751,4 +6933,4 @@ button.close {
 	.hidden-print, tr.hidden-print, th.hidden-print, td.hidden-print {
 		display: none !important
 	}
-} 
+}

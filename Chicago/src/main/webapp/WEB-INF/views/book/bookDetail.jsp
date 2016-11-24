@@ -13,7 +13,7 @@
 <script type="text/javascript">
 	function bcBtn() {
 		if(confirm("장바구니로 이동하시겠습니까?") == true) {
-			window.location.href="sb/sb.do?book_code=${detailBook.book_code}";
+			window.location.href="sb.do?book_code=${detailBook.book_code}";
 		} else {
 			return;
 		}
@@ -56,7 +56,7 @@
 	function popupOpen(book_code){
 		
 		var popUrl="bookReviewContent.do?book_code="+book_code;
-		var popOption="width=420, height=400, resizable=no scrollbars=no status=no;";
+		var popOption="width=500, height=430, resizable=no scrollbars=no status=no;";
 		window.open(popUrl,"",popOption);
 	}
 
@@ -98,7 +98,7 @@
 				<!-- 좌측 카테고리 끝 -->
 				<!-- 내용시작 -->
 				<div class="col-md-9">
-				<form>
+				<form action="purchase.do" method="post">
 				<table class="table_content" border="0">
 					<tr>
 						<!-- 책 이미지 -->
@@ -107,8 +107,8 @@
 							<tr>
 								<td><img alt="bookImage" src="${detailBook.img }" style="vertical-align: bottom;"></td>
 							</tr>
-						<tr>								
-								<td  >
+							<tr>								
+								<td height="20">
 									<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(board_img/icon_star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
 										<p style="WIDTH: ${starAvg}%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(board_img/icon_star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
 										</p>
@@ -148,14 +148,14 @@
 									</td>
 								</tr>
 								<tr>
-									<td style="font-size:11px; color:#505050;" colspan="4" height="13"><b>[배송정보]</b>&nbsp;18시 이전 주문 시 (도서산간 제외) "내일(화)" 배송</td>
+									<td style="font-size:11px; color:#505050;" colspan="4" height="13"><b>[배송정보]</b>&nbsp;15시 이전 주문 시 (도서산간 제외) 당일 출고</td>
 								</tr>
 								<tr>
 									<td style="font-size:11px; color:#505050;" height="13" colspan="4"><b>[주문수량]</b>&nbsp;
 										<img src="book_img\down.png" alt="downBtn" style="width:20px;height:20px;" onclick="btdown()"/>
-										<input type="text" value="${defAmount }" name="amount" id="defamount" readonly="readonly"/>
+										<input type="text" value="${defAmount }" name="amount" id="defamount" readonly="readonly" size="1" style="text-align: center;"/>
 										<input type="hidden" value="${detailBook.book_code }" name="book_code"/>
-										<%-- <input type="hidden" value="${detailBook.amount }" id="amount"/> --%>
+										<input type="hidden" value="${detailBook.amount }" id="amount"/>
 										<img src="book_img\up.png" alt="upBtn" style="width:20px;height:20px;" onclick="btup()"/>
 									</td>
 								</tr>
@@ -165,7 +165,7 @@
 									<td align="left">
 										<input type="button" value="찜목록 담기" onclick="lkBtn()"/>&nbsp;&nbsp;
 										<input type="button" value="북카트 담기" onclick="bcBtn()"/>&nbsp;&nbsp;
-										<a href="purchase.do?book_code=${book_code }"><input type="button" value="바로구매"/></a>
+										<%-- <a href="purchase.do?book_code=${book_code }?"> --%><input type="submit" value="바로구매"/><!-- </a> -->
 									</td>
 								</tr>
 							</table>
@@ -202,6 +202,10 @@
 					<c:forEach var="rvo" items="${list}">
 					<tr>
 					<tr>					
+<%-- 
+						<td width="20%" style="font-size:11px; color:#505050;" align="center">${rvo.score }</td>
+						<td width="40%" style="font-size:11px; color:#505050;" align="center">${rvo.content }</td>
+ --%>
 						<td>
 							<div style="CLEAR: both;	PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(board_img/icon_star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
 								<p style="WIDTH: ${rvo.score}%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(board_img/icon_star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
