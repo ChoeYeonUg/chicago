@@ -9,8 +9,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="css/board_css/board_css.css" rel="stylesheet" />
+<style type="text/css">
+#content
+
+</style>
 </head>
 <body>
+<div style="padding-bottom: 120px;">
 	<br/>
 	<table>
 		<tr>
@@ -131,6 +136,7 @@
 	</table>
 	<!-- 페이지표시 끝 -->
 	
-
+</div>
 </body>
+
 </html>
