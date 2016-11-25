@@ -118,4 +118,8 @@
 		DELETE FROM member <include refid="where-id,pwd"/>
   	</delete>
   	
+  	<update id="pointMinus" parameterType="hashmap">
+  		UPDATE member SET point = point - #{usePoint} WHERE id=#{id}
+  	</update>
+  	
 </mapper>

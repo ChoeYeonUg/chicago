@@ -29,6 +29,7 @@ public interface MemberService {
 	public void insertMemberDeliveryAddrs(AddressVO avo) throws Exception;
 	public void modyfyMemberDeliveryAddrs(AddressVO avo) throws Exception;
 	public void withdrawMember(Map map) throws Exception;
+	public void pointMinus(Map map) throws Exception;
 	
 	//order
 	public MemberVO orderData(String id) throws Exception;

@@ -156,6 +156,12 @@ public class MemberServiceImpl implements MemberService{
 		
 		return bCheck;
 	}
+
+	@Override
+	public void pointMinus(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		mapper.pointMinus(map);
+	}
 	
 
 }
