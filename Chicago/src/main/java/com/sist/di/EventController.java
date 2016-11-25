@@ -136,7 +136,7 @@ public class EventController {
 		 
 		}
 		//년도/월 셋팅
-	//	cal.set(year, month, 1);
+		cal.set(year, month, 1);
 		 
 		int startDay = cal.getMinimum(java.util.Calendar.DATE);
 		int endDay = cal.getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
@@ -148,25 +148,37 @@ public class EventController {
 		Calendar todayCal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyMMdd");
 		int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
-		 
-		int iUseDate = Integer.parseInt(sUseDate);
+	//	index = Integer.parseInt(req.getParameter(Integer.toString(index))); 
+		sUseDate += Integer.toString(month+1).length() == 1 ? "0" + Integer.toString(month+1) : Integer.toString(month+1);
+	//	sUseDate += Integer.toString(index).length() == 1 ? "0" + Integer.toString(index) : Integer.toString(index);
+		
+		String iUseDate = sUseDate;
+		String dateUse = "";
 	//	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	//	SimpleDateFormat nya=new SimpleDateFormat("yyyy-MM");
-		/*SimpleDateFormat year=new SimpleDateFormat("yyyy");
-		SimpleDateFormat month=new SimpleDateFormat("MM");
-		SimpleDateFormat day=new SimpleDateFormat("dd");*/
+	//	SimpleDateFormat year=new SimpleDateFormat("yyyy");
+		SimpleDateFormat months=new SimpleDateFormat("MM");
+	//	SimpleDateFormat day=new SimpleDateFormat("dd");
 		String today=sdf.format(new Date());
 	//	String indentifire = nya.format(new Date());
 		
 		//int day = Integer.toString(cal.get(Calendar.DATE));
 		
-		System.out.println(year+"샤랄라라라랄");
 		
 		/*String strYear = req.getParameter("year");
 		String strMonth = req.getParameter("month");
 		*/
 		
-		 	
+		/*dateUse=req.getParameter(dateUse); 	
+		System.out.println(dateUse+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		*/
+		
+		String dbMonth="";
+		if(month<9){
+			dbMonth="0"+Integer.toString(month+1);
+		}else{
+			dbMonth=Integer.toString(month+1);
+		}
 		
 		map.put("startDay", startDay);
 		map.put("endDay", endDay);
@@ -175,11 +187,17 @@ public class EventController {
 		map.put("year", year);
 		map.put("month", month);
 		map.put("day", date);
-		
-		
+		map.put("index", endDay);
+		map.put("months", dbMonth);
+		EventVO vo = new EventVO();
 		
 		List<EventVO> eventSchedule = es.schedule(map);
+	//	List<EventVO> dataCompare = es.dateCompare(vo.getEvent_name());
+		List<EventVO> compareDate = es.compareDate(map);
 		
+		
+		model.addAttribute("compareDate",compareDate);
+		model.addAttribute("dateUse",dateUse);
 		model.addAttribute("iUseDate",iUseDate);
 		model.addAttribute("sUseDate",sUseDate);
 		model.addAttribute("startDay",startDay);

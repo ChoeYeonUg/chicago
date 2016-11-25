@@ -10,7 +10,8 @@ import com.sist.dao.EventVO;
 public interface EventService {
 	public List<EventVO> schedule(Map map);
 	public int scheduleTotalPage(Map map);
-	
+//	public List<EventVO> dateCompare(String event_name);
+	public List<EventVO> compareDate(Map map);
 	//관리자메뉴
 	public List<EventVO> printSysopEvent(Map map) throws Exception;
 	public int eventTotalPage(int rowSize) throws Exception;

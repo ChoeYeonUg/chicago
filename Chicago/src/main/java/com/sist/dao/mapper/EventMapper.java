@@ -9,8 +9,8 @@ import com.sist.dao.WriterVO;
 public interface EventMapper {
 	public List<EventVO> schedule(Map map);
 	public int scheduleTotalPage();
-	
-	
+//	public List<EventVO> dateCompare(String event_name);
+	public List<EventVO> compareDate(Map map);
 	//관리자메뉴
 	public List<EventVO> printSysopEvent(Map map);
 	public int eventTotalPage(int rowSize);
