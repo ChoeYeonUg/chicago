@@ -10,6 +10,20 @@ public class EventVO {
 	private Date end_day;
 	private String description;
 	private String dbday;
+	private Date stday;
+	public Date getStday() {
+		return stday;
+	}
+	public void setStday(Date stday) {
+		this.stday = stday;
+	}
+	public Date getEdday() {
+		return edday;
+	}
+	public void setEdday(Date edday) {
+		this.edday = edday;
+	}
+	private Date edday;
 	
 	public int getEvent_no() {
 		return event_no;

@@ -118,4 +118,44 @@
 		DELETE FROM member <include refid="where-id,pwd"/>
   	</delete>
   	
+  	<update id="pointMinus" parameterType="hashmap">
+  		UPDATE member SET point = point - #{usePoint} WHERE id=#{id}
+  	</update>
+  	
+  	<!-- 내가 쓴 문의내역과 연관댓글 확인하기 -->
+  	<select id="myQuestion" resultType="board" parameterType="hashmap">
+  		SELECT board_no,subject,id,GROUP_ID,hit,group_tab,regdate,secret,pwd,to_char(regdate,'yyyy-MM-dd') as dbday,num
+ 		FROM (SELECT board_no,id,GROUP_ID,hit,group_tab,subject,regdate,secret,pwd,ROWNUM as num
+ 		FROM (SELECT board_no,id,GROUP_ID,hit,group_tab,subject,regdate,secret,pwd FROM board WHERE category=3 AND group_id in (select DISTINCT GROUP_ID from board where id=#{id} AND group_tab=0) ORDER BY group_id DESC, group_step ASC))
+ 		WHERE num BETWEEN #{start} AND #{end}
+  	</select>
+  	
+  	<!-- 내가 쓴 문의내역 토탈페이지 수 -->
+    <select id="myQuestionTotal" resultType="int" parameterType="hashmap">
+    	SELECT CEIL(COUNT(*)/#{rowSize}) FROM (select GROUP_ID from board where group_id 
+    	in (select DISTINCT GROUP_ID from board where CATEGORY=3 AND id=#{id} AND group_tab=0))    
+    </select>
+    
+  	<select id="myQ_content" resultType="board" parameterType="int">
+	  	SELECT board_no,subject,id,category,content,regdate,hit,secret,pwd  
+	  	FROM board WHERE category=3 AND board_no=#{board_no}
+  	</select>
+  	
+  	<delete id="myQ_delete" parameterType="int">
+  		DELETE FROM board WHERE board_no=#{board_no}
+  	</delete>
+  	
+  	<select id="myQ_deleteData" resultType="board" parameterType="int">
+  		SELECT root,depth FROM board WHERE board_no=#{board_no}
+  	</select>
+  	
+  	 <update id="myQ_admin_delete" parameterType="int">
+  		UPDATE board SET subject='관리자가 삭제한 게시물입니다.', content='관리자가 삭제한 게시물입니다.'WHERE board_no=#{board_no}
+ 	</update>
+ 	
+ 	<update id="myQ_update" parameterType="board">
+  		UPDATE board SET subject=#{subject},content=#{content},
+  		secret=#{secret},pwd=#{pwd},hit=#{hit} WHERE board_no=#{board_no}
+  	</update>	
+ 	
 </mapper>

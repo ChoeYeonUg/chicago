@@ -217,13 +217,13 @@ ul.clients li:hover {
 /* footer */
 footer{
 /* 	background:#68A4C4; */
-	background:#745330;
-
+	background-image: url('../images/CoffeePape2.jpg');
+	height: 190px;
 }
 #sub-footer{
 /* 	background:#68A4C4; */
-	background:#745330;
-	
+	background-image: url('../images/CoffeePape2.jpg');
+	height: 190px;
 }
 
 /* head backgroud */
@@ -238,5 +238,6 @@ footer{
 #content{
 	
 	padding-top: 20px;
+	padding-bottom: 100px;
 	
 }

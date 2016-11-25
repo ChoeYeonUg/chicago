@@ -1,7 +1,9 @@
 package com.sist.di;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
@@ -119,7 +121,7 @@ public class PurchaseController {
 	}
 	
 	@RequestMapping("purchase_ok")
-	public String purchseokPage(Model model, OrdersVO vo, int[] bookCount, String[] bookList, HttpServletRequest req){
+	public String purchseokPage(Model model,int usePoint, OrdersVO vo, int[] bookCount, String[] bookList, HttpServletRequest req){
 		
 		HttpSession hs = req.getSession();
 		
@@ -130,6 +132,12 @@ public class PurchaseController {
 		
 		try {
 			os.orderProcess(bookList, bookCount, vo);
+			if(usePoint != 0){
+				Map map = new HashMap();
+				map.put("id", id);
+				map.put("usePoint", usePoint);
+				ms.pointMinus(map);
+			}
 			List<String> sbList = (List<String>)hs.getAttribute("sbList");
 			boolean bCheck = false;
 			if(sbList != null){
@@ -154,6 +162,6 @@ public class PurchaseController {
 		}
 		
 				
-		return "redirect:main.do";
+		return "redirect:memberOrderList.do";
 	}
 }

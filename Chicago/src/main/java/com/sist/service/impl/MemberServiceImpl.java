@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.sist.dao.AddressVO;
+import com.sist.dao.BoardVO;
 import com.sist.dao.MemberVO;
 import com.sist.dao.mapper.MemberMapper;
 import com.sist.service.MemberService;
@@ -156,6 +157,45 @@ public class MemberServiceImpl implements MemberService{
 		
 		return bCheck;
 	}
+
+	@Override
+	public void pointMinus(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		mapper.pointMinus(map);
+	}
+
+	public List<BoardVO> myQuestion(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.myQuestion(map);
+	}
+
+	@Override
+	public int myQuestionTotal(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.myQuestionTotal(map);
+	}
+
+	@Override
+	public BoardVO secretboard_Content(int board_no) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.myQ_content(board_no);
+	}
 	
+	@Override
+	public void myQ_delete(int board_no) throws Exception{
+		BoardVO vo=mapper.myQ_deleteData(board_no);
+		if(vo.getDepth()==0){
+			mapper.myQ_delete(board_no);
+		}else{
+			mapper.myQ_admin_delete(board_no);
+		}		
+		
+	}
+
+	@Override
+	public void myQ_update(BoardVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		mapper.myQ_update(vo);
+	}
 
 }
