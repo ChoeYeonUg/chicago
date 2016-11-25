@@ -10,7 +10,7 @@
 </head>
 <body>
 <table width="100%" class="table_content" border="0">
-					<c:forEach items="${schedule }" var="list">
+					<c:forEach items="${dayToday }" var="list">
 					<tr>
 						
 						<!-- 책 간략 소개내용 -->
@@ -50,12 +50,6 @@
 				프리브</a> &nbsp;
 		</c:if>    --%>
 		
-		<%-- <c:if test="${curpage<=block}"> --%>
-			<a href="noticeboard.do?page=1">비긴</a>
-				<a href="noticeboard.do?page=${curpage>1?curpage-1:curpage}">
-				프리브</a> &nbsp;
-		<%-- </c:if>    --%>
-		
 		<c:forEach var="i" begin="${fromPage }" end="${toPage }">
 		[<c:if test="${ curpage ==i}">
 		
@@ -63,39 +57,30 @@
 		
 		</c:if>		
 		<c:if test="${ curpage !=i}">
-		<a href="noticeboard.do?page=${i }">${i }</a>
+		<a href="event_day.do?page=${i }">${i }</a>
 					
 		</c:if>		
 		]
 		</c:forEach>
 		
-		<c:if test="${toPage<totalpage }">
-			<a href="noticeboard.do?page=${toPage+1 }">넥스트</a>
-			<a href="noticeboard.do?page=${totalpage }">끝</a>
+		<c:if test="${toPage<dayPage }">
+			<a href="event_day.do?page=${toPage+1 }">넥스트</a>
+			
 		</c:if>
 		
-		<c:if test="${toPage>=totalpage }">
-			<a href="noticeboard.do?page=${curpage<totalpage?curpage+1:curpage }">넥스트</a>&nbsp;
-			<a href="noticeboard.do?page=${totalpage }">끝</a>
+		<c:if test="${toPage>=dayPage }">
+			<a href="event_day.do?page=${curpage<dayPage?curpage+1:curpage }">넥스트</a>&nbsp;
+			
 		</c:if>
 		&nbsp;&nbsp;
-		${curpage } page / ${totalpage  } pages
+		${curpage } page / ${dayPage } pages
 		
 		</td>
 		
 		</tr>
 		</table>
 		<!-- 페이지표시 끝 -->
-		<!-- 글쓰기 -->
-				<table width="700">
-					<tr>
-						<!-- 관리자만보이게 설정 -->
-						<c:if test="${grade<=1 }">
-						<td align="right"><a href="noticeboard_insert.do">글쓰기</a></td>
-						</c:if>
-					</tr>
-				</table>
-		<!-- 글쓰기 끝 -->
+		
 				<!-- End FAQ Item -->
 
 				<div class="clearfix margin-bottom-10"></div>

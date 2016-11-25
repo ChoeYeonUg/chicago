@@ -156,7 +156,7 @@ int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
                     </c:when>
                     <c:otherwise>
                     <a href="<c:url value='/event_month.do' />?year=${year-1}&amp;month=11" target="_self">
-                           <b>&gt;</b>
+                           <b>&lt;</b>
                     </c:otherwise>
                     </c:choose>
                     
@@ -329,17 +329,19 @@ while(newLine > 0 && newLine < 7)
              backColor = "#c9c9c9"
        </c:if>
        <TD valign='top' align='left' height='92px' bgcolor=#EFEFEF nowrap >  
+       <c:if test="${index<10}">      
+       	   <a href="event_day.do?today=${iUseDate}0${index}" >
+		   <c:set var="dataUse" value="${iUseDate}0${index }"/>       
+       </c:if>
+       <c:if test="${index>=10}">
+			<a href="event_day.do?today=${iUseDate}${index}" >       
+  			<c:set var="dataUse" value="${iUseDate}${index }"/>
+  		</c:if>
 
        <font color='${color }'>
              ${index }
        </font>  
        <BR>
-       <c:if test="${index<10}">      
-		   <c:set var="dataUse" value="${iUseDate}0${index }"/>       
-       </c:if>
-       <c:if test="${index>=10}">
-  			<c:set var="dataUse" value="${iUseDate}${index }"/>
-  		</c:if>
 		  	<%-- <c:set var="count"value="0">	 --%>	  
 		  		<c:forEach items="${compareDate }" var="vo"> 
 			  		<div style="display:none">
@@ -362,8 +364,8 @@ while(newLine > 0 && newLine < 7)
 	  		
   		<%-- <c:out value="${vo.start_day.replace('-','')}"/>
   		<c:out value="${vo.start_day}"/> --%>       
-       <BR>
-      
+       <BR>      
+       </a>
        </TD>
       <%--  ${newLine+=1}--%> 		
       <c:set var="newLine" value="${newLine + 1}" />

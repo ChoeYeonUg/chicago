@@ -360,7 +360,7 @@ public class EventController {
 	
 	
 	@RequestMapping("event_day")
-	public String event_day(Model model ,String page){
+	public String event_day(Model model ,String page,String today,HttpServletRequest req){
 		if(page == null) {
 			page = "1";
 		}
@@ -370,30 +370,40 @@ public class EventController {
 		int start = (curPage * rowSize) - (rowSize-1); 
 		int end = curPage * rowSize; 
 		
+		String s=  today;
+		
+		if(s == null || s.trim().equals("")){
+			s = "0";
+			}
 		
 		Map map = new HashMap(); 
 		map.put("start", start); 
 		map.put("end", end); 
-		
+		map.put("dateUse2", today);
+		System.out.println(s+"asdfasdfsadfasfadfsadfsadfasfadfsafsadf");
 		int totalPage = es.scheduleTotalPage(map);
-		
+		int daypage = es.dayPage(map);
 		
 		int block = 5;
 		int fromPage = ((curPage-1)/block*block)+1;
 		int toPage = ((curPage-1)/block*block)+block;
-		if(toPage>totalPage) {
-			toPage = totalPage;
+		if(toPage>daypage) {
+			toPage = daypage;
 		}
 		
-		List<EventVO> eventSchedule = es.schedule(map);
+		//List<EventVO> eventSchedule = es.schedule(map);
+		List<EventVO> dayToday = es.dayToday(map);
 		
+		model.addAttribute("dayPage",daypage);
+		model.addAttribute("dayToday",dayToday);
+		model.addAttribute("dataUse2",today);
 		model.addAttribute("curPage", curPage);
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("fromPage", fromPage);
 		model.addAttribute("toPage", toPage);
 		model.addAttribute("block", block);
 		model.addAttribute("page", page);
-		model.addAttribute("schedule",eventSchedule);
+	//	model.addAttribute("schedule",eventSchedule);
 		model.addAttribute("jsp", "event.jsp");
 		model.addAttribute("event_jsp", "../event/day.jsp");
 		return "main/main";
