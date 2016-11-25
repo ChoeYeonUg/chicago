@@ -80,23 +80,23 @@
 							<!-- Member Wishlist Info -->
 							<li class="">
 								<a href="wishlist.do" data-toggle="" data-parent=""><spring:message code="memberInfoModifyMain.memberwishlisthead"/></a>
-								<ul id="" class="">
+								<%-- <ul id="" class="">
 									<li class="">
 										<a href="wishlist.do"><spring:message code="memberInfoModifyMain.btMemberWishlistInfo"/></a>
 									</li>
-								</ul>
+								</ul> --%>
 							</li>
 							<!-- End Member Wishlist Info -->
 							<!-- Member Question Info -->
 							<li class="">
-								<a href="memberquestion.do" data-toggle="" data-parent=""><spring:message code="memberInfoModifyMain.memberQuestionhead"/></a>
-								<ul id="" class="">
+								<a href="myMemberquestion.do" data-toggle="" data-parent=""><spring:message code="memberInfoModifyMain.memberQuestionhead"/></a>
+								<%-- <ul id="" class="">
 									<li class="">
 
 										<a href="myMemberquestion.do"><spring:message code="memberInfoModifyMain.btMemberQuestion"/></a>
 									</li>
 									
-								</ul>
+								</ul> --%>
 							</li>
 							<!-- End Member Question Info -->
 						</ul>

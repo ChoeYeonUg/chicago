@@ -85,7 +85,7 @@
               					<li><a href="memberinfo.do"><spring:message code="header.modifi"/></a></li>
                                 <li><a href="orderlist.do"><spring:message code="header.ppl"/></a></li>
 								<li><a href="wishlist.do"><spring:message code="header.egd"/></a></li>
-								<li><a href="memberquestion.do"><spring:message code="header.qu"/></a></li>
+								<li><a href="myMemberquestion.do"><spring:message code="header.qu"/></a></li>
             				</ul>
             			</li>
           				<li><a href="sbList.do"><spring:message code="header.sb"/></a></li>
