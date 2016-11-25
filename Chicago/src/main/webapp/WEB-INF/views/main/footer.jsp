@@ -16,7 +16,7 @@
 	}
 	#footer{
 		/* position: absolute; */
-		bottom: 0;
+		/* bottom: 0; */
 		left: 0;
 		right: 0;
 	}
@@ -27,27 +27,32 @@
 		<div class="container no-padding">
                 <div class="row">
                     <!-- Footer Menu -->
-                    <div id="footermenu" class="col-md-8">
-                        <ul class="list-unstyled list-inline">
+                    <div id="footermenu" class="col-md-8" style="padding-left: 100px;"> 
+                        <ul class="list-unstyled list-inline" style="padding-top: 20px;">
                             <li>
-                                <a href="#" target="_blank" class="footer-link">Sample Link</a>
+                                <a href="#" target="_blank" class="footer-link">회사소개&nbsp; &nbsp;&nbsp;</a><b>l</b>
                             </li>
                             <li>
-                                <a href="#" target="_blank" class="footer-link">Sample Link</a>
+                                <a href="#" target="_blank" class="footer-link">이용안내 &nbsp;&nbsp;&nbsp;</a><b>l</b>
                             </li>
                             <li>
-                                <a href="#" target="_blank" class="footer-link">Sample Link</a>
+                                <a href="#" target="_blank" class="footer-link">이용약관&nbsp; &nbsp;&nbsp;</a><b>l</b>
                             </li>
                             <li>
-                                <a href="#" target="_blank" class="footer-link">Sample Link</a>
+                                <a href="#" target="_blank" class="footer-link">개인정보방침취급안내</a>
                             </li>
                         </ul>
                     </div>
+                 <div align="center">
+                    <img src="images\logo1.png" style="width:20%; height:auto; float: right; position: relative;  right:190px; bottom: -50px;" >
+                    <img src="images\footer1.png" style="width:80%; height:auto; padding-left: 10px;" >
+                  
+                 </div>
                     <!-- End Footer Menu -->
                     <!-- Copyright -->
-                    <div id="copyright" class="col-md-4">
+                    <!-- <div id="copyright" class="col-md-4">
                         <p class="pull-right">(c)Chicago books</p>
-                    </div>
+                    </div> -->
                     <!-- End Copyright -->
                 </div>
             </div>

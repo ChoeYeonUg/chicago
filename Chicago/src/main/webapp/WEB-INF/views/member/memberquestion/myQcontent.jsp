@@ -1,25 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="css/board_css/board_css.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-
-
 <script type="text/javascript">
 
 function openPop(page,board_no){
-	/* 	alert(page);
-	alert(board_no); */
+/* 	 	alert(page);
+	alert(board_no);  */
 	
-	if(confirm("»èÁ¦ÇÏ½Ã°Ú½À´Ï±î?")){ 
-		location.href ="board_delete.do?page="+page+"&board_no="+board_no;
+	if(confirm("ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?")){ 
+		location.href ="myQ_delete.do?page="+page+"&board_no="+board_no;
 		/* location.href = "deleteMember.do?id="+data; */
 	} 
 	return false;
@@ -27,28 +24,29 @@ function openPop(page,board_no){
 </script>
 </head>
 <body>
-		<table>
+
+<table>
 			<tr>	
 				<td style="font-size:20px; color:#505050; padding: 15px;" align="left">
-				1:1 °Ô½ÃÆÇ ±Û º¸±â
+				ë¬¸ì˜ë‚´ì—­ ë³´ê¸°
 				</td>
 			</tr>
-		</table>		
-		<table class="tableContent" width="500px" style="border: 1px solid #e3e3e3">	
+</table>
+	<table class="tableContent" width="500px" style="border: 1px solid #e3e3e3">	
 			<tr>
 				<th width="20%" align="center" style="background-color: #fbfafa; padding:10px; border-bottom: 1px solid #e3e3e3;
-					border-top: 1px solid #e3e3e3; border-right: 1px solid #e3e3e3;">¹øÈ£</th>
+					border-top: 1px solid #e3e3e3; border-right: 1px solid #e3e3e3;">ë²ˆí˜¸</th>
 				<td width="30%" align="center" style="padding:10px; border-bottom: 1px solid #e3e3e3;
 					border-top: 1px solid #e3e3e3;">${vo.board_no}</td>
 				<th width="20%" align="center"  style="background-color: #fbfafa; padding:10px; border-bottom: 1px solid #e3e3e3;
-					border-top: 1px solid #e3e3e3;  border-right: 1px solid #e3e3e3; border-left:  1px solid #e3e3e3;">³¯Â¥</th>
+					border-top: 1px solid #e3e3e3;  border-right: 1px solid #e3e3e3; border-left:  1px solid #e3e3e3;">ë‚ ì§œ</th>
 				<td width="30%" align="center" style="padding:10px; border-bottom: 1px solid #e3e3e3;
 					border-top: 1px solid #e3e3e3;">				
 					<fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd"/></td>
 			</tr>		
 			<tr>
 				<th width="20%" align="center"  style="background-color: #fbfafa; padding:10px; border-bottom: 1px solid #e3e3e3;
-					border-top: 1px solid #e3e3e3;  border-right: 1px solid #e3e3e3;" >ÀÛ¼ºÀÚ</th>
+					border-top: 1px solid #e3e3e3;  border-right: 1px solid #e3e3e3;" >ì‘ì„±ì</th>
 				<td width="30%" align="center" style="padding:10px; border-bottom: 1px solid #e3e3e3;
 					border-top: 1px solid #e3e3e3;" >${vo.id }</td>
 				<th width="20%" align="center"  style="background-color: #fbfafa; padding:10px; border-bottom: 1px solid #e3e3e3;
@@ -58,7 +56,7 @@ function openPop(page,board_no){
 			</tr>				
 			<tr>
 				<th width="20%" align="center" style="background-color: #fbfafa; padding:10px; border-bottom: 1px solid #e3e3e3;
-					border-top: 1px solid #e3e3e3;  border-right: 1px solid #e3e3e3;" >Á¦¸ñ</th>
+					border-top: 1px solid #e3e3e3;  border-right: 1px solid #e3e3e3;" >ì œëª©</th>
 				<td width="80%" align="left" colspan="3" style="padding:10px;">
 				${vo.subject}</td>
 			</tr>			
@@ -72,19 +70,17 @@ function openPop(page,board_no){
 			<table class="commonTable" style="width: 700px;">
 			<tr>
 				<td align="right">
-				<c:if test="${id!=null}">
-					<a href="secret_reply.do?board_no=${board_no}">´ä±Û</a>&nbsp;					
-				</c:if>
+				<%-- <c:if test="${id!=null}">
+					<a href="myQ_reply.do?board_no=${board_no}">ë‹µê¸€</a>&nbsp;					
+				</c:if> --%>
 				<c:if test="${id==vo.id || grade<=1 }">
-					<a href="secret_update.do?page=${page }&board_no=${board_no }">¼öÁ¤</a>&nbsp;
-					<a href="#" onclick="return openPop('${page}','${board_no}');">»èÁ¦</a>&nbsp;
+					<a href="myQ_update.do?page=${page }&board_no=${board_no }">ìˆ˜ì •</a>&nbsp;
+					<a href="#" onclick="return openPop('${page}','${board_no}');">ì‚­ì œ</a>&nbsp;
 				</c:if>
-					<a href="secretboard.do?page=${page }">¸ñ·Ï</a>&nbsp;
+					<a href="myMemberquestion.do?page=${page }">ëª©ë¡</a>&nbsp;
 				</td>
 			</tr>
 		</table>
-			
-
 
 </body>
 </html>

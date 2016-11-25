@@ -35,6 +35,8 @@ public interface BoardService {
 	public BoardVO secret_parentData(int board_no) throws Exception;
 	public void secret_replyInsert(BoardVO vo) throws Exception;
 	public void secret_depthIncrement(int board_no) throws Exception;
+	public String idMine(Map map) throws Exception;
+	public void insertMine(Map map) throws Exception;
 	
 	//관리자 전용 메뉴
 	public List<BoardVO> printSysopBoard(Map map) throws Exception;

@@ -20,8 +20,15 @@ public class BoardVO {
 	private int faq_category;
 	private int num;
 	private String dbday;
+	private String mine;
 
 
+	public String getMine() {
+		return mine;
+	}
+	public void setMine(String mine) {
+		this.mine = mine;
+	}
 	public String getDbday() {
 		return dbday;
 	}

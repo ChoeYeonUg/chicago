@@ -1,5 +1,6 @@
 package com.sist.di;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.sist.dao.*;
@@ -358,7 +359,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="withdrawMember_ok.do", method=RequestMethod.POST)
-	public String withdrawMember_ok(Model model, MemberVO vo, HttpServletRequest request,String USER_PWD, String USER_C_PWD) throws Exception {
+	public String withdrawMember_ok(Model model, MemberVO vo, HttpServletRequest request,String USER_PWD, String USER_C_PWD, HttpServletResponse response) throws Exception {
 		
 		logger.info(vo.getId() + " : " + vo.getPwd());
 		
@@ -388,4 +389,151 @@ public class MemberController {
 		
 	}
 	
+	/* Member Question HeadMenu */ 
+	@RequestMapping("myMemberquestion.do")
+	public String myMemberquestion(Model model,String page, HttpServletRequest request, HttpServletResponse response) {
+		
+		HttpSession hs = request.getSession();		
+		String id = (String) hs.getAttribute("id");
+		
+		if(page==null)
+			page="1";
+		
+		int curpage = Integer.parseInt(page);
+		int rowSize = 10;
+		int start = (curpage * rowSize) - (rowSize - 1);
+		int end = curpage * rowSize;
+		int block=5;
+		int fromPage = ((curpage-1)/block*block)+1;
+		int toPage = ((curpage-1)/block*block)+block;
+		String msg="관리자가 삭제한 게시물입니다.";
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+	    String today=sdf.format(new Date());
+		
+	    Map map = new HashMap();
+	    map.put("start", start);
+		map.put("end", end);
+		map.put("id", id);
+		map.put("rowSize", rowSize);
+	
+		List<BoardVO> list;
+		int totalpage;
+		try{
+		list=ms.myQuestion(map);
+		totalpage=ms.myQuestionTotal(map);
+		
+		if(toPage> totalpage) 
+			toPage = totalpage;	
+		if(totalpage==0)
+			totalpage=1;
+		
+		
+		
+		model.addAttribute("block",block);
+		model.addAttribute("fromPage", fromPage);
+		model.addAttribute("toPage", toPage);
+		model.addAttribute("totalpage", totalpage);
+		model.addAttribute("curpage", curpage);
+		model.addAttribute("list", list);
+		model.addAttribute("today",today);
+		model.addAttribute("msg",msg);
+		model.addAttribute("pCheck",2);
+		model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+		model.addAttribute("cmi","../member/memberquestion/MyMemberQuestion.jsp" );
+		
+		model.addAttribute("jsp", "member.jsp");
+		model.addAttribute("member_jsp", "../member/MemberMain.jsp");		
+		
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			e.getStackTrace();
+		}
+		
+		return "main/main";
+		
+	}
+	
+	
+	@RequestMapping("myQcontent.do")
+	public String myQcontent(Model model,String page,int board_no, HttpServletRequest request, HttpServletResponse response) {
+		if(page==null)
+			page="1";		
+		int curpage = Integer.parseInt(page);
+		
+		try{				
+			BoardVO vo=ms.secretboard_Content(board_no);		
+	
+			model.addAttribute("page",curpage);
+			model.addAttribute("vo",vo);
+			model.addAttribute("board_no",board_no);
+			model.addAttribute("jsp", "board.jsp");
+						
+			model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+			model.addAttribute("cmi","../member/memberquestion/myQcontent.jsp" );
+			
+			model.addAttribute("jsp", "member.jsp");
+			model.addAttribute("member_jsp", "../member/MemberMain.jsp");	
+		}catch (Exception e) {
+			e.getStackTrace();
+			System.out.println(e.getMessage());
+		}			
+		
+			
+		return "main/main";
+	}
+	
+	@RequestMapping("myQ_delete")
+	public String myQ_delete(Model model,int board_no, String page, HttpServletRequest request, HttpServletResponse response){
+		if(page==null)
+			page="1";		
+		int curpage = Integer.parseInt(page);
+
+		try{
+			ms.myQ_delete(board_no);
+			model.addAttribute("page",curpage);
+			System.out.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"+board_no);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			e.getStackTrace();
+		}
+
+		return "redirect:myMemberquestion.do";
+	
+	}
+	
+	@RequestMapping("myQ_update")
+	public String myQ_update(Model model,int board_no,HttpServletRequest request, HttpServletResponse response){
+		
+		try{
+			BoardVO vo=ms.secretboard_Content(board_no);
+		
+			model.addAttribute("vo",vo);		
+			
+			model.addAttribute("MemberMain_cmi", "MemberMain.jsp");
+			model.addAttribute("cmi","../member/memberquestion/myQ_update.jsp" );
+			
+			model.addAttribute("jsp", "member.jsp");
+			model.addAttribute("member_jsp", "../member/MemberMain.jsp");
+		
+		}catch(Exception e){
+			e.getStackTrace();
+			System.out.println(e.getMessage());
+		}		
+		return "main/main";
+	}
+	
+	@RequestMapping("myQ_update_ok")
+	public String myQ_update_ok(Model model,BoardVO vo,HttpServletRequest request, HttpServletResponse response){
+		int board_no=vo.getBoard_no();
+		vo.setHit(vo.getHit()-2);
+		try {
+			
+			ms.myQ_update(vo);			
+			model.addAttribute("board_no",board_no);
+		} catch (Exception e) {
+			e.getStackTrace();
+			System.out.println(e.getMessage());
+		}		
+		return "redirect:myQcontent.do?board_no="+board_no;
+	}
 }

@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.sist.dao.AddressVO;
+import com.sist.dao.BoardVO;
 import com.sist.dao.MemberVO;
 
 public interface MemberService {
@@ -31,7 +32,14 @@ public interface MemberService {
 	public void withdrawMember(Map map) throws Exception;
 	public void pointMinus(Map map) throws Exception;
 	
+	
 	//order
 	public MemberVO orderData(String id) throws Exception;
 	
+	public List<BoardVO> myQuestion(Map map) throws Exception;
+	public int myQuestionTotal(Map map) throws Exception;
+	public BoardVO secretboard_Content(int board_no) throws Exception;
+	public void myQ_delete(int board_no) throws Exception;
+	public void myQ_update(BoardVO vo) throws Exception;
+
 }
