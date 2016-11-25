@@ -23,7 +23,7 @@
 </head>
 <body>
 	<table>
-		<tr><td align="left"><input type="button" value="추가" class="button" onclick="location='book_mngInsert.do'"/></td></tr>
+		<tr><td align="left"><input type="button" value="추가" class="btn total" onclick="location='book_mngInsert.do'"/></td></tr>
 	</table>
 	<!-- 전체 리스트 출력 -->
 	<table class="commonTable" style="	width: inherit;">
@@ -32,7 +32,7 @@
 				<td width="52%" style="font-size: 11px;"><b>도서이름</b></td>
 				<td width="20%" style="font-size: 11px;"><b>저자</b></td>
 				<td width="10%" style="font-size: 11px;"><b>절판여부</b></td>
-				<td width="10%" style="font-size: 11px;"><b>관리</b></td>
+				<td width="10%" style="font-size: 11px;"><b>재고수량</b></td>
 			</tr>
 			<c:forEach items="${list }" var="vo">
 				<tr>
@@ -46,7 +46,7 @@
 							<%-- <c:otherwise>절판</c:otherwise> --%>
 						</c:choose>
 					</td>
-					<td width="10%" style="font-size: 11px; color: #505050;"><a href="#">관리</a></td>
+					<td width="10%" style="font-size: 11px; color: #505050;">${vo.amount }</a></td>
 				</tr>
 			</c:forEach>
 	</table>
@@ -74,7 +74,7 @@
 						<label><input type="radio" value="book_content" name="fs" id="fs"/>
 							<span style="font-size:11px; color:#505050; vertical-align: bottom;">내용</span></label>
 						<input type="search" id="ss" name="ss" style="border-bottom: #505050 1px solid;"> 
-						<input type="submit" value="검색" class="button"/>
+						<input type="submit" value="검색" class="btn total"/>
 					</div>
 				</form>
 			</td>

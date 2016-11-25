@@ -16,11 +16,6 @@
 	}
 	#footer{
 		/* position: absolute; */
-<<<<<<< HEAD
-/* 		bottom: 0; */
-=======
-		/* bottom: 0; */
->>>>>>> refs/remotes/origin/master
 		left: 0;
 		right: 0;
 	}

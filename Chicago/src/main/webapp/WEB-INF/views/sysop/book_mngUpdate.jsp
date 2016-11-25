@@ -91,11 +91,11 @@
 							<td width="10%"  style="font-size:11px; color:#505050;">페이지</td>
 							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" value="${goods.pages }" name="pages" id="pages" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
 							<td width="10%"  style="font-size:11px; color:#505050;">가격</td>
-							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" value="${goods.price }" name="price" id="price" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
+							<td width="40%"  style="font-size:11px; color:#505050;"><input type="text" size="20" value="<fmt:formatNumber value="${goods.price }" type="number"/>원" name="price" id="price" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/></td>
 						</tr>
 						<tr>
 							<td width="10%" style="font-size:11px; color:#505050;">Img</td>
-							<td colspan="3" style="font-size:11px; color:#505050;">${goods.img }<br/><input type="file" name="upload" id="upload"/></td>
+							<td colspan="3" style="font-size:11px; color:#505050;">${goods.img }<br/><input type="file" name="upload" id="upload" class="btn total"/></td>
 						</tr>
 						<tr>
 							<td width="10%"  style="font-size:11px; color:#505050;">책소개</td>
@@ -105,8 +105,8 @@
 					<table>
 						<tr>
 							<td align="right">
-								<input type="button" value="수정" onclick="sendBtn();" class="button"/>
-								<input type="button" value="취소" onclick="javascript:history.back();" class="button"/>
+								<input type="button" value="수정" onclick="sendBtn();" class="btn total"/>
+								<input type="button" value="취소" onclick="javascript:history.back();" class="btn total"/>
 							</td>
 						</tr>
 					</table>

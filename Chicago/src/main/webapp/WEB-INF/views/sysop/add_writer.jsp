@@ -18,14 +18,6 @@
 		f.submit();
 	}
 </script>
-<style type="text/css">
-	.button {
-		background-color: white;
-		color: black;
-		border: 2px solid #505050;
-		font-size: 11px;
-	}
-</style>
 </head>
 <body>
 	<div id="content">
@@ -49,11 +41,11 @@
 				</tr>
 				<tr>
 					<th width="20%">Img</th>
-					<td colspan="3"><input type="file" size="56" id="upload" name="upload" style="border-top:0px; border-right:0px; border-left: 0px; border-bottom:#00000 1px solid;"></td>
+					<td colspan="3"><input type="file" size="56" id="upload" name="upload" style="border-top:0px; border-right:0px; border-left: 0px; border-bottom:#00000 1px solid;" class="btn total"></td>
 				</tr>
 				<tr>
 					<td colspan="4" align="right">
-						<input type="button" value="추가" onclick="send();" class="button">
+						<input type="button" value="추가" onclick="send();" class="btn total">
 					</td>
 				</tr>
 			</table>

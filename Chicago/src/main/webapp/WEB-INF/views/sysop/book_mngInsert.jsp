@@ -187,7 +187,7 @@
 						</tr>
 						<tr>
 							<td width="10%" style="font-size:11px; color:#505050;">이미지</td>
-							<td colspan="3" style="font-size:11px; color:#505050;"><input type="file" size="20" name="upload" id="upload"/></td>
+							<td colspan="3" style="font-size:11px; color:#505050;"><input type="file" size="20" name="upload" id="upload" class="btn total"/></td>
 						</tr>
 						<tr>
 							<td width="10%"  style="font-size:11px; color:#505050;">책소개</td>
@@ -197,8 +197,8 @@
 					<table>
 						<tr>
 							<td align="right">
-								<input type="button" value="등록" id="sendBtn" class="button"/>
-								<input type="button" value="취소" onclick="javascript:history.back()" class="button"/>
+								<input type="button" value="등록" id="sendBtn" class="btn total"/>
+								<input type="button" value="취소" onclick="javascript:history.back()" class="btn total"/>
 							</td>
 						</tr>
 					</table>

@@ -71,7 +71,7 @@ function openPop(data){
 					<option value="subject">제목</option>
 				</select>
 				<input type="search" id="ss" name="ss">
-				<input type="submit" value="검색">
+				<input type="submit" value="검색" class="btn total">
 			</form>
 		</td>
 	</tr>

@@ -6413,7 +6413,14 @@ button.close {
 .list-group-item.list-toggle a:hover,
 .list-group-item.list-toggle a:link,
 .list-group-item.list-toggle a:visited,
-.list-group-item.list-toggle a:active {
+.list-group-item.list-toggle a:active,
+.list-group-item,
+.list-group-item a,
+.list-group-item a:hover,
+.list-group-item a:link,
+.list-group-item a.visited,
+.list-group-item a.active {
 	color: #666;
 	text-decoration: none;
 }
+
