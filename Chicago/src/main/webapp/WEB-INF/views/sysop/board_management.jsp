@@ -87,7 +87,7 @@ function popupOpen(board_no){
 						<option value="content">내용</option>
 					</select>
 					<input type="search" id="ss" name="ss">
-					<input type="submit" value="검색">
+					<input type="submit" value="검색" class="btn total">
 				</form>
 			</td>
 		</tr>

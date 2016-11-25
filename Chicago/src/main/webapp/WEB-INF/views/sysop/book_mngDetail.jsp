@@ -63,7 +63,9 @@
 						</tr>
 						<tr>
 							<th align="left" width="10%" style="font-size:11px; color:#000;">가격</th>
-							<td align="left" width="40%" style="font-size:11px; color:#505050;">${bookMngDetail.price }</td>
+							<td align="left" width="40%" style="font-size:11px; color:#505050;">
+								<fmt:formatNumber value="${bookMngDetail.price }" type="number"/>원
+							</td>
 							<th align="left" width="10%" style="font-size:11px; color:#000;">출판일</th>
 							<td align="left" width="40%" style="font-size:11px; color:#505050;">
 								<fmt:formatDate value="${bookMngDetail.publication }" pattern="yyyy/MM/dd"/>
@@ -85,8 +87,8 @@
 						<tr align="right">
 							<td>
 								<a href="book_mngUpdate.do?book_code=${book_code }">
-								<input type="button" value="수정" onclick="location='book_mngUpdate.do?book_code=${bookMngDetail.book_code}'" class="button"/></a>
-								<input type="button" value="목록" onclick="javascript:history.back()" class="button"/>
+								<input type="button" value="수정" onclick="location='book_mngUpdate.do?book_code=${bookMngDetail.book_code}'" class="btn total"/></a>
+								<input type="button" value="목록" onclick="javascript:history.back()" class="btn total"/>
 							</td>
 						</tr>
 					</table>

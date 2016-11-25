@@ -8,10 +8,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="css/board_css/board_css.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
 </head>
 <body>
 	<table>
-		<tr><td align="left"><input type="button" value="추가" style="hegiht:8px; width:40px; border-radius:2px; font-size:11px;" onclick="location='add_writer.do'"/></td></tr>
+		<tr><td align="left"><input type="button" value="추가" class="btn total" onclick="location='add_writer.do'"/></td></tr>
 	</table>
 	<table class="commonTable" style="	width: inherit;">
 		<tr>
@@ -56,7 +57,7 @@
 						<option value="writer_name">저자명</option>
 					</select>
 					<input type="search" id="ss" name="ss">
-					<input type="submit" value="검색">
+					<input type="submit" value="검색" class="btn total">
 				</form>
 			</td>
 		</tr>

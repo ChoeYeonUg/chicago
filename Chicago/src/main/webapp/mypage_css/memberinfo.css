@@ -601,3 +601,8 @@ ul.nav li.dropdown a {
 	position:relative;
 	margin:0;
 	padding:0; */
+	
+
+.pull-right {
+	float: right !important
+}

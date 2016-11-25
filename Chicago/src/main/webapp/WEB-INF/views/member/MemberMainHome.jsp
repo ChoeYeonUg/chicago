@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta >
+<meta>
 <title>Made By ChoDing!!</title>
 <link href="css/bootstrap.min.css" rel="stylesheet" />
 <link href="css/mypagecss/memberinfo.css" rel="stylesheet" />
@@ -26,13 +26,12 @@
 <script src="js/jquery.js"></script>
 <script src="js/validate.js"></script>
 <script src="js/google-code-prettify/prettify.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-</script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 </head>
 <body>
-	<!-- Member Main Home -->
+	<%-- <!-- Member Main Home -->
 	<div class="OutlineForm">
 		<div class="MiddlelineSettingForm">
 			<div class="HeadlineSettingForm">
@@ -64,6 +63,10 @@
 				</div>
 			</div>
 		</div>
+	</div> --%>
+	<div class="col-md-9">
+		<!-- 마이페이지 진입 시 가장 먼저 보이는 화면 -->
+		<img src="images/book_image.jpg" alt="myPage"/>
 	</div>
 </body>
 </html>

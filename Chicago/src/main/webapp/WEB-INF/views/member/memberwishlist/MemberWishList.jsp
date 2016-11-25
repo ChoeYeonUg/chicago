@@ -11,7 +11,6 @@
 <meta >
 <title>Made By ChoDing!!</title>
 <link href="css/bootstrap.min.css" rel="stylesheet" />
-<link href="css/mypagecss/orderlist.css" rel="stylesheet" />
 
 <!-- Theme skin -->
 <link href="skins/default.css" rel="stylesheet" />
@@ -128,117 +127,72 @@ function cancel(checkbox,book,amount){
 
 };
 </script>
+<style type="text/css">
+	th, td {
+		align: center;
+		vertical-align: middle;
+	}
+</style>
 </head>
 <body>
-	<div class="OutlineForm">
-		<div class="MiddlelineSettingForm">
-			<div class="HeadlineSettingForm">
-				<div class="Headline">
-					회원찜내역
-				</div>
-				<div class="Notification">
-					<ul class="Notcont">
-						<li>회원님의 찜내역을 확인할 수 있습니다.</li>
-						<li>찜내역에서 찜하신 서적을 재고량에 따라 추후에 구매하실 수 있습니다.</li>
-					</ul>
+	<div class="col-md-9">
+		<!-- 본인확인 안내 msg -->
+		<div id="accordion" class="panel-group">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="panel-title">
+						<h3 class="panel-title">회원찜내역</h3>
+					</div>
+					<div id="collapse-One" class="accordion-body collapse in">
+						<div class="panel-body">
+							◎&nbsp;회원님의 찜내역을 확인할 수 있습니다.<br /> 
+							◎&nbsp;찜내역에서 찜하신 서적을 재고량에 따라 추후에 구매하실 수 있습니다.
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="OrderlistSettingForm">
-				<div class="MemberOrderlistHeadlineForm">
-					<label class="MemberInfoHeadline">${id }님의 찜 내역</label>
-				</div>
-				<div class="MemberWishlistContentForm">
-					<div id="InnerBox">
-						<div id="sb_content" class="cont_basket">
-							<c:if test="${wishList != null && wishList.size() != 0}">
-								<fieldset>
-									<form action="purchase.do" method="post" name="frm">
-										<div class="info_basket">
-											<p class="desc_total">
-												<em class="emph_total">${wishList.size() }개</em> 상품이 찜목록에
-												있습니다.
-											</p>
-
-											<ul class="list_basket">
-												<c:if test="${wishList != null }">
-													<c:forEach items="${wishList}" var="item">
-														<li class="check_on"><span
-															class="choice_g choice_basket"> <input
-																type="checkbox" class="inp_g" checked="checked"
-																onclick="cancel(this,'am_${item.book_code}','${item.book_code}')">
-														</span> <a href="bookDetail.do?book_code=${item.book_code}"
-															class="link_thumb"> <img src="${item.img}">
-														</a>
-
-															<div class="desc_basket">
-																<strong class="tit_product"><a
-																	href="bookDetail.do?book_code=${item.book_code}">
-																		${item.book_name } </a></strong>
-
-																<ul class="list_append">
-																	<li><em class="tit_append">금액 : </em> <span
-																		class="product_price"><fmt:formatNumber
-																				value="${item.price}" pattern="###,###" />원</span></li>
-																</ul>
-															</div>
-															<div class="box_quantity">
-																<input type="text" name="amount" value="1"
-																	id="am_${item.book_code}" class="inp_quantity">
-																<button type="button" class="btn_g btn_minus"
-																	onclick="down('am_${item.book_code}');">
-																	<img alt="" src="book_img\down.png">
-																</button>
-																<button type="button" class="btn_g btn_plus"
-																	onclick="up('am_${item.book_code}',${item.amount});">
-																	<img alt="" src="book_img\up.png">
-																</button>
-															</div>
-
-															<button type="button" class="link_delete"
-																onclick="deleteBook('${item.book_code}')">
-																<span class="ico_friends ico_delete">X</span>
-															</button> <input type="hidden" name="book_code"
-															id="${item.book_code}" value="${item.book_code}">
-															<input type="hidden" name="price" value="${item.price}">
-													</c:forEach>
-												</c:if>
-											</ul>
-											<!-- <input type="submit" value="전송"> -->
-										</div>
-										<div class="info_price">
-											<dl class="list_price">
-												<dt>선택 물품 합계 :</dt>
-												<dd>
-													<span id="basketFee"> </span>
-												</dd>
-												<dt>배송비</dt>
-												<dd>
-													<span id="shipFee"></span>
-												</dd>
-											</dl>
-											<dl class="list_price price_total">
-												<dt>총 결제금액</dt>
-												<dd>
-													<strong> <span id="totalFee"></span>
-													</strong>
-												</dd>
-											</dl>
-										</div>
-
-										<div class="order_btn">
-											<button class="btn_order btn_payment" onclick="send();">
-												<span class="txt_g">주문하기</span>
-											</button>
-										</div>
-
-									</form>
-								</fieldset>
-							</c:if>
-						</div>
-						<div id="cEtc"></div>
-
-					</div>
 		</div>
+		<h4>${id }님의 찜 내역</h4>
+	<!-- 본인확인 안내 msg 끝 -->
+	<h6>${wishList.size() }개 상품이 찜목록에 있습니다.</h6>
+	<hr/>
 	</div>
+	<c:if test="${wishList != null && wishList.size() != 0}">
+		<form action="purchase.do" method="post" name="frm">
+			<table>
+				<c:if test="${wishList != null }">
+					<c:forEach items="${wishList}" var="item">
+						<tr>
+							<td width="5%"><input type="checkbox" class="inp_g" checked="checked" onclick="cancel(this,'am_${item.book_code}','${item.book_code}')"></td>
+							<td width="15%"><a href="bookDetail.do?book_code=${item.book_code}" class="link_thumb"> <img src="${item.img}"> </a></td>	
+							<td width="45%"><a href="bookDetail.do?book_code=${item.book_code}"> ${item.book_name } </a></td>
+							<td width="10%"><fmt:formatNumber value="${item.price}" type="number"/>원</td>
+							<td width="20%" align="center">
+								<button type="button" class="btn total" onclick="down('am_${item.book_code}');"><img alt="down" src="book_img\down.png" style="width:6px; height:10px; vertical-align: middle;"> </button>
+								<input type="text" name="amount" value="1" size="2" id="am_${item.book_code}" class="inp_quantity">
+								<button type="button" class="btn total" onclick="up('am_${item.book_code}',${item.amount});"> <img alt="up" src="book_img\up.png" style="width:6px; height:10px; vertical-align: middle;"></button>
+							</td>
+							<td width="5%">
+								<button type="button" class="btn total" onclick="deleteBook('${item.book_code}')">X</button>
+								<input type="hidden" name="book_code" id="${item.book_code}" value="${item.book_code}">
+								<input type="hidden" name="price" value="${item.price}">
+							</td>
+						</tr>
+					</c:forEach>
+				</c:if>
+			</table>
+			<br/><br/>
+			<table>
+				<tr>
+					<td align="right">선택 물품 합계 :&nbsp;<span id="basketFee"></span>&nbsp;&nbsp;&nbsp;| 배송비 : &nbsp;<span id="shipFee"></span>&nbsp;&nbsp;&nbsp;| 총 결제금액 : &nbsp;<strong><span id="totalFee"></span></strong></td>
+				</tr>
+				<tr>
+					<td align="right">
+						<button class="btn total" onclick="send();">주문하기</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</c:if>
 </body>
 </html>

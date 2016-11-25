@@ -11,7 +11,7 @@
 </head>
 <body>
 	<table>
-		<tr><td align="left"><input type="button" value="추가" style="hegiht:8px; width:40px; border-radius:2px; font-size:11px;" onclick="location='add_event.do'"/></td></tr>
+		<tr><td align="left"><input type="button" value="추가"  class="btn total" style="hegiht:8px; width:40px; border-radius:2px; font-size:11px;" onclick="location='add_event.do'"/></td></tr>
 	</table>
 	<table  class="commonTable" style="	width: inherit;">
 		<tr>
@@ -56,7 +56,7 @@
 						<option value="event_name">이벤트이름</option>
 					</select>
 					<input type="search" id="ss" name="ss">
-					<input type="submit" value="검색">
+					<input type="submit" value="검색" class="btn total">
 				</form>
 			</td>
 		</tr>
