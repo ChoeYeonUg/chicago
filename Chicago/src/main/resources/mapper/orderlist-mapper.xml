@@ -61,6 +61,34 @@
   		SELECT orders.order_id,orders.id,order_book.book_code,goods.book_name,order_book.amount,goods.price,goods.img,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.delivery,orders.refund_state
 				FROM orders,order_book,goods WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND orders.id=#{id} AND orders.order_id=${order_id}
   	</select>
+  	
+  	<update id="changeDeli" parameterType="int">
+  		UPDATE orders SET delivery = 3 WHERE order_id = #{order_id}
+  	</update>
+  	
+  	<select id="totalPrice" parameterType="String" resultType="int">
+  		SELECT sum(total_price) FROM orders WHERE id=#{id} AND delivery = 3
+  	</select>
+  	
+  	<select id="changeGrade" parameterType="String">
+  		UPDATE member SET grade = 4 WHERE id = #{id}
+  	</select>
+  	
+  	<select id="changeAmount" parameterType="orderbook">
+  		UPDATE goods SET amount = amount+#{amount} WHERE book_code = #{book_code}
+  	</select>
+  	
+  	<select id="refund" parameterType="int">
+  		UPDATE orders SET refund_state = 'refund' WHERE order_id = #{order_id}
+  	</select>
+  	
+  	<select id="cancelBook" parameterType="int" resultType="orderbook">
+  		SELECT book_code,amount FROM order_book WHERE order_id = #{order_id}
+  	</select>
+  	
+  	<update id="updatePoint" parameterType="orderbook">
+  		update member SET point = point + (SELECT saving FROM orders WHERE order_id=#{order_id}) WHERE id=#{id}
+  	</update>
  	
 </mapper>
 

@@ -13,4 +13,7 @@ public interface OrderlistService {
 	public int searchOrderlistTotalPage(Map map) throws Exception;
 	public List<OrderlistVO> memberOrderlistDetail(Map map) throws Exception;
 	
+	public void deliOk(int order_id,int grade, String id) throws Exception;
+	public void cancelOrder(int order_id) throws Exception;
+	
 }

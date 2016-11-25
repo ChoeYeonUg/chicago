@@ -29,6 +29,7 @@ public interface MemberMapper {
 	
 	//order
 	public MemberVO orderData(String id);
+	public void pointMinus(Map map);
 
 	//내문의사항
 	public List<BoardVO> myQuestion(Map map);

@@ -107,7 +107,7 @@ function send(){
 };
 
 function deleteBook(data){
-	location.replace("sbDelete.do?book_code="+data);	
+	location.replace("wlbookdelete.do?book_code="+data);	
 };
 //disabled="disabled"
 function cancel(checkbox,book,amount){
@@ -161,7 +161,7 @@ function cancel(checkbox,book,amount){
 
 											<ul class="list_basket">
 												<c:if test="${wishList != null }">
-													<c:forEach items="${mwishList}" var="item">
+													<c:forEach items="${wishList}" var="item">
 														<li class="check_on"><span
 															class="choice_g choice_basket"> <input
 																type="checkbox" class="inp_g" checked="checked"

@@ -118,6 +118,10 @@
 		DELETE FROM member <include refid="where-id,pwd"/>
   	</delete>
   	
+  	<update id="pointMinus" parameterType="hashmap">
+  		UPDATE member SET point = point - #{usePoint} WHERE id=#{id}
+  	</update>
+  	
   	<!-- 내가 쓴 문의내역과 연관댓글 확인하기 -->
   	<select id="myQuestion" resultType="board" parameterType="hashmap">
   		SELECT board_no,subject,id,GROUP_ID,hit,group_tab,regdate,secret,pwd,to_char(regdate,'yyyy-MM-dd') as dbday,num

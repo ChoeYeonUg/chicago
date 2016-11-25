@@ -11,7 +11,16 @@ public class WishlistVO {
 	private String book_code;
 	private int amount;
 	private int price;
+	private String img;
 	
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
 	public String getId() {
 		return id;
 	}

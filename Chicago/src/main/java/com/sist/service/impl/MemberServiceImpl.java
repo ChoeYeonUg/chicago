@@ -159,6 +159,11 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
+	public void pointMinus(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		mapper.pointMinus(map);
+	}
+
 	public List<BoardVO> myQuestion(Map map) throws Exception {
 		// TODO Auto-generated method stub
 		return mapper.myQuestion(map);

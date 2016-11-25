@@ -21,25 +21,38 @@ public class WishlistServiceImpl implements WishlistService {
 	private WishlistMapper mapper;
 	
 	@Override
-	public WishlistVO inputMemberWishlist(Map map) throws Exception {
-		return mapper.inputMemberWishlist(map);
+	public void inputMemberWishlist(Map map) throws Exception {
+		
+		int count = mapper.countWishlist(map);
+		
+		if(count == 0)	mapper.inputMemberWishlist(map);
 	}
 	
 	@Override
-	public List<WishlistVO> memberWishlist(List<String> list)throws Exception{
+	public List<WishlistVO> memberWishlist(String id)throws Exception{
 		
 		
-		List<WishlistVO> wishList = new ArrayList<WishlistVO>();
-		
-		for(String book_code : list){
-			System.out.println(book_code);
-			WishlistVO vo = mapper.memberWishlist(book_code);
-			
-			wishList.add(vo);
-			
-		}
+		List<WishlistVO> wishList = mapper.memberWishlist(id);
 		
 		return wishList;
 	}
-	
+
+	@Override
+	public void deleteWishlist(String id, String book_code) throws Exception {
+		// TODO Auto-generated method stub
+		
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("book_code", book_code);
+		int count = mapper.countWishlist(map);
+		if(count == 1){
+			mapper.deleteWishlist(id);
+		}
+	}
+
+	@Override
+	public void wlDeleteBook(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		mapper.wlDeleteBook(map);		
+	}	
 }

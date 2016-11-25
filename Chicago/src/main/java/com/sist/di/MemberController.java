@@ -79,12 +79,16 @@ public class MemberController {
 			} else {
 								
 				model.addAttribute("typecheck", typecheck);
-				url = "redirect:modifyMemberInfo.do";
-
+				//url = "redirect:modifyMemberInfo.do";
+				
+				if(typecheck.equals("mi")) {
+					 					
+					url = "redirect:modifyMemberInfo.do";
+					} else {
+						url= "redirect:memberAddrsInfo.do";
+					}
 			}
-		
 			return url;
-		
 	}
 	
 	
@@ -235,16 +239,16 @@ public class MemberController {
 		
 		vo = ms.selectMember(sessionid);
 		
-		if(vo.getGrade()==1) {
-			gradename = "어섭쇼 보스~~~";
+		if(vo.getGrade()==1 || vo.getGrade()==0) {
+			gradename = "운영자";
 		} else if(vo.getGrade()==2) {
-			gradename = "고목클라스";
+			gradename = "다이아몬드";
 		} else if(vo.getGrade()==3) {
-			gradename = "적당한데??";
+			gradename = "플레티넘";
 		} else if(vo.getGrade()==4) {
-			gradename = "아직 어리군...";
+			gradename = "골드";
 		} else if(vo.getGrade()==5) {
-			gradename = "새싹";
+			gradename = "일반";
 		}
 		
 		model.addAttribute("gradename", gradename);
