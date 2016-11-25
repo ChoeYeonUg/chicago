@@ -41,4 +41,37 @@ public class OrderlistServiceImpl implements OrderlistService{
 		return mapper.memberOrderlistDetail(map);
 	}
 
+	@Override
+	public void deliOk(int order_id,int grade, String id) throws Exception {
+		// TODO Auto-generated method stub
+		
+		mapper.changeDeli(order_id);
+		
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("order_id", order_id);
+		mapper.updatePoint(map);
+		
+		int total = mapper.totalPrice(id);
+		if(total > 100000 && grade==5){
+			mapper.changeGrade(id);
+		}
+		
+		
+	}
+
+	@Override
+	public void cancelOrder(int order_id) throws Exception {
+		// TODO Auto-generated method stub
+		mapper.refund(order_id);
+		mapper.changeDeli(order_id);
+		
+		List<OrderBookVO> list = mapper.cancelBook(order_id);
+		for(OrderBookVO vo : list){
+			mapper.changeAmount(vo);
+		}
+		
+		
+	}
+
 }

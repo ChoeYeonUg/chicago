@@ -172,4 +172,32 @@ public class OrderlistController {
 		
 	}
 	
+	@RequestMapping("deliOk")
+	public String deliOk(Model model, HttpServletRequest req, HttpServletResponse resp, int order_id){
+		
+		try {
+			HttpSession hs = req.getSession();
+			String id = (String)hs.getAttribute("id");
+			int grade = (Integer) hs.getAttribute("grade");
+			ols.deliOk(order_id, grade, id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "redirect:memberOrderList.do";
+	}
+	
+	@RequestMapping("orderCancel")
+	public String orderCancel(Model model, HttpServletRequest req, HttpServletResponse resp, int order_id){
+		
+		try {
+			ols.cancelOrder(order_id);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return "redirect:memberOrderList.do";
+	}
+	
 }

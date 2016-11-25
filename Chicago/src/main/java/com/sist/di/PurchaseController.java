@@ -21,6 +21,7 @@ import com.sist.dao.OrdersVO;
 import com.sist.service.BookService;
 import com.sist.service.MemberService;
 import com.sist.service.OrdersService;
+import com.sist.service.WishlistService;
 
 @Controller
 public class PurchaseController {
@@ -33,6 +34,9 @@ public class PurchaseController {
 	
 	@Resource(name="ordersService")
 	private OrdersService os;
+	
+	@Resource(name="wishlistService")
+	private WishlistService ws;
 	
 	private static final Logger logger = LoggerFactory.getLogger(PurchaseController.class);
 	
@@ -140,6 +144,9 @@ public class PurchaseController {
 					if(bCheck) break;
 				}
 			}
+			
+			ws.deleteWishlist(id, bookList[0]);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			/*e.printStackTrace();*/

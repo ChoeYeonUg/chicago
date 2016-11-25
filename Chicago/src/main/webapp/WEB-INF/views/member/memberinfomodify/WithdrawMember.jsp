@@ -66,9 +66,84 @@ function send(){
 	
 }
 </script>
-
+<style type="text/css">
+	th {
+		text-align: left;
+		width: 20%;
+		
+	}
+	
+	th, td {
+		height: 50px;
+		vertical-align: middle;
+		margin: 1px;
+		padding: 1px;
+	}
+	
+	.text {
+		border-top: 0px;
+		border-right: 0px;
+		border-left: 0px;
+		border-bottom: #505050 1px solid;
+	}
+	
+	.button {
+	background-color: white;
+	color: black;
+	border: 2px solid #505050;
+	font-size: 11px;
+	}
+</style>
 </head>
 <body>
+	<div class="col-md-9">
+		<!-- 본인확인 안내 msg -->
+		<div id="accordion" class="panel-group">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="panel-title">
+						<h3 class="panel-title">
+							<spring:message code="memberWithdraw.header"/>
+						</h3>
+					</div>
+					<div id="collapse-One" class="accordion-body collapse in">
+						<div class="panel-body">
+							◎&nbsp;<spring:message code="memberWithdraw.notFy1"/><br/>
+							◎&nbsp;<spring:message code="memberWithdraw.notFy2"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 본인확인 안내 msg 끝 -->
+		<form:form name="frm" id="frm" method="post" action="withdrawMember_ok.do" commandName="com.sist.dao.MemberVO">
+			<table>
+				<tr>
+					<th>비밀번호 입력</th>
+					<td><input type="password" name="USER_PWD" id="USER_PWD" class="text" maxlength="16"/></td>
+				</tr>
+				<tr>
+					<th>비밀번호 확인</th>
+					<td><input type="password" name="USER_C_PWD" id="USER_C_PWD" class="text" maxlength="16"></td>
+				</tr>
+				<tr>
+					<th>탈퇴 확인 문구</th>
+					<td><input type="text" name="INPUT_CONFIRM" id="INPUT_CONFIRM" class="text" maxlength="16">
+						<br/><label for="INPUT_CONFIRM" class="notcont"><spring:message code="memberWithdraw.notFy3"/></label>
+					</td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td align="right">
+						<input type="button" id="okBtn" class="button" onclick="send()" value="<spring:message code="memberWithdraw.btOk"/>">
+					</td>
+				</tr>
+			</table>
+		</form:form>
+	</div>
+
+<%-- 
 	<!-- Withdraw Member -->
 	<div class="OutlineForm">
 		<div class="MiddlelineSettingForm">
@@ -95,19 +170,19 @@ function send(){
 								<div class="WithdrawMember">
 									<dl class="wm">
 										<!-- Input ID -->
-										<%-- <dt>
+										<dt>
 											<label for="USER_ID"><spring:message code="memberWithdraw.memberWithdrawId"/></label>
 										</dt>
 										<dd>
 											<form:input name="USER_ID" id="USER_ID" class="" path="id" maxlength="16" value="${id}"/>
-										</dd> --%>
+										</dd>
 										
 										<!-- Input PASSWORD -->
 										<dt>
 											<label for="USER_PWD"><spring:message code="memberWithdraw.memberWithdrawPwd"/></label>
 										</dt>
 										<dd>
-											<%-- <form:password name="USER_PWD" id="USER_PWD" class="" path="pwd" maxlength="16" value="${pwd}"/> --%>
+											<form:password name="USER_PWD" id="USER_PWD" class="" path="pwd" maxlength="16" value="${pwd}"/>
 											<input type="password" name="USER_PWD" id="USER_PWD" class="" maxlength="16">
 										</dd>
 										
@@ -116,7 +191,7 @@ function send(){
 											<label for="USER_C_PWD"><spring:message code="memberWithdraw.confirmMemberWithdrawPwd"/></label>
 										</dt>
 										<dd>
-											<%-- <form:password name="USER_C_PWD" id="USER__C_PWD" class="" path="#" maxlength="16" value="${pwd}"/> --%>
+											<form:password name="USER_C_PWD" id="USER__C_PWD" class="" path="#" maxlength="16" value="${pwd}"/>
 											<input type="password" name="USER_C_PWD" id="USER_C_PWD" class="" maxlength="16">
 										</dd>
 										
@@ -125,7 +200,7 @@ function send(){
 											<label for="INPUT_CONFIRM" class="notcont"><spring:message code="memberWithdraw.notFy3"/></label>
 										</dt>
 										<dd>
-											<%-- <form:input name="INPUT_CONFIRM" id="INPUT_CONFIRM" class="" path="#" maxlength="16" value=""/> --%>
+											<form:input name="INPUT_CONFIRM" id="INPUT_CONFIRM" class="" path="#" maxlength="16" value=""/>
 											<input type="text" name="INPUT_CONFIRM" id="INPUT_CONFIRM" class="" maxlength="16">
 										</dd>
 									</dl>
@@ -134,8 +209,8 @@ function send(){
 								<!-- OK, Cancel Button -->
 								<div>
 									<input type="button" id="" class="" onclick="send()" value="<spring:message code="memberWithdraw.btOk"/>">
-									<%-- <button id="" class=""><spring:message code="memberWithdraw.btOk"/></button> --%>
-									<%-- <button id="" class=""><spring:message code="memberWithdraw.btCancel"/></button> --%>
+									<button id="" class=""><spring:message code="memberWithdraw.btOk"/></button>
+									<button id="" class=""><spring:message code="memberWithdraw.btCancel"/></button>
 								</div>
 								
 							</fieldset>
@@ -145,6 +220,6 @@ function send(){
 			</div>
 		</div>
 	</div>
-
+ --%>
 </body>
 </html>
