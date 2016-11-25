@@ -14,6 +14,7 @@
 </head>
 
 <body>
+<div style="padding-bottom: 120px;">
 <br/>
 	<table>
 		<tr>
@@ -125,7 +126,7 @@
 		</tr>
 	</table>
 	<!-- 페이지표시 끝 -->				
-
+</div>
 
 </body>
 </html>
