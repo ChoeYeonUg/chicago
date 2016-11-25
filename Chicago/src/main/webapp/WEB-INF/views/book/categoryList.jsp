@@ -22,7 +22,7 @@
 	}
 	
 	function lkBtn(book_code) {
-		if(confirm("찜목록으로 이동하시겠습니까?") == true) {
+		if(confirm("찜목록에 담으시겠습니까?") == true) {
 			window.location.href="memberWishList.do?book_code="+book_code;
 		} else {
 			return;
@@ -93,9 +93,9 @@
 								<option value="writer"><spring:message code="radio.ti3"/>
 								<option value="publisher"><spring:message code="radio.ti4"/>
 							</select> --%>
-							<input type="text" id="sch_value" name="sch_value" height="15"/>
+							<input type="text" id="sch_value" name="sch_value" height="18"/>
 							<input type="hidden" name="book_category" value="${book_category }">
-							<button type="button" onclick="search()" style="height:15;">검색</button>
+							<button type="button" onclick="search()" style="height:15;" class="btn total">검색</button>
 							</div>
 						</td>
 					</tr>

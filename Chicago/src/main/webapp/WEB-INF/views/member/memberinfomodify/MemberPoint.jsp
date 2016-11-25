@@ -46,13 +46,6 @@
 		border-left: 0px;
 		border-bottom: #505050 1px solid;
 	}
-	
-	.button {
-	background-color: white;
-	color: black;
-	border: 2px solid #505050;
-	font-size: 11px;
-	}
 </style>
 </head>
 <body>
@@ -90,7 +83,7 @@
 				</tr>
 			</table>
 			<table>
-				<tr><td align="right"><button class="button"><spring:message code="MemberPoint.btMain"/></button></td></tr>
+				<tr><td align="right"><button class="btn total"><spring:message code="MemberPoint.btMain"/></button></td></tr>
 			</table>
 		</form:form>
 	</div>

@@ -12,7 +12,7 @@
 <title>Made By ChoDing!!</title>
 <link href="css/bootstrap.min.css" rel="stylesheet" />
 <link href="mypage_css/memberinfo.css" rel="stylesheet" />
-
+<link rel="stylesheet" type="text/css" href="css/adminPage.css"/>
 <!-- Theme skin -->
 <link href="skins/default.css" rel="stylesheet" />
 
@@ -61,26 +61,26 @@
 								&nbsp;&nbsp;<spring:message code="memberInfoModifyMain.btWithdrawMember" /></a></li>
 						<!-- 구매정보 -->
 						<li class="list-group-item list-toggle">
-							<a data-toggle="" data-parent="" href="orderlist.do">
+							<a data-toggle="" data-parent="" href="memberOrderList.do">
 								<b><spring:message code="memberInfoModifyMain.orderhead" /></b></a></li>
 						<!-- 회원구매목록 -->
-						<li class="list-group-item list-toggle">
+						<%-- <li class="list-group-item list-toggle">
 							<a href="memberOrderList.do">
-								&nbsp;&nbsp;<spring:message code="memberInfoModifyMain.btMemberOrderInfo" /></a></li>
+								&nbsp;&nbsp;<spring:message code="memberInfoModifyMain.btMemberOrderInfo" /></a></li> --%>
 						<!-- 찜정보 -->
 						<li class="list-group-item list-toggle">
 							<a href="wishlist.do" data-toggle="" data-parent="">
 								<b><spring:message code="memberInfoModifyMain.memberwishlisthead" /></b></a></li>
 						<!-- 내가찜한목록 -->
-						<li class="list-group-item list-toggle"><a href=".do">
-							&nbsp;&nbsp;<spring:message code="memberInfoModifyMain.btMemberWishlistInfo" /></a></li>
+						<%-- <li class="list-group-item list-toggle"><a href=".do">
+							&nbsp;&nbsp;<spring:message code="memberInfoModifyMain.btMemberWishlistInfo" /></a></li> --%>
 						<!-- 문의사항 -->
 						<li class="list-group-item list-toggle">
-							<a href="memberquestion.do" data-toggle="" data-parent="">
+							<a href="myMemberquestion.do" data-toggle="" data-parent="">
 								<b><spring:message code="memberInfoModifyMain.memberQuestionhead" /></b></a></li>
 						<!-- 내문의사항 -->
-						<li class="list-group-item list-toggle">
-							<a href=".do">&nbsp;&nbsp;<spring:message code="memberInfoModifyMain.btMemberQuestion" /></a></li>
+						<%-- <li class="list-group-item list-toggle">
+							<a href=".do">&nbsp;&nbsp;<spring:message code="memberInfoModifyMain.btMemberQuestion" /></a></li> --%>
 					</ul>
 				</div>
 				<!-- 좌측 카테고리 끝 -->
@@ -92,94 +92,6 @@
 			</div>
 		</div>
 	</div>
-	<%-- 
 
-	<!-- MyPageMainOutlineForm -->
-	<div id="MyPageMainOutlineForm" class="">
-		<div id="MyPageMainMiddlelineForm" class="">
-			<!-- MyPageHeadlineForm -->
-			<div id="MyPageHeadlineForm" class="">
-				<div id="MyPageHeadline">
-					My Page
-				</div>
-			</div>
-			<hr/>
-			<!-- My Page Content -->
-			<div id="MyPageContent" class="">
-				<div id="LeftContent" class="">
-					<!-- Begine MyPage Menu Bar -->
-					<div id="MyPageMenuBar" class="">
-						<ul id="" class="">
-							<!-- Modify Member Info -->
-							<li class="">
-								<a data-toggle="" data-parent="" href="memberinfo.do"><spring:message code="memberInfoModifyMain.memberinfohead"/></a>
-								<ul id="" class="">
-									<li class="">
-										<a href="modifyMemberInfo.do"><spring:message code="memberInfoModifyMain.btMemberInfoModify"/></a>//
-									</li>
-									<li class="">
-										<a href="modyfyMemberPwd.do"><spring:message code="memberInfoModifyMain.btMemberPasswordModify"/></a>//
-									</li>
-									<li class="">
-										<a href="memberAddrsInfo.do"><spring:message code="memberInfoModifyMain.btMemberAddressModify"/></a>//
-									</li>
-									<li class="">
-										<a href="memberPoint.do"><spring:message code="memberInfoModifyMain.btMemberPoint"/></a>//
-									</li>
-									<li class="">
-										<a href="withdrawMember.do"><spring:message code="memberInfoModifyMain.btWithdrawMember"/></a>//
-									</li>
-								</ul>
-							</li>
-							<!-- End Modify Member Info -->
-							<!-- OrderList Info -->
-							<li class="">
-								<a data-toggle="" data-parent="" href="orderlist.do"><spring:message code="memberInfoModifyMain.orderhead"/></a>
-								<ul id="" class="">
-									<li class="">
-										<a href="memberOrderList.do"><spring:message code="memberInfoModifyMain.btMemberOrderInfo"/></a>
-									</li>
-								</ul>
-							</li>
-							<!-- End Orderlist Info -->
-							<!-- Member Wishlist Info -->
-							<li class="">
-								<a href="wishlist.do" data-toggle="" data-parent=""><spring:message code="memberInfoModifyMain.memberwishlisthead"/></a>
-								<%-- <ul id="" class="">
-									<li class="">
-										<a href="wishlist.do"><spring:message code="memberInfoModifyMain.btMemberWishlistInfo"/></a>
-									</li>
-								</ul> --%>
-							</li>
-							<!-- End Member Wishlist Info -->
-							<!-- Member Question Info -->
-							<li class="">
-								<a href="myMemberquestion.do" data-toggle="" data-parent=""><spring:message code="memberInfoModifyMain.memberQuestionhead"/></a>
-								<%-- <ul id="" class="">
-									<li class="">
-
-										<a href="myMemberquestion.do"><spring:message code="memberInfoModifyMain.btMemberQuestion"/></a>
-									</li>
-									
-								</ul> --%>
-							</li>
-							<!-- End Member Question Info -->
-						</ul>
-					</div>
-					<!-- End MyPage Menu Bar -->
-				</div>
-				<div id="MainContent" class="">
-					<!-- MyPage Content View -->
-					<div id="" class="">
-							
-							<jsp:include page="${cmi}"></jsp:include>
-							
-					</div>
-	            </div>
-	       </div>
-	    </div>
-		<!-- End My Page Content -->
-		<hr/>
-	</div> --%>
 </body>
 </html>

@@ -245,7 +245,7 @@ function sample6_execDaumPostcode3() {
 				<tr>
 					<td>
 						<input type="text" name="zipcode1" id="zipcode1" placeholder="<spring:message code="form.zip"/>" readonly="readonly">
-						<input type="button" class="" onclick="sample6_execDaumPostcode1()" value="<spring:message code="memberInfoModify.btZipcode"/>">
+						<input type="button" class="btn total" onclick="sample6_execDaumPostcode1()" value="<spring:message code="memberInfoModify.btZipcode"/>">
 						<br/><br/>
 						<input type="text" name="addr1" id="addr1" placeholder="<spring:message code="form.addr"/>">
 						<input type="text" id="addr1E" placeholder="<spring:message code="form.addr2"/>">
@@ -262,7 +262,7 @@ function sample6_execDaumPostcode3() {
 				<tr>
 					<td>
 						<input type="text" name="zipcode2" id="zipcode2" placeholder="<spring:message code="form.zip"/>" readonly="readonly">
-						<input type="button" class="" onclick="sample6_execDaumPostcode2()" value="<spring:message code="memberInfoModify.btZipcode"/>">
+						<input type="button" class="btn total" onclick="sample6_execDaumPostcode2()" value="<spring:message code="memberInfoModify.btZipcode"/>">
 						<br/><br/>
 						<input type="text" name="addr2" id="addr2" placeholder="<spring:message code="form.addr"/>">
 						<input type="text" id="addr2E" placeholder="<spring:message code="form.addr2"/>">
@@ -278,7 +278,7 @@ function sample6_execDaumPostcode3() {
 				<tr>
 					<td>
 						<input type="text" name="zipcode3" id="zipcode3" placeholder="<spring:message code="form.zip"/>" readonly="readonly">
-						<input type="button" class="" onclick="sample6_execDaumPostcode3()" value="<spring:message code="memberInfoModify.btZipcode"/>">
+						<input type="button" class="btn total" onclick="sample6_execDaumPostcode3()" value="<spring:message code="memberInfoModify.btZipcode"/>">
 						<br/><br/>
 						<input type="text" name="addr3" id="addr3" placeholder="<spring:message code="form.addr"/>">
 						<input type="text" id="addr3E" placeholder="<spring:message code="form.addr2"/>">
@@ -287,7 +287,7 @@ function sample6_execDaumPostcode3() {
 			</table>
 			<table>
 				<tr>
-					<td align="right"><input type="button" value="변경하기" onclick="send()"></td>
+					<td align="right"><input type="button" value="변경하기" onclick="send()" class="btn total"></td>
 				</tr>
 			</table>
 		</form:form>
@@ -337,7 +337,7 @@ function sample6_execDaumPostcode3() {
 										</dt>
 										<dd>
 											<input type="text" name="zipcode1" id="zipcode1" placeholder="<spring:message code="form.zip"/>" readonly="readonly">
-											<input type="button" class="" onclick="sample6_execDaumPostcode1()" value="<spring:message code="memberInfoModify.btZipcode"/>"><br/>
+											<input type="button" class="btn total" onclick="sample6_execDaumPostcode1()" value="<spring:message code="memberInfoModify.btZipcode"/>"><br/>
 											&nbsp;
 											주소입력<br/>
 											<input type="text" name="addr1" id="addr1" placeholder="<spring:message code="form.addr"/>">
@@ -357,7 +357,7 @@ function sample6_execDaumPostcode3() {
 										</dt>
 										<dd>
 											<input type="text" name="zipcode2" id="zipcode2" placeholder="<spring:message code="form.zip"/>" readonly="readonly">
-											<input type="button" class="" onclick="sample6_execDaumPostcode2()" value="<spring:message code="memberInfoModify.btZipcode"/>"><br/>
+											<input type="button" class="btn total" onclick="sample6_execDaumPostcode2()" value="<spring:message code="memberInfoModify.btZipcode"/>"><br/>
 											&nbsp;
 											주소입력<br/>
 											<input type="text" name="addr2" id="addr2" placeholder="<spring:message code="form.addr"/>">
@@ -377,7 +377,7 @@ function sample6_execDaumPostcode3() {
 										</dt>
 										<dd>
 											<input type="text" name="zipcode3" id="zipcode3" placeholder="<spring:message code="form.zip"/>" readonly="readonly">
-											<input type="button" class="" onclick="sample6_execDaumPostcode3()" value="<spring:message code="memberInfoModify.btZipcode"/>"><br/>
+											<input type="button" class="btn total" onclick="sample6_execDaumPostcode3()" value="<spring:message code="memberInfoModify.btZipcode"/>"><br/>
 											&nbsp;
 											주소입력<br/>
 											<input type="text" name="addr3" id="addr3" placeholder="<spring:message code="form.addr"/>">
@@ -389,7 +389,7 @@ function sample6_execDaumPostcode3() {
 								<!-- OK, Cancel Button -->
 								<div>
 									<input type="button" value="변경하기" onclick="send()">
-									<form:button name="" id="" class="" onclick="javascript:history.back()"><spring:message code="memberInfoModify.btCancel"/></form:button>
+									<form:button name="" id="" class="btn total" onclick="javascript:history.back()"><spring:message code="memberInfoModify.btCancel"/></form:button>
 								</div>
 								
 							</fieldset>

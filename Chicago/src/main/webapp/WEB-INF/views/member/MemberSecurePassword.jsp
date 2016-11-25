@@ -78,9 +78,9 @@
 			</div>
 			<hr/>
 			<div class="row">
-				<div class="col-md-6">
-					<button class="btn btn-primary pull-right" type="button" onclick="send()">확인</button>
-				</div>
+				<table>
+					<tr><td align="center"><button class="btn total" type="button" onclick="send()">확인</button></td></tr>
+				</table>
 			</div>
 		</form:form>
 		</div>

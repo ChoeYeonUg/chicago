@@ -141,12 +141,6 @@ function sample6_execDaumPostcode() {
 		border-bottom: #505050 1px solid;
 	}
 	
-	.button {
-	background-color: white;
-	color: black;
-	border: 2px solid #505050;
-	font-size: 11px;
-	}
 </style>
 </head>
 <body>
@@ -205,7 +199,7 @@ function sample6_execDaumPostcode() {
 						<br/>
 						<b><spring:message code="memberInfoModify.NewAddress"/></b>
 						<input type="text" name="zipcode" id="zipcode" placeholder="<spring:message code="form.zip"/>" readonly="readonly" class="text" >
-						<input type="button" class="" onclick="sample6_execDaumPostcode()" value="<spring:message code="memberInfoModify.btZipcode"/>">
+						<input type="button" class="btn total" onclick="sample6_execDaumPostcode()" value="<spring:message code="memberInfoModify.btZipcode"/>">
 						<br>
 						<input type="text" name="addr" id="addr" placeholder="<spring:message code="form.addr"/>" class="text" >
 						<input type="text" id="addr2" placeholder="<spring:message code="form.addr2"/>" class="text" >
@@ -223,8 +217,8 @@ function sample6_execDaumPostcode() {
 			<table>
 				<tr>
 					<td align="right">
-						<input type="button" value="<spring:message code="memberInfoModify.btOk"/>" onclick="send()" class="button">
-						<input type="button" value="<spring:message code="memberInfoModify.btCancel"/>" onclick="javascript:location.href='main.do';" class="button">
+						<input type="button" value="<spring:message code="memberInfoModify.btOk"/>" onclick="send()" class="btn total">
+						<input type="button" value="<spring:message code="memberInfoModify.btCancel"/>" onclick="javascript:location.href='main.do';" class="btn total">
 					</td>
 				</tr>
 			</table>

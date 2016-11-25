@@ -82,12 +82,6 @@ function send(){
 		border-bottom: #505050 1px solid;
 	}
 	
-	.button {
-	background-color: white;
-	color: black;
-	border: 2px solid #505050;
-	font-size: 11px;
-	}
 </style>
 </head>
 <body>
@@ -130,8 +124,8 @@ function send(){
 		<table>
 			<tr>
 				<td align="right">
-					<input type="button" onclick="send()" value="<spring:message code="memberPasswordModify.btOk"/>" class="button">
-					<button name="" id="" class="button" onclick=""><spring:message code="memberPasswordModify.btCancel"/></button>
+					<input type="button" onclick="send()" value="<spring:message code="memberPasswordModify.btOk"/>" class="btn total">
+					<button name="" id="" class="btn total" onclick=""><spring:message code="memberPasswordModify.btCancel"/></button>
 				</td>
 			</tr>
 		</table>

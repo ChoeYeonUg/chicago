@@ -52,7 +52,7 @@ th {
 }
 
 th, td {
-	height: 25px;
+	height: 40px;
 	vertical-align: middle;
 	margin: 1px;
 	padding: 1px;
@@ -64,14 +64,6 @@ th, td {
 	border-left: 0px;
 	border-bottom: #505050 1px solid;
 }
-
-.button {
-	background-color: white;
-	color: black;
-	border: 2px solid #505050;
-	font-size: 11px;
-}
-
 .search {
 	vertical-align: bottom;
 }
@@ -96,11 +88,11 @@ th, td {
 			</div>
 		</div>
 		<!-- 본인확인 안내 msg 끝 -->
-		<h4>${vo.name}님의 주문내역</h4>
+		<h4>${id}님의 주문내역</h4>
 		<hr />
 		<form class="search">
 			<b>주문번호 입력 : </b><input type="text" name="ss" class="text"> <input
-				type="submit" value="검색" class="button">
+				type="submit" value="검색" class="btn total">
 		</form>
 		<br/>
 	</div>
@@ -138,17 +130,17 @@ th, td {
 					<td align="center" class="line">
 						<c:if test="${vo.delivery == 1}"> 배송준비중 </c:if> 
 						<c:if test="${vo.delivery == 2}">
-							<input type="button" onclick="deliOk('${vo.order_id}')" value="배송중" class="button">
+							<input type="button" onclick="deliOk('${vo.order_id}')" value="배송중" class="btn total">
 						</c:if> 
 						<c:if test="${vo.delivery == 3}"> 배송완료 </c:if></td>
 					<td align="center" class="line">
 						<c:if test="${vo.refund_state != null }"> 환불 </c:if>
 						<c:if test="${vo.refund_state == null }">
 							<c:if test="${vo.delivery != 3}">
-								<input type="button" onclick="cancel('${vo.order_id}')" value="주문취소" class="button">
+								<input type="button" onclick="cancel('${vo.order_id}')" value="주문취소" class="btn total">
 							</c:if>
 						<c:if test="${vo.delivery == 3}">
-							<input type="button" onclick="cancel('${vo.order_id}')" value="환불신청하기" class="button">
+							<input type="button" onclick="cancel('${vo.order_id}')" value="환불신청하기" class="btn total">
 						</c:if>
 						</c:if>
 					</td>
