@@ -18,8 +18,15 @@
 	<select id="scheduleTotalPage" resultType="int" parameterType="int">
 		SELECT CEIL(COUNT(*)/10) FROM EVENT
 	</select>
-	<select id="dateCompare" resultType="String" parameterType="String">
-		SELECT EVENT_NAME,START_DAY,END_DAY FROM EVENT WHERE TRANSLATE(START_DAY, '0123456789' || START_DAY, '0123456789')<=#{} AND TRANSLATE(END_DAY, '0123456789' || END_DAY, '0123456789')<='20161231'; 
+	<select id="dateCompare" resultType="EventVO" parameterType="String">
+		<!-- <![CDATA[
+			SELECT EVENT_NAME,START_DAY,END_DAY FROM EVENT WHERE TRANSLATE(START_DAY, '0123456789' || START_DAY, '0123456789')<=TO_DATE('${dataUse}' ,'YYYYmmdd') AND TRANSLATE(END_DAY, '0123456789' || END_DAY, '0123456789')>=TO_DATE('${dataUse}' ,'YYYYmmdd') 
+		]]> -->
+	</select>
+	<select id="compareDate" parameterType="hashmap" resultType="event">
+		<![CDATA[
+		SELECT EVENT_NAME,START_DAY,END_DAY,TO_DATE(TO_CHAR(START_DAY,'yyyyMMdd'), 'yyyyMMdd') as STDAY, TO_DATE(TO_CHAR(END_DAY,'yyyyMMdd'),'yyyyMMdd') as EDDAY FROM EVENT WHERE START_DAY>=TO_DATE('${year}${months}01','yyyyMMdd') AND START_DAY<=TO_DATE('${year}${months}${index}','yyyyMMdd')
+		]]>
 	</select>	
 	<!-- 관리자 메뉴 -->
   		

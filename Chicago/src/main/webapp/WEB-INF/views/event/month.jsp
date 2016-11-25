@@ -38,6 +38,9 @@
  
        </style>
 </head>
+<script type="text/javascript">
+	
+</script>
 <body>
 <table width="100%" class="table_content" border="0">
 			
@@ -151,6 +154,10 @@ int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
                            <b>&lt;</b><!-- 이전달 -->
                     </a>
                     </c:when>
+                    <c:otherwise>
+                    <a href="<c:url value='/event_month.do' />?year=${year-1}&amp;month=11" target="_self">
+                           <b>&gt;</b>
+                    </c:otherwise>
                     </c:choose>
                     
                    <!--  <b>&lt;</b> -->
@@ -166,6 +173,7 @@ int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
                     </a>
                     </c:when>
                     <c:otherwise>
+                    <a href="<c:url value='/event_month.do' />?year=${year+1}&amp;month=0" target="_self">
                            <b>&gt;</b>
                     </c:otherwise>
                     </c:choose>
@@ -331,8 +339,29 @@ while(newLine > 0 && newLine < 7)
        </c:if>
        <c:if test="${index>=10}">
   			<c:set var="dataUse" value="${iUseDate}${index }"/>
-  		</c:if>	
-       <c:out value="${dataUse }"/>
+  		</c:if>
+		  	<%-- <c:set var="count"value="0">	 --%>	  
+		  		<c:forEach items="${compareDate }" var="vo"> 
+			  		<div style="display:none">
+			  		<fmt:formatDate value="${vo.start_day }" pattern="yyyyMMdd"/>
+			  		<fmt:formatDate value="${vo.end_day}" pattern="yyyyMMdd"/>
+			  		<fmt:parseDate var="dataUse2" value="${dataUse}" pattern="yyyyMMdd"/>
+			  		<fmt:formatDate value="${dataUse2 }" pattern="yyyyMMdd"/>		  	
+			  		</div>
+			  		<c:if test="${vo.stday==dataUse2}">		  			
+			  			<%-- <c:set target="${count }" value="${count + 1 }"> 
+			  				<c:if test="${count<3}"> --%> 
+			  					${vo.event_name }<br>
+			  				<%-- </c:if>	
+			  			</c:set> --%>
+			  		<%-- <c:forEach begin="${vo.start_day}" end="${vo.end_day}">
+			  		</c:forEach> --%>	
+			  		</c:if>
+		  		</c:forEach> 
+		<%-- 	</c:set>	   --%>
+	  		
+  		<%-- <c:out value="${vo.start_day.replace('-','')}"/>
+  		<c:out value="${vo.start_day}"/> --%>       
        <BR>
       
        </TD>

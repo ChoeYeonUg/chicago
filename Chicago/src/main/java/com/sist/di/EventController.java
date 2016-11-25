@@ -156,9 +156,9 @@ public class EventController {
 		String dateUse = "";
 	//	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	//	SimpleDateFormat nya=new SimpleDateFormat("yyyy-MM");
-		/*SimpleDateFormat year=new SimpleDateFormat("yyyy");
-		SimpleDateFormat month=new SimpleDateFormat("MM");
-		SimpleDateFormat day=new SimpleDateFormat("dd");*/
+	//	SimpleDateFormat year=new SimpleDateFormat("yyyy");
+		SimpleDateFormat months=new SimpleDateFormat("MM");
+	//	SimpleDateFormat day=new SimpleDateFormat("dd");
 		String today=sdf.format(new Date());
 	//	String indentifire = nya.format(new Date());
 		
@@ -169,7 +169,16 @@ public class EventController {
 		String strMonth = req.getParameter("month");
 		*/
 		
-		 	
+		/*dateUse=req.getParameter(dateUse); 	
+		System.out.println(dateUse+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		*/
+		
+		String dbMonth="";
+		if(month<9){
+			dbMonth="0"+Integer.toString(month+1);
+		}else{
+			dbMonth=Integer.toString(month+1);
+		}
 		
 		map.put("startDay", startDay);
 		map.put("endDay", endDay);
@@ -178,12 +187,16 @@ public class EventController {
 		map.put("year", year);
 		map.put("month", month);
 		map.put("day", date);
-		
-		
+		map.put("index", endDay);
+		map.put("months", dbMonth);
+		EventVO vo = new EventVO();
 		
 		List<EventVO> eventSchedule = es.schedule(map);
-	//	List<>
+	//	List<EventVO> dataCompare = es.dateCompare(vo.getEvent_name());
+		List<EventVO> compareDate = es.compareDate(map);
 		
+		
+		model.addAttribute("compareDate",compareDate);
 		model.addAttribute("dateUse",dateUse);
 		model.addAttribute("iUseDate",iUseDate);
 		model.addAttribute("sUseDate",sUseDate);
