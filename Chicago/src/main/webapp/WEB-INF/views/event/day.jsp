@@ -12,7 +12,6 @@
 <table width="100%" class="table_content" border="0">
 					<c:forEach items="${dayToday }" var="list">
 					<tr>
-						
 						<!-- 책 간략 소개내용 -->
 						<td width="85%" height="200">
 							<table border="0">

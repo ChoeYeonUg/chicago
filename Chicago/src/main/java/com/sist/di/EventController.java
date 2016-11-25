@@ -370,17 +370,16 @@ public class EventController {
 		int start = (curPage * rowSize) - (rowSize-1); 
 		int end = curPage * rowSize; 
 		
-		String s=  today;
-		
-		if(s == null || s.trim().equals("")){
-			s = "0";
-			}
-		
+		SimpleDateFormat currentTime = new SimpleDateFormat("yyyyMMdd");
+		if(today==null){
+			today=currentTime.format(new Date());
+			System.out.println(today+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdfsdfjsdhfjhfgjdfjhghd");
+		}
 		Map map = new HashMap(); 
 		map.put("start", start); 
 		map.put("end", end); 
 		map.put("dateUse2", today);
-		System.out.println(s+"asdfasdfsadfasfadfsadfsadfasfadfsafsadf");
+		
 		int totalPage = es.scheduleTotalPage(map);
 		int daypage = es.dayPage(map);
 		
@@ -391,9 +390,13 @@ public class EventController {
 			toPage = daypage;
 		}
 		
+		
+		
+		
 		//List<EventVO> eventSchedule = es.schedule(map);
 		List<EventVO> dayToday = es.dayToday(map);
 		
+		model.addAttribute("currentTime", currentTime);
 		model.addAttribute("dayPage",daypage);
 		model.addAttribute("dayToday",dayToday);
 		model.addAttribute("dataUse2",today);
