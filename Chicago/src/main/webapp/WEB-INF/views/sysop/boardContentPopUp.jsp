@@ -23,6 +23,7 @@ function openPop(board_no){
 </script>
 </head>
 <body>
+<br/>
 	<center>
 	<table class="tableContent" style="border: 1px solid #e3e3e3; border-collapse: collapse; width: 450px; ">
 			<tr>
@@ -57,12 +58,12 @@ function openPop(board_no){
 					<pre style="background-color: white; padding:20px; border: 0px ; font-size:11px; color:#505050;">${vo.content}</pre>
 				</td>
 			</tr>			
-		</table>
-		<table class="commonTable" style="width: 450px;">
+		</table> 
+		<table  style="width: 500px;">
 			<tr>
 				<td align="center" style="padding-top: 20px;">					
-					<a href="#" onclick="return openPop('${vo.board_no}');">삭제</a>&nbsp;
-					<a href="#" onclick="window.close();">닫기</a>&nbsp;
+					<a href="#" onclick="return openPop('${vo.board_no}');" style="font-size: 12px;" class="myButton">삭제</a>&nbsp;
+					<a href="#" onclick="window.close();" style="font-size: 12px;" class="myButton">닫기</a>&nbsp;
 				</td>
 			</tr>
 		</table>

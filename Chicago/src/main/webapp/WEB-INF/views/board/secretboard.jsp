@@ -145,7 +145,7 @@ $(function(){
 										<input type="text" size="10" name="ss" id="ss" style="border: 1px solid  #e3e3e3; height: 17px;">
 									</c:if>
 									<c:if test="${ss ne null }">
-										<input type="text" size="10" name="ss" id="ss" value="${ss }" style="border: 1px solid  #e3e3e3">
+										<input type="text" size="10" name="ss" id="ss" value="${ss }" style="border: 1px solid  #e3e3e3; height: 17px;">
 									</c:if>
 									
 									<input type="button" value="찾기" id="findBtn2" style="background-color: white;"> 
@@ -154,7 +154,7 @@ $(function(){
 								</form>
 							</td>			
 							<c:if test="${id!=null }">
-							<td align="right"><a href="secretboard_insert.do" style="padding-right:30px;">글쓰기</a></td>
+							<td align="right" style="padding-right: 20px;"><a href="secretboard_insert.do" style="font-size: 12px;" class="myButton" >글쓰기</a></td>
 							</c:if>
 						</tr>
 					</table>

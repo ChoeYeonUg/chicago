@@ -16,6 +16,15 @@ public class EventServiceImpl implements EventService{
 	@Resource(name="eventMapper")
 	private EventMapper em;
 
+	/*@Override
+	public List<EventVO> dateCompare(String event_name){
+		return em.dateCompare(event_name);
+	}	*/
+	@Override
+	public List<EventVO> compareDate(Map map){
+		return em.compareDate(map);
+	}
+	
 	@Override
 	public List<EventVO> schedule(Map map) {
 		return em.schedule(map);

@@ -219,11 +219,15 @@ footer{
 /* 	background:#68A4C4; */
 	background-image: url('../images/CoffeePape2.jpg');
 	height: 190px;
+	background-size: cover;
+
 }
 #sub-footer{
 /* 	background:#68A4C4; */
 	background-image: url('../images/CoffeePape2.jpg');
 	height: 190px;
+	background-size: cover;
+	
 }
 
 /* head backgroud */
@@ -238,6 +242,6 @@ footer{
 #content{
 	
 	padding-top: 20px;
-	padding-bottom: 100px;
+
 	
 }

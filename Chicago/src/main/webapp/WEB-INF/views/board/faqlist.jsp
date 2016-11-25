@@ -90,7 +90,7 @@
 		<tr>
 		<!-- 관리자만보이게 설정 -->
 			<c:if test="${grade<=1 }">
-				<td align="right"><a href="faqboard_insert.do">글쓰기</a></td>
+				<td align="right"><a href="faqboard_insert.do" style="font-size: 12px;" class="myButton" >글쓰기</a></td>
 			</c:if>
 		</tr>
 	</table>
