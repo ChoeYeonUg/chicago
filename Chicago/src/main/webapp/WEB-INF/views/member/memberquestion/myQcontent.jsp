@@ -12,11 +12,11 @@
 <script type="text/javascript">
 
 function openPop(page,board_no){
-	/* 	alert(page);
-	alert(board_no); */
+/* 	 	alert(page);
+	alert(board_no);  */
 	
 	if(confirm("삭제하시겠습니까?")){ 
-		location.href ="board_delete.do?page="+page+"&board_no="+board_no;
+		location.href ="myQ_delete.do?page="+page+"&board_no="+board_no;
 		/* location.href = "deleteMember.do?id="+data; */
 	} 
 	return false;

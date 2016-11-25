@@ -177,7 +177,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public void myQ_delete(int board_no) {
+	public void myQ_delete(int board_no) throws Exception{
 		BoardVO vo=mapper.myQ_deleteData(board_no);
 		if(vo.getDepth()==0){
 			mapper.myQ_delete(board_no);

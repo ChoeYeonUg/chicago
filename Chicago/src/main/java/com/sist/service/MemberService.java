@@ -38,7 +38,7 @@ public interface MemberService {
 	public List<BoardVO> myQuestion(Map map) throws Exception;
 	public int myQuestionTotal(Map map) throws Exception;
 	public BoardVO secretboard_Content(int board_no) throws Exception;
-	public void myQ_delete(int board_no);
+	public void myQ_delete(int board_no) throws Exception;
 	public void myQ_update(BoardVO vo) throws Exception;
 
 }

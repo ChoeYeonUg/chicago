@@ -72,7 +72,7 @@
 		</table>	
 	<table>
 						<tr>
-							<td align="center"> 	
+							<td align="center"  style="position: relative;"> 	
 								<ul class="pagination pagination-sm" style="margin-top: 0px;">
 									<c:if test="${curpage<=block }">
 									<li><a href="myMemberquestion.do?page=${curpage>1?curpage-1:curpage}">&laquo;</a></li>
@@ -97,10 +97,15 @@
 								</ul>
 							
 								
-							</td>							
+							</td>														
 						</tr>
 					</table>
-			
+					<!-- <table>
+						<tr>
+							<td align="right" style="position: relative; right: 0px; bottom: 62px;"><a href="secretboard_insert.do" style="padding-right:30px;"><span style=" width:100px; height:100px; 2em; padding: 1px solid black;">글쓰기</span></a></td>
+						</tr>
+					</table>
+			 -->
 </table>
 </body>
 </html>

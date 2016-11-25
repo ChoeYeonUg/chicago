@@ -141,9 +141,9 @@
   		DELETE FROM board WHERE board_no=#{board_no}
   	</delete>
   	
-  	<delete id="myQ_deleteData" parameterType="int">
+  	<select id="myQ_deleteData" resultType="board" parameterType="int">
   		SELECT root,depth FROM board WHERE board_no=#{board_no}
-  	</delete>
+  	</select>
   	
   	 <update id="myQ_admin_delete" parameterType="int">
   		UPDATE board SET subject='관리자가 삭제한 게시물입니다.', content='관리자가 삭제한 게시물입니다.'WHERE board_no=#{board_no}

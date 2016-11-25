@@ -355,7 +355,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="withdrawMember_ok.do", method=RequestMethod.POST)
-	public String withdrawMember_ok(Model model, MemberVO vo, HttpServletRequest request,String USER_PWD, String USER_C_PWD) throws Exception {
+	public String withdrawMember_ok(Model model, MemberVO vo, HttpServletRequest request,String USER_PWD, String USER_C_PWD, HttpServletResponse response) throws Exception {
 		
 		logger.info(vo.getId() + " : " + vo.getPwd());
 		
@@ -387,7 +387,7 @@ public class MemberController {
 	
 	/* Member Question HeadMenu */ 
 	@RequestMapping("myMemberquestion.do")
-	public String myMemberquestion(Model model,String page, HttpServletRequest request) {
+	public String myMemberquestion(Model model,String page, HttpServletRequest request, HttpServletResponse response) {
 		
 		HttpSession hs = request.getSession();		
 		String id = (String) hs.getAttribute("id");
@@ -451,7 +451,7 @@ public class MemberController {
 	
 	
 	@RequestMapping("myQcontent.do")
-	public String myQcontent(Model model,String page,int board_no, HttpServletRequest request) {
+	public String myQcontent(Model model,String page,int board_no, HttpServletRequest request, HttpServletResponse response) {
 		if(page==null)
 			page="1";		
 		int curpage = Integer.parseInt(page);
@@ -479,24 +479,26 @@ public class MemberController {
 	}
 	
 	@RequestMapping("myQ_delete")
-	public String myQ_delete(Model model,int board_no, String page, HttpServletRequest request){
+	public String myQ_delete(Model model,int board_no, String page, HttpServletRequest request, HttpServletResponse response){
 		if(page==null)
 			page="1";		
 		int curpage = Integer.parseInt(page);
-			
+
 		try{
 			ms.myQ_delete(board_no);
 			model.addAttribute("page",curpage);
+			System.out.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"+board_no);
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 			e.getStackTrace();
 		}
+
 		return "redirect:myMemberquestion.do";
 	
 	}
 	
 	@RequestMapping("myQ_update")
-	public String myQ_update(Model model,int board_no,HttpServletRequest request){
+	public String myQ_update(Model model,int board_no,HttpServletRequest request, HttpServletResponse response){
 		
 		try{
 			BoardVO vo=ms.secretboard_Content(board_no);
@@ -517,7 +519,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("myQ_update_ok")
-	public String myQ_update_ok(Model model,BoardVO vo,HttpServletRequest request){
+	public String myQ_update_ok(Model model,BoardVO vo,HttpServletRequest request, HttpServletResponse response){
 		int board_no=vo.getBoard_no();
 		vo.setHit(vo.getHit()-2);
 		try {
