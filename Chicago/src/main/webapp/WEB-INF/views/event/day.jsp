@@ -64,12 +64,12 @@
 		
 		<c:if test="${toPage<dayPage }">
 			<a href="event_day.do?page=${toPage+1 }">넥스트</a>
-			
+			<a href="event_day.do?page=${dayPage }">끝</a>	
 		</c:if>
 		
 		<c:if test="${toPage>=dayPage }">
 			<a href="event_day.do?page=${curpage<dayPage?curpage+1:curpage }">넥스트</a>&nbsp;
-			
+			<a href="event_day.do?page=${dayPage}">끝</a>
 		</c:if>
 		&nbsp;&nbsp;
 		${curpage } page / ${dayPage } pages
