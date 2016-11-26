@@ -5401,6 +5401,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover,
 	margin-bottom: 0;
 	font-size: 16px;
 	color: inherit;
+	
 }
 
 .panel-title>a {
@@ -6383,3 +6384,43 @@ button.close {
 		display: none !important
 	}
 }
+
+.btn.total {
+	display: inline-block;
+	margin: 5px 0;
+	padding: .5em .75em;
+	border-radius: .25em;
+	box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	background: transparent;
+	outline: 0;
+	vertical-align: middle;
+	font-family: inherit;
+	font-size: 12px;
+	text-decoration: none;
+	white-space: nowrap;
+	cursor: pointer;
+	color: #666;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #c6c6c6;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.04);
+	background: #fff;
+	background: linear-gradient(to bottom, #ffffff 40%, #f6f6f6 100%);
+ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6', GradientType=0 );/*IE*/
+}
+
+.list-group-item.list-toggle a, 
+.list-group-item.list-toggle a:hover,
+.list-group-item.list-toggle a:link,
+.list-group-item.list-toggle a:visited,
+.list-group-item.list-toggle a:active,
+.list-group-item,
+.list-group-item a,
+.list-group-item a:hover,
+.list-group-item a:link,
+.list-group-item a.visited,
+.list-group-item a.active {
+	color: #666;
+	text-decoration: none;
+}
+

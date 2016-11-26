@@ -1,6 +1,6 @@
 package com.sist.dao.mapper;
 
-import com.sist.dao.StoreVO;
+import com.sist.vo.StoreVO;
 
 public interface StoreMapper {
 	public int storeCount();

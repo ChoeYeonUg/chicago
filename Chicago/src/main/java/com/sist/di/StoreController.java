@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sist.dao.StoreVO;
 import com.sist.service.StoreService;
+import com.sist.vo.StoreVO;
 
 @Controller
 public class StoreController {

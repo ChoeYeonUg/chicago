@@ -1,11 +1,16 @@
 package com.sist.dao.mapper;
 
+import java.util.*;
 import com.sist.dao.*;
-/* Made By Choding */
+import com.sist.vo.WishlistVO;
+
+/* Made By Choding */ 
 public interface WishlistMapper {
-	//public int sessionIdCheck(String id);
-	//public String sessionPwdCheck(String pwd);
-	//public void insertWishlistColmun(WishlistVO vo);
-	//public void deleteWishlistColumn(WishlistVO vo);
+	
+	public void inputMemberWishlist(Map map) throws Exception;
+	public List<WishlistVO> memberWishlist(String id) throws Exception;
+	public int countWishlist(Map map) throws Exception;
+	public void deleteWishlist(String id);
+	public void wlDeleteBook(Map map);
 	
 }

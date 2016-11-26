@@ -3,7 +3,7 @@ package com.sist.dao.mapper;
 import java.util.List;
 import java.util.Map;
 
-import com.sist.dao.OrdersVO;
+import com.sist.vo.OrdersVO;
 
 public interface OrdersMapper {
 	public int newOrderId();

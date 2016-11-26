@@ -4,9 +4,9 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.sist.dao.StoreVO;
 import com.sist.dao.mapper.StoreMapper;
 import com.sist.service.StoreService;
+import com.sist.vo.StoreVO;
 
 @Service("storeService")
 public class StoreServiceImpl implements StoreService{

@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sist.dao.OrderBookVO;
-import com.sist.dao.OrdersVO;
 import com.sist.dao.mapper.BookMapper;
 import com.sist.dao.mapper.OrderBookMapper;
 import com.sist.dao.mapper.OrdersMapper;
 import com.sist.service.OrdersService;
+import com.sist.vo.OrderBookVO;
+import com.sist.vo.OrdersVO;
 
 @Transactional(propagation = Propagation.REQUIRED,rollbackFor={Exception.class})
 @Service("ordersService")

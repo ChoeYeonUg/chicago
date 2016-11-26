@@ -42,7 +42,7 @@
 	<bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean"
 	p:dataSource-ref="ds"
 	p:configLocation="classpath:Config.xml"
-	p:typeAliasesPackage="com.sist.dao"
+	p:typeAliasesPackage="com.sist.vo"
 	p:mapperLocations="classpath:mapper/*mapper.xml">
 	</bean>	
 	

@@ -14,10 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sist.dao.BookVO;
-import com.sist.dao.WriterVO;
 import com.sist.service.BookService;
 import com.sist.service.WriterService;
+import com.sist.vo.BookVO;
+import com.sist.vo.WriterVO;
 
 @Controller
 public class WriterController {

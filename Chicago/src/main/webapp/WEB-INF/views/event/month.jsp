@@ -38,6 +38,9 @@
  
        </style>
 </head>
+<script type="text/javascript">
+	
+</script>
 <body>
 <table width="100%" class="table_content" border="0">
 			
@@ -151,6 +154,10 @@ int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
                            <b>&lt;</b><!-- 이전달 -->
                     </a>
                     </c:when>
+                    <c:otherwise>
+                    <a href="<c:url value='/event_month.do' />?year=${year-1}&amp;month=11" target="_self">
+                           <b>&lt;</b>
+                    </c:otherwise>
                     </c:choose>
                     
                    <!--  <b>&lt;</b> -->
@@ -166,6 +173,7 @@ int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
                     </a>
                     </c:when>
                     <c:otherwise>
+                    <a href="<c:url value='/event_month.do' />?year=${year+1}&amp;month=0" target="_self">
                            <b>&gt;</b>
                     </c:otherwise>
                     </c:choose>
@@ -275,7 +283,6 @@ while(newLine > 0 && newLine < 7)
 <%-- <c:set var="newLine">0</c:set> --%>
 <c:forEach begin="1" end="${startD-1}" step="1">
   <TD >&nbsp;</TD>
-	<h1>${newLine}</h1>
   <c:set var="newLine" value="${newLine+1}" />
 </c:forEach> 
 
@@ -301,30 +308,64 @@ while(newLine > 0 && newLine < 7)
 	</c:choose>
 
 
-       
+
+       <%-- 
+
        
        ${sUseDate += Integer.toString(month+1).length() == 1 ? "0" + Integer.toString(month+1) : Integer.toString(month+1)};
        ${sUseDate += Integer.toString(index).length() == 1 ? "0" + Integer.toString(index) : Integer.toString(index)};
- 
 	   
+ 
+ --%>	   
+	   <%-- <c:set var="sUseDate">${sUseDate += Integer.toString(month+1).length() == 1 ? "0" + Integer.toString(month+1) : Integer.toString(month+1) }</c:set>
+	   <c:set var="sUseDate">${sUseDate += Integer.toString(index).length() == 1 ? "0" + Integer.toString(index) : Integer.toString(index) }</c:set> --%>	
     <!--   
    //	   String iUseDate =  ;
        -->
        <!-- String backColor = "#EFEFEF"; -->
-       <c:set var="iUseDate" value="${iuseDate}"/>
-       <%-- <c:set var="backColor" value="${backColor}">"#EFEFEF"</c:set>
+       <c:set var="iUseDate" value="${iUseDate}"/>
+       <c:set var="backColor">#EFEFEF</c:set>
        <c:if test="${iUseDate } == ${intToday }">  
-             backColor = "#c9c9c9";
-       </c:if> --%>
-       <TD valign='top' align='left' height='92px' bgcolor="${color }"  nowrap >  
+             backColor = "#c9c9c9"
+       </c:if>
+       <TD valign='top' align='left' height='92px' bgcolor=#EFEFEF nowrap >  
+       <c:if test="${index<10}">      
+       	   <a href="event_day.do?today=${iUseDate}0${index}" >
+		   <c:set var="dataUse" value="${iUseDate}0${index }"/>       
+       </c:if>
+       <c:if test="${index>=10}">
+			<a href="event_day.do?today=${iUseDate}${index}" >       
+  			<c:set var="dataUse" value="${iUseDate}${index }"/>
+  		</c:if>
+
        <font color='${color }'>
              ${index }
        </font>  
-       <%-- <BR>
-       <c:out value="${iUseDate }"/>
-       <BR> --%>
-      
-      
+       <BR>
+		  	<%-- <c:set var="count"value="0">	 --%>	  
+		  		<c:forEach items="${compareDate }" var="vo"> 
+			  		<div style="display:none">
+			  		<fmt:formatDate value="${vo.start_day }" pattern="yyyyMMdd"/>
+			  		<fmt:formatDate value="${vo.end_day}" pattern="yyyyMMdd"/>
+			  		<fmt:parseDate var="dataUse2" value="${dataUse}" pattern="yyyyMMdd"/>
+			  		<fmt:formatDate value="${dataUse2 }" pattern="yyyyMMdd"/>		  	
+			  		</div>
+			  		<c:if test="${vo.stday==dataUse2}">		  			
+			  			<%-- <c:set target="${count }" value="${count + 1 }"> 
+			  				<c:if test="${count<3}"> --%> 
+			  					${vo.event_name }<br>
+			  				<%-- </c:if>	
+			  			</c:set> --%>
+			  		<%-- <c:forEach begin="${vo.start_day}" end="${vo.end_day}">
+			  		</c:forEach> --%>	
+			  		</c:if>
+		  		</c:forEach> 
+		<%-- 	</c:set>	   --%>
+	  		
+  		<%-- <c:out value="${vo.start_day.replace('-','')}"/>
+  		<c:out value="${vo.start_day}"/> --%>       
+       <BR>      
+       </a>
        </TD>
       <%--  ${newLine+=1}--%> 		
       <c:set var="newLine" value="${newLine + 1}" />

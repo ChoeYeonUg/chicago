@@ -40,11 +40,17 @@
                 </div>
                  -->
                  
-		<div id="logo" class="fl_left">
+	<!-- 	<div id="logo" class="fl_left">
 			<h1><a class="navbar-hou" href="index.html"><span class="main-hou">C</span>hicago</a></h1>
 		</div>
-                 
-                <nav id="mainav" class="fl_right">
+                  -->
+       <br/>           
+       <div style="text-align:center">
+        	<a class="navbar-hou" href="index.html">
+        		<img alt="#" src="images\chicagologo2.png" style="width: 40%; height:auto;">
+        	</a>
+        </div>
+                <nav id="mainav" > <!--  class="fl_right" -->
        				 <ul class="clear">
           				<li><a href="store.do"><spring:message code="header.menu"/></a></li>
           				<li><a href="book.do"><spring:message code="header.book"/></a>
@@ -78,8 +84,8 @@
             				<ul>
               					<li><a href="memberinfo.do"><spring:message code="header.modifi"/></a></li>
                                 <li><a href="orderlist.do"><spring:message code="header.ppl"/></a></li>
-								<li><a href="wish.do"><spring:message code="header.egd"/></a></li>
-								<li><a href="memberquestion.do"><spring:message code="header.qu"/></a></li>
+								<li><a href="wishlist.do"><spring:message code="header.egd"/></a></li>
+								<li><a href="myMemberquestion.do"><spring:message code="header.qu"/></a></li>
             				</ul>
             			</li>
           				<li><a href="sbList.do"><spring:message code="header.sb"/></a></li>
@@ -95,11 +101,12 @@
 	            				</ul>
 	          				</li>
           				</c:if>
-          				<li><a class="drop" href="login.do"><spring:message code="header.login"/></a>
-            				<ul>
+          				<li><c:if test="${id == null }"><a class="drop" href="login.do"><spring:message code="header.login"/></a></c:if>
+          					<c:if test="${id != null }"><a class="drop" href="login.do">로그아웃</a></c:if>
+<%--             				<ul>
                                 <li><a href="login.do"><spring:message code="header.login"/></a></li>
-                                <%-- <li><a href="#"><spring:message code="header.nm"/></a></li> --%>
-            				</ul>
+                                <li><a href="#"><spring:message code="header.nm"/></a></li>
+            				</ul> --%>
           				</li>
         			</ul>
       			</nav>
@@ -168,6 +175,7 @@
             </div>
         </div>
         --%>
+
 	</header>
 	
 

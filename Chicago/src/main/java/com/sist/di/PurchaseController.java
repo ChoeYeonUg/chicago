@@ -1,7 +1,9 @@
 package com.sist.di;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
@@ -15,12 +17,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sist.dao.BookVO;
-import com.sist.dao.MemberVO;
-import com.sist.dao.OrdersVO;
 import com.sist.service.BookService;
 import com.sist.service.MemberService;
 import com.sist.service.OrdersService;
+import com.sist.service.WishlistService;
+import com.sist.vo.BookVO;
+import com.sist.vo.MemberVO;
+import com.sist.vo.OrdersVO;
 
 @Controller
 public class PurchaseController {
@@ -34,13 +37,18 @@ public class PurchaseController {
 	@Resource(name="ordersService")
 	private OrdersService os;
 	
+	@Resource(name="wishlistService")
+	private WishlistService ws;
+	
 	private static final Logger logger = LoggerFactory.getLogger(PurchaseController.class);
 	
 	@RequestMapping("purchase")
 	public String purchsePage(Model model,String[] book_code, String[] amount, HttpServletRequest req, HttpServletResponse resp) {
 		
 		if(book_code == null || amount == null){
-			return null;
+			System.out.println(book_code);
+			System.out.println(amount);
+			return "redirect:book.do";
 		}
 		
 		int[] amountInt = new int[book_code.length];
@@ -113,7 +121,7 @@ public class PurchaseController {
 	}
 	
 	@RequestMapping("purchase_ok")
-	public String purchseokPage(Model model, OrdersVO vo, int[] bookCount, String[] bookList, HttpServletRequest req){
+	public String purchseokPage(Model model,int usePoint, OrdersVO vo, int[] bookCount, String[] bookList, HttpServletRequest req){
 		
 		HttpSession hs = req.getSession();
 		
@@ -124,6 +132,12 @@ public class PurchaseController {
 		
 		try {
 			os.orderProcess(bookList, bookCount, vo);
+			if(usePoint != 0){
+				Map map = new HashMap();
+				map.put("id", id);
+				map.put("usePoint", usePoint);
+				ms.pointMinus(map);
+			}
 			List<String> sbList = (List<String>)hs.getAttribute("sbList");
 			boolean bCheck = false;
 			if(sbList != null){
@@ -138,6 +152,9 @@ public class PurchaseController {
 					if(bCheck) break;
 				}
 			}
+			
+			ws.deleteWishlist(id, bookList[0]);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			/*e.printStackTrace();*/
@@ -145,6 +162,6 @@ public class PurchaseController {
 		}
 		
 				
-		return "redirect:main.do";
+		return "redirect:memberOrderList.do";
 	}
 }

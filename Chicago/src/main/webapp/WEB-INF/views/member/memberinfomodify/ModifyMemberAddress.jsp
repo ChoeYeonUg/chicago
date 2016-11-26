@@ -32,6 +32,7 @@
 
 <script type="text/javascript">
 function send(){
+	
 	var f=document.frm;
 		
 	if(f.zipcode1.value==""){
@@ -212,10 +213,94 @@ function sample6_execDaumPostcode3() {
 
 </head>
 <body>
+<div class="col-md-9">
+		<!-- 본인확인 안내 msg -->
+		<div id="accordion" class="panel-group">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="panel-title">
+						<h3 class="panel-title">
+							주소수정
+						</h3>
+					</div>
+					<div id="collapse-One" class="accordion-body collapse in">
+						<div class="panel-body">
+							◎&nbsp;배송지 관리 페이지입니다. <br/>
+							◎&nbsp;자주 사용하시는 주소를 "기본 배송주소"로 설정하세요.<br/>
+							◎&nbsp;2군데 주소를 보조 배송주소로 사용할 수 있습니다.
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 본인확인 안내 msg 끝 -->
+		<form:form method="post" name="frm" id="frm" action="modyfyMemberAddrs_ok.do" commandName="com.sist.dao.AddressVO">
+			<h4>기본 배송주소</h4>
+			<h6>${avo.zipcode1} &nbsp;&nbsp; ${avo.addr1}</h6>
+			<br>
+			<table>
+				<tr>
+					<td>기본 배송주소 수정</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" name="zipcode1" id="zipcode1" placeholder="<spring:message code="form.zip"/>" readonly="readonly">
+						<input type="button" class="btn total" onclick="sample6_execDaumPostcode1()" value="<spring:message code="memberInfoModify.btZipcode"/>">
+						<br/><br/>
+						<input type="text" name="addr1" id="addr1" placeholder="<spring:message code="form.addr"/>">
+						<input type="text" id="addr1E" placeholder="<spring:message code="form.addr2"/>">
+					</td>
+				</tr>
+			</table>
+			<br><br>
+			<h4>보조 배송주소 1</h4>
+			<h6>${avo.zipcode2} &nbsp;&nbsp; ${avo.addr2}</h6>
+			<table>
+				<tr>
+					<td>보조 배송주소 1 수정</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" name="zipcode2" id="zipcode2" placeholder="<spring:message code="form.zip"/>" readonly="readonly">
+						<input type="button" class="btn total" onclick="sample6_execDaumPostcode2()" value="<spring:message code="memberInfoModify.btZipcode"/>">
+						<br/><br/>
+						<input type="text" name="addr2" id="addr2" placeholder="<spring:message code="form.addr"/>">
+						<input type="text" id="addr2E" placeholder="<spring:message code="form.addr2"/>">
+					</td>
+				</tr>
+			</table><br><br>
+			<h4>보조 배송주소 2</h4>
+			<h6>${avo.zipcode3} &nbsp;&nbsp; ${avo.addr3}</h6>
+			<table>
+				<tr>
+					<td>보조 배송주소 2 수정</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" name="zipcode3" id="zipcode3" placeholder="<spring:message code="form.zip"/>" readonly="readonly">
+						<input type="button" class="btn total" onclick="sample6_execDaumPostcode3()" value="<spring:message code="memberInfoModify.btZipcode"/>">
+						<br/><br/>
+						<input type="text" name="addr3" id="addr3" placeholder="<spring:message code="form.addr"/>">
+						<input type="text" id="addr3E" placeholder="<spring:message code="form.addr2"/>">
+					</td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td align="right"><input type="button" value="변경하기" onclick="send()" class="btn total"></td>
+				</tr>
+			</table>
+		</form:form>
+	</div>
+
+				
+
+<%-- 			
+
 	<!-- Modify Member PASSWORD Member -->
 	<div class="OutlineForm">
 		<div class="MiddlelineSettingForm">
-			<div class="HeadlineSettingForm">
+			<!-- <div class="HeadlineSettingForm">
 				<div class="Headline">
 					주소수정
 				</div>
@@ -225,7 +310,7 @@ function sample6_execDaumPostcode3() {
 						<li>너님은 회원이라서 세개까지 수정 가능</li>
 					</ul>
 				</div>
-			</div>
+			</div> -->
 			<div class="MemberSettingForm">
 				<div class="ModifyMemberAddressHeadlineForm">
 					<label class="ModifyMemberPwdHeadline"><spring:message code="memberPasswordModify.modifyPasswordheader"/></label>
@@ -243,16 +328,16 @@ function sample6_execDaumPostcode3() {
 											<label for="USER_CADDRESS1">주 배송주소</label>
 										</dt>
 										<dd>
-											${zipcode1}
+											${avo.zipcode1}
 											&nbsp;
-											${addr1}
+											${avo.addr1}
 										</dd>
 										<dt>
 											<label for="USER_ADDRESS1">주 배송주소 수정</label>
 										</dt>
 										<dd>
 											<input type="text" name="zipcode1" id="zipcode1" placeholder="<spring:message code="form.zip"/>" readonly="readonly">
-											<input type="button" class="" onclick="sample6_execDaumPostcode1()" value="<spring:message code="memberInfoModify.btZipcode"/>"><br/>
+											<input type="button" class="btn total" onclick="sample6_execDaumPostcode1()" value="<spring:message code="memberInfoModify.btZipcode"/>"><br/>
 											&nbsp;
 											주소입력<br/>
 											<input type="text" name="addr1" id="addr1" placeholder="<spring:message code="form.addr"/>">
@@ -263,16 +348,16 @@ function sample6_execDaumPostcode3() {
 											<label for="USER_CADDRESS2">주 배송주소1</label>
 										</dt>
 										<dd>
-											${zipcode2}
+											${avo.zipcode2}
 											&nbsp;
-											${addr2}
+											${avo.addr2}
 										</dd>
 										<dt>
 											<label for="USER_ADDRESS2">보조 배송 주소1</label>
 										</dt>
 										<dd>
 											<input type="text" name="zipcode2" id="zipcode2" placeholder="<spring:message code="form.zip"/>" readonly="readonly">
-											<input type="button" class="" onclick="sample6_execDaumPostcode2()" value="<spring:message code="memberInfoModify.btZipcode"/>"><br/>
+											<input type="button" class="btn total" onclick="sample6_execDaumPostcode2()" value="<spring:message code="memberInfoModify.btZipcode"/>"><br/>
 											&nbsp;
 											주소입력<br/>
 											<input type="text" name="addr2" id="addr2" placeholder="<spring:message code="form.addr"/>">
@@ -280,19 +365,19 @@ function sample6_execDaumPostcode3() {
 										</dd>
 										
 										<dt>
-											<label for="USER_CADDRESS3">주 배송주소</label>
+											<label for="USER_CADDRESS3">주 배송주소2</label>
 										</dt>
 										<dd>
-											${zipcode2}
+											${avo.zipcode3}
 											&nbsp;
-											${addr12}
+											${avo.addr3}
 										</dd>
 										<dt>
 											<label for="USER_ADDRESS3">보조 배송 주소2</label>
 										</dt>
 										<dd>
 											<input type="text" name="zipcode3" id="zipcode3" placeholder="<spring:message code="form.zip"/>" readonly="readonly">
-											<input type="button" class="" onclick="sample6_execDaumPostcode3()" value="<spring:message code="memberInfoModify.btZipcode"/>"><br/>
+											<input type="button" class="btn total" onclick="sample6_execDaumPostcode3()" value="<spring:message code="memberInfoModify.btZipcode"/>"><br/>
 											&nbsp;
 											주소입력<br/>
 											<input type="text" name="addr3" id="addr3" placeholder="<spring:message code="form.addr"/>">
@@ -304,7 +389,7 @@ function sample6_execDaumPostcode3() {
 								<!-- OK, Cancel Button -->
 								<div>
 									<input type="button" value="변경하기" onclick="send()">
-									<%-- <form:button name="" id="" class="" onclick="javascript:history.back()"><spring:message code="memberInfoModify.btCancel"/></form:button> --%>
+									<form:button name="" id="" class="btn total" onclick="javascript:history.back()"><spring:message code="memberInfoModify.btCancel"/></form:button>
 								</div>
 								
 							</fieldset>
@@ -313,6 +398,6 @@ function sample6_execDaumPostcode3() {
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 </body>
 </html>

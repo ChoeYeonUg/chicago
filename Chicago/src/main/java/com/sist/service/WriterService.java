@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.sist.dao.WriterVO;
+import com.sist.vo.WriterVO;
 
 public interface WriterService {
 	public List<WriterVO> printWriter(Map map) throws Exception;

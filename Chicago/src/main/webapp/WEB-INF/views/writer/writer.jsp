@@ -24,7 +24,7 @@
 					<div id="wDB_List">
 						<form>
 							<input type="text" name="ss">
-							<input type="submit" value="검색">
+							<input type="submit" value="검색" class="btn total">
 						</form>
 					
 						<h2>
@@ -50,7 +50,6 @@
 									<c:if test="${vo.img != null && fn:indexOf(vo.img,'http://') != -1 }">
 										<img src="${vo.img }" class="bd" alt="${vo.writer_name }">
 									</c:if>
-									
 								</a>
 							</div>
 							<dl>
@@ -94,8 +93,21 @@
 						
 						</div>
 					</c:forEach>
-					
-					<div id="pageNaviType">
+					<table>
+						<tr>
+							<td align="center">
+								<ul class="pagination pagination-sm">
+								<li><a href="writer.do?book_category=${book_category}&ss=${ss}&page=${(formpage - block) >= 1 ? formpage-block : curpage }">&laquo;</a></li>
+								<c:forEach begin="${formpage }" end="${topage }" var="i" step="1">
+									<li><a href="writer.do?page=${i }&book_category=${book_category}&ss=${ss}"> ${i }</a></li>
+								</c:forEach>
+								<li><a href="writer.do?book_category=${book_category}&ss=${ss}&page=${(formpage + block)<=totalpage ? formpage+block : curpage }">&raquo;</a></li>
+							</ul> 
+						</td>
+						</tr>
+					</table>
+					<!-- 기봉 -->
+					<!-- <div id="pageNaviType">
 						<span><a href="writer.do?book_category=${book_category}&ss=${ss}&page=${(formpage - block) >= 1 ? formpage-block : curpage }">이전</a></span>
 						<ul>
 							<c:forEach begin="${formpage }" end="${topage }" var="i" step="1">
@@ -103,9 +115,8 @@
 							</c:forEach>
 						</ul>
 						<span><a href="writer.do?book_category=${book_category}&ss=${ss}&page=${(formpage + block)<=totalpage ? formpage+block : curpage }">다음</a></span>
-					</div>
-					</div>
-					
-				</div>
+					</div>-->
+				</div> 
+			</div>
 </body>
 </html>

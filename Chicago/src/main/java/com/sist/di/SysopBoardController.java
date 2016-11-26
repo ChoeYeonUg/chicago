@@ -14,9 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sist.dao.BoardVO;
-import com.sist.dao.ReviewVO;
 import com.sist.service.BoardService;
+import com.sist.vo.BoardVO;
+import com.sist.vo.ReviewVO;
 
 @Controller
 public class SysopBoardController {

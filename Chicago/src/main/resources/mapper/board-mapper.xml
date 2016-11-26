@@ -53,15 +53,15 @@
   	</insert>
   	
   	<insert id="secret_insert" parameterType="board">
-  	INSERT INTO BOARD (board_no,id,subject,category,pwd,content,secret,group_id) 
-  	VALUES (board_seq.nextval,#{id},#{subject},3,#{pwd},#{content},#{secret},groupid_seq.nextval)
+  	INSERT INTO BOARD (board_no,id,subject,category,pwd,content,secret,group_id,mine) 
+  	VALUES (board_seq.nextval,#{id},#{subject},3,#{pwd},#{content},#{secret},groupid_seq.nextval,#{id})
   	</insert>
   	
   	<!-- 1:1게시판 리스트 -->  	
   	<select id="secretlist" resultType="board" parameterType="hashmap">
-  		SELECT board_no,subject,id,GROUP_ID,hit,group_tab,regdate,secret,pwd,to_char(regdate,'yyyy-MM-dd') as dbday,num 
- 		FROM (SELECT board_no,id,GROUP_ID,hit,group_tab,subject,regdate,secret,pwd,ROWNUM as num
- 		FROM (SELECT board_no,id,GROUP_ID,hit,group_tab,subject,regdate,secret,pwd FROM board WHERE category=3 ORDER BY group_id DESC, group_step ASC))
+  		SELECT board_no,subject,id,GROUP_ID,hit,group_tab,regdate,secret,pwd,to_char(regdate,'yyyy-MM-dd') as dbday,num,mine 
+ 		FROM (SELECT board_no,id,GROUP_ID,hit,group_tab,subject,regdate,secret,pwd,ROWNUM as num,mine
+ 		FROM (SELECT board_no,id,GROUP_ID,hit,group_tab,subject,regdate,secret,pwd,mine FROM board WHERE category=3 ORDER BY group_id DESC, group_step ASC))
  		WHERE num BETWEEN #{start} AND #{end}
   	</select> 
   	
@@ -70,9 +70,18 @@
   	</update>
   	
   	<select id="secret_content" resultType="board" parameterType="int">
-  	SELECT board_no,subject,id,category,content,regdate,hit,secret,pwd  
-  	FROM board WHERE category=3 AND board_no=#{board_no}
+	  	SELECT board_no,subject,id,category,content,regdate,hit,secret,pwd  
+	  	FROM board WHERE category=3 AND board_no=#{board_no}
   	</select>
+  	
+  	<!-- 내가쓴 비밀글 댓글 보기-->
+  	<select id="idMine" resultType="String" parameterType="hashmap">
+  	SELECT mine FROM (SELECT id as mine FROM board where group_tab=0 AND group_id=#{group_id})
+  	</select>
+  	
+  	<update id="insertMine" parameterType="hashmap">
+  		UPDATE BOARD SET mine=#{mine} WHERE group_id=#{group_id}
+  	</update> 
   	
   	<!-- 비밀번호 찾기 -->
   	<select id="getPwd" resultType="String" parameterType="int">

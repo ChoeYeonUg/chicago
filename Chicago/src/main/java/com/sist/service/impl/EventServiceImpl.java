@@ -7,15 +7,32 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.sist.dao.EventVO;
 import com.sist.dao.mapper.EventMapper;
 import com.sist.service.EventService;
+import com.sist.vo.EventVO;
 
 @Service("eventService")
 public class EventServiceImpl implements EventService{
 	@Resource(name="eventMapper")
 	private EventMapper em;
 
+	/*@Override
+	public List<EventVO> dateCompare(String event_name){
+		return em.dateCompare(event_name);
+	}	*/
+	@Override
+	public List<EventVO> dayToday(Map map){
+		return em.dayToday(map);
+	}
+	@Override
+	public int dayPage(Map map){
+		return em.dayPage(map);
+	}	
+	@Override
+	public List<EventVO> compareDate(Map map){
+		return em.compareDate(map);
+	}
+	
 	@Override
 	public List<EventVO> schedule(Map map) {
 		return em.schedule(map);

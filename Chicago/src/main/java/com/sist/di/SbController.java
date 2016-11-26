@@ -14,8 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sist.dao.BookVO;
 import com.sist.service.BookService;
+import com.sist.vo.BookVO;
 
 @Controller
 public class SbController {

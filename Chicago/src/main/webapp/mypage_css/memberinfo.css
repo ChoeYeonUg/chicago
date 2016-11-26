@@ -322,6 +322,9 @@ body {
 	color:#656565;
 }
 
+#footer{
+	position: absolute;
+}
 
 /*
 a:active {
@@ -598,3 +601,8 @@ ul.nav li.dropdown a {
 	position:relative;
 	margin:0;
 	padding:0; */
+	
+
+.pull-right {
+	float: right !important
+}

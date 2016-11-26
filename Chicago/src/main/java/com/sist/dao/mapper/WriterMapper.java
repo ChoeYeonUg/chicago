@@ -3,7 +3,7 @@ package com.sist.dao.mapper;
 import java.util.List;
 import java.util.Map;
 
-import com.sist.dao.WriterVO;
+import com.sist.vo.WriterVO;
 
 public interface WriterMapper {
 	public List<WriterVO> printWriter(Map map);

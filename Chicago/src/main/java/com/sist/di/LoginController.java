@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
-import com.sist.dao.MemberVO;
 import com.sist.service.MemberService;
+import com.sist.vo.MemberVO;
 
 @Controller
 @EnableAspectJAutoProxy
@@ -137,9 +137,11 @@ public class LoginController {
 			if(!idCheck && id.length()>4){
 				//data = "사용 가능한 아이디 입니다.";
 				data = true;
+				System.out.println(data);
 			}else{
 				//data = "사용할 수 없습니다.";
 				data = false;
+				System.out.println(data);
 			}
 			resp.setCharacterEncoding("UTF-8");
 			resp.getWriter().print(data);

@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.sist.dao.*;
+import com.sist.vo.AddressVO;
+import com.sist.vo.BoardVO;
+import com.sist.vo.MemberVO;
 
 public interface MemberMapper {
 	public int findPwd(MemberVO vo);
@@ -29,5 +32,14 @@ public interface MemberMapper {
 	
 	//order
 	public MemberVO orderData(String id);
-		
+	public void pointMinus(Map map);
+
+	//내문의사항
+	public List<BoardVO> myQuestion(Map map);
+	public int myQuestionTotal(Map map);
+	public BoardVO myQ_content(int board_no);
+	public void myQ_delete(int board_no);
+	public BoardVO myQ_deleteData(int board_no);
+	public void myQ_admin_delete(int board_no);
+	public void myQ_update(BoardVO vo);
 }

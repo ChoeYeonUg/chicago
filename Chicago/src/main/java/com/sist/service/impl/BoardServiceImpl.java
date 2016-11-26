@@ -8,11 +8,11 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.sist.dao.BoardVO;
-import com.sist.dao.ReviewVO;
 import com.sist.dao.mapper.BoardMapper;
 import com.sist.dao.mapper.MemberMapper;
 import com.sist.service.BoardService;
+import com.sist.vo.BoardVO;
+import com.sist.vo.ReviewVO;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService{	
@@ -227,6 +227,19 @@ public class BoardServiceImpl implements BoardService{
 	public int review_find_total(Map map) throws Exception {
 		// TODO Auto-generated method stub
 		return mapper.review_find_total(map);
+	}
+
+	@Override
+	public String idMine(Map map) throws Exception {
+		// TODO Auto-generated method stub
+	
+		return mapper.idMine(map);
+	}
+
+	@Override
+	public void insertMine(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		mapper.insertMine(map);
 	}
 
 

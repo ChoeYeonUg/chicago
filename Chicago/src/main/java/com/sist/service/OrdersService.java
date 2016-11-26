@@ -3,7 +3,7 @@ package com.sist.service;
 import java.util.List;
 import java.util.Map;
 
-import com.sist.dao.OrdersVO;
+import com.sist.vo.OrdersVO;
 
 public interface OrdersService {
 	public void orderProcess(String[] bookList, int[] bookCount, OrdersVO vo) throws Exception;

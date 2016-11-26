@@ -7,14 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <!-- Bootstrap Core CSS -->
-<link rel="stylesheet" href="board_css/bootstrap.css" rel="stylesheet">
+<!-- <link rel="stylesheet" href="board_css/bootstrap.css" rel="stylesheet"> -->
 <!-- Template CSS -->
-<link rel="stylesheet" href="board_css/animate.css" rel="stylesheet">
+<!-- <link rel="stylesheet" href="board_css/animate.css" rel="stylesheet">
 <link rel="stylesheet" href="board_css/font-awesome.css"
 	rel="stylesheet">
 <link rel="stylesheet" href="board_css/nexus.css" rel="stylesheet">
 <link rel="stylesheet" href="board_css/responsive.css" rel="stylesheet">
-<link rel="stylesheet" href="board_css/custom.css" rel="stylesheet">
+<link rel="stylesheet" href="board_css/custom.css" rel="stylesheet"> -->
 
 <!-- Google Fonts-->
 <link href="http://fonts.googleapis.com/css?family=Raleway:100,300,400"

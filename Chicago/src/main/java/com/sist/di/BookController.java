@@ -18,10 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-import com.sist.dao.BookVO;
-import com.sist.dao.ReviewVO;
 import com.sist.service.BookService;
+import com.sist.vo.BookVO;
+import com.sist.vo.ReviewVO;
 
 @Controller
 public class BookController {
@@ -35,7 +34,7 @@ public class BookController {
 	// 도서 메인 페이지 
 	@RequestMapping("book")
 	public String login_page(Model model) {
-
+		
 		// 내용추가 (16.10.31)
 		//List<BookVO> bookList = bs.bookAllList();
 		List<BookVO> newBookList1 = bs.newBookCate(1);
@@ -48,7 +47,7 @@ public class BookController {
 		model.addAttribute("newBookCate2", newBookList2);
 		model.addAttribute("newBookCate3", newBookList3);
 		model.addAttribute("newBookCate4", newBookList4);
-
+		
 		// 기존내용
 		model.addAttribute("jsp", "book.jsp");
 		model.addAttribute("book_jsp", "../book/list.jsp");
@@ -57,7 +56,11 @@ public class BookController {
 	
 	// 카테고리 별 리스트 보여주는 페이지 
 	@RequestMapping("categoryList")
-	public String book_cate_page1(Model model, int book_category, String page, String book_code, String sch_type, String sch_value) {
+	public String book_cate_page1(Model model, int book_category, String page, String book_code, String sch_type, String sch_value, HttpServletRequest req) {
+		
+		HttpSession hs = req.getSession();
+		
+		String id = (String) hs.getAttribute("id");
 		
 		try {
 			// 페이지 구하기 
@@ -77,7 +80,7 @@ public class BookController {
 			
 			// list 
 			List<BookVO> cateList;
-			
+						
 			/*int totalPage = bs.cateFirTotalPage(book_category);*/
 			int totalPage = 1;
 			int count = bs.cateFirCount(book_category);
@@ -142,6 +145,17 @@ public class BookController {
 		BookVO detailBook = bs.detailBook(book_code);
 		// 수량정보
 		int defAmount = 1;
+		
+		// 파일 업로드한 사진 보이기
+		if(detailBook.getImg() != null && detailBook.getImg().indexOf("http://") == -1) {
+			String imgPath;
+			imgPath = "imageSrc.do?src=" + detailBook.getImg();
+			model.addAttribute("imgPath", imgPath);
+		} else if (detailBook.getImg() != null && detailBook.getImg().indexOf("http://") <= 0) {
+			model.addAttribute("imgPath", detailBook.getImg());
+		} else {
+			model.addAttribute("imgPath", "images\\writer_noimage.gif");
+		}
 		
 		// 리뷰내용
 		try{

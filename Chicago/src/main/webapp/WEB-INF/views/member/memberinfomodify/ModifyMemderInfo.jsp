@@ -120,10 +120,113 @@ function sample6_execDaumPostcode() {
 }
 
 </script>
-
+<style type="text/css">
+	th {
+		text-align: left;
+		width: 20%;
+		
+	}
+	
+	th, td {
+		height: 50px;
+		vertical-align: middle;
+		margin: 1px;
+		padding: 1px;
+	}
+	
+	.text {
+		border-top: 0px;
+		border-right: 0px;
+		border-left: 0px;
+		border-bottom: #505050 1px solid;
+	}
+	
+</style>
 </head>
 <body>
-	<!-- Member Info Modify -->
+	<div class="col-md-9">
+		<!-- 본인확인 안내 msg -->
+		<div id="accordion" class="panel-group">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="panel-title">
+						<h3 class="panel-title">
+							<spring:message code="memberInfoModify.header"/>
+						</h3>
+					</div>
+					<div id="collapse-One" class="accordion-body collapse in">
+						<div class="panel-body">
+							◎&nbsp;<spring:message code="memberInfoModify.notFy1"/><br/>
+							◎&nbsp;<spring:message code="memberInfoModify.notFy2"/><br/>
+							◎&nbsp;<spring:message code="memberInfoModify.notFy3"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 본인확인 안내 msg 끝 -->
+		<!-- 회원 정보 수정 시작 -->
+		<form:form method="post" name="frm" id="frm" action="modyfyMemberInfo_ok.do" commandName="com.sist.dao.MemberVO">
+			<table>
+				<tr>
+					<th >이름</th>
+					<td><input type="text" name="name" id="name" class="text" maxlength="36" value="${vo.name}"></td>
+				</tr>
+				<tr>
+					<th >성별</th>
+					<td>
+						<c:if test="${vo.gender == 1 }">
+							<spring:message code="memberInfoModify.genderMan"/>
+						</c:if>
+						<c:if test="${vo.gender == 2 }">
+							<spring:message code="memberInfoModify.genderWoman"/>
+						</c:if>
+						&nbsp;&nbsp;&nbsp;&nbsp;			
+						<b><spring:message code="form.gender"/></b>
+							<input type="radio" name="gender" value="1" checked="checked"><spring:message code="form.man"/>
+							<input type="radio" name="gender" value="2"><spring:message code="form.woman"/></td>
+				</tr>
+				<tr>
+					<th >비밀번호</th>
+					<td><a id="USER_PASSWORD" class="" href="modyfyMemberPwd.do" target=""><spring:message code="memberInfoModify.btPassword"/></a></td>
+				</tr>
+				<tr>
+					<th >주소</th>
+					<td height="90px">
+						<b><spring:message code="memberInfoModify.CurAddress"/></b>
+						${vo.zipcode}&nbsp;${vo.addr}
+						
+						<br/>
+						<b><spring:message code="memberInfoModify.NewAddress"/></b>
+						<input type="text" name="zipcode" id="zipcode" placeholder="<spring:message code="form.zip"/>" readonly="readonly" class="text" >
+						<input type="button" class="btn total" onclick="sample6_execDaumPostcode()" value="<spring:message code="memberInfoModify.btZipcode"/>">
+						<br>
+						<input type="text" name="addr" id="addr" placeholder="<spring:message code="form.addr"/>" class="text" >
+						<input type="text" id="addr2" placeholder="<spring:message code="form.addr2"/>" class="text" >
+					</td>
+				</tr>
+				<tr>
+					<th >이메일</th>
+					<td><input type="text" name="email" id="email" class="" maxlength="36" value="${vo.email}" class="text" ></td>
+				</tr>
+				<tr>
+					<th >전화번호</th>
+					<td><input type="text" name="phone" id="USER_PHONE" class="" maxlength="36" value="${vo.phone}" class="text" ></td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td align="right">
+						<input type="button" value="<spring:message code="memberInfoModify.btOk"/>" onclick="send()" class="btn total">
+						<input type="button" value="<spring:message code="memberInfoModify.btCancel"/>" onclick="javascript:location.href='main.do';" class="btn total">
+					</td>
+				</tr>
+			</table>
+		</form:form>
+		<!-- 회원 정보 수정 끝 -->
+	</div>
+
+	<%-- <!-- Member Info Modify -->
 	<div class="OutlineForm">
 		<div class="MiddlelineSettingForm">
 			<div class="HeadlineSettingForm">
@@ -145,8 +248,7 @@ function sample6_execDaumPostcode() {
 				<div class="InnerBox">
 					<div id="MemberInfo-Box">
 							<form:form method="post" name="frm" id="frm" action="modyfyMemberInfo_ok.do" commandName="com.sist.dao.MemberVO">
-							<input type="hidden" value="<%=request.getAttribute("id") %>">
-							<input type="hidden"  name="typecheck" value="${typecheck}">
+							
 							<fieldset>
 								<div class="InfoModify">
 									<dl class="mim">
@@ -230,6 +332,6 @@ function sample6_execDaumPostcode() {
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 </body>
 </html>

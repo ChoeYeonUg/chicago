@@ -13,8 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sist.dao.OrdersVO;
 import com.sist.service.OrdersService;
+import com.sist.vo.OrdersVO;
 
 @Controller
 public class SysopOrderController {

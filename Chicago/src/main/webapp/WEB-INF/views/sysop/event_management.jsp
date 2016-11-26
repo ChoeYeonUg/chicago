@@ -7,14 +7,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="css/board_css/board_css.css" rel="stylesheet" />
 </head>
 <body>
 	<table>
-		<tr>
-			<td><a href="add_event.do">이벤트 추가</a></td>
-		</tr>
+		<tr><td align="left"><input type="button" value="추가"  class="btn total" style="hegiht:8px; width:40px; border-radius:2px; font-size:11px;" onclick="location='add_event.do'"/></td></tr>
 	</table>
-	<table>
+	<table  class="commonTable" style="	width: inherit;">
 		<tr>
 			<th width="100">이벤트번호</th>
 			<th width="100">이벤트명</th>
@@ -36,14 +35,16 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<table>
+	<table style="	width: inherit;">
 		<tr>
-			<td>
-				<a href="event_management.do?fs=${fs }&ss=${ss }&page=${(formpage - block) >= 1 ? formpage-block : curpage }">이전</a>&nbsp;
+			<td align="center">
+				<ul class="pagination pagination-sm">
+				<li><a href="event_management.do?fs=${fs }&ss=${ss }&page=${(formpage - block) >= 1 ? formpage-block : curpage }">&laquo;</a></li>
 				<c:forEach begin="${formpage }" end="${topage }" step="1" var="i">
-					<a href="event_management.do?fs=${fs }&ss=${ss }&page=${i }">[${i }]</a>
+					<li><a href="event_management.do?fs=${fs }&ss=${ss }&page=${i }">${i }</a></li>
 				</c:forEach>
-				&nbsp;<a href="event_management.do?fs=${fs }&ss=${ss }&page=${(formpage + block)<=totalpage ? formpage+block : curpage }">다음</a>		
+				<li><a href="event_management.do?fs=${fs }&ss=${ss }&page=${(formpage + block)<=totalpage ? formpage+block : curpage }">&raquo;</a></li>
+				</ul>		
 			</td>
 		</tr>
 		
@@ -55,7 +56,7 @@
 						<option value="event_name">이벤트이름</option>
 					</select>
 					<input type="search" id="ss" name="ss">
-					<input type="submit" value="검색">
+					<input type="submit" value="검색" class="btn total">
 				</form>
 			</td>
 		</tr>

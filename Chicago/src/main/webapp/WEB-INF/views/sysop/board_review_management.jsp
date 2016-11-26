@@ -7,6 +7,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="css/board_css/board_css.css" rel="stylesheet" />
+<style type="text/css">
+table {
+	width: inherit;
+}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 
@@ -21,7 +27,7 @@ function openPop(review_no){
 };
 function popupOpen(review_no){
 	var popUrl="boardReview_management_content.do?review_no="+review_no;
-	var popOption="width=500, height=460, resizable=no scrollbars=no status=no;";
+	var popOption="width=500, height=370, resizable=no scrollbars=no status=no;";
 	window.open(popUrl,"",popOption);
 };
 </script>
@@ -34,22 +40,29 @@ function popupOpen(review_no){
 						 리뷰게시판</td>
 					</tr>
 				</table>
-	<table>
+	<table class="commonTable" style="	width: inherit;">
 		<tr>
-			<th width="100">번호</th>
-			<th width="100">글쓴이</th>
-			<th width="100">내용</th>
-			<th width="200">등록일</th>
-			<th width="60">평점</th>
-			<th width="60">기타</th>
+			<th width="10%">번호</th>
+			<th width="10%">글쓴이</th>
+			<th width="40%">내용</th>
+			<th width="20%">등록일</th>
+			<th width="10%">평점</th>
+			<th width="15%">기타</th>
 		</tr>
 		<c:forEach items="${list }" var="vo">
 			<tr>		
 				<td>${vo.review_no }</td>	
 				<td>${vo.id }</td>
-				<td><a href="javascript:popupOpen('${vo.review_no }');">${vo.content }</a></td>
+				<td style="text-align: left;"><a href="javascript:popupOpen('${vo.review_no }');">${vo.content }</a></td>
 				<td><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-				<td>${vo.score }</td>
+				<td align="center">
+					<div style="CLEAR: both; PADDING-RIGHT: 0px;	PADDING-LEFT: 0px;	BACKGROUND: url(board_img/icon_star2.gif) 0px 0px;	FLOAT: left;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	WIDTH: 90px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+						<p style="WIDTH: ${vo.score*20}%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(board_img/icon_star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+						</p>
+					</div>				
+			
+				</td>
+				
 				<td>
 					<a href="#" onclick="return openPop('${vo.review_no}');">삭제</a>
 				</td>
@@ -58,12 +71,14 @@ function popupOpen(review_no){
 	</table>
 	<table>
 		<tr>
-			<td>
-				<a href="reviewboard_management.do?fs=${fs }&ss=${ss }&page=${(formpage - block) >= 1 ? formpage-block : curpage }">이전</a>&nbsp;
+			<td align="center">
+				<ul class="pagination pagination-sm">		
+					<li><a href="reviewboard_management.do?fs=${fs }&ss=${ss }&page=${(formpage - block) >= 1 ? formpage-block : curpage }">&laquo;</a></li>
 				<c:forEach begin="${formpage }" end="${topage }" step="1" var="i">
-					<a href="reviewboard_management.do?fs=${fs }&ss=${ss }&page=${i }">[${i }]</a>
+					<li><a href="reviewboard_management.do?fs=${fs }&ss=${ss }&page=${i }">${i }</a>
 				</c:forEach>
-				&nbsp;<a href="reviewboard_management.do?fs=${fs }&ss=${ss }&page=${(formpage + block)<=totalpage ? formpage+block : curpage }">다음</a>		
+					<li><a href="reviewboard_management.do?fs=${fs }&ss=${ss }&page=${(formpage + block)<=totalpage ? formpage+block : curpage }">&raquo;</a></li>	
+				</ul>
 			</td>
 		</tr>
 		
@@ -80,5 +95,6 @@ function popupOpen(review_no){
 			</td>
 		</tr>
 	</table>
+		
 </body>
 </html>

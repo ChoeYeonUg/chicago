@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.sist.dao.WriterVO;
 import com.sist.dao.mapper.WriterMapper;
 import com.sist.service.WriterService;
+import com.sist.vo.WriterVO;
 
 @Service("writerService")
 public class WriterServiceImpl implements WriterService{

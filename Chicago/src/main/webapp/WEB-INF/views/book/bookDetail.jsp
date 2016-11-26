@@ -19,9 +19,9 @@
 		}
 	}
 	
-	function lkBtn() {
+	function lkBtn(book_code) {
 		if(confirm("찜목록으로 이동하시겠습니까?") == true) {
-			window.location.href="member/memberwishlist/MemberWishList.do?book_code=${datilBook.book_code}";
+			window.location.href="memberWishList.do?book_code="+book_code;
 		} else {
 			return;
 		}
@@ -56,7 +56,7 @@
 	function popupOpen(book_code){
 		
 		var popUrl="bookReviewContent.do?book_code="+book_code;
-		var popOption="width=420, height=400, resizable=no scrollbars=no status=no;";
+		var popOption="width=500, height=430, resizable=no scrollbars=no status=no;";
 		window.open(popUrl,"",popOption);
 	}
 
@@ -105,7 +105,7 @@
 						<td width="14%">
 						<table>
 							<tr>
-								<td><img alt="bookImage" src="${detailBook.img }" style="vertical-align: bottom;"></td>
+								<td><img onerror="/images/writer_noimage.gif"/ src="${imgPath }" style="vertical-align: bottom;"></td>
 							</tr>
 							<tr>								
 								<td height="20">
@@ -152,20 +152,49 @@
 								</tr>
 								<tr>
 									<td style="font-size:11px; color:#505050;" height="13" colspan="4"><b>[주문수량]</b>&nbsp;
-										<img src="book_img\down.png" alt="downBtn" style="width:20px;height:20px;" onclick="btdown()"/>
-										<input type="text" value="${defAmount }" name="amount" id="defamount" readonly="readonly" size="1" style="text-align: center;"/>
-										<input type="hidden" value="${detailBook.book_code }" name="book_code"/>
-										<input type="hidden" value="${detailBook.amount }" id="amount"/>
-										<img src="book_img\up.png" alt="upBtn" style="width:20px;height:20px;" onclick="btup()"/>
+										<c:choose>
+											<c:when test="${detailBook.amount == 0 && detailBook.out_of_print == 0}">
+												<b style="color:#D50000;">절판된 상품입니다. 주문이 불가능합니다. 고객센터에 문의해주세요.</b>
+											</c:when>
+											<c:when test="${detailBook.amount != 0 && detailBook.out_of_print == 0 }">
+												<img src="book_img\down.png" alt="downBtn" style="width:20px;height:20px;" onclick="btdown()" />
+												<input type="text" value="${defAmount }" name="amount" id="defamount" readonly="readonly" size="1" style="text-align: center;"/>
+												<input type="hidden" value="${detailBook.book_code }" name="book_code"/>
+												<input type="hidden" value="${detailBook.amount }" id="amount"/>
+												<img src="book_img\up.png" alt="upBtn" style="width:20px;height:20px;" onclick="btup()"/>
+												&nbsp;<b style="color:#D50000;">절판된 상품입니다. 현재 남아있는 ${detailBook.amount }권 만 판매가 가능합니다.</b>
+											</c:when>
+											<c:when test="${detailBook.amount == 0  &&   detailBook.out_of_print == 1 }">
+												<b style="color:#D50000;">상품 준비중입니다.</b>
+											</c:when>
+											<c:otherwise>										
+												<img src="book_img\down.png" alt="downBtn" style="width:20px;height:20px;" onclick="btdown()"/>
+												<input type="text" value="${defAmount }" name="amount" id="defamount" readonly="readonly" size="1" style="text-align: center;"/>
+												<input type="hidden" value="${detailBook.book_code }" name="book_code"/>
+												<input type="hidden" value="${detailBook.amount }" id="amount"/>
+												<img src="book_img\up.png" alt="upBtn" style="width:20px;height:20px;" onclick="btup()"/>
+												&nbsp;<b style="color:#D50000;">주문가능 수량은 ${detailBook.amount }권 입니다.</b>
+											</c:otherwise>
+										</c:choose>
 									</td>
 								</tr>
 							</table>
 							<table>
 								<tr>
 									<td align="left">
-										<input type="button" value="찜목록 담기" onclick="lkBtn()"/>&nbsp;&nbsp;
-										<input type="button" value="북카트 담기" onclick="bcBtn()"/>&nbsp;&nbsp;
-										<%-- <a href="purchase.do?book_code=${book_code }?"> --%><input type="submit" value="바로구매"/><!-- </a> -->
+										<c:choose>
+											<c:when test="${detailBook.amount == 0 }">
+												<input type="button" value="목록" onclick="javascript:history.back()" class="btn total"/>
+											</c:when>
+											<c:when test="${detailBook.amount == 0  &&   detailBook.out_of_print == 1 }">
+												<input type="button" value="목록" onclick="javascript:history.back()"  class="btn total"/>
+											</c:when>
+											<c:otherwise>
+												<input type="button" value="찜목록 담기" onclick="lkBtn('${detailBook.book_code}')" class="btn total"/>&nbsp;&nbsp;
+												<input type="button" value="북카트 담기" onclick="bcBtn()" class="btn total"/>&nbsp;&nbsp;
+												<input type="submit" value="바로구매" class="btn total"/>
+											</c:otherwise>
+										</c:choose>
 									</td>
 								</tr>
 							</table>
@@ -232,7 +261,7 @@
 				<hr/>
 				<table>
 					<tr>
-						<th width="10%" style="font-size:11px; color:#505050;">저자</th>
+						<th width="10%" style="font-size:11px; color:#505050;" align="left">저자</th>
 						<td width="40%" align="left" style="font-size:11px; color:#505050;">${detailBook.writer }</td>
 						<th width="10%" style="font-size:11px; color:#505050;">출판사</th>
 						<td width="40%" align="left" style="font-size:11px; color:#505050;">${detailBook.publisher }</td>

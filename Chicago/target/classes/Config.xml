@@ -10,18 +10,18 @@
     </settings>
  	
  	<typeAliases>
- 		<typeAlias type="com.sist.dao.MemberVO" alias="member"/>
- 		<typeAlias type="com.sist.dao.AddressVO" alias="address"/>
- 		<typeAlias type="com.sist.dao.WishlistVO" alias="wishlist"/>
- 		<typeAlias type="com.sist.dao.OrderlistVO" alias="orderlist"/>
- 		<typeAlias type="com.sist.dao.BoardVO" alias="board"/>
- 		<typeAlias type="com.sist.dao.ReviewVO" alias="r_board"/>
- 		<typeAlias type="com.sist.dao.BookVO" alias="goods"/>
- 		<typeAlias type="com.sist.dao.OrdersVO" alias="orders"/>
- 		<typeAlias type="com.sist.dao.OrderBookVO" alias="orderbook"/>
- 		<typeAlias type="com.sist.dao.WriterVO" alias="writer"/>
- 		<typeAlias type="com.sist.dao.BookVO" alias="book"/>
- 		<typeAlias type="com.sist.dao.EventVO" alias="event"/>
+ 		<typeAlias type="com.sist.vo.MemberVO" alias="member"/>
+ 		<typeAlias type="com.sist.vo.AddressVO" alias="address"/>
+ 		<typeAlias type="com.sist.vo.WishlistVO" alias="wishlist"/>
+ 		<typeAlias type="com.sist.vo.OrderlistVO" alias="orderlist"/>
+ 		<typeAlias type="com.sist.vo.BoardVO" alias="board"/>
+ 		<typeAlias type="com.sist.vo.ReviewVO" alias="r_board"/>
+ 		<typeAlias type="com.sist.vo.BookVO" alias="goods"/>
+ 		<typeAlias type="com.sist.vo.OrdersVO" alias="orders"/>
+ 		<typeAlias type="com.sist.vo.OrderBookVO" alias="orderbook"/>
+ 		<typeAlias type="com.sist.vo.WriterVO" alias="writer"/>
+ 		<typeAlias type="com.sist.vo.BookVO" alias="book"/>
+ 		<typeAlias type="com.sist.vo.EventVO" alias="event"/>
  	</typeAliases>
  	
  	<!-- <mappers>

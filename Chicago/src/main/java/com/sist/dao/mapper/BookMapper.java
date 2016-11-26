@@ -3,8 +3,8 @@ package com.sist.dao.mapper;
 import java.util.List;
 import java.util.Map;
 
-import com.sist.dao.BookVO;
-import com.sist.dao.ReviewVO;
+import com.sist.vo.BookVO;
+import com.sist.vo.ReviewVO;
 
 public interface BookMapper {
 	public List<BookVO> bookAllList();
@@ -37,11 +37,15 @@ public interface BookMapper {
 
 	public int printSearchBookTotalPage(Map map);
 	
+	// 관리자 페이지 insert에서 book_code 확인하기
+	public int codeCheck(String book_code);
+	
 	// 도서 관리자 추가하기 
-	public void printSysopBookInsert(Map map);
+	public void printSysopBookInsert(BookVO vo);
 	
 	// 도서 관리자 수정하기
-	public void printSysopBookUpdate(BookVO vo);
+	public BookVO printSysopBookUpdate(String book_code);
+	public void printSysopBookUpdateData(BookVO vo);
 	
 	// 도서 관리자 상세 페이지
 	public BookVO printSysopBookDetail(String book_code);

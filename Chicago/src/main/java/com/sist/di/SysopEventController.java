@@ -13,10 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sist.dao.EventVO;
-import com.sist.dao.WriterVO;
 import com.sist.service.EventService;
 import com.sist.service.StoreService;
+import com.sist.vo.EventVO;
+import com.sist.vo.WriterVO;
 
 @Controller
 public class SysopEventController {
@@ -117,7 +117,7 @@ public class SysopEventController {
 		es.eventInsert(event);
 		
 		}catch(Exception e){
-			return "redirect:add_writer.do";
+			return "redirect:add_event.do";
 		}
 			
 		return "redirect:event_management.do";
@@ -175,7 +175,7 @@ public class SysopEventController {
 		return "main/main";
 	}
 	
-	@RequestMapping("event_update_ok")
+	@RequestMapping("update_event_ok")
 	public String event_update_ok(EventVO event, HttpServletRequest req, String startDay, String endDay){
 		
 		try{
@@ -193,7 +193,7 @@ public class SysopEventController {
 			return "redirect:update_event.do?event_no"+event.getEvent_no();
 		}
 		
-		return "redirect:writer_management.do";
+		return "redirect:event_management.do";
 		
 
 	}

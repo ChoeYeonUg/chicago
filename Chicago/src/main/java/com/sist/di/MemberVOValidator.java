@@ -9,7 +9,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.sist.dao.MemberVO;
+import com.sist.vo.MemberVO;
 
 public class MemberVOValidator implements Validator{
 	private static final String emailRegExp="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"

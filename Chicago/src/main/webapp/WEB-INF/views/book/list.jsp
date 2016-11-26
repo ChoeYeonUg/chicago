@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,7 +60,15 @@
 								<div class="row">
 									<c:forEach items="${newBookCate1 }" var="vo">
 										<div class="imgdiv">
-											<a href="bookDetail.do?book_code=${vo.book_code }"><img class="newimg" src="${vo.img }" alt="filler image"></a>
+											<c:if test="${vo.img == null }">
+												<a href="bookDetail.do?book_code=${vo.book_code }"><img src="imageSrc.do?src=${vo.img }" alt="${vo.book_name }"></a>
+											</c:if>
+											<c:if test="${vo.img != null && fn:indexOf(vo.img,'http://') == -1 }">
+												<a href="bookDetail.do?book_code=${vo.book_code }"><img src="imageSrc.do?src=${vo.img }" alt="${vo.book_name }"></a>
+											</c:if>
+											<c:if test="${vo.img != null && fn:indexOf(vo.img,'http://') != -1 }"> 
+												<a href="bookDetail.do?book_code=${vo.book_code }"><img src="${vo.img }" alt="${vo.book_name }"></a>
+											</c:if>
 										</div>
 										<div class="desdiv">
 											<h3><a href="bookDetail.do?book_code=${vo.book_code }">${vo.book_name }</a></h3>

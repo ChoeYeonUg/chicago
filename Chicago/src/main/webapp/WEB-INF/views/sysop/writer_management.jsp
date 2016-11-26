@@ -7,14 +7,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="css/board_css/board_css.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
 </head>
 <body>
 	<table>
-		<tr>
-			<td><a href="add_writer.do">작가 추가</a></td>
-		</tr>
+		<tr><td align="left"><input type="button" value="추가" class="btn total" onclick="location='add_writer.do'"/></td></tr>
 	</table>
-	<table>
+	<table class="commonTable" style="	width: inherit;">
 		<tr>
 			<th width="100">작가번호</th>
 			<th width="100">작가명</th>
@@ -36,14 +36,16 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<table>
+	<table style="	width: inherit;">
 		<tr>
-			<td>
-				<a href="writer_management.do?fs=${fs }&ss=${ss }&page=${(formpage - block) >= 1 ? formpage-block : curpage }">이전</a>&nbsp;
-				<c:forEach begin="${formpage }" end="${topage }" step="1" var="i">
-					<a href="writer_management.do?fs=${fs }&ss=${ss }&page=${i }">[${i }]</a>
-				</c:forEach>
-				&nbsp;<a href="writer_management.do?fs=${fs }&ss=${ss }&page=${(formpage + block)<=totalpage ? formpage+block : curpage }">다음</a>		
+			<td align="center">
+				<ul class="pagination pagination-sm">
+					<li><a href="writer_management.do?fs=${fs }&ss=${ss }&page=${(formpage - block) >= 1 ? formpage-block : curpage }">&laquo;</a></li>
+					<c:forEach begin="${formpage }" end="${topage }" step="1" var="i">
+						<li><a href="writer_management.do?fs=${fs }&ss=${ss }&page=${i }">${i }</a></li>
+					</c:forEach>
+					<li><a href="writer_management.do?fs=${fs }&ss=${ss }&page=${(formpage + block)<=totalpage ? formpage+block : curpage }">&raquo;</a></li>
+				</ul>
 			</td>
 		</tr>
 		
@@ -55,7 +57,7 @@
 						<option value="writer_name">저자명</option>
 					</select>
 					<input type="search" id="ss" name="ss">
-					<input type="submit" value="검색">
+					<input type="submit" value="검색" class="btn total">
 				</form>
 			</td>
 		</tr>

@@ -14,8 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sist.dao.WriterVO;
 import com.sist.service.WriterService;
+import com.sist.vo.WriterVO;
 
 @Controller
 public class SysopWriterController {

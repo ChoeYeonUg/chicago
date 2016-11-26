@@ -14,8 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sist.dao.MemberVO;
 import com.sist.service.MemberService;
+import com.sist.vo.MemberVO;
 
 @Controller
 public class SysopController {

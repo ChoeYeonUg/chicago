@@ -3,8 +3,8 @@ package com.sist.dao.mapper;
 import java.util.List;
 import java.util.Map;
 
-import com.sist.dao.BoardVO;
-import com.sist.dao.ReviewVO;
+import com.sist.vo.BoardVO;
+import com.sist.vo.ReviewVO;
 
 public interface BoardMapper {
 	/*공지사항 리스트*/
@@ -37,6 +37,8 @@ public interface BoardMapper {
 	public void secret_stepIncrement(BoardVO vo);
 	public void secret_replyInsert(BoardVO vo);
 	public void secret_depthIncrement(int board_no);
+	public String idMine(Map map);
+	public void insertMine(Map map);
 	
 	//관리자 전용 메뉴	
 	public List<BoardVO> printSysopBoard(Map map);

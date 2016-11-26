@@ -1,6 +1,6 @@
 package com.sist.service;
 
-import com.sist.dao.StoreVO;
+import com.sist.vo.StoreVO;
 
 public interface StoreService {
 	public int storeCount();
