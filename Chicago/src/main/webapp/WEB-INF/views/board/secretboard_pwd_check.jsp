@@ -44,9 +44,22 @@ $(function () {
 
 </head>
 <body>
-	<center>
-		<h3>비밀번호를 입력해 주세요</h3>
+<div class="col-md-9">
+		<!-- 본인확인 안내 msg -->
+		<div id="accordion" class="panel-group">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="panel-title">
+						<h3 class="panel-title">
+							비밀번호를 입력해 주세요
+						</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-md-offset-3 col-sm-offset-3">
 		<form action="secretboard_pwd_check_ok.do" method="post" id="frm">
+			<input type="hidden" name="typecheck" value="${typecheck}">
 			<table border="1" width="100" height="150" >
 				<tr >
 					<td align="center" >
