@@ -37,7 +37,7 @@ public class OrderlistServiceImpl implements OrderlistService{
 	}
 	
 	@Override
-	public List<OrderlistVO> memberOrderlistDetail(Map map) throws Exception {
+	public OrderlistVO memberOrderlistDetail(Map map) throws Exception {
 		return mapper.memberOrderlistDetail(map);
 	}
 

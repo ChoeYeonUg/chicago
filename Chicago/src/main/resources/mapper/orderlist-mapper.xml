@@ -21,7 +21,7 @@
   	</select>
   	
   	<resultMap type="orderlist" id="orderlistMap">
-  			<result property="order_id" column="order_id"/>
+  			<result property="Order_id" column="order_id"/>
   			<result property="total_price" column="total_price"/>
   			<result property="order_date" column="order_date"/>
   			<result property="delivery" column="delivery"/>
@@ -57,7 +57,7 @@
   	</select>
   	
   	<!-- Select Member Orderlist Detail -->
-  	<select id="memberOrderlistDetail" parameterType="hashmap" resultType="orderlist" resultMap="orderlistMap">
+  	<select id="memberOrderlistDetail" parameterType="hashmap" resultMap="orderlistMap">
   		SELECT orders.order_id,orders.id,order_book.book_code,goods.book_name,order_book.amount,goods.price,goods.img,orders.total_price,orders.payment,orders.order_date,orders.account_info,orders.delivery,orders.refund_state
 				FROM orders,order_book,goods WHERE orders.order_id=order_book.order_id AND order_book.book_code=goods.book_code AND orders.id=#{id} AND orders.order_id=${order_id}
   	</select>
