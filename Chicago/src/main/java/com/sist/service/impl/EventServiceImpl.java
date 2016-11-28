@@ -21,6 +21,14 @@ public class EventServiceImpl implements EventService{
 		return em.dateCompare(event_name);
 	}	*/
 	@Override
+	public List<EventVO> dayToday(Map map){
+		return em.dayToday(map);
+	}
+	@Override
+	public int dayPage(Map map){
+		return em.dayPage(map);
+	}	
+	@Override
 	public List<EventVO> compareDate(Map map){
 		return em.compareDate(map);
 	}

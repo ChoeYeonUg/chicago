@@ -101,11 +101,12 @@
 	            				</ul>
 	          				</li>
           				</c:if>
-          				<li><a class="drop" href="login.do"><spring:message code="header.login"/></a>
-            				<ul>
+          				<li><c:if test="${id == null }"><a class="drop" href="login.do"><spring:message code="header.login"/></a></c:if>
+          					<c:if test="${id != null }"><a class="drop" href="login.do">로그아웃</a></c:if>
+<%--             				<ul>
                                 <li><a href="login.do"><spring:message code="header.login"/></a></li>
-                                <%-- <li><a href="#"><spring:message code="header.nm"/></a></li> --%>
-            				</ul>
+                                <li><a href="#"><spring:message code="header.nm"/></a></li>
+            				</ul> --%>
           				</li>
         			</ul>
       			</nav>

@@ -75,18 +75,21 @@ th, td {
 		<!-- 본인확인 안내 msg 끝 -->
 		<form:form name="frm" id="frm" commandName="com.sist.dao.OrderlistVO">
 			<table>
-				<c:forEach var="vo" items="${list}">
+				
 				<tr>
 					<th width="20%">주문번호</th>
-					<td colspan="3"  class="line">&nbsp;${vo.order_id}</td>
+					<td class="line">&nbsp;${list.order_id}</td>
+					<th width="20%">주문날자</th>
+					<td class="line">&nbsp;<fmt:formatDate value="${list.order_date}" pattern="yyyy-MM-dd"/></td>
 				</tr>
+				<c:forEach var="book" items="${list.bList}">
 				<tr>
 					<th width="20%">도서명</th>
 						<td width="30%" class="line">&nbsp;
-							<c:if test="${book.book_name.length() > 30 }">
-								<img src="${book.img}"> ${fn:substring(book.book_name, 0, 30)}... <br />
-							</c:if> <c:if test="${book.book_name.length() <= 30 }">
-								<img src="${book.img}"> ${book.book_name} <br />
+							<c:if test="${book.book_name.length() > 10 }">
+								<img src="${book.img}"><br /> ${fn:substring(book.book_name, 0, 10)}...
+							</c:if> <c:if test="${book.book_name.length() <= 10 }">
+								<img src="${book.img}"><br /> ${book.book_name} 
 							</c:if></td>
 					<th width="20%">주문수량</th>
 					<td width="30%" class="line">&nbsp;${book.amount}권</td>
@@ -97,16 +100,17 @@ th, td {
 					<th width="20%">주문날짜</th>
 					<td width="30%" class="line">&nbsp;<fmt:formatDate value="${vo.order_date}" pattern="yyyy-MM-dd"/></td>
 				</tr>
+				</c:forEach>
 				<tr>
 					<th width="20%">배송상태</th>
 					<td width="30%" class="line">&nbsp;
-						<c:if test="${vo.delivery == 1}"> 배송준비중 </c:if>
-						<c:if test="${vo.delivery == 2}"> 배송중 </c:if>
-						<c:if test="${vo.delivery == 3}"> 배송완료 </c:if>
+						<c:if test="${list.delivery == 1}"> 배송준비중 </c:if>
+						<c:if test="${list.delivery == 2}"> 배송중 </c:if>
+						<c:if test="${list.delivery == 3}"> 배송완료 </c:if>
 					</td>
 					<th width="20%">취소/환불</th>
 					<td width="30%" class="line">&nbsp;
-						<c:if test="${vo.delivery != 3}"> 
+						<c:if test="${list.delivery != 3}"> 
 					 		<input type="button" onclick="#" value="주문취소"  class="btn total">
 						</c:if>
 						<c:if test="${vo.delivery == 3}">
@@ -115,7 +119,7 @@ th, td {
 						</c:if>
 					</td>
 				</tr>
-				</c:forEach>
+				
 			</table>
 			<table>
 				<tr><td align="right"><input type="button" value="목록보기" onclick="javascript:history.back()" class="btn total"/></td></tr>

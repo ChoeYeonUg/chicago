@@ -16,7 +16,7 @@
   	
   	<!-- 위시리스트에서 보여줄 리스트 -->
  	<select id="memberWishlist" parameterType="String" resultType="wishlistVO">
-		SELECT book_code, book_name, amount, price, img FROM goods WHERE book_code in (SELECT book_code FROM wishlist WHERE id = #{id})
+		SELECT book_code, book_name, amount, price, img FROM goods WHERE book_code IN (SELECT book_code FROM wishlist WHERE id = #{id})
   	</select>
   	
   	<select id="countWishlist" resultType="int" parameterType="hashmap">

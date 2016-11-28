@@ -141,7 +141,7 @@ public class OrderlistController {
 			map.put("id", sessionid);
 			map.put("order_id", order_id);
 			
-			List<OrderlistVO> list = ols.memberOrderlistDetail(map);
+			OrderlistVO list = ols.memberOrderlistDetail(map);
 			
 			model.addAttribute("list", list);
 			

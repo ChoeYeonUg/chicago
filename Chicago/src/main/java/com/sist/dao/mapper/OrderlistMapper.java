@@ -11,7 +11,7 @@ public interface OrderlistMapper {
 	public int selectOrderlistTotalPage(Map map);
 	public List<OrderlistVO> searchOrderlist(Map map);
 	public int searchOrderlistTotalPage(Map map);
-	public List<OrderlistVO> memberOrderlistDetail(Map map);
+	public OrderlistVO memberOrderlistDetail(Map map);
 	public void changeDeli(int order_id);
 	public int totalPrice(String id);
 	public void changeGrade(String id);

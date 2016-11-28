@@ -28,6 +28,15 @@
 		SELECT EVENT_NAME,START_DAY,END_DAY,TO_DATE(TO_CHAR(START_DAY,'yyyyMMdd'), 'yyyyMMdd') as STDAY, TO_DATE(TO_CHAR(END_DAY,'yyyyMMdd'),'yyyyMMdd') as EDDAY FROM EVENT WHERE START_DAY>=TO_DATE('${year}${months}01','yyyyMMdd') AND START_DAY<=TO_DATE('${year}${months}${index}','yyyyMMdd')
 		]]>
 	</select>	
+	<select id="dayToday" parameterType="hashmap" resultType="event">
+		SELECT EVENT_NO,EVENT_NAME,STORE_NAME,START_DAY,END_DAY,DESCRIPTION,num 
+ 		FROM (SELECT EVENT_NO,EVENT_NAME,STORE_NAME,START_DAY,END_DAY,DESCRIPTION,ROWNUM as num 
+ 		FROM (SELECT EVENT_NO,EVENT_NAME,STORE_NAME,START_DAY,END_DAY,DESCRIPTION FROM EVENT WHERE TO_DATE(TO_CHAR(START_DAY,'yyyyMMdd'), 'yyyyMMdd')=TO_DATE('${dateUse2}', 'yyyyMMdd') ORDER BY START_DAY)) 
+ 		WHERE num BETWEEN #{start} AND #{end} 
+	</select>
+	<select id="dayPage" parameterType="hashmap" resultType="int">
+		SELECT CEIL(COUNT(*)/10) FROM EVENT WHERE TO_DATE(TO_CHAR(START_DAY,'yyyyMMdd'), 'yyyyMMdd')=TO_DATE('${dateUse2}', 'yyyyMMdd') ORDER BY START_DAY
+	</select>
 	<!-- 관리자 메뉴 -->
   		
   		<insert id="eventInsert" parameterType="event">
