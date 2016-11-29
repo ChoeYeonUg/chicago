@@ -77,28 +77,24 @@ th, td {
 			<table>
 				
 				<tr>
-					<th width="20%">주문번호</th>
+					<th width="8%">주문번호</th>
 					<td class="line">&nbsp;${list.order_id}</td>
-					<th width="20%">주문날자</th>
-					<td class="line">&nbsp;<fmt:formatDate value="${list.order_date}" pattern="yyyy-MM-dd"/></td>
+					<th width="8%">주문일</th>
+					<td class="line" colspan="3">&nbsp;<fmt:formatDate value="${list.order_date}" pattern="yyyy-MM-dd"/></td>
 				</tr>
 				<c:forEach var="book" items="${list.bList}">
 				<tr>
-					<th width="20%">도서명</th>
-						<td width="30%" class="line">&nbsp;
+					<th width="8%">도서명</th>
+						<td width="15%" class="line">&nbsp;
 							<c:if test="${book.book_name.length() > 10 }">
 								<img src="${book.img}"><br /> ${fn:substring(book.book_name, 0, 10)}...
 							</c:if> <c:if test="${book.book_name.length() <= 10 }">
 								<img src="${book.img}"><br /> ${book.book_name} 
 							</c:if></td>
-					<th width="20%">주문수량</th>
-					<td width="30%" class="line">&nbsp;${book.amount}권</td>
-				</tr>
-				<tr>
-					<th width="20%">가격</th>
-					<td width="30%" class="line">&nbsp;${book.price}원</td>
-					<th width="20%">주문날짜</th>
-					<td width="30%" class="line">&nbsp;<fmt:formatDate value="${vo.order_date}" pattern="yyyy-MM-dd"/></td>
+					<th width="8%">주문수량</th>
+					<td width="20%" class="line">&nbsp;${book.amount}권</td>
+					<th width="10%">가격</th>
+					<td width="27%" class="line">&nbsp;${book.price}원</td>
 				</tr>
 				</c:forEach>
 				<tr>
@@ -109,7 +105,7 @@ th, td {
 						<c:if test="${list.delivery == 3}"> 배송완료 </c:if>
 					</td>
 					<th width="20%">취소/환불</th>
-					<td width="30%" class="line">&nbsp;
+					<td width="30%" class="line" colspan="3">&nbsp;
 						<c:if test="${list.delivery != 3}"> 
 					 		<input type="button" onclick="#" value="주문취소"  class="btn total">
 						</c:if>
